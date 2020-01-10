@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Event loop</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt GLib Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference">
+<link rel="prev" href="Libvirt-glib-Error-reporting.html" title="Error reporting">
+<link rel="next" href="object-tree.html" title="Object Hierarchy">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="Libvirt-glib-Error-reporting.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt GLib Reference Manual</th>
+<td><a accesskey="n" href="object-tree.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#Libvirt-glib-Event-loop.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#Libvirt-glib-Event-loop.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="Libvirt-glib-Event-loop"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="Libvirt-glib-Event-loop.top_of_page"></a>Event loop</span></h2>
+<p>Event loop — Integrate libvirt with the GMain event framework</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="Libvirt-glib-Event-loop.stability-level"></a><h2>Stability Level</h2>
+Stable, unless otherwise indicated
+</div>
+<div class="refsynopsisdiv">
+<a name="Libvirt-glib-Event-loop.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;libvirt-glib/libvirt-glib.h&gt;
+
+<span class="returnvalue">void</span>                <a class="link" href="Libvirt-glib-Event-loop.html#gvir-event-register" title="gvir_event_register ()">gvir_event_register</a>                 (<em class="parameter"><code><span class="type">void</span></code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="Libvirt-glib-Event-loop.description"></a><h2>Description</h2>
+<p>
+The libvirt API has the ability to provide applications with asynchronous
+notifications of interesting events. To enable this functionality though,
+applications must provide libvirt with an event loop implementation. The
+libvirt-glib API provides such an implementation, which naturally integrates
+with the GMain event loop framework.
+</p>
+<p>
+To enable use of the GMain event loop glue, the <code class="code"><a class="link" href="Libvirt-glib-Event-loop.html#gvir-event-register" title="gvir_event_register ()"><code class="function">gvir_event_register()</code></a></code>
+should be invoked. Once this is done, it is mandatory to have the default
+GMain event loop run by a thread in the application, usually the primary
+thread, eg by using <code class="code"><a href="http://library.gnome.org/devel/gtk3/gtk2-General.html#gtk-main"><code class="function">gtk_main()</code></a></code> or <code class="code"><code class="function">g_application_run()</code></code>
+</p>
+<p>
+</p>
+<div class="example">
+<a name="id-1.2.4.5.4.1"></a><p class="title"><b>Example 3. Registering for events with a GTK application</b></p>
+<div class="example-contents">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="type">int</span><span class="normal"> </span><span class="function">main</span><span class="symbol">(</span><span class="type">int</span><span class="normal"> argc</span><span class="symbol">,</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">**</span><span class="normal">argv</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">  </span><span class="symbol">...</span><span class="normal">setup</span><span class="symbol">...</span>
+<span class="normal">  </span><span class="function"><a href="Libvirt-glib-Event-loop.html#gvir-event-register">gvir_event_register</a></span><span class="symbol">();</span>
+<span class="normal">  </span><span class="symbol">...</span><span class="usertype">more</span><span class="normal"> setup</span><span class="symbol">...</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/gtk3/gtk2-General.html#gtk-main">gtk_main</a></span><span class="symbol">();</span>
+<span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="number">0</span><span class="symbol">;</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+<p><br class="example-break">
+</p>
+<p>
+</p>
+<div class="example">
+<a name="id-1.2.4.5.5.1"></a><p class="title"><b>Example 4. Registering for events using Appplication</b></p>
+<div class="example-contents">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="type">int</span><span class="normal"> </span><span class="function">main</span><span class="symbol">(</span><span class="type">int</span><span class="normal"> argc</span><span class="symbol">,</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">**</span><span class="normal">argv</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">  </span><span class="symbol">...</span><span class="normal">setup</span><span class="symbol">...</span>
+<span class="normal">  </span><span class="usertype">GApplication</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">app </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">...</span><span class="normal">create some impl </span><span class="usertype">of</span><span class="normal"> GApplication</span><span class="symbol">...</span>
+<span class="normal">  </span><span class="function"><a href="Libvirt-glib-Event-loop.html#gvir-event-register">gvir_event_register</a></span><span class="symbol">();</span>
+<span class="normal">  </span><span class="symbol">...</span><span class="usertype">more</span><span class="normal"> setup</span><span class="symbol">...</span>
+<span class="normal">  </span><span class="function">g_application_run</span><span class="symbol">(</span><span class="normal">app</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="number">0</span><span class="symbol">;</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+<p><br class="example-break">
+</p>
+</div>
+<div class="refsect1">
+<a name="Libvirt-glib-Event-loop.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="gvir-event-register"></a><h3>gvir_event_register ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_event_register                 (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Registers a libvirt event loop implementation that is backed
+by the default <code class="code">GMain</code> context. If invoked more
+than once this method will be a no-op. Applications should,
+however, take care not to register any another non-GLib
+event loop with libvirt.
+</p>
+<p>
+After invoking this method, it is mandatory to run the
+default GMain event loop. Typically this can be satisfied
+by invoking <code class="code">gtk_main</code> or <code class="code">g_application_run</code>
+in the application's main thread. Failure to run the event
+loop will mean no libvirt events get dispatched, and the
+libvirt keepalive timer will kill off libvirt connections
+frequently.
+</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

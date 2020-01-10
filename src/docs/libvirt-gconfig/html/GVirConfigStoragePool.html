@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirConfigStoragePool</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-gconfig Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-gconfig">
+<link rel="prev" href="GVirConfigSecret.html" title="GVirConfigSecret">
+<link rel="next" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirConfigSecret.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-gconfig Reference Manual</th>
+<td><a accesskey="n" href="GVirConfigStorageVol.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirConfigStoragePool.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirConfigStoragePool.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirConfigStoragePool.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirConfigStoragePool"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirConfigStoragePool.top_of_page"></a>GVirConfigStoragePool</span></h2>
+<p>GVirConfigStoragePool</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirConfigStoragePool.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="GVirConfigStoragePool.html#GVirConfigStoragePool-struct" title="struct GVirConfigStoragePool">GVirConfigStoragePool</a>;
+struct              <a class="link" href="GVirConfigStoragePool.html#GVirConfigStoragePoolClass" title="struct GVirConfigStoragePoolClass">GVirConfigStoragePoolClass</a>;
+enum                <a class="link" href="GVirConfigStoragePool.html#GVirConfigStoragePoolType" title="enum GVirConfigStoragePoolType">GVirConfigStoragePoolType</a>;
+<a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="returnvalue">GVirConfigStoragePool</span></a> * <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-new" title="gvir_config_storage_pool_new ()">gvir_config_storage_pool_new</a>    (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="returnvalue">GVirConfigStoragePool</span></a> * <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-new-from-xml" title="gvir_config_storage_pool_new_from_xml ()">gvir_config_storage_pool_new_from_xml</a>
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">guint64</span>             <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-get-allocation" title="gvir_config_storage_pool_get_allocation ()">gvir_config_storage_pool_get_allocation</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-set-allocation" title="gvir_config_storage_pool_set_allocation ()">gvir_config_storage_pool_set_allocation</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> allocation</code></em>);
+<span class="returnvalue">guint64</span>             <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-get-available" title="gvir_config_storage_pool_get_available ()">gvir_config_storage_pool_get_available</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-set-available" title="gvir_config_storage_pool_set_available ()">gvir_config_storage_pool_set_available</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> available</code></em>);
+<span class="returnvalue">guint64</span>             <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-get-capacity" title="gvir_config_storage_pool_get_capacity ()">gvir_config_storage_pool_get_capacity</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-set-capacity" title="gvir_config_storage_pool_set_capacity ()">gvir_config_storage_pool_set_capacity</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> capacity</code></em>);
+const <span class="returnvalue">char</span> *        <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-get-name" title="gvir_config_storage_pool_get_name ()">gvir_config_storage_pool_get_name</a>   (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-set-name" title="gvir_config_storage_pool_set_name ()">gvir_config_storage_pool_set_name</a>   (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *name</code></em>);
+<a class="link" href="GVirConfigStoragePool.html#GVirConfigStoragePoolType" title="enum GVirConfigStoragePoolType"><span class="returnvalue">GVirConfigStoragePoolType</span></a> <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-get-pool-type" title="gvir_config_storage_pool_get_pool_type ()">gvir_config_storage_pool_get_pool_type</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-set-pool-type" title="gvir_config_storage_pool_set_pool_type ()">gvir_config_storage_pool_set_pool_type</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html#GVirConfigStoragePoolType" title="enum GVirConfigStoragePoolType"><span class="type">GVirConfigStoragePoolType</span></a> type</code></em>);
+<span class="returnvalue">GVirConfigStoragePoolSource</span> * <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-get-source" title="gvir_config_storage_pool_get_source ()">gvir_config_storage_pool_get_source</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-set-source" title="gvir_config_storage_pool_set_source ()">gvir_config_storage_pool_set_source</a> (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><span class="type">GVirConfigStoragePoolSource</span> *source</code></em>);
+<span class="returnvalue">GVirConfigStoragePoolTarget</span> * <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-get-target" title="gvir_config_storage_pool_get_target ()">gvir_config_storage_pool_get_target</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-set-target" title="gvir_config_storage_pool_set_target ()">gvir_config_storage_pool_set_target</a> (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><span class="type">GVirConfigStoragePoolTarget</span> *target</code></em>);
+const <span class="returnvalue">char</span> *        <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-get-uuid" title="gvir_config_storage_pool_get_uuid ()">gvir_config_storage_pool_get_uuid</a>   (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStoragePool.html#gvir-config-storage-pool-set-uuid" title="gvir_config_storage_pool_set_uuid ()">gvir_config_storage_pool_set_uuid</a>   (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *uuid</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirConfigStoragePool.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----<a class="link" href="GVirConfigObject.html" title="GVirConfigObject">GVirConfigObject</a>
+         +----GVirConfigStoragePool
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirConfigStoragePool.description"></a><h2>Description</h2>
+</div>
+<div class="refsect1">
+<a name="GVirConfigStoragePool.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirConfigStoragePool-struct"></a><h3>struct GVirConfigStoragePool</h3>
+<pre class="programlisting">struct GVirConfigStoragePool;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirConfigStoragePoolClass"></a><h3>struct GVirConfigStoragePoolClass</h3>
+<pre class="programlisting">struct GVirConfigStoragePoolClass {
+    GVirConfigObjectClass parent_class;
+
+    gpointer padding[20];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirConfigStoragePoolType"></a><h3>enum GVirConfigStoragePoolType</h3>
+<pre class="programlisting">typedef enum {
+    GVIR_CONFIG_STORAGE_POOL_TYPE_DIR,
+    GVIR_CONFIG_STORAGE_POOL_TYPE_FS,
+    GVIR_CONFIG_STORAGE_POOL_TYPE_NETFS,
+    GVIR_CONFIG_STORAGE_POOL_TYPE_LOGICAL,
+    GVIR_CONFIG_STORAGE_POOL_TYPE_DISK,
+    GVIR_CONFIG_STORAGE_POOL_TYPE_ISCSI,
+    GVIR_CONFIG_STORAGE_POOL_TYPE_SCSI,
+    GVIR_CONFIG_STORAGE_POOL_TYPE_MPATH
+} GVirConfigStoragePoolType;
+</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><a name="GVIR-CONFIG-STORAGE-POOL-TYPE-DIR:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_STORAGE_POOL_TYPE_DIR</code></span></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p><a name="GVIR-CONFIG-STORAGE-POOL-TYPE-FS:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_STORAGE_POOL_TYPE_FS</code></span></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p><a name="GVIR-CONFIG-STORAGE-POOL-TYPE-NETFS:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_STORAGE_POOL_TYPE_NETFS</code></span></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p><a name="GVIR-CONFIG-STORAGE-POOL-TYPE-LOGICAL:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_STORAGE_POOL_TYPE_LOGICAL</code></span></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p><a name="GVIR-CONFIG-STORAGE-POOL-TYPE-DISK:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_STORAGE_POOL_TYPE_DISK</code></span></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p><a name="GVIR-CONFIG-STORAGE-POOL-TYPE-ISCSI:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_STORAGE_POOL_TYPE_ISCSI</code></span></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p><a name="GVIR-CONFIG-STORAGE-POOL-TYPE-SCSI:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_STORAGE_POOL_TYPE_SCSI</code></span></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p><a name="GVIR-CONFIG-STORAGE-POOL-TYPE-MPATH:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_STORAGE_POOL_TYPE_MPATH</code></span></p></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-new"></a><h3>gvir_config_storage_pool_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="returnvalue">GVirConfigStoragePool</span></a> * gvir_config_storage_pool_new    (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-new-from-xml"></a><h3>gvir_config_storage_pool_new_from_xml ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="returnvalue">GVirConfigStoragePool</span></a> * gvir_config_storage_pool_new_from_xml
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-get-allocation"></a><h3>gvir_config_storage_pool_get_allocation ()</h3>
+<pre class="programlisting"><span class="returnvalue">guint64</span>             gvir_config_storage_pool_get_allocation
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);</pre>
+<p>
+Gets the total storage allocation for the pool.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pool</code></em> :</span></p></td>
+<td>a <a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>total storage allocation in bytes.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-set-allocation"></a><h3>gvir_config_storage_pool_set_allocation ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_pool_set_allocation
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> allocation</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-get-available"></a><h3>gvir_config_storage_pool_get_available ()</h3>
+<pre class="programlisting"><span class="returnvalue">guint64</span>             gvir_config_storage_pool_get_available
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);</pre>
+<p>
+Gets the free space available for allocating new volumes in the pool.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pool</code></em> :</span></p></td>
+<td>a <a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>free space available in bytes.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-set-available"></a><h3>gvir_config_storage_pool_set_available ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_pool_set_available
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> available</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-get-capacity"></a><h3>gvir_config_storage_pool_get_capacity ()</h3>
+<pre class="programlisting"><span class="returnvalue">guint64</span>             gvir_config_storage_pool_get_capacity
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);</pre>
+<p>
+Gets the total storage capacity for the pool.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pool</code></em> :</span></p></td>
+<td>a <a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>total storage capacity in bytes.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-set-capacity"></a><h3>gvir_config_storage_pool_set_capacity ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_pool_set_capacity
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> capacity</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-get-name"></a><h3>gvir_config_storage_pool_get_name ()</h3>
+<pre class="programlisting">const <span class="returnvalue">char</span> *        gvir_config_storage_pool_get_name   (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);</pre>
+<p>
+Gets the name of the pool.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pool</code></em> :</span></p></td>
+<td>a <a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>name of <em class="parameter"><code>pool</code></em>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-set-name"></a><h3>gvir_config_storage_pool_set_name ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_pool_set_name   (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *name</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-get-pool-type"></a><h3>gvir_config_storage_pool_get_pool_type ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigStoragePool.html#GVirConfigStoragePoolType" title="enum GVirConfigStoragePoolType"><span class="returnvalue">GVirConfigStoragePoolType</span></a> gvir_config_storage_pool_get_pool_type
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);</pre>
+<p>
+Gets the type of the pool.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pool</code></em> :</span></p></td>
+<td>a <a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<span class="type">Gname</span> of <em class="parameter"><code>pool</code></em>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-set-pool-type"></a><h3>gvir_config_storage_pool_set_pool_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_pool_set_pool_type
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html#GVirConfigStoragePoolType" title="enum GVirConfigStoragePoolType"><span class="type">GVirConfigStoragePoolType</span></a> type</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-get-source"></a><h3>gvir_config_storage_pool_get_source ()</h3>
+<pre class="programlisting"><span class="returnvalue">GVirConfigStoragePoolSource</span> * gvir_config_storage_pool_get_source
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);</pre>
+<p>
+Gets the source for <em class="parameter"><code>pool</code></em>
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pool</code></em> :</span></p></td>
+<td>a <a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new <span class="type">GVirConfigStoragePoolSource</span> instance. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-set-source"></a><h3>gvir_config_storage_pool_set_source ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_pool_set_source (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><span class="type">GVirConfigStoragePoolSource</span> *source</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>source</code></em> :</span></p></td>
+<td>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-get-target"></a><h3>gvir_config_storage_pool_get_target ()</h3>
+<pre class="programlisting"><span class="returnvalue">GVirConfigStoragePoolTarget</span> * gvir_config_storage_pool_get_target
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);</pre>
+<p>
+Gets the target for <em class="parameter"><code>pool</code></em>
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pool</code></em> :</span></p></td>
+<td>a <a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new <span class="type">GVirConfigStoragePoolTarget</span> instance. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-set-target"></a><h3>gvir_config_storage_pool_set_target ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_pool_set_target (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code><span class="type">GVirConfigStoragePoolTarget</span> *target</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>target</code></em> :</span></p></td>
+<td>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-get-uuid"></a><h3>gvir_config_storage_pool_get_uuid ()</h3>
+<pre class="programlisting">const <span class="returnvalue">char</span> *        gvir_config_storage_pool_get_uuid   (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>);</pre>
+<p>
+Gets the unique identifier for <em class="parameter"><code>pool</code></em>.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pool</code></em> :</span></p></td>
+<td>a <a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>unique identifier for <em class="parameter"><code>pool</code></em>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-pool-set-uuid"></a><h3>gvir_config_storage_pool_set_uuid ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_pool_set_uuid   (<em class="parameter"><code><a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool"><span class="type">GVirConfigStoragePool</span></a> *pool</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *uuid</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>uuid</code></em> :</span></p></td>
+<td>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

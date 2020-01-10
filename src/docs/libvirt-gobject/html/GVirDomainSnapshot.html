@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirDomainSnapshot</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-gobject Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-gobject">
+<link rel="prev" href="GVirDomain.html" title="GVirDomain">
+<link rel="next" href="Libvirt-gobject-GVir.html" title="GVir">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirDomain.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-gobject Reference Manual</th>
+<td><a accesskey="n" href="Libvirt-gobject-GVir.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirDomainSnapshot.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirDomainSnapshot.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirDomainSnapshot.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GVirDomainSnapshot.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirDomainSnapshot"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirDomainSnapshot.top_of_page"></a>GVirDomainSnapshot</span></h2>
+<p>GVirDomainSnapshot</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirDomainSnapshot.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="GVirDomainSnapshot.html#GVirDomainSnapshot-struct" title="struct GVirDomainSnapshot">GVirDomainSnapshot</a>;
+struct              <a class="link" href="GVirDomainSnapshot.html#GVirDomainSnapshotClass" title="struct GVirDomainSnapshotClass">GVirDomainSnapshotClass</a>;
+const <span class="returnvalue">gchar</span> *       <a class="link" href="GVirDomainSnapshot.html#gvir-domain-snapshot-get-name" title="gvir_domain_snapshot_get_name ()">gvir_domain_snapshot_get_name</a>       (<em class="parameter"><code><a class="link" href="GVirDomainSnapshot.html" title="GVirDomainSnapshot"><span class="type">GVirDomainSnapshot</span></a> *snapshot</code></em>);
+<a href="/usr/share/gtk-doc/html/Libvirt-gconfig/GVirConfigDomainSnapshot.html"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> * <a class="link" href="GVirDomainSnapshot.html#gvir-domain-snapshot-get-config" title="gvir_domain_snapshot_get_config ()">gvir_domain_snapshot_get_config</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirDomainSnapshot.html" title="GVirDomainSnapshot"><span class="type">GVirDomainSnapshot</span></a> *snapshot</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirDomainSnapshot.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----GVirDomainSnapshot
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirDomainSnapshot.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GVirDomainSnapshot.html#GVirDomainSnapshot--handle" title='The "handle" property'>handle</a>"                   <span class="type">GVirDomainSnapshotHandle</span>*  : Read / Write / Construct Only
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirDomainSnapshot.description"></a><h2>Description</h2>
+</div>
+<div class="refsect1">
+<a name="GVirDomainSnapshot.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirDomainSnapshot-struct"></a><h3>struct GVirDomainSnapshot</h3>
+<pre class="programlisting">struct GVirDomainSnapshot;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirDomainSnapshotClass"></a><h3>struct GVirDomainSnapshotClass</h3>
+<pre class="programlisting">struct GVirDomainSnapshotClass {
+    GObjectClass parent_class;
+
+    gpointer padding[20];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-domain-snapshot-get-name"></a><h3>gvir_domain_snapshot_get_name ()</h3>
+<pre class="programlisting">const <span class="returnvalue">gchar</span> *       gvir_domain_snapshot_get_name       (<em class="parameter"><code><a class="link" href="GVirDomainSnapshot.html" title="GVirDomainSnapshot"><span class="type">GVirDomainSnapshot</span></a> *snapshot</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-domain-snapshot-get-config"></a><h3>gvir_domain_snapshot_get_config ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/Libvirt-gconfig/GVirConfigDomainSnapshot.html"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> * gvir_domain_snapshot_get_config
+                                                        (<em class="parameter"><code><a class="link" href="GVirDomainSnapshot.html" title="GVirDomainSnapshot"><span class="type">GVirDomainSnapshot</span></a> *snapshot</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>snapshot</code></em> :</span></p></td>
+<td>the domain_snapshot</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td>the flags</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the config. The returned object should be
+unreffed with <code class="function">g_object_unref()</code> when no longer needed. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirDomainSnapshot.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GVirDomainSnapshot--handle"></a><h3>The <code class="literal">"handle"</code> property</h3>
+<pre class="programlisting">  "handle"                   <span class="type">GVirDomainSnapshotHandle</span>*  : Read / Write / Construct Only</pre>
+<p>The domain_snapshot handle.</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

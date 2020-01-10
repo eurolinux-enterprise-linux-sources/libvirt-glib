@@ -1,0 +1,60 @@
+libvirt-glib
+============
+
+libvirt is a C toolkit to interact with the virtualization capabilities
+of recent versions of Linux (and other OSes). It is free software
+available under the GNU Lesser General Public License. Virtualization on
+the Linux Operating System means the ability to run multiple instances of
+Operating Systems concurrently on a single hardware system where the basic
+resources are driven by a Linux instance. The library aim at providing
+long term stable C API initially for the Xen paravirtualization but
+should be able to integrate other virtualization mechanisms if needed.
+
+libvirt-glib wraps libvirt to provide a high-level object-oriented API better
+suited for glib-based applications, via three libraries:
+
+  - libvirt-glib - GLib main loop integration & misc helper APIs
+  - libvirt-gconfig - GObjects for manipulating libvirt XML documents
+  - libvirt-gobject - GObjects for managing libvirt objects
+
+libvirt-glib is Free Software and licenced under LGPLv2+.
+
+The latest official releases can be found at:
+
+  ftp://libvirt.org/libvirt/glib/
+
+NB: at this time, libvirt-glib is *NOT* considered API/ABI stable. Future
+releases may still include API/ABI incompatible changes.
+
+Dependencies
+============
+
+- Required:
+  - glib-2.0
+  - gobject-2.0
+  - libxml-2.0
+  - libvirt
+
+- Optional:
+  - gobject-introspection
+  - Vala (build-time only)
+
+Patches sumissions
+==================
+
+Patch submissions are welcomed from any interested contributor. Please
+send them to the main libvir-list mailing list
+
+    libvir-list@redhat.com
+
+Questions about usage / deployment can be send to the end users mailing
+list
+
+    libvirt-users@redhat.com
+
+For further information about mailing lists & contacting the developers,
+please consult
+
+    http://libvirt.org/contact.html
+
+--End

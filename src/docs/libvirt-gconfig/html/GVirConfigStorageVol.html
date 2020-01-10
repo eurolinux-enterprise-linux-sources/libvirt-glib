@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirConfigStorageVol</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-gconfig Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-gconfig">
+<link rel="prev" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool">
+<link rel="next" href="GVirConfigCapabilities.html" title="GVirConfigCapabilities">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirConfigStoragePool.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-gconfig Reference Manual</th>
+<td><a accesskey="n" href="GVirConfigCapabilities.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirConfigStorageVol.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirConfigStorageVol.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirConfigStorageVol.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirConfigStorageVol"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirConfigStorageVol.top_of_page"></a>GVirConfigStorageVol</span></h2>
+<p>GVirConfigStorageVol</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirConfigStorageVol.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="GVirConfigStorageVol.html#GVirConfigStorageVol-struct" title="struct GVirConfigStorageVol">GVirConfigStorageVol</a>;
+struct              <a class="link" href="GVirConfigStorageVol.html#GVirConfigStorageVolClass" title="struct GVirConfigStorageVolClass">GVirConfigStorageVolClass</a>;
+<a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="returnvalue">GVirConfigStorageVol</span></a> * <a class="link" href="GVirConfigStorageVol.html#gvir-config-storage-vol-new" title="gvir_config_storage_vol_new ()">gvir_config_storage_vol_new</a>      (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="returnvalue">GVirConfigStorageVol</span></a> * <a class="link" href="GVirConfigStorageVol.html#gvir-config-storage-vol-new-from-xml" title="gvir_config_storage_vol_new_from_xml ()">gvir_config_storage_vol_new_from_xml</a>
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStorageVol.html#gvir-config-storage-vol-set-allocation" title="gvir_config_storage_vol_set_allocation ()">gvir_config_storage_vol_set_allocation</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> allocation</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStorageVol.html#gvir-config-storage-vol-set-backing-store" title="gvir_config_storage_vol_set_backing_store ()">gvir_config_storage_vol_set_backing_store</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
+                                                         <em class="parameter"><code><span class="type">GVirConfigStorageVolBackingStore</span> *backing_store</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStorageVol.html#gvir-config-storage-vol-set-capacity" title="gvir_config_storage_vol_set_capacity ()">gvir_config_storage_vol_set_capacity</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> capacity</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStorageVol.html#gvir-config-storage-vol-set-name" title="gvir_config_storage_vol_set_name ()">gvir_config_storage_vol_set_name</a>    (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *name</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVirConfigStorageVol.html#gvir-config-storage-vol-set-target" title="gvir_config_storage_vol_set_target ()">gvir_config_storage_vol_set_target</a>  (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
+                                                         <em class="parameter"><code><span class="type">GVirConfigStorageVolTarget</span> *target</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirConfigStorageVol.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----<a class="link" href="GVirConfigObject.html" title="GVirConfigObject">GVirConfigObject</a>
+         +----GVirConfigStorageVol
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirConfigStorageVol.description"></a><h2>Description</h2>
+</div>
+<div class="refsect1">
+<a name="GVirConfigStorageVol.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirConfigStorageVol-struct"></a><h3>struct GVirConfigStorageVol</h3>
+<pre class="programlisting">struct GVirConfigStorageVol;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirConfigStorageVolClass"></a><h3>struct GVirConfigStorageVolClass</h3>
+<pre class="programlisting">struct GVirConfigStorageVolClass {
+    GVirConfigObjectClass parent_class;
+
+    gpointer padding[20];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-vol-new"></a><h3>gvir_config_storage_vol_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="returnvalue">GVirConfigStorageVol</span></a> * gvir_config_storage_vol_new      (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-vol-new-from-xml"></a><h3>gvir_config_storage_vol_new_from_xml ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="returnvalue">GVirConfigStorageVol</span></a> * gvir_config_storage_vol_new_from_xml
+                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-vol-set-allocation"></a><h3>gvir_config_storage_vol_set_allocation ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_vol_set_allocation
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> allocation</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-vol-set-backing-store"></a><h3>gvir_config_storage_vol_set_backing_store ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_vol_set_backing_store
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
+                                                         <em class="parameter"><code><span class="type">GVirConfigStorageVolBackingStore</span> *backing_store</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>backing_store</code></em> :</span></p></td>
+<td>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-vol-set-capacity"></a><h3>gvir_config_storage_vol_set_capacity ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_vol_set_capacity
+                                                        (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint64</span> capacity</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-vol-set-name"></a><h3>gvir_config_storage_vol_set_name ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_vol_set_name    (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *name</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-storage-vol-set-target"></a><h3>gvir_config_storage_vol_set_target ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_storage_vol_set_target  (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
+                                                         <em class="parameter"><code><span class="type">GVirConfigStorageVolTarget</span> *target</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>target</code></em> :</span></p></td>
+<td>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

@@ -1,0 +1,234 @@
+                 libvirt-glib News
+                 =================
+
+0.1.7 - Jul  8, 2013
+====================
+
+- Fix memory leaks in domain memory setters
+- Add APIs for configuration sdl/rdp/desktop graphics modes
+- Add getter APIs for domain channel devices
+- Add getter APIs for storage pools
+- Add API for getting/setting virt type
+- Add getter APIs for storage pool schema
+- Add base framework for i18n of error messages
+- Fix annotation of gvir_init_object
+- Add getter/setter APIs for disk driver format
+- Add APIs for domain snapshot schema
+- Add APIs to access domain chardev source
+- Add API to access domain device aliases
+
+0.1.6 - Mar 18, 2013
+====================
+
+- Prefer g_strlcpy over strncpy
+- Fix potential crashes in some error handling cases
+- Fix typo in gvir_config_init docs which broke vala binding
+- Use 'transfer none' for argv parameter in all init functions
+- Ensure stream data parameters are annotated to be guint8
+  arrays, not gchar, since they're not NULL terminated
+  strings.
+- Replace FSF address with URL in copyright headers
+- Add API for changing Spice compression parameters.
+
+0.1.5 - Jan 14, 2013
+====================
+
+- Add support for bridge interface types in guest XML
+- Add API to open a read-only connection
+- Add support for smartcard devices in guest XML
+- Remove storage volume from pool list after deleteing it
+
+0.1.4 - Nov 16, 2012
+====================
+
+- Add support for configuring power management config
+- Add API binding for updating device config
+- Avoid SEGV when querying storage volune with NULL name
+- Avoid reference count leak when constructing wrapped libvirt objects
+- Avoid calling g_type_init for newer glib
+- Add flags for domain reboot API
+- Fix leak with GMutex compatibility wrappers
+- Don't use storage volumes before the pool refresh finishes
+- Add binding for destroying storage pools
+- Add binding for defining storage pools
+
+0.1.3 - Oct  8, 2012
+====================
+
+- Improve documentation for set_memory method in GVirConfigDomain
+- Handle size units for memory attributes
+- Add API for current memory
+- Fix python example to specify virt type
+- Use 1 GB of RAM in python example instead 1 TB !
+- Add API to get hypervisor name and version
+- Avoid NULL format string for g_set_error
+- Fix XXX_new_with_xml constructors for config objects
+- Add misc getters for VNC/SPICE config attributes
+- Add handling of PMSUSPENDED state
+- Add handling of WAKEUP events
+- Require libvirt 0.10.2 minimum
+- Add API for domain PM wakeup
+
+0.1.2 - Aug 20, 2012
+====================
+
+- Add async binding for virDomainResume
+- Fix deadlock in event loop handle/timer removal
+
+0.1.1 - Aug 06, 2012
+====================
+
+- Add bindings for virDomainSnapshotCreate*().
+- Add bindings for virDomainRestore*().
+- Add GVir.DomainShutdownFlags() binding.
+- Add GVir.DomainXMLFlags binding.
+
+0.1.0 - Jul 16, 2012
+====================
+
+- Add setters for capabilities CPU config object
+- Add constructor for capabilities CPU config object
+- Add config object for domain CPU schema
+- Add bindings for domain save APIs
+- Add bindings for storage volume upload/download
+
+0.0.9 - Jun 25, 2012
+====================
+- Full API docs for libvirt-glib library
+- Add API for getting domain OS config
+- Add API for getting domain OS boot devices
+- Add APIs for querying host capabilities
+- Add missing domain OS type enum values
+- Add API for getting domain virt type
+- Add comprehensive API arg checking
+- Add API for getting domain arch
+- Allow zero timeouts in timer
+- Fix build with newer glibc-headers and -O0
+- Fix generation of filesystem source element
+- Port to use Mingw64 toolchain for automated builds
+- Add async API for starting domains
+- Fix thread safety of event loop timeouts/watches
+- Add support for filesystem type=bind|ram
+
+0.0.8 - Apr 27, 2012
+====================
+
+- Fix build of test suites with Debian's libtool
+- Add API for disk source startup policy
+- Add API for domain controller devices
+- Add APIs for USB controllers
+- Add APIs for USB / PCI device addressing schemes
+- Add APIs for USB redirection devices
+- Add ASync API for fetching domain info
+- Add APIs for domain timer configuration
+
+0.0.7 - Mar 30, 2012
+====================
+
+- Fix typo in filesystem access mode constant
+- Remove incorrect encoding of XML attributes
+- Add support for USB redirection devices
+- Add support for SPICE agent device
+- Fix typo in channel device target constant
+- Make all string getters return a const string
+- Keep list of devices sorted in original XML order
+
+0.0.6 - Mar 05, 2012
+====================
+
+- Add binding for virDomainBlockResize(): gvir_domain_disk_resize().
+- Set correct target node attribute for domain interface.
+  gvir_config_domain_interface_set_ifname() should be setting 'dev' attribute
+  under 'target', not 'device'.
+- Getter for the associated domain of a domain device.
+- Getters for GVirConfigDomainInterface attributes.
+- GVirDomainDevice now has an associated GVirConfigDomainDevice.
+- Remove now redundant 'path' property from GVirDomainDevice subclasses.
+- Add gvir_domain_get_devices().
+- Empty statistics for user-mode interfaces. One of the limitations of user-mode
+  networking of libvirt is that you can't get statistics for it (not yet, at
+  least). Instead of erroring-out in that case, simply return empty statistics
+  result and spit a debug message.
+- Fix a GVirStream leak.
+- Also distribute GNUmakefile, cfg.mk and maint.mk files.
+
+0.0.5 - Feb 20, 2012
+====================
+
+- Require libvirt >= 0.9.10
+- Fix error after finishing a stream
+- Use G_PARAM_STATIC_STRINGS
+- Add config for readonly disks
+- Add config for description/metadata
+- Fix type when creating storage volumes
+- Remove some bogus g_error usage
+- Import GNULIB's compiler warning flags support & fix
+  problems
+- Add API for resizing storage volumes
+- Add API to check if a domain is saved
+- Add config for disk cache method
+- Add APIs to get node information
+- Add flags for deleting domains
+
+
+0.0.4 - Jan 12, 2012
+====================
+
+- Add support for configuring sound, serial, parallel
+  and channel devices
+- Add support for newer libvirt shutdown event
+- Add support for setting SPICE/VNC passwords
+- Fix storage pool annotations
+- Improve docs for memory APIs
+- Fix problem with duplicated attributes
+- Many internal XML helper API cleanups/additions
+- Add API for retrieving list of all devices
+- Fix mixup between g_new0/g_slice_free
+- Change namespace for GVirConfig APIs (breaks ABI
+  and API)
+- New APIs for save/suspend
+
+
+0.0.3 - Dec 19, 2011
+====================
+
+- Flesh out API in libvirt-gconfig to allow basic domain
+  configuration
+- Don't memset private data fields, since glib already
+  ensures this
+- Fix VPATH builds
+- Add syntax-check rules ensuring coding style compliance
+- Describe coding style in HACKING file
+- Expand libvirt-gobject API to allow watches on streams
+- Simplify debug system with new glib
+- Fix libvirt-gobject pkg-config file
+- Fix domain event handlig wrt transient guests
+- Don't crash if given a NULL uri to connect to
+- Expand libvirt-gobject API for storage pools & volumes
+- Fix some crashes in error paths where GError instance
+  was NULL
+- Add vala files to the RPM
+- Add binding for open domain consoles & graphics
+
+
+0.0.2 - Nov 22, 2011
+====================
+
+- Add API to redefine an existing domain.
+- Expicitely call virInitialize() to avoid connection races.
+- Adjust example to latest pygobject-3.0.
+- Add missing deps on libxml2-devel & libtool.
+- Add support for writing to streams
+- Add API for creating transient domains
+- Change all flags parameters to be guint
+- Uncomment & fix code for returning object config
+- Ensure pools & domains hashes are non-NULL to avoid SEGV
+- Don't de-reference GError instances which are NULL
+- Update COPYING file to have latest FSF address
+- Update RPM specfile to include Fedora review feedback
+
+
+0.0.1 - Nov 16, 2011
+====================
+
+First public release.

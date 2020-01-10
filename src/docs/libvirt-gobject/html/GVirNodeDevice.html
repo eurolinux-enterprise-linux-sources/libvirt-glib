@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GVirNodeDevice</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Libvirt-gobject Reference Manual">
+<link rel="up" href="ch01.html" title="Libvirt-gobject">
+<link rel="prev" href="GVirNetwork.html" title="GVirNetwork">
+<link rel="next" href="GVirSecret.html" title="GVirSecret">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GVirNetwork.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libvirt-gobject Reference Manual</th>
+<td><a accesskey="n" href="GVirSecret.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GVirNodeDevice.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GVirNodeDevice.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GVirNodeDevice.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GVirNodeDevice.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="GVirNodeDevice"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GVirNodeDevice.top_of_page"></a>GVirNodeDevice</span></h2>
+<p>GVirNodeDevice</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GVirNodeDevice.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">struct              <a class="link" href="GVirNodeDevice.html#GVirNodeDevice-struct" title="struct GVirNodeDevice">GVirNodeDevice</a>;
+struct              <a class="link" href="GVirNodeDevice.html#GVirNodeDeviceClass" title="struct GVirNodeDeviceClass">GVirNodeDeviceClass</a>;
+const <span class="returnvalue">gchar</span> *       <a class="link" href="GVirNodeDevice.html#gvir-node-device-get-name" title="gvir_node_device_get_name ()">gvir_node_device_get_name</a>           (<em class="parameter"><code><a class="link" href="GVirNodeDevice.html" title="GVirNodeDevice"><span class="type">GVirNodeDevice</span></a> *device</code></em>);
+<a href="/usr/share/gtk-doc/html/Libvirt-gconfig/GVirConfigNodeDevice.html"><span class="returnvalue">GVirConfigNodeDevice</span></a> * <a class="link" href="GVirNodeDevice.html#gvir-node-device-get-config" title="gvir_node_device_get_config ()">gvir_node_device_get_config</a>      (<em class="parameter"><code><a class="link" href="GVirNodeDevice.html" title="GVirNodeDevice"><span class="type">GVirNodeDevice</span></a> *device</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirNodeDevice.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GObject
+   +----GVirNodeDevice
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirNodeDevice.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GVirNodeDevice.html#GVirNodeDevice--handle" title='The "handle" property'>handle</a>"                   <span class="type">GVirNodeDeviceHandle</span>*  : Read / Write / Construct Only
+</pre>
+</div>
+<div class="refsect1">
+<a name="GVirNodeDevice.description"></a><h2>Description</h2>
+</div>
+<div class="refsect1">
+<a name="GVirNodeDevice.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="GVirNodeDevice-struct"></a><h3>struct GVirNodeDevice</h3>
+<pre class="programlisting">struct GVirNodeDevice;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GVirNodeDeviceClass"></a><h3>struct GVirNodeDeviceClass</h3>
+<pre class="programlisting">struct GVirNodeDeviceClass {
+    GObjectClass parent_class;
+
+    gpointer padding[20];
+};
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-node-device-get-name"></a><h3>gvir_node_device_get_name ()</h3>
+<pre class="programlisting">const <span class="returnvalue">gchar</span> *       gvir_node_device_get_name           (<em class="parameter"><code><a class="link" href="GVirNodeDevice.html" title="GVirNodeDevice"><span class="type">GVirNodeDevice</span></a> *device</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-node-device-get-config"></a><h3>gvir_node_device_get_config ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/Libvirt-gconfig/GVirConfigNodeDevice.html"><span class="returnvalue">GVirConfigNodeDevice</span></a> * gvir_node_device_get_config      (<em class="parameter"><code><a class="link" href="GVirNodeDevice.html" title="GVirNodeDevice"><span class="type">GVirNodeDevice</span></a> *device</code></em>,
+                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
+                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);</pre>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>device</code></em> :</span></p></td>
+<td>the node_device</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td>the flags</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
+<td>Place-holder for possible errors</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the config. The returned object should be
+unreffed with <code class="function">g_object_unref()</code> when no longer needed. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirNodeDevice.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GVirNodeDevice--handle"></a><h3>The <code class="literal">"handle"</code> property</h3>
+<pre class="programlisting">  "handle"                   <span class="type">GVirNodeDeviceHandle</span>*  : Read / Write / Construct Only</pre>
+<p>The node_device handle.</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.19</div>
+</body>
+</html>

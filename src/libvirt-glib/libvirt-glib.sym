@@ -1,0 +1,23 @@
+LIBVIRT_GLIB_0.0.7 {
+  global:
+        gvir_init;
+        gvir_init_check;
+        gvir_event_register;
+
+	gvir_error_new;
+	gvir_error_new_valist;
+	gvir_error_new_literal;
+	gvir_set_error;
+	gvir_set_error_valist;
+	gvir_set_error_literal;
+
+  local:
+        *;
+};
+
+LIBVIRT_GLIB_0.1.4 {
+	gvir_critical;
+	gvir_warning;
+} LIBVIRT_GLIB_0.0.7;
+
+# .... define new API here using predicted next version number ....
