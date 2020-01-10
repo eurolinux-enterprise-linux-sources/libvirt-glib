@@ -22,7 +22,7 @@
 
 Name: libvirt-glib
 Version: 0.1.7
-Release: 1%{?dist}%{?extra_release}
+Release: 3%{?dist}%{?extra_release}
 Summary: libvirt glib integration for events
 Group: Development/Libraries
 License: LGPLv2+
@@ -234,6 +234,12 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.1.7-3
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.1.7-2
+- Mass rebuild 2013-12-27
+
 * Mon Jul  8 2013 Daniel P. Berrange <berrange@redhat.com> - 0.1.7-1
 - Update to 0.1.7 release
 
