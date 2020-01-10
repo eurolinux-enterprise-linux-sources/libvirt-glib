@@ -266,7 +266,6 @@ CPPFLAGS = @CPPFLAGS@
 CYGPATH_W = @CYGPATH_W@
 CYGWIN_EXTRA_LDFLAGS = @CYGWIN_EXTRA_LDFLAGS@
 CYGWIN_EXTRA_LIBADD = @CYGWIN_EXTRA_LIBADD@
-CYGWIN_EXTRA_PYTHON_LIBADD = @CYGWIN_EXTRA_PYTHON_LIBADD@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
@@ -362,10 +361,6 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
-PYTHON = @PYTHON@
-PYTHON_INCLUDES = @PYTHON_INCLUDES@
-PYTHON_SITE_PACKAGES = @PYTHON_SITE_PACKAGES@
-PYTHON_VERSION = @PYTHON_VERSION@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -424,7 +419,6 @@ pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
-pythondir = @pythondir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
@@ -560,6 +554,7 @@ INTROSPECTION_GIRS = $(am__append_1)
 @HAVE_INTROSPECTION_TRUE@	--c-include="libvirt-gobject/libvirt-gobject.h" \
 @HAVE_INTROSPECTION_TRUE@	--include-uninstalled $(top_builddir)/libvirt-glib/LibvirtGLib-1.0.gir \
 @HAVE_INTROSPECTION_TRUE@	--include-uninstalled $(top_builddir)/libvirt-gconfig/LibvirtGConfig-1.0.gir \
+@HAVE_INTROSPECTION_TRUE@	--warn-all \
 @HAVE_INTROSPECTION_TRUE@	$(NULL)
 
 @HAVE_INTROSPECTION_TRUE@INTROSPECTION_COMPILER_ARGS = \

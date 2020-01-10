@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GVirConfigDomainSnapshot: Libvirt-gconfig Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="Libvirt-gconfig Reference Manual">
 <link rel="up" href="ch01.html" title="Libvirt-gconfig">
 <link rel="prev" href="GVirConfigDomain.html" title="GVirConfigDomain">
 <link rel="next" href="GVirConfigInterface.html" title="GVirConfigInterface">
-<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -34,7 +34,7 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="GVirConfigDomainSnapshot.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
@@ -166,7 +166,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<a href="https://developer.gnome.org/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *
+<span class="returnvalue">GList</span> *
 </td>
 <td class="function_name">
 <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-disks" title="gvir_config_domain_snapshot_get_disks ()">gvir_config_domain_snapshot_get_disks</a> <span class="c_punctuation">()</span>
@@ -177,7 +177,7 @@
 </div>
 <div class="refsect1">
 <a name="GVirConfigDomainSnapshot.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
@@ -208,7 +208,7 @@
 </div>
 <div class="refsect1">
 <a name="GVirConfigDomainSnapshot.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+<pre class="screen">    GObject
     <span class="lineart">╰──</span> <a class="link" href="GVirConfigObject.html" title="GVirConfigObject">GVirConfigObject</a>
         <span class="lineart">╰──</span> GVirConfigDomainSnapshot
 </pre>
@@ -228,8 +228,8 @@ gvir_config_domain_snapshot_new (<em class="parameter"><code><span class="type">
 <a name="gvir-config-domain-snapshot-new-from-xml"></a><h3>gvir_config_domain_snapshot_new_from_xml ()</h3>
 <pre class="programlisting"><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> *
 gvir_config_domain_snapshot_new_from_xml
-                               (<em class="parameter"><code>const <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *xml</code></em>,
-                                <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                               (<em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
+                                <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
@@ -318,8 +318,8 @@ gvir_config_domain_snapshot_get_domain
 <p>Gets the configuration of the domain <em class="parameter"><code>snapshot</code></em>
  is a snapshot of.</p>
 <div class="refsect3">
-<a name="id-1.2.4.7.15.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gvir-config-domain-snapshot-get-domain.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -333,9 +333,9 @@ gvir_config_domain_snapshot_get_domain
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.7.15.6"></a><h4>Returns</h4>
+<a name="gvir-config-domain-snapshot-get-domain.returns"></a><h4>Returns</h4>
 <p> A <a class="link" href="GVirConfigDomain.html" title="GVirConfigDomain"><span class="type">GVirConfigDomain</span></a>. The returned object
-should be unreffed with <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> when no longer needed. </p>
+should be unreffed with <code class="function">g_object_unref()</code> when no longer needed. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 </div>
@@ -344,10 +344,10 @@ should be unreffed with <a href="https://developer.gnome.org/gobject/unstable/go
 <a name="gvir-config-domain-snapshot-set-disks"></a><h3>gvir_config_domain_snapshot_set_disks ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gvir_config_domain_snapshot_set_disks (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                       <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *disks</code></em>);</pre>
+                                       <em class="parameter"><code><span class="type">GList</span> *disks</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.2.4.7.16.4"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gvir-config-domain-snapshot-set-disks.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -378,15 +378,15 @@ gvir_config_domain_snapshot_add_disk (<em class="parameter"><code><a class="link
 <hr>
 <div class="refsect2">
 <a name="gvir-config-domain-snapshot-get-disks"></a><h3>gvir_config_domain_snapshot_get_disks ()</h3>
-<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *
+<pre class="programlisting"><span class="returnvalue">GList</span> *
 gvir_config_domain_snapshot_get_disks (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
 <p>Gets the list of disks attached to <em class="parameter"><code>snapshot</code></em>
 .  The returned list should
-be freed with <a href="https://developer.gnome.org/glib/unstable/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>, after its elements have been unreffed with
-<a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</p>
+be freed with <code class="function">g_list_free()</code>, after its elements have been unreffed with
+<code class="function">g_object_unref()</code>.</p>
 <div class="refsect3">
-<a name="id-1.2.4.7.18.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gvir-config-domain-snapshot-get-disks.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -400,8 +400,8 @@ be freed with <a href="https://developer.gnome.org/glib/unstable/glib-Doubly-Lin
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.7.18.6"></a><h4>Returns</h4>
-<p>a newly allocated <a href="https://developer.gnome.org/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <span class="type">GVirConfigDomainSnapshotDisk</span>. </p>
+<a name="gvir-config-domain-snapshot-get-disks.returns"></a><h4>Returns</h4>
+<p>a newly allocated <span class="type">GList</span> of <span class="type">GVirConfigDomainSnapshotDisk</span>. </p>
 <p><span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> LibvirtGConfig.DomainSnapshotDisk][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 </div>
@@ -426,8 +426,8 @@ be freed with <a href="https://developer.gnome.org/glib/unstable/glib-Doubly-Lin
 <div class="refsect2">
 <a name="GVirConfigDomainSnapshotDomainState"></a><h3>enum GVirConfigDomainSnapshotDomainState</h3>
 <div class="refsect3">
-<a name="id-1.2.4.8.4.3"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="GVirConfigDomainSnapshotDomainState.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -487,8 +487,8 @@ be freed with <a href="https://developer.gnome.org/glib/unstable/glib-Doubly-Lin
 <div class="refsect2">
 <a name="GVirConfigDomainSnapshotMemoryState"></a><h3>enum GVirConfigDomainSnapshotMemoryState</h3>
 <div class="refsect3">
-<a name="id-1.2.4.8.5.3"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="GVirConfigDomainSnapshotMemoryState.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -522,6 +522,6 @@ be freed with <a href="https://developer.gnome.org/glib/unstable/glib-Doubly-Lin
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

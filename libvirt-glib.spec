@@ -1,27 +1,20 @@
 # -*- rpm-spec -*-
 
 %define with_introspection 0
-%define with_python 0
 %define with_vala 0
 
 %if 0%{?fedora} >= 15
 %define with_introspection 1
 %endif
-%if 0%{?fedora} && 0%{?fedora} < 15
-%define with_python 1
-%endif
 %if 0%{?rhel} > 6
 %define with_introspection 1
 %endif
-%if 0%{?rhel} && 0%{?rhel} < 7
-%define with_python 1
-%endif
 %define with_vala %{with_introspection}
 
-%define libvirt_version 0.10.2
+%define libvirt_version 1.1.1
 
 Name: libvirt-glib
-Version: 0.2.3
+Version: 1.0.0
 Release: 1%{?dist}%{?extra_release}
 Summary: libvirt glib integration for events
 Group: Development/Libraries
@@ -32,7 +25,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: glib2-devel >= 2.36.0
 BuildRequires: libvirt-devel >= %{libvirt_version}
-BuildRequires: python-devel
 %if %{with_introspection}
 BuildRequires: gobject-introspection-devel
 %if 0%{?fedora} == 12
@@ -45,6 +37,7 @@ BuildRequires: libtool
 %if %{with_vala}
 BuildRequires: vala-tools
 %endif
+BuildRequires: intltool
 
 %package devel
 Group: Development/Libraries
@@ -72,12 +65,6 @@ Requires: libvirt-gconfig-devel = %{version}-%{release}
 Requires: libvirt-gobject = %{version}-%{release}
 Requires: libvirt-devel >=  %{libvirt_version}
 
-%if %{with_python}
-%package python
-Group: Development/Libraries
-Summary: libvirt glib integration for events python binding
-%endif
-
 %description
 This package provides integration between libvirt and the glib
 event loop.
@@ -102,12 +89,6 @@ objects
 This package provides development header files and libraries for
 managing virtualization host objects
 
-%if %{with_python}
-%description python
-This package provides a python module for integration between
-libvirt and the glib event loop
-%endif
-
 %prep
 %setup -q
 
@@ -118,13 +99,8 @@ libvirt and the glib event loop
 %else
 %define introspection_arg --disable-introspection
 %endif
-%if %{with_python}
-%define python_arg --with-python
-%else
-%define python_arg --without-python
-%endif
 
-%configure %{introspection_arg} %{python_arg}
+%configure %{introspection_arg}
 %__make %{?_smp_mflags}
 
 
@@ -227,15 +203,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/libvirt-gobject-1.0.vapi
 %endif
 
-%if %{with_python}
-%files python
-%defattr(-,root,root,-)
-%doc examples/event-test.py
-%{_libdir}/python*/site-packages/libvirtglib.py*
-%{_libdir}/python*/site-packages/libvirtglibmod*
-%endif
-
 %changelog
+* Fri Mar 10 2017 Christophe Fergeau <cfergeau@redhat.com> 1.0.0-1
+- Rebase to libvirt-glib 1.0.0
+  Resolves: rhbz#1387020
+
 * Tue May 10 2016 Zeeshan Ali <zeenix@redhat.com> - 0.2.3-1
 - Upgrade to 0.2.3. rhbz#1330571.
 - Drop now redundant patch. rhbz#1330571.

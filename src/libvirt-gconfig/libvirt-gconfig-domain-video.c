@@ -68,6 +68,17 @@ GVirConfigDomainVideo *gvir_config_domain_video_new_from_xml(const gchar *xml,
     return GVIR_CONFIG_DOMAIN_VIDEO(object);
 }
 
+GVirConfigDomainVideoModel gvir_config_domain_video_get_model(GVirConfigDomainVideo *video)
+{
+    g_return_val_if_fail(GVIR_CONFIG_IS_DOMAIN_VIDEO(video), GVIR_CONFIG_DOMAIN_VIDEO_MODEL_VGA);
+
+    return gvir_config_object_get_attribute_genum(GVIR_CONFIG_OBJECT(video),
+                                                  "model",
+                                                  "type",
+                                                  GVIR_CONFIG_TYPE_DOMAIN_VIDEO_MODEL,
+                                                  GVIR_CONFIG_DOMAIN_VIDEO_MODEL_VGA);
+}
+
 void gvir_config_domain_video_set_model(GVirConfigDomainVideo *video,
                                         GVirConfigDomainVideoModel model)
 {
@@ -135,4 +146,22 @@ void gvir_config_domain_video_set_heads(GVirConfigDomainVideo *video,
                                                G_TYPE_UINT, head_count,
                                                NULL);
     g_object_unref(G_OBJECT(node));
+}
+
+void gvir_config_domain_video_set_accel3d(GVirConfigDomainVideo *video,
+                                          gboolean accel3d)
+{
+    GVirConfigObject *model, *accel;
+
+    g_return_if_fail(GVIR_CONFIG_IS_DOMAIN_VIDEO(video));
+    model = gvir_config_object_add_child(GVIR_CONFIG_OBJECT(video), "model");
+    g_return_if_fail(GVIR_CONFIG_IS_OBJECT(model));
+    accel = gvir_config_object_add_child(GVIR_CONFIG_OBJECT(model), "acceleration");
+    g_return_if_fail(GVIR_CONFIG_IS_OBJECT(accel));
+
+    gvir_config_object_set_attribute_with_type(accel, "accel3d",
+                                               G_TYPE_BOOLEAN, accel3d,
+                                               NULL);
+    g_object_unref(G_OBJECT(model));
+    g_object_unref(G_OBJECT(accel));
 }

@@ -209,6 +209,14 @@ void gvir_config_object_validate(GVirConfigObject *config,
         return;
     }
 
+    if (!priv->schema) {
+        gvir_config_set_error_literal(err,
+                                      GVIR_CONFIG_OBJECT_ERROR,
+                                      0,
+                                      _("No XML schema associated with this config object"));
+        return;
+    }
+
     rngParser = xmlRelaxNGNewParserCtxt(priv->schema);
     if (!rngParser) {
         gvir_config_set_error(err,
@@ -969,4 +977,17 @@ gvir_config_object_get_child(GVirConfigObject *object,
     return gvir_config_object_get_child_with_type(object,
                                                   child_name,
                                                   GVIR_CONFIG_TYPE_OBJECT);
+}
+
+G_GNUC_INTERNAL gboolean
+gvir_config_object_has_child(GVirConfigObject *object, const gchar *child_name)
+{
+    xmlNodePtr node;
+
+    g_return_val_if_fail(GVIR_CONFIG_IS_OBJECT(object), FALSE);
+    g_return_val_if_fail(child_name != NULL, FALSE);
+
+    node = gvir_config_xml_get_element(object->priv->node, child_name, NULL);
+
+    return (node != NULL);
 }

@@ -62,7 +62,8 @@ typedef enum {
     GVIR_CONFIG_DOMAIN_VIDEO_MODEL_VMVGA,
     GVIR_CONFIG_DOMAIN_VIDEO_MODEL_XEN,
     GVIR_CONFIG_DOMAIN_VIDEO_MODEL_VBOX,
-    GVIR_CONFIG_DOMAIN_VIDEO_MODEL_QXL
+    GVIR_CONFIG_DOMAIN_VIDEO_MODEL_QXL,
+    GVIR_CONFIG_DOMAIN_VIDEO_MODEL_VIRTIO
 } GVirConfigDomainVideoModel;
 
 GType gvir_config_domain_video_get_type(void);
@@ -70,6 +71,7 @@ GType gvir_config_domain_video_get_type(void);
 GVirConfigDomainVideo *gvir_config_domain_video_new(void);
 GVirConfigDomainVideo *gvir_config_domain_video_new_from_xml(const gchar *xml,
                                                              GError **error);
+GVirConfigDomainVideoModel gvir_config_domain_video_get_model(GVirConfigDomainVideo *video);
 void gvir_config_domain_video_set_model(GVirConfigDomainVideo *video,
                                         GVirConfigDomainVideoModel model);
 void gvir_config_domain_video_set_vram(GVirConfigDomainVideo *video,
@@ -81,6 +83,8 @@ void gvir_config_domain_video_set_vgamem(GVirConfigDomainVideo *video,
                                        guint kbytes);
 void gvir_config_domain_video_set_heads(GVirConfigDomainVideo *video,
                                         guint head_count);
+void gvir_config_domain_video_set_accel3d(GVirConfigDomainVideo *video,
+                                          gboolean accel3d);
 
 G_END_DECLS
 

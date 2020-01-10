@@ -50,6 +50,8 @@ GCONFIG_HEADER_FILES = \
 			libvirt-gconfig-domain-graphics-sdl.h \
 			libvirt-gconfig-domain-graphics-spice.h \
 			libvirt-gconfig-domain-graphics-vnc.h \
+			libvirt-gconfig-domain-hostdev.h \
+			libvirt-gconfig-domain-hostdev-pci.h \
 			libvirt-gconfig-domain-input.h \
 			libvirt-gconfig-domain-interface.h \
 			libvirt-gconfig-domain-interface-bridge.h \
@@ -141,6 +143,8 @@ GCONFIG_SOURCE_FILES = \
 			libvirt-gconfig-domain-graphics-sdl.c \
 			libvirt-gconfig-domain-graphics-spice.c \
 			libvirt-gconfig-domain-graphics-vnc.c \
+			libvirt-gconfig-domain-hostdev.c \
+			libvirt-gconfig-domain-hostdev-pci.c \
 			libvirt-gconfig-domain-input.c \
 			libvirt-gconfig-domain-interface.c \
 			libvirt-gconfig-domain-interface-bridge.c \
@@ -263,6 +267,7 @@ LibvirtGConfig_1_0_gir_SCANNERFLAGS = \
 	--identifier-prefix=GVirConfig \
 	--symbol-prefix=gvir_config \
 	--c-include="libvirt-gconfig/libvirt-gconfig.h" \
+	--warn-all \
 	$(NULL)
 INTROSPECTION_GIRS += LibvirtGConfig-1.0.gir
 

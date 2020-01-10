@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>API Index: Libvirt-gconfig Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="Libvirt-gconfig Reference Manual">
 <link rel="up" href="index.html" title="Libvirt-gconfig Reference Manual">
 <link rel="prev" href="object-tree.html" title="Object Hierarchy">
 <link rel="next" href="annotation-glossary.html" title="Annotation Glossary">
-<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,7 +26,7 @@
 <a name="api-index-full"></a>API Index</h1></div></div></div>
 <a name="idx"></a><a name="idxT"></a><h3 class="title">T</h3>
 <dt>
-<a href="https://developer.gnome.org/gobject/unstable/gobject-Type-Information.html#g-type-init">g_type_init</a>, macro in libvirt-gconfig-compat
+g_type_init, macro in libvirt-gconfig-compat
 </dt>
 <dd></dd>
 <a name="idxV"></a><h3 class="title">V</h3>
@@ -584,6 +584,30 @@ GVirConfigDomainGraphicsVncClass, struct in GVirConfigDomainGraphicsVnc
 <dd></dd>
 <dt>
 GVirConfigDomainGraphicsVncPrivate, struct in GVirConfigDomainGraphicsVnc
+</dt>
+<dd></dd>
+<dt>
+GVirConfigDomainHostdev, struct in GVirConfigDomainHostdev
+</dt>
+<dd></dd>
+<dt>
+GVirConfigDomainHostdevClass, struct in GVirConfigDomainHostdev
+</dt>
+<dd></dd>
+<dt>
+GVirConfigDomainHostdevPci, struct in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+GVirConfigDomainHostdevPciClass, struct in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+GVirConfigDomainHostdevPciPrivate, struct in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+GVirConfigDomainHostdevPrivate, struct in GVirConfigDomainHostdev
 </dt>
 <dd></dd>
 <dt>
@@ -1319,6 +1343,26 @@ gvir_config_capabilities_host_secmodel_get_model, function in GVirConfigCapabili
 </dt>
 <dd></dd>
 <dt>
+gvir_config_domain_address_pci_get_bus, function in GVirConfigDomainAddressPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_address_pci_get_domain, function in GVirConfigDomainAddressPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_address_pci_get_function, function in GVirConfigDomainAddressPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_address_pci_get_multifunction, function in GVirConfigDomainAddressPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_address_pci_get_slot, function in GVirConfigDomainAddressPci
+</dt>
+<dd></dd>
+<dt>
 gvir_config_domain_address_pci_new, function in GVirConfigDomainAddressPci
 </dt>
 <dd></dd>
@@ -1979,6 +2023,10 @@ gvir_config_domain_graphics_spice_set_autoport, function in GVirConfigDomainGrap
 </dt>
 <dd></dd>
 <dt>
+gvir_config_domain_graphics_spice_set_gl, function in GVirConfigDomainGraphicsSpice
+</dt>
+<dd></dd>
+<dt>
 gvir_config_domain_graphics_spice_set_image_compression, function in GVirConfigDomainGraphicsSpice
 </dt>
 <dd></dd>
@@ -2024,6 +2072,74 @@ gvir_config_domain_graphics_vnc_set_port, function in GVirConfigDomainGraphicsVn
 <dd></dd>
 <dt>
 gvir_config_domain_graphics_vnc_set_socket, function in GVirConfigDomainGraphicsVnc
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_get_boot_order, function in GVirConfigDomainHostdev
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_get_readonly, function in GVirConfigDomainHostdev
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_get_shareable, function in GVirConfigDomainHostdev
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_new_from_tree, function in libvirt-gconfig-domain-device-private
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_pci_get_address, function in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_pci_get_managed, function in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_pci_get_rom_bar, function in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_pci_get_rom_file, function in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_pci_new, function in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_pci_new_from_xml, function in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_pci_set_address, function in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_pci_set_managed, function in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_pci_set_rom_bar, function in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_pci_set_rom_file, function in GVirConfigDomainHostdevPci
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_set_boot_order, function in GVirConfigDomainHostdev
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_set_readonly, function in GVirConfigDomainHostdev
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_hostdev_set_shareable, function in GVirConfigDomainHostdev
 </dt>
 <dd></dd>
 <dt>
@@ -2611,11 +2727,19 @@ gvir_config_domain_timer_set_tick_policy, function in GVirConfigDomainTimer
 </dt>
 <dd></dd>
 <dt>
+gvir_config_domain_video_get_model, function in GVirConfigDomainVideo
+</dt>
+<dd></dd>
+<dt>
 gvir_config_domain_video_new, function in GVirConfigDomainVideo
 </dt>
 <dd></dd>
 <dt>
 gvir_config_domain_video_new_from_xml, function in GVirConfigDomainVideo
+</dt>
+<dd></dd>
+<dt>
+gvir_config_domain_video_set_accel3d, function in GVirConfigDomainVideo
 </dt>
 <dd></dd>
 <dt>
@@ -2776,6 +2900,10 @@ gvir_config_object_get_xml_doc, function in libvirt-gconfig-object-private
 <dd></dd>
 <dt>
 gvir_config_object_get_xml_node, function in libvirt-gconfig-object-private
+</dt>
+<dd></dd>
+<dt>
+gvir_config_object_has_child, function in libvirt-gconfig-object-private
 </dt>
 <dd></dd>
 <dt>
@@ -3160,6 +3288,6 @@ gvir_config_xml_parse, function in libvirt-gconfig-helpers-private
 <dd></dd>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

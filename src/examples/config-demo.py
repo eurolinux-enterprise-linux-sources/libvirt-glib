@@ -58,10 +58,12 @@ domain.add_device(input)
 
 graphics = LibvirtGConfig.DomainGraphicsSpice.new()
 graphics.set_port(1234)
+graphics.set_gl(True)
 domain.add_device(graphics)
 
 video = LibvirtGConfig.DomainVideo.new()
-video.set_model(LibvirtGConfig.DomainVideoModel.QXL)
+video.set_model(LibvirtGConfig.DomainVideoModel.VIRTIO)
+video.set_accel3d(True)
 domain.add_device(video)
 
 console = LibvirtGConfig.DomainConsole.new()

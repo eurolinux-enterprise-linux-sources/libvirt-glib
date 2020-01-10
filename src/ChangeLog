@@ -1,4 +1,166 @@
+2016-11-04  Daniel P. Berrange  <berrange@redhat.com>
+
+	Update NEWS for 1.0.0 release
+
+	bump release to 1.0.0 to match libvirt numbering scheme
+	Switch to follow the libvirt release numbering scheme
+
+	- Major is incremented at start of each year
+	- Minor is incremented each release during a year
+	- Micro is reserved for stable branch releases (if any)
+
+2016-11-04  Christophe Fergeau  <cfergeau@redhat.com>
+
+	tests: Don't leak xml data in test-gconfig-device-unknown
+
+2016-11-04  Zeeshan Ali  <zeenix@gmail.com>
+
+	gconfig,tests: Add test case for unknown devices
+
+2016-11-03  Zeeshan Ali  <zeenix@gmail.com>
+
+	gconfig,tests: Separate XML loading function
+	We'll need to load XML from file in another function, that will be added
+	in a following patch.
+
+	gconfig: Create objects for all domain device nodes
+	Currently we can and do get into serious trouble with this kind of code:
+
+	devices = gvir_config_domain_get_devices(domain);
+	gvir_config_domain_set_devices(domain, domain);
+
+	since the first call above won't return a complete list of objects present
+	in the domain but only the ones we have specific classes for and the
+	second call above overwrites all device nodes under the domain. This
+	lately made Boxes break against the latest libvirt, where a new device
+	node was made compulsory[1].
+
+	Although we should add support for all know domain devices ASAP, new
+	devices will be added in future and this can happen again. So let's first
+	ensure that gvir_config_domain_get_devices() always returns all devices
+	under the domain. All unknown/unimplemented devices will now be returned
+	as the very generic DomainDevice objects. Once we add support for a
+	particular device, there will be no API/ABI breakage since the new class
+	will inherit from DomainDevice class.
+
+	[1] https://bugzilla.redhat.com/show_bug.cgi?id=1388091
+
+2016-11-01  Zeeshan Ali  <zeenix@gmail.com>
+
+	gconfig: DomainDevice now instantiable
+	We'll need to instatiate DomainDevice baseclass itself for unknown (think
+	new devices added to libvirt XML) devices in a following patch. This
+	change makes that possible.
+
+	This doesn't break any API or ABI to the best of my knowledge and this
+	assumption was confirmed by Emmanuele Bassi and Tim-Philipp Muller.
+
+	gconfig: Allow schema to be NULL
+	Validation (if attempted) should just fail in this case instead of
+	crashing.
+
+2016-08-02  Daniel P. Berrange  <berrange@redhat.com>
+
+	Delete the manually written python binding
+	The python binding only supports python2, only supports
+	1 single API in libvirt-glib and has not even been enabled
+	in RPM builds since Fedora 15. Any distro these days should
+	have gobject introspection and pygobject available, so
+	there's no compelling reason to continue to have the python
+	binding exist.
+
+2016-07-28  Daniel P. Berrange  <berrange@redhat.com>
+
+	Remove accidental debug code which changed version
+
+	Fix check for libvirt optional functions
+	The checks for virDomainOpenGraphicsFD and
+	virNetworkGetDHCPLeases in configure are simply trying
+	to compile and link a test program. This was assuming
+	that libvirt was installed in /usr/lib & /usr/include,
+	which is not always the case. Using a pkg-config version
+	check avoids needing to compile and thus avoids the
+	bad assumptions about install locations.
+
+	Avoid unused variable in DHCP lease finalize method
+	If the network DHCP lease support is not detected, the build
+	will generate a warning / error:
+
+	libvirt-gobject-network-dhcp-lease.c: In function 'gvir_network_dhcp_lease_finalize':
+	libvirt-gobject-network-dhcp-lease.c:99:27: error: unused variable 'lease' [-Werror=unused-variable]
+	     GVirNetworkDHCPLease *lease = GVIR_NETWORK_DHCP_LEASE(object);
+	                           ^~~~~
+	cc1: all warnings being treated as errors
+
+2016-07-27  Guido Günther  <agx@sigxcpu.org>
+
+	docs: Document gvir_connection_get_{storage_pools,networks,domains}
+	In contrast to libvirt itself all get_* methods need to prefetch the
+	corresponding information first so document this.
+
+	Acked-by: Christophe Fergeau <cfergeau@redhat.com>
+
+2016-07-25  Zeeshan Ali (Khattak)  <zeeshanak@gnome.org>
+
+	tests: Add test for GVirConfigDomainHostdevPci API
+
+2016-07-25  Christophe Fergeau  <cfergeau@redhat.com>
+
+	gconfig: Add GVirConfigDomainAddressPci getters
+	They will be useful to do more checks in the GVirDomainDeviceHostdev
+	unit test.
+
+2016-07-25  Zeeshan Ali (Khattak)  <zeeshanak@gnome.org>
+
+	gconfig: Add GVirConfigDomainHostdevPci
+	Add API to read and write PCI hostdev nodes.
+
+2016-07-22  Zeeshan Ali (Khattak)  <zeeshanak@gnome.org>
+
+	gconfig: Add GVirConfigDomainHostdev
+	Add API to read and write domain/devices/hostdev nodes. This patch only
+	adds the baseclass and hence is not useful on it's own. A more specific
+	subclass to represent PCI devices will be added in a following patch.
+
+2016-07-21  Christophe Fergeau  <cfergeau@redhat.com>
+
+	gconfig: Add gvir_config_object_has_child
+
+2016-07-21  Zeeshan Ali (Khattak)  <zeeshanak@gnome.org>
+
+	gconfig: Add gvir_config_domain_video_get_model()
+	Add a getter for model of domain video device.
+
+2016-02-26  Marc-André Lureau  <marcandre.lureau@gmail.com>
+
+	config: add accel3d setter
+	Learn to set the accel3d attribute on video model.
+
+	config: add virtio video model
+
+	config: add spice gl child
+	Learn to set  "gl" on spice (to have -spice gl=on on qemu)
+
+	tests: fix potential crash
+	The idle source is not always removed and may crash next tests
+
+2016-02-14  Marc-André Lureau  <marcandre.lureau@gmail.com>
+
+	build-sys: fix gir introspection warnings
+	Enable GIR warnings and fix them, since they are all useful.
+
+2015-12-26  Michal Privoznik  <mprivozn@redhat.com>
+
+	libvirt-glib-1.0.pc.in: Correctly mark variable
+	In the pkg-config file for libvirt-glib we have a typo:
+
+	  Libs.private: @LIBVIRT_LIBS @GLIB2_LIBS@
+
+	Noticed the missing '@' after LIBVIRT_LIBS? Well, I just did.
+
 2015-12-16  Daniel P. Berrange  <berrange@redhat.com>
+
+	Post release version bump
 
 	Update NEWS for 0.2.3 release
 

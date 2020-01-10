@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GVirConfigStorageVol: Libvirt-gconfig Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="Libvirt-gconfig Reference Manual">
 <link rel="up" href="ch01.html" title="Libvirt-gconfig">
 <link rel="prev" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool">
 <link rel="next" href="GVirConfigCapabilities.html" title="GVirConfigCapabilities">
-<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -34,7 +34,7 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="GVirConfigStorageVol.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
@@ -101,7 +101,7 @@
 </div>
 <div class="refsect1">
 <a name="GVirConfigStorageVol.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
@@ -124,7 +124,7 @@
 </div>
 <div class="refsect1">
 <a name="GVirConfigStorageVol.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+<pre class="screen">    GObject
     <span class="lineart">╰──</span> <a class="link" href="GVirConfigObject.html" title="GVirConfigObject">GVirConfigObject</a>
         <span class="lineart">╰──</span> GVirConfigStorageVol
 </pre>
@@ -143,8 +143,8 @@ gvir_config_storage_vol_new (<em class="parameter"><code><span class="type">void
 <div class="refsect2">
 <a name="gvir-config-storage-vol-new-from-xml"></a><h3>gvir_config_storage_vol_new_from_xml ()</h3>
 <pre class="programlisting"><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="returnvalue">GVirConfigStorageVol</span></a> *
-gvir_config_storage_vol_new_from_xml (<em class="parameter"><code>const <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *xml</code></em>,
-                                      <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+gvir_config_storage_vol_new_from_xml (<em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
+                                      <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
@@ -152,7 +152,7 @@ gvir_config_storage_vol_new_from_xml (<em class="parameter"><code>const <a href=
 <pre class="programlisting"><span class="returnvalue">void</span>
 gvir_config_storage_vol_set_allocation
                                (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
-                                <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> allocation</code></em>);</pre>
+                                <em class="parameter"><code><span class="type">guint64</span> allocation</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
@@ -162,8 +162,8 @@ gvir_config_storage_vol_set_backing_store
                                (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
                                 <em class="parameter"><code><span class="type">GVirConfigStorageVolBackingStore</span> *backing_store</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.2.11.7.5.4"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gvir-config-storage-vol-set-backing-store.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -182,7 +182,7 @@ gvir_config_storage_vol_set_backing_store
 <a name="gvir-config-storage-vol-set-capacity"></a><h3>gvir_config_storage_vol_set_capacity ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gvir_config_storage_vol_set_capacity (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
-                                      <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> capacity</code></em>);</pre>
+                                      <em class="parameter"><code><span class="type">guint64</span> capacity</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
@@ -191,8 +191,8 @@ gvir_config_storage_vol_set_capacity (<em class="parameter"><code><a class="link
 gvir_config_storage_vol_set_name (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
                                   <em class="parameter"><code>const <span class="type">char</span> *name</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.2.11.7.7.4"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gvir-config-storage-vol-set-name.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -213,8 +213,8 @@ gvir_config_storage_vol_set_name (<em class="parameter"><code><a class="link" hr
 gvir_config_storage_vol_set_target (<em class="parameter"><code><a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol"><span class="type">GVirConfigStorageVol</span></a> *vol</code></em>,
                                     <em class="parameter"><code><span class="type">GVirConfigStorageVolTarget</span> *target</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.2.11.7.8.4"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="gvir-config-storage-vol-set-target.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -253,6 +253,6 @@ gvir_config_storage_vol_set_target (<em class="parameter"><code><a class="link" 
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>
