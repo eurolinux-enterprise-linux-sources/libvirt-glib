@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Libvirt GLib Reference Manual: Event loop</title>
+<title>Event loop: Libvirt GLib Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Libvirt GLib Reference Manual">
 <link rel="up" href="ch01.html" title="API Reference">
 <link rel="prev" href="Libvirt-glib-Error-reporting.html" title="Error reporting">
 <link rel="next" href="object-tree.html" title="Object Hierarchy">
-<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -73,7 +73,7 @@ with the GMain event loop framework.</p>
 <p>To enable use of the GMain event loop glue, the <code class="code"><a class="link" href="Libvirt-glib-Event-loop.html#gvir-event-register" title="gvir_event_register ()"><code class="function">gvir_event_register()</code></a></code>
 should be invoked. Once this is done, it is mandatory to have the default
 GMain event loop run by a thread in the application, usually the primary
-thread, eg by using <code class="code"><a href="http://developer.gnome.org/gtk2/gtk3-General.html#gtk-main"><code class="function">gtk_main()</code></a></code> or <code class="code"><a href="http://library.gnome.org/devel/gio/unstable/GApplication.html#g-application-run"><code class="function">g_application_run()</code></a></code></p>
+thread, eg by using <code class="code"><a href="http://developer.gnome.org/gtk2/gtk3-General.html#gtk-main"><code class="function">gtk_main()</code></a></code> or <code class="code"><a href="https://developer.gnome.org/gio/unstable/GApplication.html#g-application-run"><code class="function">g_application_run()</code></a></code></p>
 <div class="example">
 <a name="id-1.2.4.6.4"></a><p class="title"><b>Example 3. Registering for events with a GTK application</b></p>
 <div class="example-contents">
@@ -116,10 +116,10 @@ thread, eg by using <code class="code"><a href="http://developer.gnome.org/gtk2/
 8</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="type">int</span><span class="normal"> </span><span class="function">main</span><span class="symbol">(</span><span class="type">int</span><span class="normal"> argc</span><span class="symbol">,</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">**</span><span class="normal">argv</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
 <span class="normal">  </span><span class="symbol">...</span><span class="normal">setup</span><span class="symbol">...</span>
-<span class="normal">  </span><span class="usertype">GApplication</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">app </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">...</span><span class="normal">create some impl </span><span class="usertype">of</span><span class="normal"> <a href="http://library.gnome.org/devel/gio/unstable/GApplication.html">GApplication</a></span><span class="symbol">...</span>
+<span class="normal">  </span><span class="usertype">GApplication</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">app </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">...</span><span class="normal">create some impl </span><span class="usertype">of</span><span class="normal"> <a href="https://developer.gnome.org/gio/unstable/GApplication.html">GApplication</a></span><span class="symbol">...</span>
 <span class="normal">  </span><span class="function"><a href="Libvirt-glib-Event-loop.html#gvir-event-register">gvir_event_register</a></span><span class="symbol">();</span>
 <span class="normal">  </span><span class="symbol">...</span><span class="usertype">more</span><span class="normal"> setup</span><span class="symbol">...</span>
-<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/gio/unstable/GApplication.html#g-application-run">g_application_run</a></span><span class="symbol">(</span><span class="normal">app</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="https://developer.gnome.org/gio/unstable/GApplication.html#g-application-run">g_application_run</a></span><span class="symbol">(</span><span class="normal">app</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="number">0</span><span class="symbol">;</span>
 <span class="cbracket">}</span></pre></td>
       </tr>
@@ -155,7 +155,6 @@ frequently.</p>
 </div>
 </div>
 <div class="footer">
-<hr>
-          Generated by GTK-Doc V1.21</div>
+<hr>Generated by GTK-Doc V1.24</div>
 </body>
 </html>

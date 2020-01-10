@@ -21,7 +21,7 @@
 %define libvirt_version 0.10.2
 
 Name: libvirt-glib
-Version: 0.1.9
+Version: 0.2.3
 Release: 1%{?dist}%{?extra_release}
 Summary: libvirt glib integration for events
 Group: Development/Libraries
@@ -236,6 +236,13 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue May 10 2016 Zeeshan Ali <zeenix@redhat.com> - 0.2.3-1
+- Upgrade to 0.2.3. rhbz#1330571.
+- Drop now redundant patch. rhbz#1330571.
+
+* Fri Apr 22 2016 Zeeshan Ali <zeenix@redhat.com> - 0.1.9-2
+- Add gvir_domain_open_graphics_fd(). rhbz#1043950.
+
 * Thu May 21 2015 Zeeshan Ali <zeenix@redhat.com> - 0.1.9-1
 - Update to 0.1.9 (Same as Fedora 21, rhbz#1174554.
 

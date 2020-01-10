@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Libvirt GLib Reference Manual: Library initialization</title>
+<title>Library initialization: Libvirt GLib Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Libvirt GLib Reference Manual">
 <link rel="up" href="ch01.html" title="API Reference">
 <link rel="prev" href="ch01.html" title="API Reference">
 <link rel="next" href="Libvirt-glib-Error-reporting.html" title="Error reporting">
-<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.24 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -59,7 +59,7 @@ justifications.
 </tr>
 <tr>
 <td class="function_type">
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 </td>
 <td class="function_name">
 <a class="link" href="Libvirt-glib-Library-initialization.html#gvir-init-check" title="gvir_init_check ()">gvir_init_check</a> <span class="c_punctuation">()</span>
@@ -153,7 +153,7 @@ if argv is NULL). This will be changed if any arguments were handled. </p></td>
 <td class="parameter_name"><p>argv</p></td>
 <td class="parameter_description">
 <p> Address of the</p>
-<em class="parameter"><code>argv</code></em> parameter of <code class="function">main()</code>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. Any options
+<em class="parameter"><code>argv</code></em> parameter of <code class="function">main()</code>, or <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. Any options
 <p>    understood by GTK+ are stripped before return. </p>
 </td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=argc][<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></td>
@@ -165,13 +165,13 @@ if argv is NULL). This will be changed if any arguments were handled. </p></td>
 <hr>
 <div class="refsect2">
 <a name="gvir-init-check"></a><h3>gvir_init_check ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 gvir_init_check (<em class="parameter"><code><span class="type">int</span> *argc</code></em>,
                  <em class="parameter"><code><span class="type">char</span> ***argv</code></em>,
-                 <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **err</code></em>);</pre>
+                 <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **err</code></em>);</pre>
 <p>This function does the same work as <a class="link" href="Libvirt-glib-Library-initialization.html#gvir-init" title="gvir_init ()"><code class="function">gvir_init()</code></a> with only a single
 change: It does not terminate the program if the Libvirt GLib library
-can't be initialized. Instead it returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on failure.</p>
+can't be initialized. Instead it returns <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on failure.</p>
 <p>This way the application can fall back to some other mode of
 operation.</p>
 <div class="refsect3">
@@ -193,7 +193,7 @@ if argv is NULL). This will be changed if any arguments were handled. </p></td>
 <td class="parameter_name"><p>argv</p></td>
 <td class="parameter_description">
 <p> Address of the</p>
-<em class="parameter"><code>argv</code></em> parameter of <code class="function">main()</code>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. Any options
+<em class="parameter"><code>argv</code></em> parameter of <code class="function">main()</code>, or <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. Any options
 <p>    understood by GTK+ are stripped before return. </p>
 </td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=argc][<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></td>
@@ -208,9 +208,8 @@ if argv is NULL). This will be changed if any arguments were handled. </p></td>
 </div>
 <div class="refsect3">
 <a name="id-1.2.2.7.3.7"></a><h4>Returns</h4>
-<p> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the library was successfully initialized,
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
-<p></p>
+<p> <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the library was successfully initialized,
+<a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
 </div>
 </div>
 </div>
@@ -219,7 +218,6 @@ if argv is NULL). This will be changed if any arguments were handled. </p></td>
 </div>
 </div>
 <div class="footer">
-<hr>
-          Generated by GTK-Doc V1.21</div>
+<hr>Generated by GTK-Doc V1.24</div>
 </body>
 </html>

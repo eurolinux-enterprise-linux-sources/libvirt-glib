@@ -48,6 +48,7 @@ static void check_xml(GVirConfigDomain *domain, const char *reference_file)
     xml = gvir_config_object_to_xml(GVIR_CONFIG_OBJECT(domain));
     g_assert_cmpstr(xml, ==, reference_xml);
     g_free(xml);
+    g_free(reference_xml);
 }
 
 
@@ -224,6 +225,8 @@ static void test_domain_os(void)
     gvir_config_domain_set_os(domain, NULL);
     os = gvir_config_domain_get_os(domain);
     g_assert(os == NULL);
+
+    g_object_unref(G_OBJECT(domain));
 }
 
 
@@ -294,9 +297,13 @@ static void test_domain_cpu(void)
                                               NULL);
     topology = gvir_config_capabilities_cpu_get_topology(GVIR_CONFIG_CAPABILITIES_CPU(cpu));
     g_assert(topology == NULL);
+    g_object_unref(G_OBJECT(cpu));
+
     gvir_config_domain_set_cpu(domain, NULL);
     cpu = gvir_config_domain_get_cpu(domain);
     g_assert(cpu == NULL);
+
+    g_object_unref(G_OBJECT(domain));
 }
 
 
@@ -347,12 +354,47 @@ static void test_domain_device_disk(void)
     g_assert(gvir_config_domain_disk_driver_get_copy_on_read(driver));
     g_assert_cmpint(gvir_config_domain_disk_get_target_bus(disk), ==, GVIR_CONFIG_DOMAIN_DISK_BUS_IDE);
     g_assert_cmpstr(gvir_config_domain_disk_get_target_dev(disk), ==, "hda");
+    g_object_unref(G_OBJECT(driver));
 
     gvir_config_domain_disk_set_driver(disk, NULL);
     driver = gvir_config_domain_disk_get_driver(disk);
     g_assert(driver == NULL);
 
     g_list_free_full(disks, g_object_unref);
+
+    g_object_unref(G_OBJECT(domain));
+}
+
+
+static void test_domain_device_filesystem(void)
+{
+    GVirConfigDomain *domain;
+    GVirConfigDomainFilesys *fs;
+
+    domain = gvir_config_domain_new();
+
+    fs = gvir_config_domain_filesys_new();
+    gvir_config_domain_filesys_set_type(fs, GVIR_CONFIG_DOMAIN_FILESYS_FILE);
+    gvir_config_domain_filesys_set_access_type(fs, GVIR_CONFIG_DOMAIN_FILESYS_ACCESS_MAPPED);
+    gvir_config_domain_filesys_set_driver_type(fs, GVIR_CONFIG_DOMAIN_FILESYS_DRIVER_NBD);
+    gvir_config_domain_filesys_set_driver_format(fs, GVIR_CONFIG_DOMAIN_DISK_FORMAT_QCOW2);
+    gvir_config_domain_filesys_set_source(fs, "/path/to/source");
+    gvir_config_domain_filesys_set_target(fs, "/path/to/target1");
+    gvir_config_domain_filesys_set_readonly(fs, TRUE);
+    gvir_config_domain_add_device(domain, GVIR_CONFIG_DOMAIN_DEVICE(fs));
+    g_object_unref(fs);
+
+    /* Add a RAM fs */
+    fs = gvir_config_domain_filesys_new();
+    gvir_config_domain_filesys_set_type(fs, GVIR_CONFIG_DOMAIN_FILESYS_RAM);
+    gvir_config_domain_filesys_set_access_type(fs, GVIR_CONFIG_DOMAIN_FILESYS_ACCESS_PASSTHROUGH);
+    gvir_config_domain_filesys_set_driver_type(fs, GVIR_CONFIG_DOMAIN_FILESYS_DRIVER_PATH);
+    gvir_config_domain_filesys_set_ram_usage(fs, 1234);
+    gvir_config_domain_filesys_set_target(fs, "/path/to/target2");
+    gvir_config_domain_add_device(domain, GVIR_CONFIG_DOMAIN_DEVICE(fs));
+    g_object_unref(fs);
+
+    check_xml(domain, "gconfig-domain-device-filesys.xml");
 
     g_object_unref(G_OBJECT(domain));
 }
@@ -399,6 +441,7 @@ static void test_domain_device_input(void)
                                              GVIR_CONFIG_DOMAIN_INPUT_DEVICE_TABLET);
     gvir_config_domain_input_set_bus(input, GVIR_CONFIG_DOMAIN_INPUT_BUS_USB);
     gvir_config_domain_add_device(domain, GVIR_CONFIG_DOMAIN_DEVICE(input));
+    g_object_unref(G_OBJECT(input));
 
     check_xml(domain, "gconfig-domain-device-input.xml");
 
@@ -451,6 +494,8 @@ static void test_domain_device_video(void)
     video = gvir_config_domain_video_new();
     gvir_config_domain_video_set_model(video,
                                        GVIR_CONFIG_DOMAIN_VIDEO_MODEL_QXL);
+    gvir_config_domain_video_set_heads(video, 4);
+    gvir_config_domain_video_set_vram(video, 256*1024);
     gvir_config_domain_add_device(domain, GVIR_CONFIG_DOMAIN_DEVICE(video));
     g_object_unref(G_OBJECT(video));
 
@@ -512,6 +557,7 @@ static void test_domain_device_channel(void)
     GVirConfigDomainChannel *channel;
     GVirConfigDomainChardevSourceSpiceVmc *spicevmc;
     GVirConfigDomainChardevSourceSpicePort *spiceport;
+    GVirConfigDomainChardevSourceUnix *unix_source;
 
     channel = gvir_config_domain_channel_new();
     gvir_config_domain_channel_set_target_type(channel,
@@ -536,6 +582,16 @@ static void test_domain_device_channel(void)
     gvir_config_domain_add_device(domain, GVIR_CONFIG_DOMAIN_DEVICE(channel));
     g_object_unref(G_OBJECT(channel));
 
+    channel = gvir_config_domain_channel_new();
+    gvir_config_domain_channel_set_target_type(channel,
+                                               GVIR_CONFIG_DOMAIN_CHANNEL_TARGET_VIRTIO);
+    gvir_config_domain_channel_set_target_name(channel, "org.qemu.guest_agent.0");
+    unix_source = gvir_config_domain_chardev_source_unix_new();
+    gvir_config_domain_chardev_set_source(GVIR_CONFIG_DOMAIN_CHARDEV(channel),
+                                          GVIR_CONFIG_DOMAIN_CHARDEV_SOURCE(unix_source));
+    g_object_unref(G_OBJECT(unix_source));
+    gvir_config_domain_add_device(domain, GVIR_CONFIG_DOMAIN_DEVICE(channel));
+    g_object_unref(G_OBJECT(channel));
     check_xml(domain, "gconfig-domain-device-channel.xml");
 
     g_object_unref(G_OBJECT(domain));
@@ -665,6 +721,8 @@ int main(int argc, char **argv)
     g_test_add_func("/libvirt-gconfig/domain-cpu", test_domain_cpu);
     g_test_add_func("/libvirt-gconfig/domain-device-disk",
                     test_domain_device_disk);
+    g_test_add_func("/libvirt-gconfig/domain-device-filesystem",
+                    test_domain_device_filesystem);
     g_test_add_func("/libvirt-gconfig/domain-device-network",
                     test_domain_device_network);
     g_test_add_func("/libvirt-gconfig/domain-device-input",

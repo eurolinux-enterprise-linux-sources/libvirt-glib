@@ -44,6 +44,8 @@ struct _GVirConnectionPrivate
 
     GHashTable *domains;
     GHashTable *pools;
+    GHashTable *interfaces;
+    GHashTable *networks;
 };
 
 G_DEFINE_TYPE(GVirConnection, gvir_connection, G_TYPE_OBJECT);
@@ -141,8 +143,6 @@ static void gvir_connection_finalize(GObject *object)
     GVirConnection *conn = GVIR_CONNECTION(object);
     GVirConnectionPrivate *priv = conn->priv;
 
-    g_debug("Finalize GVirConnection=%p", conn);
-
     if (gvir_connection_is_open(conn))
         gvir_connection_close(conn);
 
@@ -239,8 +239,6 @@ static void gvir_connection_init(GVirConnection *conn)
 {
     GVirConnectionPrivate *priv;
 
-    g_debug("Init GVirConnection=%p", conn);
-
     priv = conn->priv = GVIR_CONNECTION_GET_PRIVATE(conn);
 
     priv->lock = g_mutex_new();
@@ -252,6 +250,14 @@ static void gvir_connection_init(GVirConnection *conn)
                                         g_str_equal,
                                         NULL,
                                         g_object_unref);
+    priv->interfaces = g_hash_table_new_full(g_str_hash,
+                                             g_str_equal,
+                                             NULL,
+                                             g_object_unref);
+    priv->networks = g_hash_table_new_full(g_str_hash,
+                                           g_str_equal,
+                                           NULL,
+                                           g_object_unref);
 }
 
 
@@ -497,17 +503,18 @@ gboolean gvir_connection_open_read_only(GVirConnection *conn,
 }
 
 static void
-gvir_connection_open_helper(GSimpleAsyncResult *res,
-                            GObject *object,
+gvir_connection_open_helper(GTask *task,
+                            gpointer object,
+                            gpointer task_data G_GNUC_UNUSED,
                             GCancellable *cancellable)
 {
     GVirConnection *conn = GVIR_CONNECTION(object);
     GError *err = NULL;
 
-    if (!gvir_connection_open(conn, cancellable, &err)) {
-        g_simple_async_result_set_from_error(res, err);
-        g_error_free(err);
-    }
+    if (!gvir_connection_open(conn, cancellable, &err))
+        g_task_return_error(task, err);
+    else
+        g_task_return_boolean(task, TRUE);
 }
 
 
@@ -523,20 +530,20 @@ void gvir_connection_open_async(GVirConnection *conn,
                                 GAsyncReadyCallback callback,
                                 gpointer user_data)
 {
-    GSimpleAsyncResult *res;
+    GTask *task;
 
     g_return_if_fail(GVIR_IS_CONNECTION(conn));
     g_return_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable));
 
-    res = g_simple_async_result_new(G_OBJECT(conn),
-                                    callback,
-                                    user_data,
-                                    gvir_connection_open_async);
-    g_simple_async_result_run_in_thread(res,
-                                        gvir_connection_open_helper,
-                                        G_PRIORITY_DEFAULT,
-                                        cancellable);
-    g_object_unref(res);
+    task = g_task_new(G_OBJECT(conn),
+                      cancellable,
+                      callback,
+                      user_data);
+    g_task_set_source_tag(task,
+                          gvir_connection_open_async);
+    g_task_run_in_thread(task,
+                         gvir_connection_open_helper);
+    g_object_unref(task);
 }
 
 
@@ -550,28 +557,28 @@ gboolean gvir_connection_open_finish(GVirConnection *conn,
                                      GError **err)
 {
     g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
-    g_return_val_if_fail(g_simple_async_result_is_valid(result, G_OBJECT(conn),
-                                                        gvir_connection_open_async),
+    g_return_val_if_fail(g_task_is_valid(result, G_OBJECT(conn)),
+                         FALSE);
+    g_return_val_if_fail(g_task_get_source_tag(G_TASK(result)) ==
+                         gvir_connection_open_async,
                          FALSE);
 
-    if (g_simple_async_result_propagate_error(G_SIMPLE_ASYNC_RESULT(result), err))
-        return FALSE;
-
-    return TRUE;
+    return g_task_propagate_boolean(G_TASK(result), err);
 }
 
 static void
-gvir_connection_open_read_only_helper(GSimpleAsyncResult *res,
-                            GObject *object,
-                            GCancellable *cancellable)
+gvir_connection_open_read_only_helper(GTask *task,
+                                      gpointer object,
+                                      gpointer task_data G_GNUC_UNUSED,
+                                      GCancellable *cancellable)
 {
     GVirConnection *conn = GVIR_CONNECTION(object);
     GError *err = NULL;
 
-    if (!gvir_connection_open_read_only(conn, cancellable, &err)) {
-        g_simple_async_result_set_from_error(res, err);
-        g_error_free(err);
-    }
+    if (!gvir_connection_open_read_only(conn, cancellable, &err))
+        g_task_return_error(task, err);
+    else
+        g_task_return_boolean(task, TRUE);
 }
 
 
@@ -587,20 +594,20 @@ void gvir_connection_open_read_only_async(GVirConnection *conn,
                                 GAsyncReadyCallback callback,
                                 gpointer user_data)
 {
-    GSimpleAsyncResult *res;
+    GTask *task;
 
     g_return_if_fail(GVIR_IS_CONNECTION(conn));
     g_return_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable));
 
-    res = g_simple_async_result_new(G_OBJECT(conn),
-                                    callback,
-                                    user_data,
-                                    gvir_connection_open_read_only_async);
-    g_simple_async_result_run_in_thread(res,
-                                        gvir_connection_open_read_only_helper,
-                                        G_PRIORITY_DEFAULT,
-                                        cancellable);
-    g_object_unref(res);
+    task = g_task_new(G_OBJECT(conn),
+                      cancellable,
+                      callback,
+                      user_data);
+    g_task_set_source_tag(task,
+                          gvir_connection_open_read_only_async);
+    g_task_run_in_thread(task,
+                         gvir_connection_open_read_only_helper);
+    g_object_unref(task);
 }
 
 
@@ -614,14 +621,13 @@ gboolean gvir_connection_open_read_only_finish(GVirConnection *conn,
                                                GError **err)
 {
     g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
-    g_return_val_if_fail(g_simple_async_result_is_valid(result, G_OBJECT(conn),
-                                                        gvir_connection_open_read_only_async),
+    g_return_val_if_fail(g_task_is_valid(result, G_OBJECT(conn)),
+                         FALSE);
+    g_return_val_if_fail(g_task_get_source_tag(G_TASK(result)) ==
+                         gvir_connection_open_read_only_async,
                          FALSE);
 
-    if (g_simple_async_result_propagate_error(G_SIMPLE_ASYNC_RESULT(result), err))
-        return FALSE;
-
-    return TRUE;
+    return g_task_propagate_boolean(G_TASK(result), err);
 }
 
 gboolean gvir_connection_is_open(GVirConnection *conn)
@@ -668,6 +674,16 @@ void gvir_connection_close(GVirConnection *conn)
         priv->pools = NULL;
     }
 
+    if (priv->interfaces) {
+        g_hash_table_unref(priv->interfaces);
+        priv->interfaces = NULL;
+    }
+
+    if (priv->networks) {
+        g_hash_table_unref(priv->networks);
+        priv->networks = NULL;
+    }
+
     if (priv->conn) {
         virConnectDomainEventDeregister(priv->conn, domain_event_cb);
         virConnectClose(priv->conn);
@@ -678,48 +694,6 @@ void gvir_connection_close(GVirConnection *conn)
     g_mutex_unlock(priv->lock);
 
     g_signal_emit(conn, signals[VIR_CONNECTION_CLOSED], 0);
-}
-
-typedef gint (* CountFunction) (virConnectPtr vconn);
-typedef gint (* ListFunction) (virConnectPtr vconn, gchar **lst, gint max);
-
-static gchar ** fetch_list(virConnectPtr vconn,
-                           const char *name,
-                           CountFunction count_func,
-                           ListFunction list_func,
-                           GCancellable *cancellable,
-                           gint *length,
-                           GError **err)
-{
-    gchar **lst = NULL;
-    gint n = 0;
-
-    if ((n = count_func(vconn)) < 0) {
-        gvir_set_error(err, GVIR_CONNECTION_ERROR,
-                       0,
-                       _("Unable to count %s"), name);
-        goto error;
-    }
-
-    if (n) {
-        if (g_cancellable_set_error_if_cancelled(cancellable, err))
-            goto error;
-
-        lst = g_new0(gchar *, n);
-        if ((n = list_func(vconn, lst, n)) < 0) {
-            gvir_set_error(err, GVIR_CONNECTION_ERROR,
-                           0,
-                           _("Unable to list %s %d"), name, n);
-            goto error;
-        }
-    }
-
-    *length = n;
-    return lst;
-
-error:
-    g_free(lst);
-    return NULL;
 }
 
 /**
@@ -733,14 +707,11 @@ gboolean gvir_connection_fetch_domains(GVirConnection *conn,
 {
     GVirConnectionPrivate *priv;
     GHashTable *doms;
-    gchar **inactive = NULL;
-    gint ninactive = 0;
-    gint *active = NULL;
-    gint nactive = 0;
+    virDomainPtr *domains = NULL;
+    gint ndomains = 0;
     gboolean ret = FALSE;
     gint i;
     virConnectPtr vconn = NULL;
-    GError *lerr = NULL;
 
     g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
     g_return_val_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable),
@@ -761,81 +732,28 @@ gboolean gvir_connection_fetch_domains(GVirConnection *conn,
     virConnectRef(vconn);
     g_mutex_unlock(priv->lock);
 
-    if (g_cancellable_set_error_if_cancelled(cancellable, err))
+    ndomains = virConnectListAllDomains(vconn, &domains, 0);
+    if (ndomains < 0) {
+        gvir_set_error(err, GVIR_CONNECTION_ERROR,
+                       0,
+                       _("Failed to fetch list of domains"));
         goto cleanup;
-
-    if ((nactive = virConnectNumOfDomains(vconn)) < 0) {
-        gvir_set_error_literal(err, GVIR_CONNECTION_ERROR,
-                               0,
-                               _("Unable to count domains"));
-        goto cleanup;
-    }
-    if (nactive) {
-        if (g_cancellable_set_error_if_cancelled(cancellable, err))
-            goto cleanup;
-
-        active = g_new(gint, nactive);
-        if ((nactive = virConnectListDomains(vconn, active, nactive)) < 0) {
-            gvir_set_error_literal(err, GVIR_CONNECTION_ERROR,
-                                   0,
-                                   _("Unable to list domains"));
-            goto cleanup;
-        }
     }
 
     if (g_cancellable_set_error_if_cancelled(cancellable, err))
         goto cleanup;
-
-    inactive = fetch_list(vconn,
-                          "Domains",
-                          virConnectNumOfDefinedDomains,
-                          virConnectListDefinedDomains,
-                          cancellable,
-                          &ninactive,
-                          &lerr);
-    if (lerr) {
-        g_propagate_error(err, lerr);
-        lerr = NULL;
-        goto cleanup;
-    }
 
     doms = g_hash_table_new_full(g_str_hash,
                                  g_str_equal,
                                  NULL,
                                  g_object_unref);
 
-    for (i = 0 ; i < nactive ; i++) {
-        if (g_cancellable_set_error_if_cancelled(cancellable, err))
-            goto cleanup;
-
-        virDomainPtr vdom = virDomainLookupByID(vconn, active[i]);
+    for (i = 0 ; i < ndomains; i++) {
         GVirDomain *dom;
-        if (!vdom)
-            continue;
 
         dom = GVIR_DOMAIN(g_object_new(GVIR_TYPE_DOMAIN,
-                                       "handle", vdom,
+                                       "handle", domains[i],
                                        NULL));
-        virDomainFree(vdom);
-
-        g_hash_table_insert(doms,
-                            (gpointer)gvir_domain_get_uuid(dom),
-                            dom);
-    }
-
-    for (i = 0 ; i < ninactive ; i++) {
-        if (g_cancellable_set_error_if_cancelled(cancellable, err))
-            goto cleanup;
-
-        virDomainPtr vdom = virDomainLookupByName(vconn, inactive[i]);
-        GVirDomain *dom;
-        if (!vdom)
-            continue;
-
-        dom = GVIR_DOMAIN(g_object_new(GVIR_TYPE_DOMAIN,
-                                       "handle", vdom,
-                                       NULL));
-        virDomainFree(vdom);
 
         g_hash_table_insert(doms,
                             (gpointer)gvir_domain_get_uuid(dom),
@@ -846,16 +764,18 @@ gboolean gvir_connection_fetch_domains(GVirConnection *conn,
     if (priv->domains)
         g_hash_table_unref(priv->domains);
     priv->domains = doms;
-    virConnectClose(vconn);
     g_mutex_unlock(priv->lock);
 
     ret = TRUE;
 
 cleanup:
-    g_free(active);
-    for (i = 0 ; i < ninactive ; i++)
-        g_free(inactive[i]);
-    g_free(inactive);
+    if (ndomains > 0) {
+        for (i = 0 ; i < ndomains; i++)
+            virDomainFree(domains[i]);
+        free(domains);
+    }
+    if (vconn != NULL)
+        virConnectClose(vconn);
     return ret;
 }
 
@@ -870,14 +790,11 @@ gboolean gvir_connection_fetch_storage_pools(GVirConnection *conn,
 {
     GVirConnectionPrivate *priv;
     GHashTable *pools;
-    gchar **inactive = NULL;
-    gint ninactive = 0;
-    gchar **active = NULL;
-    gint nactive = 0;
+    virStoragePoolPtr *vpools = NULL;
+    gint npools = 0;
     gboolean ret = FALSE;
     gint i;
     virConnectPtr vconn = NULL;
-    GError *lerr = NULL;
 
     g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
     g_return_val_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable),
@@ -901,77 +818,31 @@ gboolean gvir_connection_fetch_storage_pools(GVirConnection *conn,
     if (g_cancellable_set_error_if_cancelled(cancellable, err))
         goto cleanup;
 
-    active = fetch_list(vconn,
-                        "Storage Pools",
-                        virConnectNumOfStoragePools,
-                        virConnectListStoragePools,
-                        cancellable,
-                        &nactive,
-                        &lerr);
-    if (lerr) {
-        g_propagate_error(err, lerr);
-        lerr = NULL;
+    npools = virConnectListAllStoragePools(vconn, &vpools, 0);
+    if (npools < 0) {
+        gvir_set_error(err, GVIR_CONNECTION_ERROR,
+                       0,
+                       _("Failed to fetch list of pools"));
         goto cleanup;
     }
 
     if (g_cancellable_set_error_if_cancelled(cancellable, err))
         goto cleanup;
 
-    inactive = fetch_list(vconn,
-                          "Storage Pools",
-                          virConnectNumOfDefinedStoragePools,
-                          virConnectListDefinedStoragePools,
-                          cancellable,
-                          &ninactive,
-                          &lerr);
-    if (lerr) {
-        g_propagate_error(err, lerr);
-        lerr = NULL;
-        goto cleanup;
-    }
-
     pools = g_hash_table_new_full(g_str_hash,
                                   g_str_equal,
                                   NULL,
                                   g_object_unref);
 
-    for (i = 0 ; i < nactive ; i++) {
+    for (i = 0 ; i < npools; i++) {
+        GVirStoragePool *pool;
+
         if (g_cancellable_set_error_if_cancelled(cancellable, err))
             goto cleanup;
 
-        virStoragePoolPtr vpool;
-        GVirStoragePool *pool;
-
-        vpool = virStoragePoolLookupByName(vconn, active[i]);
-        if (!vpool)
-            continue;
-
         pool = GVIR_STORAGE_POOL(g_object_new(GVIR_TYPE_STORAGE_POOL,
-                                              "handle", vpool,
+                                              "handle", vpools[i],
                                               NULL));
-        virStoragePoolFree(vpool);
-
-        g_hash_table_insert(pools,
-                            (gpointer)gvir_storage_pool_get_uuid(pool),
-                            pool);
-    }
-
-    for (i = 0 ; i < ninactive ; i++) {
-        if (g_cancellable_set_error_if_cancelled(cancellable, err))
-            goto cleanup;
-
-        virStoragePoolPtr vpool;
-        GVirStoragePool *pool;
-
-        vpool = virStoragePoolLookupByName(vconn, inactive[i]);
-        if (!vpool)
-            continue;
-
-        pool = GVIR_STORAGE_POOL(g_object_new(GVIR_TYPE_STORAGE_POOL,
-                                              "handle", vpool,
-                                              NULL));
-        virStoragePoolFree(vpool);
-
         g_hash_table_insert(pools,
                             (gpointer)gvir_storage_pool_get_uuid(pool),
                             pool);
@@ -981,33 +852,34 @@ gboolean gvir_connection_fetch_storage_pools(GVirConnection *conn,
     if (priv->pools)
         g_hash_table_unref(priv->pools);
     priv->pools = pools;
-    virConnectClose(vconn);
     g_mutex_unlock(priv->lock);
 
     ret = TRUE;
 
 cleanup:
-    for (i = 0 ; i < nactive ; i++)
-        g_free(active[i]);
-    g_free(active);
-    for (i = 0 ; i < ninactive ; i++)
-        g_free(inactive[i]);
-    g_free(inactive);
+    if (npools > 0) {
+        for (i = 0 ; i < npools; i++)
+            virStoragePoolFree(vpools[i]);
+        free(vpools);
+    }
+    if (vconn != NULL)
+        virConnectClose(vconn);
     return ret;
 }
 
 static void
-gvir_connection_fetch_domains_helper(GSimpleAsyncResult *res,
-                                     GObject *object,
+gvir_connection_fetch_domains_helper(GTask *task,
+                                     gpointer object,
+                                     gpointer task_data G_GNUC_UNUSED,
                                      GCancellable *cancellable)
 {
     GVirConnection *conn = GVIR_CONNECTION(object);
     GError *err = NULL;
 
-    if (!gvir_connection_fetch_domains(conn, cancellable, &err)) {
-        g_simple_async_result_set_from_error(res, err);
-        g_error_free(err);
-    }
+    if (!gvir_connection_fetch_domains(conn, cancellable, &err))
+        g_task_return_error(task, err);
+    else
+        g_task_return_boolean(task, TRUE);
 }
 
 
@@ -1023,20 +895,20 @@ void gvir_connection_fetch_domains_async(GVirConnection *conn,
                                          GAsyncReadyCallback callback,
                                          gpointer user_data)
 {
-    GSimpleAsyncResult *res;
+    GTask *task;
 
     g_return_if_fail(GVIR_IS_CONNECTION(conn));
     g_return_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable));
 
-    res = g_simple_async_result_new(G_OBJECT(conn),
-                                    callback,
-                                    user_data,
-                                    gvir_connection_fetch_domains_async);
-    g_simple_async_result_run_in_thread(res,
-                                        gvir_connection_fetch_domains_helper,
-                                        G_PRIORITY_DEFAULT,
-                                        cancellable);
-    g_object_unref(res);
+    task = g_task_new(G_OBJECT(conn),
+                      cancellable,
+                      callback,
+                      user_data);
+    g_task_set_source_tag(task,
+                          gvir_connection_fetch_domains_async);
+    g_task_run_in_thread(task,
+                         gvir_connection_fetch_domains_helper);
+    g_object_unref(task);
 }
 
 /**
@@ -1049,28 +921,28 @@ gboolean gvir_connection_fetch_domains_finish(GVirConnection *conn,
                                               GError **err)
 {
     g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
-    g_return_val_if_fail(g_simple_async_result_is_valid(result, G_OBJECT(conn),
-                                                        gvir_connection_fetch_domains_async),
+    g_return_val_if_fail(g_task_is_valid(result, G_OBJECT(conn)),
+                         FALSE);
+    g_return_val_if_fail(g_task_get_source_tag(G_TASK(result)) ==
+                         gvir_connection_fetch_domains_async,
                          FALSE);
 
-    if (g_simple_async_result_propagate_error(G_SIMPLE_ASYNC_RESULT(result), err))
-        return FALSE;
-
-    return TRUE;
+    return g_task_propagate_boolean(G_TASK(result), err);
 }
 
 static void
-gvir_connection_fetch_pools_helper(GSimpleAsyncResult *res,
-                                   GObject *object,
+gvir_connection_fetch_pools_helper(GTask *task,
+                                   gpointer object,
+                                   gpointer task_data G_GNUC_UNUSED,
                                    GCancellable *cancellable)
 {
     GVirConnection *conn = GVIR_CONNECTION(object);
     GError *err = NULL;
 
-    if (!gvir_connection_fetch_storage_pools(conn, cancellable, &err)) {
-        g_simple_async_result_set_from_error(res, err);
-        g_error_free(err);
-    }
+    if (!gvir_connection_fetch_storage_pools(conn, cancellable, &err))
+        g_task_return_error(task, err);
+    else
+        g_task_return_boolean(task, TRUE);
 }
 
 /**
@@ -1085,20 +957,20 @@ void gvir_connection_fetch_storage_pools_async(GVirConnection *conn,
                                                GAsyncReadyCallback callback,
                                                gpointer user_data)
 {
-    GSimpleAsyncResult *res;
+    GTask *task;
 
     g_return_if_fail(GVIR_IS_CONNECTION(conn));
     g_return_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable));
 
-    res = g_simple_async_result_new(G_OBJECT(conn),
-                                    callback,
-                                    user_data,
-                                    gvir_connection_fetch_storage_pools_async);
-    g_simple_async_result_run_in_thread(res,
-                                        gvir_connection_fetch_pools_helper,
-                                        G_PRIORITY_DEFAULT,
-                                        cancellable);
-    g_object_unref(res);
+    task = g_task_new(G_OBJECT(conn),
+                      cancellable,
+                      callback,
+                      user_data);
+    g_task_set_source_tag(task,
+                          gvir_connection_fetch_storage_pools_async);
+    g_task_run_in_thread(task,
+                         gvir_connection_fetch_pools_helper);
+    g_object_unref(task);
 }
 
 /**
@@ -1111,14 +983,13 @@ gboolean gvir_connection_fetch_storage_pools_finish(GVirConnection *conn,
                                                     GError **err)
 {
     g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
-    g_return_val_if_fail(g_simple_async_result_is_valid(result, G_OBJECT(conn),
-                                                        gvir_connection_fetch_storage_pools_async),
+    g_return_val_if_fail(g_task_is_valid(result, G_OBJECT(conn)),
+                         FALSE);
+    g_return_val_if_fail(g_task_get_source_tag(G_TASK(result)) ==
+                         gvir_connection_fetch_storage_pools_async,
                          FALSE);
 
-    if (g_simple_async_result_propagate_error(G_SIMPLE_ASYNC_RESULT(result), err))
-        return FALSE;
-
-    return TRUE;
+    return g_task_propagate_boolean(G_TASK(result), err);
 }
 
 const gchar *gvir_connection_get_uri(GVirConnection *conn)
@@ -1588,6 +1459,518 @@ GVirDomain *gvir_connection_start_domain(GVirConnection *conn,
 }
 
 /**
+ * gvir_connection_fetch_interfaces:
+ * @conn: a #GVirConnection
+ * @cancellable: (allow-none)(transfer none): cancellation object
+ * @err: return location for any errors
+ *
+ * Use this method to fetch information on all network interfaces
+ * managed by connection @conn on host machine. Use
+ * #gvir_connection_get_interfaces or #gvir_connection_get_interface afterwards
+ * to query the fetched interfaces.
+ *
+ * Return value: %TRUE on success, %FALSE otherwise and @err is set.
+ */
+gboolean gvir_connection_fetch_interfaces(GVirConnection *conn,
+                                          GCancellable *cancellable,
+                                          GError **err)
+{
+    GVirConnectionPrivate *priv;
+    GHashTable *interfaces;
+    virInterfacePtr *ifaces = NULL;
+    gint ninterfaces = 0;
+    gboolean ret = FALSE;
+    gint i;
+    virConnectPtr vconn = NULL;
+
+    g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
+    g_return_val_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable),
+                         FALSE);
+    g_return_val_if_fail((err == NULL) || (*err == NULL), FALSE);
+
+    priv = conn->priv;
+    g_mutex_lock(priv->lock);
+    if (!priv->conn) {
+        g_set_error_literal(err, GVIR_CONNECTION_ERROR,
+                            0,
+                            _("Connection is not open"));
+        g_mutex_unlock(priv->lock);
+        goto cleanup;
+    }
+    vconn = priv->conn;
+    /* Stop another thread closing the connection just at the minute */
+    virConnectRef(vconn);
+    g_mutex_unlock(priv->lock);
+
+    if (g_cancellable_set_error_if_cancelled(cancellable, err))
+        goto cleanup;
+
+    ninterfaces = virConnectListAllInterfaces(vconn, &ifaces, 0);
+    if (ninterfaces < 0) {
+        gvir_set_error(err, GVIR_CONNECTION_ERROR,
+                       0,
+                       _("Failed to fetch list of interfaces"));
+        goto cleanup;
+    }
+
+    if (g_cancellable_set_error_if_cancelled(cancellable, err))
+        goto cleanup;
+
+    interfaces = g_hash_table_new_full(g_str_hash,
+                                       g_str_equal,
+                                       NULL,
+                                       g_object_unref);
+
+    for (i = 0 ; i < ninterfaces; i++) {
+        GVirInterface *iface;
+
+        if (g_cancellable_set_error_if_cancelled(cancellable, err))
+            goto cleanup;
+
+        iface = GVIR_INTERFACE(g_object_new(GVIR_TYPE_INTERFACE,
+                                            "handle", ifaces[i],
+                                            NULL));
+
+        g_hash_table_insert(interfaces,
+                            (gpointer)gvir_interface_get_name(iface),
+                            iface);
+    }
+
+    g_mutex_lock(priv->lock);
+    if (priv->interfaces)
+        g_hash_table_unref(priv->interfaces);
+    priv->interfaces = interfaces;
+    g_mutex_unlock(priv->lock);
+
+    ret = TRUE;
+
+cleanup:
+    if (ninterfaces > 0) {
+        for (i = 0 ; i < ninterfaces; i++)
+            virInterfaceFree(ifaces[i]);
+        free(ifaces);
+    }
+    if (vconn != NULL)
+        virConnectClose(vconn);
+    return ret;
+}
+
+static void
+gvir_connection_fetch_interfaces_helper(GTask *task,
+                                        gpointer object,
+                                        gpointer task_data G_GNUC_UNUSED,
+                                        GCancellable *cancellable)
+{
+    GVirConnection *conn = GVIR_CONNECTION(object);
+    GError *err = NULL;
+
+    if (!gvir_connection_fetch_interfaces(conn, cancellable, &err))
+        g_task_return_error(task, err);
+    else
+        g_task_return_boolean(task, TRUE);
+}
+
+
+/**
+ * gvir_connection_fetch_interfaces_async:
+ * @conn: a #GVirConnection
+ * @cancellable: (allow-none)(transfer none): cancellation object
+ * @callback: (scope async): completion callback
+ * @user_data: (closure): opaque data for callback
+ */
+void gvir_connection_fetch_interfaces_async(GVirConnection *conn,
+                                            GCancellable *cancellable,
+                                            GAsyncReadyCallback callback,
+                                            gpointer user_data)
+{
+    GTask *task;
+
+    g_return_if_fail(GVIR_IS_CONNECTION(conn));
+    g_return_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable));
+
+    task = g_task_new(G_OBJECT(conn),
+                      cancellable,
+                      callback,
+                      user_data);
+    g_task_set_source_tag(task,
+                          gvir_connection_fetch_interfaces_async);
+    g_task_run_in_thread(task,
+                         gvir_connection_fetch_interfaces_helper);
+    g_object_unref(task);
+}
+
+/**
+ * gvir_connection_fetch_interfaces_finish:
+ * @conn: a #GVirConnection
+ * @result: (transfer none): async method result
+ * @err: return location for any errors
+ */
+gboolean gvir_connection_fetch_interfaces_finish(GVirConnection *conn,
+                                                 GAsyncResult *result,
+                                                 GError **err)
+{
+    g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
+    g_return_val_if_fail(g_task_is_valid(result, G_OBJECT(conn)),
+                         FALSE);
+    g_return_val_if_fail(g_task_get_source_tag(G_TASK(result)) ==
+                         gvir_connection_fetch_interfaces_async,
+                         FALSE);
+
+    return g_task_propagate_boolean(G_TASK(result), err);
+}
+
+/**
+ * gvir_connection_get_interfaces:
+ * @conn: a #GVirConnection
+ *
+ * Get a list of all the network interfaces managed by connection @conn on
+ * host machine.
+ *
+ * Return value: (element-type LibvirtGObject.Interface) (transfer full): List
+ * of #GVirInterface. The returned list should be freed with g_list_free(),
+ * after its elements have been unreffed with g_object_unref().
+ */
+GList *gvir_connection_get_interfaces(GVirConnection *conn)
+{
+    GVirConnectionPrivate *priv;
+    GList *interfaces = NULL;
+
+    g_return_val_if_fail(GVIR_IS_CONNECTION(conn), NULL);
+
+    priv = conn->priv;
+    g_mutex_lock(priv->lock);
+    if (priv->interfaces != NULL) {
+        interfaces = g_hash_table_get_values(priv->interfaces);
+        g_list_foreach(interfaces, gvir_domain_ref, NULL);
+    }
+    g_mutex_unlock(priv->lock);
+
+    return interfaces;
+}
+
+/**
+ * gvir_connection_get_interface:
+ * @conn: a #GVirConnection
+ * @name: interface name to lookup
+ *
+ * Get a particular interface which has name @name.
+ *
+ * Return value: (transfer full): A new reference to a #GVirInterface, or NULL
+ * if no interface exists with name @name. The returned object must be unreffed
+ * using g_object_unref() once used.
+ */
+GVirInterface *gvir_connection_get_interface(GVirConnection *conn,
+                                             const gchar *name)
+{
+    GVirConnectionPrivate *priv;
+    GVirInterface *iface;
+
+    g_return_val_if_fail(GVIR_IS_CONNECTION(conn), NULL);
+    g_return_val_if_fail(name != NULL, NULL);
+
+    priv = conn->priv;
+    g_mutex_lock(priv->lock);
+    iface = g_hash_table_lookup(priv->interfaces, name);
+    if (iface)
+        g_object_ref(iface);
+    g_mutex_unlock(priv->lock);
+
+    return iface;
+}
+
+/**
+ * gvir_connection_find_interface_by_mac:
+ * @conn: a #GVirConnection
+ * @mac: MAC address to lookup
+ *
+ * Get a particular interface which has MAC address @mac.
+ *
+ * Return value: (transfer full): A new reference to a #GVirInterface, or NULL
+ * if no interface exists with MAC address @mac. The returned object must be
+ * unreffed using g_object_unref() once used.
+ */
+GVirInterface *gvir_connection_find_interface_by_mac(GVirConnection *conn,
+                                                     const gchar *mac)
+{
+    GVirConnectionPrivate *priv;
+    GHashTableIter iter;
+    gpointer key, value;
+
+    g_return_val_if_fail(GVIR_IS_CONNECTION(conn), NULL);
+    g_return_val_if_fail(mac != NULL, NULL);
+
+    priv = conn->priv;
+    g_mutex_lock(priv->lock);
+    g_hash_table_iter_init(&iter, priv->interfaces);
+
+    while (g_hash_table_iter_next(&iter, &key, &value)) {
+        GVirInterface *iface = value;
+        const gchar *thismac = gvir_interface_get_mac(iface);
+
+        if (g_strcmp0(thismac, mac) == 0) {
+            g_object_ref(iface);
+            g_mutex_unlock(priv->lock);
+            return iface;
+        }
+    }
+    g_mutex_unlock(priv->lock);
+
+    return NULL;
+}
+
+/**
+ * gvir_connection_fetch_networks:
+ * @conn: a #GVirConnection
+ * @cancellable: (allow-none)(transfer none): cancellation object
+ */
+gboolean gvir_connection_fetch_networks(GVirConnection *conn,
+                                        GCancellable *cancellable,
+                                        GError **err)
+{
+    GVirConnectionPrivate *priv;
+    GHashTable *networks;
+    virNetworkPtr *vnetworks = NULL;
+    gint nnetworks = 0;
+    gboolean ret = FALSE;
+    gint i;
+    virConnectPtr vconn = NULL;
+
+    g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
+    g_return_val_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable),
+                         FALSE);
+    g_return_val_if_fail((err == NULL) || (*err == NULL), FALSE);
+
+    priv = conn->priv;
+    g_mutex_lock(priv->lock);
+    if (!priv->conn) {
+        g_set_error_literal(err, GVIR_CONNECTION_ERROR,
+                            0,
+                            _("Connection is not open"));
+        g_mutex_unlock(priv->lock);
+        goto cleanup;
+    }
+    vconn = priv->conn;
+    /* Stop another thread closing the connection just at the minute */
+    virConnectRef(vconn);
+    g_mutex_unlock(priv->lock);
+
+    if (g_cancellable_set_error_if_cancelled(cancellable, err))
+        goto cleanup;
+
+    nnetworks = virConnectListAllNetworks(vconn, &vnetworks, 0);
+    if (nnetworks < 0) {
+        gvir_set_error(err, GVIR_CONNECTION_ERROR,
+                       0,
+                       _("Failed to fetch list of networks"));
+        goto cleanup;
+    }
+
+    if (g_cancellable_set_error_if_cancelled(cancellable, err))
+        goto cleanup;
+
+    networks = g_hash_table_new_full(g_str_hash,
+                                     g_str_equal,
+                                     NULL,
+                                     g_object_unref);
+
+    for (i = 0 ; i < nnetworks; i++) {
+        GVirNetwork *network;
+
+        if (g_cancellable_set_error_if_cancelled(cancellable, err))
+            goto cleanup;
+
+        network = GVIR_NETWORK(g_object_new(GVIR_TYPE_NETWORK,
+                                            "handle", vnetworks[i],
+                                            NULL));
+        g_hash_table_insert(networks,
+                            (gpointer)gvir_network_get_uuid(network),
+                            network);
+    }
+
+    g_mutex_lock(priv->lock);
+    if (priv->networks)
+        g_hash_table_unref(priv->networks);
+    priv->networks = networks;
+    g_mutex_unlock(priv->lock);
+
+    ret = TRUE;
+
+cleanup:
+    if (nnetworks > 0) {
+        for (i = 0 ; i < nnetworks; i++)
+            virNetworkFree(vnetworks[i]);
+        free(vnetworks);
+    }
+    if (vconn != NULL)
+        virConnectClose(vconn);
+    return ret;
+}
+
+static void
+gvir_connection_fetch_networks_helper(GTask *task,
+                                      gpointer object,
+                                      gpointer task_data G_GNUC_UNUSED,
+                                      GCancellable *cancellable)
+{
+    GVirConnection *conn = GVIR_CONNECTION(object);
+    GError *err = NULL;
+
+    if (!gvir_connection_fetch_networks(conn, cancellable, &err))
+        g_task_return_error(task, err);
+    else
+        g_task_return_boolean(task, TRUE);
+}
+
+/**
+ * gvir_connection_fetch_networks_async:
+ * @conn: a #GVirConnection
+ * @cancellable: (allow-none)(transfer none): cancellation object
+ * @callback: (scope async): completion callback
+ * @user_data: (closure): opaque data for callback
+ */
+void gvir_connection_fetch_networks_async(GVirConnection *conn,
+                                          GCancellable *cancellable,
+                                          GAsyncReadyCallback callback,
+                                          gpointer user_data)
+{
+    GTask *task;
+
+    g_return_if_fail(GVIR_IS_CONNECTION(conn));
+    g_return_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable));
+
+    task = g_task_new(G_OBJECT(conn),
+                     cancellable,
+                     callback,
+                     user_data);
+    g_task_set_source_tag(task,
+                          gvir_connection_fetch_networks_async);
+    g_task_run_in_thread(task,
+                         gvir_connection_fetch_networks_helper);
+    g_object_unref(task);
+}
+
+/**
+ * gvir_connection_fetch_networks_finish:
+ * @conn: a #GVirConnection
+ * @result: (transfer none): async method result
+ * @err: return location for any errors
+ */
+gboolean gvir_connection_fetch_networks_finish(GVirConnection *conn,
+                                               GAsyncResult *result,
+                                               GError **err)
+{
+    g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
+    g_return_val_if_fail(g_task_is_valid(result, G_OBJECT(conn)),
+                         FALSE);
+    g_return_val_if_fail(g_task_get_source_tag(G_TASK(result)) ==
+                         gvir_connection_fetch_networks_async,
+                         FALSE);
+
+    return g_task_propagate_boolean(G_TASK(result), err);
+}
+
+/**
+ * gvir_connection_get_networks:
+ * @conn: a #GVirConnection
+ *
+ * Get a list of all the network networks available through @conn.
+ *
+ * Return value: (element-type LibvirtGObject.Network) (transfer full): List
+ * of #GVirNetwork. The returned list should be freed with g_list_free(),
+ * after its elements have been unreffed with g_object_unref().
+ */
+GList *gvir_connection_get_networks(GVirConnection *conn)
+{
+    GVirConnectionPrivate *priv;
+    GList *networks = NULL;
+
+    g_return_val_if_fail(GVIR_IS_CONNECTION(conn), NULL);
+
+    priv = conn->priv;
+    g_mutex_lock(priv->lock);
+    if (priv->networks != NULL) {
+        networks = g_hash_table_get_values(priv->networks);
+        g_list_foreach(networks, gvir_domain_ref, NULL);
+    }
+    g_mutex_unlock(priv->lock);
+
+    return networks;
+}
+
+/**
+ * gvir_connection_get_network:
+ * @conn: a #GVirConnection
+ * @uuid: UUID of the network to lookup
+ *
+ * Get a particular network which has UUID @uuid.
+ *
+ * Return value: (transfer full): A new reference to a #GVirNetwork, or NULL if
+ * no network exists with UUID @uuid. The returned object must be unreffed using
+ * g_object_unref() once used.
+ */
+GVirNetwork *gvir_connection_get_network(GVirConnection *conn,
+                                         const gchar *uuid)
+{
+    GVirConnectionPrivate *priv;
+    GVirNetwork *network;
+
+    g_return_val_if_fail(GVIR_IS_CONNECTION(conn), NULL);
+    g_return_val_if_fail(uuid != NULL, NULL);
+
+    priv = conn->priv;
+    g_mutex_lock(priv->lock);
+    network = g_hash_table_lookup(priv->networks, uuid);
+    if (network)
+        g_object_ref(network);
+    g_mutex_unlock(priv->lock);
+
+    return network;
+}
+
+/**
+ * gvir_connection_find_network_by_name:
+ * @conn: a #GVirConnection
+ * @name: name of the network to search for
+ *
+ * Get a particular network which has name @name.
+ *
+ * Return value: (transfer full): A new reference to a #GVirNetwork, or NULL if
+ * no network exists with name @name. The returned object must be unreffed using
+ * g_object_unref() once used.
+ */
+GVirNetwork *gvir_connection_find_network_by_name(GVirConnection *conn,
+                                                  const gchar *name)
+{
+    GVirConnectionPrivate *priv;
+    GHashTableIter iter;
+    gpointer key, value;
+
+    g_return_val_if_fail(GVIR_IS_CONNECTION(conn), NULL);
+    g_return_val_if_fail(name != NULL, NULL);
+
+    priv = conn->priv;
+    g_mutex_lock(priv->lock);
+    g_hash_table_iter_init(&iter, priv->networks);
+
+    while (g_hash_table_iter_next(&iter, &key, &value)) {
+        GVirNetwork *network = value;
+        const gchar *thisname = gvir_network_get_name(network);
+
+        if (thisname == NULL)
+            continue;
+
+        if (strcmp(thisname, name) == 0) {
+            g_object_ref(network);
+            g_mutex_unlock(priv->lock);
+            return network;
+        }
+    }
+    g_mutex_unlock(priv->lock);
+
+    return NULL;
+}
+
+/**
  * gvir_connection_create_storage_pool:
  * @conn: a #GVirConnection on which to create the pool
  * @conf: the configuration for the new storage pool
@@ -1713,9 +2096,10 @@ GVirConfigCapabilities *gvir_connection_get_capabilities(GVirConnection *conn,
 }
 
 static void
-gvir_connection_get_capabilities_helper(GSimpleAsyncResult *res,
-                                        GObject *object,
-                                        GCancellable *cancellable)
+gvir_connection_get_capabilities_helper(GTask *task,
+                                        gpointer object,
+                                        gpointer task_data G_GNUC_UNUSED,
+                                        GCancellable *cancellable G_GNUC_UNUSED)
 {
     GVirConnection *conn = GVIR_CONNECTION(object);
     GError *err = NULL;
@@ -1723,12 +2107,12 @@ gvir_connection_get_capabilities_helper(GSimpleAsyncResult *res,
 
     caps = gvir_connection_get_capabilities(conn, &err);
     if (caps == NULL) {
-        g_simple_async_result_take_error(res, err);
+        g_task_return_error(task, err);
 
         return;
     }
 
-    g_simple_async_result_set_op_res_gpointer(res, caps, g_object_unref);
+    g_task_return_pointer(task, caps, g_object_unref);
 }
 
 /**
@@ -1743,20 +2127,20 @@ void gvir_connection_get_capabilities_async(GVirConnection *conn,
                                             GAsyncReadyCallback callback,
                                             gpointer user_data)
 {
-    GSimpleAsyncResult *res;
+    GTask *task;
 
     g_return_if_fail(GVIR_IS_CONNECTION(conn));
     g_return_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable));
 
-    res = g_simple_async_result_new(G_OBJECT(conn),
-                                    callback,
-                                    user_data,
-                                    gvir_connection_get_capabilities_async);
-    g_simple_async_result_run_in_thread(res,
-                                        gvir_connection_get_capabilities_helper,
-                                        G_PRIORITY_DEFAULT,
-                                        cancellable);
-    g_object_unref(res);
+    task = g_task_new(G_OBJECT(conn),
+                      cancellable,
+                      callback,
+                      user_data);
+    g_task_set_source_tag(task,
+                          gvir_connection_get_capabilities_async);
+    g_task_run_in_thread(task,
+                         gvir_connection_get_capabilities_helper);
+    g_object_unref(task);
 }
 
 /**
@@ -1773,19 +2157,14 @@ gvir_connection_get_capabilities_finish(GVirConnection *conn,
                                         GAsyncResult *result,
                                         GError **err)
 {
-    GVirConfigCapabilities *caps;
-
     g_return_val_if_fail(GVIR_IS_CONNECTION(conn), NULL);
-    g_return_val_if_fail(g_simple_async_result_is_valid(result, G_OBJECT(conn),
-                                                        gvir_connection_get_capabilities_async),
+    g_return_val_if_fail(g_task_is_valid(result, G_OBJECT(conn)),
                          NULL);
+    g_return_val_if_fail(g_task_get_source_tag(G_TASK(result)) ==
+                         gvir_connection_get_capabilities_async,
+                         FALSE);
 
-    if (g_simple_async_result_propagate_error(G_SIMPLE_ASYNC_RESULT(result), err))
-        return NULL;
-
-    caps = g_simple_async_result_get_op_res_gpointer(G_SIMPLE_ASYNC_RESULT(result));
-
-    return g_object_ref(caps);
+    return g_task_propagate_pointer(G_TASK(result), err);
 }
 
 /**
@@ -1853,22 +2232,25 @@ static void restore_domain_from_file_data_free(RestoreDomainFromFileData *data)
 
 static void
 gvir_connection_restore_domain_from_file_helper
-                               (GSimpleAsyncResult *res,
-                                GObject *object,
+                               (GTask *task,
+                                gpointer object,
+                                gpointer task_data,
                                 GCancellable *cancellable G_GNUC_UNUSED)
 {
     GVirConnection *conn = GVIR_CONNECTION(object);
     RestoreDomainFromFileData *data;
     GError *err = NULL;
 
-    data = g_simple_async_result_get_op_res_gpointer(res);
+    data = (RestoreDomainFromFileData *)task_data;
 
     if (!gvir_connection_restore_domain_from_file(conn,
                                                   data->filename,
                                                   data->custom_conf,
                                                   data->flags,
                                                   &err))
-       g_simple_async_result_take_error(res, err);
+       g_task_return_error(task, err);
+    else
+        g_task_return_boolean(task, TRUE);
 }
 
 /**
@@ -1892,7 +2274,7 @@ gvir_connection_restore_domain_from_file_async(GVirConnection *conn,
                                                GAsyncReadyCallback callback,
                                                gpointer user_data)
 {
-    GSimpleAsyncResult *res;
+    GTask *task;
     RestoreDomainFromFileData *data;
 
     g_return_if_fail(GVIR_IS_CONNECTION(conn));
@@ -1905,23 +2287,20 @@ gvir_connection_restore_domain_from_file_async(GVirConnection *conn,
         data->custom_conf = g_object_ref(custom_conf);
     data->flags = flags;
 
-    res = g_simple_async_result_new
-                         (G_OBJECT(conn),
-                          callback,
-                          user_data,
+    task = g_task_new(G_OBJECT(conn),
+                      cancellable,
+                      callback,
+                      user_data);
+    g_task_set_source_tag(task,
                           gvir_connection_restore_domain_from_file_async);
-    g_simple_async_result_set_op_res_gpointer
-                          (res,
-                           data,
-                           (GDestroyNotify)restore_domain_from_file_data_free);
+    g_task_set_task_data(task,
+                         data,
+                         (GDestroyNotify)restore_domain_from_file_data_free);
 
-    g_simple_async_result_run_in_thread
-                          (res,
-                           gvir_connection_restore_domain_from_file_helper,
-                           G_PRIORITY_DEFAULT,
-                           cancellable);
+    g_task_run_in_thread(task,
+                         gvir_connection_restore_domain_from_file_helper);
 
-    g_object_unref(res);
+    g_object_unref(task);
 }
 
 /**
@@ -1940,15 +2319,11 @@ gvir_connection_restore_domain_from_file_finish(GVirConnection *conn,
                                                 GError **err)
 {
     g_return_val_if_fail(GVIR_IS_CONNECTION(conn), FALSE);
-    g_return_val_if_fail(g_simple_async_result_is_valid
-                           (result,
-                            G_OBJECT(conn),
-                            gvir_connection_restore_domain_from_file_async),
-                            FALSE);
+    g_return_val_if_fail(g_task_is_valid(result, G_OBJECT(conn)),
+                         FALSE);
+    g_return_val_if_fail(g_task_get_source_tag(G_TASK(result)) ==
+                         gvir_connection_restore_domain_from_file_async,
+                         FALSE);
 
-     if (g_simple_async_result_propagate_error(G_SIMPLE_ASYNC_RESULT(result),
-                                               err))
-         return FALSE;
-
-    return TRUE;
+    return g_task_propagate_boolean(G_TASK(result), err);
 }

@@ -18,10 +18,10 @@
 %endif
 %define with_vala %{with_introspection}
 
-%define libvirt_version 0.10.2
+%define libvirt_version 1.1.1
 
 Name: libvirt-glib
-Version: 0.1.9
+Version: 0.2.3
 Release: 1%{?dist}%{?extra_release}
 Summary: libvirt glib integration for events
 Group: Development/Libraries

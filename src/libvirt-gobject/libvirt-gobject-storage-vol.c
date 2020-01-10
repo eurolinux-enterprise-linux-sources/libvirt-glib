@@ -112,8 +112,6 @@ static void gvir_storage_vol_finalize(GObject *object)
     GVirStorageVol *vol = GVIR_STORAGE_VOL(object);
     GVirStorageVolPrivate *priv = vol->priv;
 
-    g_debug("Finalize GVirStorageVol=%p", vol);
-
     virStorageVolFree(priv->handle);
 
     G_OBJECT_CLASS(gvir_storage_vol_parent_class)->finalize(object);
@@ -156,8 +154,6 @@ static void gvir_storage_vol_class_init(GVirStorageVolClass *klass)
 
 static void gvir_storage_vol_init(GVirStorageVol *vol)
 {
-    g_debug("Init GVirStorageVol=%p", vol);
-
     vol->priv = GVIR_STORAGE_VOL_GET_PRIVATE(vol);
 }
 
@@ -367,7 +363,7 @@ gboolean gvir_storage_vol_download(GVirStorageVol *vol,
                                    GVirStream *stream,
                                    guint64 offset,
                                    guint64 length,
-                                   guint flags,
+                                   guint flags G_GNUC_UNUSED,
                                    GError **err)
 {
     virStreamPtr stream_handle = NULL;
@@ -413,7 +409,7 @@ gboolean gvir_storage_vol_upload(GVirStorageVol *vol,
                                  GVirStream *stream,
                                  guint64 offset,
                                  guint64 length,
-                                 guint flags,
+                                 guint flags G_GNUC_UNUSED,
                                  GError **err)
 {
     virStreamPtr stream_handle = NULL;

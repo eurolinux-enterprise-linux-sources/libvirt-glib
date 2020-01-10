@@ -4,12 +4,6 @@ gvir_mutex_free
 gvir_mutex_new
 g_mutex_new
 g_mutex_free
-G_DEFINE_BOXED_TYPE
-G_DEFINE_BOXED_TYPE_WITH_CODE
-g_clear_object
-g_simple_async_result_take_error
-g_simple_async_result_new_take_error
-g_simple_async_report_take_gerror_in_idle
 </SECTION>
 
 <SECTION>
@@ -37,9 +31,15 @@ gvir_connection_find_domain_by_id
 gvir_connection_find_domain_by_name
 gvir_connection_create_domain
 gvir_connection_start_domain
+gvir_connection_fetch_interfaces
+gvir_connection_fetch_interfaces_async
+gvir_connection_fetch_interfaces_finish
 gvir_connection_get_interfaces
 gvir_connection_get_interface
 gvir_connection_find_interface_by_mac
+gvir_connection_fetch_networks
+gvir_connection_fetch_networks_async
+gvir_connection_fetch_networks_finish
 gvir_connection_get_networks
 gvir_connection_get_network
 gvir_connection_find_network_by_name
@@ -121,6 +121,7 @@ gvir_domain_set_config
 gvir_domain_screenshot
 gvir_domain_open_console
 gvir_domain_open_graphics
+gvir_domain_open_graphics_fd
 gvir_domain_suspend
 gvir_domain_save
 gvir_domain_save_async
@@ -137,6 +138,9 @@ gvir_domain_get_snapshots
 gvir_domain_fetch_snapshots_async
 gvir_domain_fetch_snapshots_finish
 gvir_domain_get_has_current_snapshot
+gvir_domain_set_time
+gvir_domain_set_time_async
+gvir_domain_set_time_finish
 <SUBSECTION Standard>
 GVIR_DOMAIN
 GVIR_DOMAIN_CLASS
@@ -268,6 +272,7 @@ GVirInputStreamPrivate
 <FILE>libvirt-gobject-interface</FILE>
 <TITLE>GVirInterface</TITLE>
 gvir_interface_get_name
+gvir_interface_get_mac
 gvir_interface_get_config
 <SUBSECTION Standard>
 GVIR_INTERFACE
@@ -317,6 +322,7 @@ gvir_manager_get_type
 gvir_network_get_name
 gvir_network_get_uuid
 gvir_network_get_config
+gvir_network_get_dhcp_leases
 <SUBSECTION Standard>
 GVIR_IS_NETWORK
 GVIR_IS_NETWORK_CLASS
@@ -330,6 +336,37 @@ GVirNetworkClass
 GVirNetworkPrivate
 gvir_network_get_type
 gvir_network_handle_get_type
+</SECTION>
+
+<SECTION>
+<FILE>libvirt-gobject-network-dhcp-lease</FILE>
+<TITLE>GVirNetworkDHCPLease</TITLE>
+GVirIPAddrType
+gvir_network_dhcp_lease_get_iface
+gvir_network_dhcp_lease_get_expiry_time
+gvir_network_dhcp_lease_get_ip_type
+gvir_network_dhcp_lease_get_mac
+gvir_network_dhcp_lease_get_iaid
+gvir_network_dhcp_lease_get_ip
+gvir_network_dhcp_lease_get_prefix
+gvir_network_dhcp_lease_get_hostname
+gvir_network_dhcp_lease_get_client_id
+<SUBSECTION Standard>
+GVIR_IS_NETWORK_DHCP_LEASE
+GVIR_IS_NETWORK_DHCP_LEASE_CLASS
+GVIR_NETWORK_DHCP_LEASE
+GVIR_NETWORK_DHCP_LEASE_CLASS
+GVIR_NETWORK_DHCP_LEASE_GET_CLASS
+GVIR_TYPE_NETWORK_DHCP_LEASE
+GVirNetworkDHCPLease
+GVirNetworkDHCPLeaseClass
+GVirNetworkDHCPLeasePrivate
+gvir_network_dhcp_lease_get_type
+</SECTION>
+
+<SECTION>
+<FILE>libvirt-gobject-network-dhcp-lease-private</FILE>
+gvir_network_dhcp_lease_new
 </SECTION>
 
 <SECTION>
@@ -440,6 +477,8 @@ gvir_storage_pool_stop_finish
 gvir_storage_pool_delete
 gvir_storage_pool_delete_async
 gvir_storage_pool_delete_finish
+gvir_storage_pool_get_autostart
+gvir_storage_pool_set_autostart
 <SUBSECTION Standard>
 GVIR_IS_STORAGE_POOL
 GVIR_IS_STORAGE_POOL_CLASS

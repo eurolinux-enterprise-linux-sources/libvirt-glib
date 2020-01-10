@@ -1,8 +1,11 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Define to 1 if gcc -Wlogical-op reports false positives on strchr */
+#undef BROKEN_GCC_WLOGICALOP
+
 /* Enable compile-time and run-time bounds-checking, and some warnings,
         without upsetting newer glibc. */
-     #if !defined _FORTIFY_SOURCE &&  defined __OPTIMIZE__ && __OPTIMIZE__
+     #if !defined _FORTIFY_SOURCE && defined __OPTIMIZE__ && __OPTIMIZE__
      # define _FORTIFY_SOURCE 2
      #endif
     
@@ -40,12 +43,14 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
-#undef LT_OBJDIR
+/* Have virDomainOpenGraphicsFD? */
+#undef HAVE_VIR_DOMAIN_OPEN_GRAPHICS_FD
 
-/* Define to 1 if your C compiler doesn't accept -c and -o together. */
-#undef NO_MINUS_C_MINUS_O
+/* Have virNetworkGetDHCPLeases? */
+#undef HAVE_VIR_NETWORK_GET_DHCP_LEASES
+
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
+#undef LT_OBJDIR
 
 /* Name of package */
 #undef PACKAGE
@@ -74,5 +79,11 @@
 /* Version number of package */
 #undef VERSION
 
+/* Define to 1 if gcc supports pragma push/pop */
+#undef WORKING_PRAGMA_PUSH
+
 /* Enable GNU extensions */
 #undef _GNU_SOURCE
+
+/* Define to 1 if the compiler is checking for lint. */
+#undef lint

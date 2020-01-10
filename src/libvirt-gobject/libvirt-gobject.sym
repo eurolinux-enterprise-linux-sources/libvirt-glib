@@ -260,4 +260,55 @@ LIBVIRT_GOBJECT_0.1.9 {
 	gvir_stream_io_condition_get_type;
 } LIBVIRT_GOBJECT_0.1.5;
 
+LIBVIRT_GOBJECT_0.2.0 {
+  global:
+	gvir_domain_open_graphics_fd;
+} LIBVIRT_GOBJECT_0.1.9;
+
+LIBVIRT_GOBJECT_0.2.1 {
+  global:
+	gvir_storage_pool_get_autostart;
+	gvir_storage_pool_set_autostart;
+} LIBVIRT_GOBJECT_0.2.0;
+
+LIBVIRT_GOBJECT_0.2.2 {
+  global:
+	gvir_connection_fetch_interfaces;
+	gvir_connection_fetch_interfaces_async;
+	gvir_connection_fetch_interfaces_finish;
+	gvir_connection_fetch_networks;
+	gvir_connection_fetch_networks_async;
+	gvir_connection_fetch_networks_finish;
+	gvir_connection_find_interface_by_mac;
+	gvir_connection_find_network_by_name;
+	gvir_connection_get_interface;
+	gvir_connection_get_interfaces;
+	gvir_connection_get_network;
+	gvir_connection_get_networks;
+
+	gvir_interface_get_mac;
+
+	gvir_ip_addr_type_get_type;
+
+	gvir_network_dhcp_lease_get_client_id;
+	gvir_network_dhcp_lease_get_expiry_time;
+	gvir_network_dhcp_lease_get_hostname;
+	gvir_network_dhcp_lease_get_iaid;
+	gvir_network_dhcp_lease_get_iface;
+	gvir_network_dhcp_lease_get_ip;
+	gvir_network_dhcp_lease_get_ip_type;
+	gvir_network_dhcp_lease_get_mac;
+	gvir_network_dhcp_lease_get_prefix;
+	gvir_network_dhcp_lease_get_type;
+
+	gvir_network_get_dhcp_leases;
+} LIBVIRT_GOBJECT_0.2.1;
+
+LIBVIRT_GOBJECT_0.2.3 {
+  global:
+	gvir_domain_set_time;
+	gvir_domain_set_time_async;
+	gvir_domain_set_time_finish;
+} LIBVIRT_GOBJECT_0.2.2;
+
 # .... define new API here using predicted next version number ....

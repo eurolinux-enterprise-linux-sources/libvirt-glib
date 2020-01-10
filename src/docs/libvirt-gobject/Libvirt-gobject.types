@@ -13,6 +13,7 @@ gvir_domain_snapshot_handle_get_type
 gvir_interface_get_type
 gvir_interface_handle_get_type
 gvir_manager_get_type
+gvir_network_dhcp_lease_get_type
 gvir_network_filter_get_type
 gvir_network_filter_handle_get_type
 gvir_network_get_type

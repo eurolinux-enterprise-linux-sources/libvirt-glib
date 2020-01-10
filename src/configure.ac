@@ -1,4 +1,4 @@
-AC_INIT(libvirt-glib, 0.1.9)
+AC_INIT(libvirt-glib, 0.2.3)
 AC_CONFIG_SRCDIR(libvirt-glib/libvirt-glib-main.c)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
@@ -9,14 +9,12 @@ AC_CANONICAL_HOST
 
 AM_SILENT_RULES([yes])
 
-LIBVIRT_REQUIRED=0.10.2
+LIBVIRT_REQUIRED=1.1.1
 AC_SUBST([LIBVIRT_REQUIRED]) dnl used in the .spec file
 GLIB2_REQUIRED=2.36.0
 AC_SUBST([GLIB2_REQUIRED]) dnl used in the .spec file
 GLIB2_TEST_REQUIRED=2.38.0
-GOBJECT2_REQUIRED=2.10.0
-GIO_REQUIRED=2.10.0
-GOBJECT_INTROSPECTION_REQUIRED=0.10.8
+GOBJECT_INTROSPECTION_REQUIRED=1.36.0
 LIBXML2_REQUIRED=2.0.0
 
 LIBVIRT_GLIB_MAJOR_VERSION=`echo $VERSION | awk -F. '{print $1}'`
@@ -93,6 +91,14 @@ m4_if(m4_version_compare([2.61a.100],
 LIBVIRT_GLIB_COMPILE_WARNINGS
 
 PKG_CHECK_MODULES(LIBVIRT, libvirt >= $LIBVIRT_REQUIRED)
+# virDomainOpenGraphicsFD was introduced in libvirt 1.2.8
+AC_CHECK_LIB([virt],
+             [virDomainOpenGraphicsFD],
+             [AC_DEFINE([HAVE_VIR_DOMAIN_OPEN_GRAPHICS_FD], 1, [Have virDomainOpenGraphicsFD?])])
+# virNetworkGetDHCPLeases was introduced in libvirt 1.2.6
+AC_CHECK_LIB([virt],
+             [virNetworkGetDHCPLeases],
+             [AC_DEFINE([HAVE_VIR_NETWORK_GET_DHCP_LEASES], 1, [Have virNetworkGetDHCPLeases?])])
 enable_tests=no
 PKG_CHECK_MODULES(GLIB2, glib-2.0 >= $GLIB2_TEST_REQUIRED,
                   [enable_tests=yes],

@@ -101,8 +101,6 @@ static void gvir_domain_snapshot_finalize(GObject *object)
     GVirDomainSnapshot *snapshot = GVIR_DOMAIN_SNAPSHOT(object);
     GVirDomainSnapshotPrivate *priv = snapshot->priv;
 
-    g_debug("Finalize GVirDomainSnapshot=%p", snapshot);
-
     virDomainSnapshotFree(priv->handle);
 
     G_OBJECT_CLASS(gvir_domain_snapshot_parent_class)->finalize(object);
@@ -134,8 +132,6 @@ static void gvir_domain_snapshot_class_init(GVirDomainSnapshotClass *klass)
 
 static void gvir_domain_snapshot_init(GVirDomainSnapshot *snapshot)
 {
-    g_debug("Init GVirDomainSnapshot=%p", snapshot);
-
     snapshot->priv = GVIR_DOMAIN_SNAPSHOT_GET_PRIVATE(snapshot);
 }
 
@@ -241,7 +237,7 @@ gboolean gvir_domain_snapshot_delete (GVirDomainSnapshot *snapshot,
 static void _delete_async_thread(GTask *task,
                                  gpointer source_object,
                                  gpointer task_data,
-                                 GCancellable *cancellable)
+                                 GCancellable *cancellable G_GNUC_UNUSED)
 {
     GError *error = NULL;
     gboolean status;
@@ -369,7 +365,7 @@ gboolean gvir_domain_snapshot_revert_to(GVirDomainSnapshot *snapshot,
 static void _revert_to_async_thread(GTask *task,
                                     gpointer source_object,
                                     gpointer task_data,
-                                    GCancellable *cancellable)
+                                    GCancellable *cancellable G_GNUC_UNUSED)
 {
     GError *error = NULL;
     gboolean status;

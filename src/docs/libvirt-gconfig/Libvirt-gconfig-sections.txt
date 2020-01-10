@@ -219,8 +219,6 @@ gvir_config_capabilities_host_secmodel_get_type
 
 <SECTION>
 <FILE>libvirt-gconfig-compat</FILE>
-G_DEPRECATED
-G_DEPRECATED_FOR
 g_type_init
 </SECTION>
 
@@ -455,6 +453,24 @@ GVirConfigDomainChardevSourceSpiceVmc
 GVirConfigDomainChardevSourceSpiceVmcClass
 GVirConfigDomainChardevSourceSpiceVmcPrivate
 gvir_config_domain_chardev_source_spicevmc_get_type
+</SECTION>
+
+<SECTION>
+<FILE>libvirt-gconfig-domain-chardev-source-unix</FILE>
+<TITLE>GVirConfigDomainChardevSourceUnix</TITLE>
+GVirConfigDomainChardevSourceUnix
+GVirConfigDomainChardevSourceUnixClass
+gvir_config_domain_chardev_source_unix_new
+gvir_config_domain_chardev_source_unix_new_from_xml
+GVirConfigDomainChardevSourceUnixPrivate
+<SUBSECTION Standard>
+GVIR_CONFIG_DOMAIN_CHARDEV_SOURCE_UNIX
+GVIR_CONFIG_DOMAIN_CHARDEV_SOURCE_UNIX_CLASS
+GVIR_CONFIG_DOMAIN_CHARDEV_SOURCE_UNIX_GET_CLASS
+GVIR_CONFIG_IS_DOMAIN_CHARDEV_SOURCE_UNIX
+GVIR_CONFIG_IS_DOMAIN_CHARDEV_SOURCE_UNIX_CLASS
+GVIR_CONFIG_TYPE_DOMAIN_CHARDEV_SOURCE_UNIX
+gvir_config_domain_chardev_source_unix_get_type
 </SECTION>
 
 <SECTION>
@@ -734,6 +750,7 @@ gvir_config_domain_filesys_new_from_xml
 gvir_config_domain_filesys_set_type
 gvir_config_domain_filesys_set_access_type
 gvir_config_domain_filesys_set_driver_type
+gvir_config_domain_filesys_set_driver_format
 gvir_config_domain_filesys_set_source
 gvir_config_domain_filesys_set_ram_usage
 gvir_config_domain_filesys_set_target
@@ -1435,6 +1452,8 @@ gvir_config_domain_video_new
 gvir_config_domain_video_new_from_xml
 gvir_config_domain_video_set_model
 gvir_config_domain_video_set_vram
+gvir_config_domain_video_set_ram
+gvir_config_domain_video_set_vgamem
 gvir_config_domain_video_set_heads
 GVirConfigDomainVideoPrivate
 <SUBSECTION Standard>
@@ -1788,6 +1807,7 @@ GVirConfigStorageVolTarget
 GVirConfigStorageVolTargetClass
 gvir_config_storage_vol_target_new
 gvir_config_storage_vol_target_new_from_xml
+gvir_config_storage_vol_target_set_compat
 gvir_config_storage_vol_target_set_format
 gvir_config_storage_vol_target_set_permissions
 GVirConfigStorageVolTargetPrivate

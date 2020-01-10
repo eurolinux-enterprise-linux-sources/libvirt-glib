@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
 <book xmlns="http://www.devhelp.net/book" title="Libvirt-gconfig Reference Manual" link="index.html" author="" name="Libvirt-gconfig" version="2" language="c">
   <chapters>
     <sub name="Libvirt-gconfig" link="ch01.html">
@@ -165,5 +164,49 @@
     <keyword type="struct" name="struct GVirConfigCapabilities" link="GVirConfigCapabilities.html#GVirConfigCapabilities-struct"/>
     <keyword type="struct" name="struct GVirConfigCapabilitiesClass" link="GVirConfigCapabilities.html#GVirConfigCapabilitiesClass"/>
     <keyword type="struct" name="GVirConfigCapabilitiesPrivate" link="GVirConfigCapabilities.html#GVirConfigCapabilitiesPrivate"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_QEMU" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-QEMU:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_KQEMU" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-KQEMU:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_KVM" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-KVM:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_XEN" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-XEN:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_LXC" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-LXC:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_UML" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-UML:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_OPENVZ" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-OPENVZ:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_VSERVER" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-VSERVER:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_LDOM" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-LDOM:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_TEST" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-TEST:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_VMWARE" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-VMWARE:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_HYPERV" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-HYPERV:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_VBOX" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-VBOX:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_ONE" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-ONE:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_PHYP" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-PHYP:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_ON_POWEROFF" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-ON-POWEROFF:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_ON_REBOOT" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-ON-REBOOT:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_ON_CRASH" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-ON-CRASH:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_DESTROY" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-DESTROY:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_RESTART" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-RESTART:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_PRESERVE" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-PRESERVE:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_RENAME_RESTART" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-RENAME-RESTART:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_COREDUMP_DESTROY" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-COREDUMP-DESTROY:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_COREDUMP_RESTART" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-COREDUMP-RESTART:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_NOSTATE" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-NOSTATE:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_RUNNING" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-RUNNING:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_BLOCKED" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-BLOCKED:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_PAUSED" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-PAUSED:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_SHUTDOWN" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-SHUTDOWN:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_SHUTOFF" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-SHUTOFF:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_CRASHED" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-CRASHED:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_PMSUSPENDED" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-PMSUSPENDED:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_DISK_SNAPSHOT" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-DISK-SNAPSHOT:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_NONE" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-NONE:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_INTERNAL" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-INTERNAL:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_EXTERNAL" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-EXTERNAL:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_DIR" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-DIR:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_FS" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-FS:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_NETFS" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-NETFS:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_LOGICAL" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-LOGICAL:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_DISK" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-DISK:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_ISCSI" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-ISCSI:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_SCSI" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-SCSI:CAPS"/>
+    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_MPATH" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-MPATH:CAPS"/>
   </functions>
 </book>

@@ -49,27 +49,13 @@ gvir_domain_interface_error_quark(void)
     return g_quark_from_static_string("gvir-domain-interface");
 }
 
-static void gvir_domain_interface_finalize(GObject *object)
-{
-    GVirDomainInterface *self = GVIR_DOMAIN_INTERFACE(object);
-
-    g_debug("Finalize GVirDomainInterface=%p", self);
-
-    G_OBJECT_CLASS(gvir_domain_interface_parent_class)->finalize(object);
-}
-
 static void gvir_domain_interface_class_init(GVirDomainInterfaceClass *klass)
 {
-    GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-    object_class->finalize = gvir_domain_interface_finalize;
     g_type_class_add_private(klass, sizeof(GVirDomainInterfacePrivate));
 }
 
 static void gvir_domain_interface_init(GVirDomainInterface *self)
 {
-    g_debug("Init GVirDomainInterface=%p", self);
-
     self->priv = GVIR_DOMAIN_INTERFACE_GET_PRIVATE(self);
 }
 

@@ -714,4 +714,23 @@ global:
 	gvir_config_domain_cpu_set_model;
 } LIBVIRT_GCONFIG_0.1.8;
 
+LIBVIRT_GCONFIG_0.2.0 {
+global:
+	gvir_config_storage_vol_target_set_compat;
+} LIBVIRT_GCONFIG_0.1.9;
+
+LIBVIRT_GCONFIG_0.2.1 {
+global:
+    gvir_config_domain_filesys_set_driver_format;
+} LIBVIRT_GCONFIG_0.2.0;
+
+LIBVIRT_GCONFIG_0.2.2 {
+global:
+	gvir_config_domain_chardev_source_unix_get_type;
+	gvir_config_domain_chardev_source_unix_new;
+	gvir_config_domain_chardev_source_unix_new_from_xml;
+	gvir_config_domain_video_set_ram;
+	gvir_config_domain_video_set_vgamem;
+} LIBVIRT_GCONFIG_0.2.1;
+
 # .... define new API here using predicted next version number ....

@@ -44,8 +44,6 @@ static void gvir_config_domain_filesys_class_init(GVirConfigDomainFilesysClass *
 
 static void gvir_config_domain_filesys_init(GVirConfigDomainFilesys *filesys)
 {
-    g_debug("Init GVirConfigDomainFilesys=%p", filesys);
-
     filesys->priv = GVIR_CONFIG_DOMAIN_FILESYS_GET_PRIVATE(filesys);
 }
 
@@ -137,6 +135,22 @@ void gvir_config_domain_filesys_set_driver_type(GVirConfigDomainFilesys *filesys
     g_object_unref(G_OBJECT(node));
 }
 
+void gvir_config_domain_filesys_set_driver_format(GVirConfigDomainFilesys *filesys,
+                                                  GVirConfigDomainDiskFormat format)
+{
+    GVirConfigObject *node;
+
+    g_return_if_fail(GVIR_CONFIG_IS_DOMAIN_FILESYS(filesys));
+    node = gvir_config_object_add_child(GVIR_CONFIG_OBJECT(filesys), "driver");
+    g_return_if_fail(GVIR_CONFIG_IS_OBJECT(node));
+
+    gvir_config_object_set_attribute_with_type(
+        node,
+        "format", GVIR_CONFIG_TYPE_DOMAIN_DISK_FORMAT, format,
+        NULL);
+    g_object_unref(G_OBJECT(node));
+}
+
 void gvir_config_domain_filesys_set_source(GVirConfigDomainFilesys *filesys,
                                            const char *source)
 {
@@ -185,7 +199,7 @@ void gvir_config_domain_filesys_set_ram_usage(GVirConfigDomainFilesys *filesys,
                                                "usage", G_TYPE_UINT64, bytes,
                                                "units", G_TYPE_STRING, "bytes",
                                                NULL);
-
+    g_object_unref(G_OBJECT(src));
 }
 
 void gvir_config_domain_filesys_set_target(GVirConfigDomainFilesys *filesys,

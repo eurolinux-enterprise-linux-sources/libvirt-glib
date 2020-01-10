@@ -101,8 +101,6 @@ static void gvir_interface_finalize(GObject *object)
     GVirInterface *iface = GVIR_INTERFACE(object);
     GVirInterfacePrivate *priv = iface->priv;
 
-    g_debug("Finalize GVirInterface=%p", iface);
-
     virInterfaceFree(priv->handle);
 
     G_OBJECT_CLASS(gvir_interface_parent_class)->finalize(object);
@@ -134,8 +132,6 @@ static void gvir_interface_class_init(GVirInterfaceClass *klass)
 
 static void gvir_interface_init(GVirInterface *iface)
 {
-    g_debug("Init GVirInterface=%p", iface);
-
     iface->priv = GVIR_INTERFACE_GET_PRIVATE(iface);
 }
 
@@ -171,6 +167,19 @@ const gchar *gvir_interface_get_name(GVirInterface *iface)
     return name;
 }
 
+const gchar *gvir_interface_get_mac(GVirInterface *iface)
+{
+    const char *mac;
+
+    g_return_val_if_fail(GVIR_IS_INTERFACE(iface), NULL);
+
+    if (!(mac = virInterfaceGetMACString(iface->priv->handle))) {
+        gvir_warning("Failed to get interface mac on %p", iface->priv->handle);
+        return NULL;
+    }
+
+    return mac;
+}
 
 /**
  * gvir_interface_get_config:

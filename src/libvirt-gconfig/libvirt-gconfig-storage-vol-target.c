@@ -45,8 +45,6 @@ static void gvir_config_storage_vol_target_class_init(GVirConfigStorageVolTarget
 
 static void gvir_config_storage_vol_target_init(GVirConfigStorageVolTarget *target)
 {
-    g_debug("Init GVirConfigStorageVolTarget=%p", target);
-
     target->priv = GVIR_CONFIG_STORAGE_VOL_TARGET_GET_PRIVATE(target);
 }
 
@@ -98,4 +96,17 @@ void gvir_config_storage_vol_target_set_permissions(GVirConfigStorageVolTarget *
     gvir_config_object_attach_replace(GVIR_CONFIG_OBJECT(target),
                                       "permissions",
                                       GVIR_CONFIG_OBJECT(perms));
+}
+
+/**
+ * gvir_config_storage_vol_target_set_compat:
+ * @compat: (allow-none):
+ */
+void gvir_config_storage_vol_target_set_compat(GVirConfigStorageVolTarget *target,
+                                               const char *compat)
+{
+    g_return_if_fail(GVIR_CONFIG_IS_STORAGE_VOL_TARGET(target));
+
+    gvir_config_object_set_node_content(GVIR_CONFIG_OBJECT(target),
+                                        "compat", compat);
 }
