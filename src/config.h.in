@@ -74,8 +74,5 @@
 /* Version number of package */
 #undef VERSION
 
-/* enable GObject introspection support */
-#undef WITH_GOBJECT_INTROSPECTION
-
 /* Enable GNU extensions */
 #undef _GNU_SOURCE

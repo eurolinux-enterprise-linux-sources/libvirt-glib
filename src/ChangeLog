@@ -1,3 +1,420 @@
+2014-08-20  Daniel P. Berrange  <berrange@redhat.com>
+
+	Update NEWS for 0.1.9 release
+
+	Refresh translations from transifex
+
+2014-08-20  Timm Bäder  <mail@baedert.org>
+
+	GVirDomainSnapshot: Add async version of _delete
+
+	GVirDomain: Add async version of _create_snapshot
+
+	GVirDomainSnapshot: Add async version of _revert_to
+
+	GVirDomain: Fix some doc comments of the snapshot API
+	Fixes the following warnings from g-ir-scanner and some cosmetic issues:
+
+	libvirt-gobject-domain.c:1532: Warning: LibvirtGObject: unknown
+	annotation: transfer-none
+	libvirt-gobject-domain.c:1650: Error: LibvirtGObject: identifier not
+	found on the first line:
+	 *
+	   ^
+
+	GVirDomain: Add _get_has_current_snapshot
+	... which uses virDomainHasCurrentSnapshot to determine if the given
+	domain has a current snapshot or not.
+
+	GVirDomainSnapshot: Add _set_config
+	... which is basically analogous to gvir_domain_set_config
+
+	GVirDomainSnapshot: Add _revert_to
+	Add a way to revert a domain to one of its snapshots.
+
+	GVirDomainSnapshot: Add _get_is_current
+	Add a way to determine if the given GVirDomainSnapshot is the current
+	snapshot of its GVirDomain.
+
+2014-08-04  Timm Bäder  <mail@baedert.org>
+
+	GVirDomain: Add async version of _fetch_snapshots
+
+	libvirt-gobject-domain: Add _get_snapshots
+	... which returns a GList of GVirDomainSnapshots, i.e. without any tree
+	structure or other relationship between the snapshots.
+
+	libvirt-gobject-domain: Add _fetch_snapshots
+	This function can be used to fetch the snapshots of a domain (according
+	to the given GVirDomainSnapshotListFlags) and save them in a
+	domain-internal GHashTable. A function to access them from outside will
+	be added in a later patch.
+
+2014-08-04  Christophe Fergeau  <cfergeau@redhat.com>
+
+	spec: Substitute minimum glib2 version from configure.ac
+	This way we don't have to keep track of the minimum glib2 version we
+	need in 2 separate places.
+
+	gobject: Fix GEnum generation through glib-mkenums
+	We were only passing libvirt-gobject-domain.h and
+	libvirt-gobject-connection.h through glib-mkenums, which causes it to
+	only generate GEnum information for enums found in these headers.
+	We want to do that for all enums defined in installed headers, so
+	passing all headers listed in libvirt_gobject_1_0_la_HEADERS is more
+	appropriate.
+
+2014-08-01  Zeeshan Ali (Khattak)  <zeeshanak@gnome.org>
+
+	Add gvir_config_domain_cpu_set_model()
+	Add a method to set model of domain CPU.
+
+	Add GVirConfigDomainCpuModel class
+	Add a class to represent 'model' node under domain/cpu.
+
+	Add gvir_config_capabilities_cpu_get_model()
+	Add a method to get the model of the CPU from capabilities.
+
+2014-07-15  Zeeshan Ali (Khattak)  <zeeshanak@gnome.org>
+
+	Add GVirConfigCapabilitiesCpuModel class
+	Add a class to represent 'model' node under capabilities/host/cpu.
+
+2014-06-17  Cédric Bosdonnat  <cbosdonnat@suse.com>
+
+	Add API to get security models from host capabilities
+
+2014-06-04  Michael Catanzaro  <mcatanzaro@gnome.org>
+
+	build: fix race in vapi/ subdirectory
+	libvirt-gobject-1.0.vapi depends on libvirt-gconfig-1.0.vapi
+
+2014-06-04  Christophe Fergeau  <cfergeau@redhat.com>
+
+	spec: Move .vapi files to -devel RPMs
+	.vapi files are only needed when building vala programs using
+	libvirt-glib, so they belong to the -devel RPMs, not to the non-devel
+	RPMs which only hold files needed at runtime.
+
+2014-06-03  Timm Bäder  <mail@baedert.org>
+
+	GVirDomainSnapshot: Add gvir_domain_snapshot_delete
+
+	Remove #if 0's from libvirt-gobject-domain-snapshot
+	The code seems to be fine.
+
+2014-06-03  Christophe Fergeau  <cfergeau@redhat.com>
+
+	tests: Fix make distcheck
+	Some files are missing from EXTRA_DIST, causing make distcheck to fail
+	when tests are enabled.
+
+	tests: Move EXTRA_DIST back into ENABLE_TESTS conditional
+	When deciding which files to put into the make dist tarball, automake is
+	clever enough to ignore conditional blocks, and to pick all files which are
+	needed for all values of the conditional.
+
+	Having EXTRA_DIST=xxx at the beginning of tests/Makefile.am causes
+	warnings from automake when ENABLE_TESTS is true as glib-tap.mk will
+	unconditionally empty it.
+
+	Keeping EXTRA_DIST+=xxx outside of the ENABLE_TESTS conditional would
+	cause a different warning from automake when ENABLE_TESTS is false as
+	we'd be appending to a variable which was never set.
+
+	Moving EXTRA_DIST+= back into the conditional solves these 2 warnings.
+
+2014-05-16  Marc-André Lureau  <marcandre.lureau@gmail.com>
+
+	tests: test spiceport chardev
+
+	gconfig: add spiceport chardev
+
+2014-05-12  Timm Bäder  <mail@baedert.org>
+
+	domain-device-private: fix typo in header guard
+
+2014-02-21  Daniel P. Berrange  <berrange@redhat.com>
+
+	Post release version bump to 0.1.9
+
+	Update NEWS for 0.1.8 release
+
+	Disable test suite unless glib >= 2.38
+	The TAP harness for glib only works with version 2.38 or later,
+	so must be disabled for earlier versions
+
+2014-02-20  Pavel Hrdina  <phrdina@redhat.com>
+
+	gobject-stream: fix issue found by coverity
+	The coverity server found issue in gvir_stream_close function that
+	we ignore return values of g_input_stream_close and
+	g_output_stream_close, but we also ignore the error message and we
+	assume that it's closed without error.
+
+	Now we will check return values and also propagate the error message
+	to the upper layers. We should try to close both streams even if
+	closing the first one will fails. We can propagate only one error
+	message.
+
+2014-02-14  Daniel P. Berrange  <berrange@redhat.com>
+
+	Avoid false positive in diagnostic check against tap-driver.sh
+
+	Add <config.h> to test cases
+
+	Remove doubled 'on on' word in tap-driver.sh
+
+	Don't mandate test files to call bindtextdomain
+
+	Fix symfile checks in VPATH build
+	The check-symfile and check-symsorting rules were not
+	taking $(srcdir) into account when accessing the symfile
+	paths.
+
+2014-02-04  Christophe Fergeau  <cfergeau@redhat.com>
+
+	build-sys: Update .gitignore
+
+	glib: Add unit test for libvirt/glib mainloop integration
+	It's currently only testing removal of disabled timer/watches
+
+	gconfig: Start adding more formal unit tests
+	Rather than the ever growing standalone libvirt-gconfig/tests/test-domain-create
+	program, this commit adds support for glib GTester framework as well as 2
+	smaller tests cases for GVirConfigDomain and GVirConfigDomainClock.
+
+	glib: Don't leak GIOChannel when destroying IO handle
+	gvir_event_handle_add() creates a GIOChannel in order to watch the fd it
+	was given for changes.
+	gvir_event_handle_remove() is freeing all the resources allocated by
+	gvir_event_handle_add() except for this GIOChannel. This commit adds
+	the needed g_io_channel_unref() call to gvir_event_handle_remove()
+
+	glib: Allow to remove disabled timers and handles
+	Trying to remove a disabled timer or handle will cause
+	gvir_{event,timer}_handle_remove() to return an error
+	rather than removing it.
+
+	glib: Don't create glib IO watch for disabled handles
+	It's possible to create a handle to watch for file events which do not
+	watch for any file event. Such a handle can be enabled later with
+	gvir_event_handle_update() by setting some conditions to watch for.
+
+	When a handle is disabled after it has been created,
+	gvir_event_handle_update() makes sure it removes the corresponding
+	gvir_event_handle::source IO watch if any was set.
+	gvir_event_handle_add() will always create a gvir_event_handle::source
+	IO watch even if the handle is not watching for any events.
+
+	This commit makes consistent by only creating a watch with g_io_add_watch()
+	when the caller asked to watch for some events.
+
+	gconfig: Fix removal of GVirConfigDomainCpu from domains
+	A wrong precondition in gvir_config_domain_set_cpu() would reject NULL
+	GVirConfigDomainCpus instead of accepting them.
+
+	gconfig: Fix removal of GVirConfigCapabilitiesCpu topology
+	Calling gvir_config_capabilities_cpu_set_topology with a NULL topology
+	would not remove the topology as expected as NULL would be rejected by
+	this method preconditions.
+
+	gconfig: Implement getters for GVirConfigDomainInput
+
+	gconfig: Add various clock-related getters
+
+	gconfig: Adjust transfer annotation for gvir_config_domain_os_get_boot_devices()
+	(transfer container) is more correct than (transfer full) for GList of
+	scalar values, it's not clear whether it's an issue or not, but better be
+	safe than sorry.
+
+	gconfig: Fix gvir_config_domain_os_get_boot_devices() API doc
+	The elements of the returned list are integer enum values, so they cannot
+	be unreffed.
+
+	gconfig: Fix GVirConfigDomainTimerPit parent class/object
+	GVirConfigDomainTimerPit is correctly define as inheriting from
+	GVirConfigDomainTimer in the G_DEFINE_TYPE macro, but it only
+	embeds GVirConfigObject/GVirConfigObjectClass structs.
+
+	This is an ABI break as this changes the size of the
+	GVirConfigDomainTimerPit/GVirConfigDomainTimerPitClass structs
+	However, since these structs only have non-public members, users of the
+	library will not be trying to access fields of the struct past the first
+	field (which is the one which changed size). This would also be an issue
+	if anything had subclassed GVirConfigDomainTimerPit, which is unlikely at
+	this point.
+	All in all, it's imo more convenient to silently fix this without an soname
+	bump. I've tested that GNOME Boxes built with an older version of
+	libvirt-gconfig still generates the correct GVirConfigDomainTimerPit
+	elements when using a version of libvirt-gconfig with this patch.
+
+2014-01-28  Daniel P. Berrange  <berrange@redhat.com>
+
+	Fix event loop implementation on win32
+	Libvirt uses gnulib for making winsock look like POSIX
+	sockets. This means that in the libvirt event handle
+	callbacks the application will be given a file descriptor
+	rather than a winsock HANDLE object. The g_io_channel_unix_new
+	method will detect that it is an FD and delegate to the
+	g_io_channel_win32_new_fd method. Unfortunately the glib Win32
+	event loop impl is not very good at dealing with FD objects,
+	simulating poll() by doing a read() on the FD :-(
+
+	The API docs for g_io_channel_win32_new_fd say
+
+	 "All reads from the file descriptor should be done by
+	  this internal GLib thread. Your code should call only
+	  g_io_channel_read()."
+
+	This isn't going to fly for libvirt, since it has zero
+	knowledge of glib at all, so is just doing normal read().
+
+	Fortunately we can work around this problem by turning
+	the FD we get from libvirt back into a HANDLE using the
+	_get_osfhandle() method.
+
+2014-01-21  Christophe Fergeau  <cfergeau@redhat.com>
+
+	Add GVirConfigDomainTimerHpet
+	This will be needed in order to solve
+	https://bugzilla.gnome.org/show_bug.cgi?id=722293
+
+	Add gvir_config_domain_timer_[gs]et_present()
+
+	Add getters for some GVirConfigDomainGraphics* attributes
+	Now that there is a gvir_config_object_get_attribute_boolean(), these
+	are trivial to implement.
+
+	Implement gvir_config_object_get_attribute_boolean()
+	gvir_config_object_set_attribute() converts (TRUE, FALSE) to ("yes", "no"),
+	but we don't have the corresponding getter. This commit adds this.
+
+	Add scripts for validating the libvirt-glib symbol files
+	Import two test scripts from libvirt code which validate that
+	all symbols in libvirt-glib symbol files exist in the ELF binary, and also
+	validate the alphabetical sorting. These are hooked up to run with 'make
+	check'.
+
+	This commit is based on a libosinfo patch from Daniel P. Berrange
+
+	Fix typo in symbol name in libvirt-gobject.sym
+	gvir_connection_restore_domain_from_file_finish was not properly exported
+	because of a typo in the symbol name.
+	This commit also removes a newer occurrence of this symbol in the file
+	(without the typo). This can be done without breaking ABI as we haven't
+	made a release since this duplicate symbol was added in the symbol file.
+
+	Remove gvir_config_domain_cpu_get_features() from sym file
+	This method was never exported. GVirConfigDomainCpu inherits from
+	GVirConfigCapabilitiesCpu so gvir_config_capabilities_cpu_get_features()
+	should be used to get these features (this calls the virtual method
+	GVirConfigCapabilities::get_features() which GVirConfigDomainCpu
+	implements).
+
+	Alphabetically sort libvirt-glib sym files
+	This is in preparation to enforcing this sorting during make check.
+	The script only checks for alphabetical sorting, which leads to unexpected
+	sorting between classes sharing a common prefix (eg the correct order is:
+	gvir_config_domain_get_foo;
+	gvir_config_domain_interface_set_foo;
+	gvir_config_domain_set_foo;
+
+	instead of
+
+	gvir_config_domain_get_foo;
+	gvir_config_domain_set_foo;
+	gvir_config_domain_interface_set_foo;
+
+	if we want to keep methods from the same class grouped in the symbol file.
+
+	Add basic test for gvir_config_domain_disk_driver_set_copy_on_read()
+
+	Deprecate gvir_config_domain_disk_[gs]et_driver_*
+	They are replaced by equivalent methods in GVirConfigDomainDiskDriver.
+	Initially, we had only one or two attributes to set on the 'driver' child
+	of the 'disk' node. Nowadays, we more than 5 attributes to set on this
+	node, mapping it as a separate object is more consistent with the rest of
+	libvirt-gconfig API.
+
+	Implement gvir_config_domain_disk_[gs]et_driver()
+
+	Add GVirConfigDomainDiskDriver
+	This class wraps creation of configuration data for the driver part of a
+	domain disk device. The methods needed for this are currently part of
+	GVirConfigDomainDisk, but since the disk driver is getting more and more
+	attributes, it's better to move such configuration to a dedicated class to
+	avoid a too big API in GVirConfigDomainDisk
+
+	config: Fix typo preventing clock removal from a domain
+	Commit 1c8ce29 added a way to unset a GVirConfigDomainClock set on a
+	GVirConfigDomain by calling gvir_config_domain_set_clock() with a NULL
+	argument.
+	However, a typo in a g_return_if_fail precondition prevents this code from
+	ever being called: g_return_if_fail(clock != NULL) is used while it should
+	have been g_return_if_fail(clock == NULL) as in all other preconditions in
+	1c8ce29.
+
+2014-01-21  Daniel P. Berrange  <berrange@redhat.com>
+
+	Switch over to using standard gobject introspection macros
+	Remove hand crafted configure.ac and Makefile.am rules in
+	favour of the standard macros.
+
+2013-10-31  Ian Main  <imain@redhat.com>
+
+	Quick fix for config-demo.py
+	I guess this must have been changed and the demo not updated.  Fix the
+	demo so it uses the right value.
+
+	Add filterref and filterref parameter support.
+	This patch adds support for setting filterref's on interfaces.  Also
+	supported are parameters to the filterref's.
+
+2013-09-27  Christophe Fergeau  <cfergeau@redhat.com>
+
+	Use latest warnings.m4 from gnulib
+	The one we were using does not work properly with clang, causing
+	the build process to try to use -f/-W options that are not
+	supported by clang.
+
+2013-09-19  Daniel P. Berrange  <berrange@redhat.com>
+
+	Add intltool as a build req in mingw RPM
+
+2013-08-28  Christophe Fergeau  <cfergeau@redhat.com>
+
+	Add missing symbols to .sym files
+	These symbols are in public headers, but were not listed in the
+	corresponding .sym file, causing them to be unavailable from
+	the resulting shared library.
+	I would have preferred not to export gvir_config_object_new_from_xml()
+	at all, but since the similar gvir_config_object_new() is already exported,
+	I've chosen to export it as well.
+
+2013-08-19  Daniel P. Berrange  <berrange@redhat.com>
+
+	Remove unused 'gint i' variable from list helpers
+	The previous change made the 'gint i' variable unused.
+
+2013-08-15  Daniel P. Berrange  <berrange@redhat.com>
+
+	Remove dead cleanup code in object fetch_list helpers
+	The fetch_list helper cleanup code iterates over the
+	elements in 'lst' array free'ing each one. This is dead
+	code, however, since the only way to get there is from
+	codepaths which do not populate 'lst' elements.
+
+	This fixes two coverity DEADCODE reports
+
+2013-07-09  Daniel P. Berrange  <berrange@redhat.com>
+
+	Refresh translations from transifex
+
+	Post-release version bump to 0.1.8
+
+	Add support for reading/writing UUID attribute in domain config
+
 2013-07-08  Daniel P. Berrange  <berrange@redhat.com>
 
 	Update NEWS for 0.1.7 release

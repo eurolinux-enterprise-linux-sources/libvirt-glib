@@ -39,6 +39,7 @@ G_DEFINE_TYPE(GVirConfigDomain, gvir_config_domain, GVIR_CONFIG_TYPE_OBJECT);
 enum {
     PROP_0,
     PROP_NAME,
+    PROP_UUID,
     PROP_TITLE,
     PROP_DESCRIPTION,
     PROP_MEMORY,
@@ -57,6 +58,9 @@ static void gvir_config_domain_get_property(GObject *object,
     switch (prop_id) {
     case PROP_NAME:
         g_value_set_string(value, gvir_config_domain_get_name(domain));
+        break;
+    case PROP_UUID:
+        g_value_set_string(value, gvir_config_domain_get_uuid(domain));
         break;
     case PROP_TITLE:
         g_value_set_string(value, gvir_config_domain_get_title(domain));
@@ -92,6 +96,9 @@ static void gvir_config_domain_set_property(GObject *object,
     switch (prop_id) {
     case PROP_NAME:
         gvir_config_domain_set_name(domain, g_value_get_string(value));
+        break;
+    case PROP_UUID:
+        gvir_config_domain_set_uuid(domain, g_value_get_string(value));
         break;
     case PROP_TITLE:
         gvir_config_domain_set_title(domain, g_value_get_string(value));
@@ -131,6 +138,14 @@ static void gvir_config_domain_class_init(GVirConfigDomainClass *klass)
                                     g_param_spec_string("name",
                                                         "Name",
                                                         "Domain Name",
+                                                        NULL,
+                                                        G_PARAM_READWRITE |
+                                                        G_PARAM_STATIC_STRINGS));
+    g_object_class_install_property(object_class,
+                                    PROP_UUID,
+                                    g_param_spec_string("uuid",
+                                                        "UUID",
+                                                        "Domain UUID",
                                                         NULL,
                                                         G_PARAM_READWRITE |
                                                         G_PARAM_STATIC_STRINGS));
@@ -247,6 +262,12 @@ const char *gvir_config_domain_get_name(GVirConfigDomain *domain)
                                                "name");
 }
 
+const char *gvir_config_domain_get_uuid(GVirConfigDomain *domain)
+{
+    return gvir_config_object_get_node_content(GVIR_CONFIG_OBJECT(domain),
+                                               "uuid");
+}
+
 const char *gvir_config_domain_get_title(GVirConfigDomain *domain)
 {
     return gvir_config_object_get_node_content(GVIR_CONFIG_OBJECT(domain),
@@ -263,6 +284,18 @@ void gvir_config_domain_set_name(GVirConfigDomain *domain, const char *name)
     gvir_config_object_set_node_content(GVIR_CONFIG_OBJECT(domain),
                                         "name", name);
     g_object_notify(G_OBJECT(domain), "name");
+}
+
+/**
+ * gvir_config_domain_set_uuid:
+ * @domain: a #GVirConfigDomain
+ * @uuid: (allow-none):
+ */
+void gvir_config_domain_set_uuid(GVirConfigDomain *domain, const char *uuid)
+{
+    gvir_config_object_set_node_content(GVIR_CONFIG_OBJECT(domain),
+                                        "uuid", uuid);
+    g_object_notify(G_OBJECT(domain), "uuid");
 }
 
 /**
@@ -510,6 +543,30 @@ void gvir_config_domain_set_features(GVirConfigDomain *domain,
     g_object_notify(G_OBJECT(domain), "features");
 }
 
+
+/**
+ * gvir_config_domain_get_clock:
+ * @domain: a #GVirConfigDomain
+ *
+ * Gets the clock configuration of @domain
+ *
+ * Returns: (transfer full): A #GVirConfigDomainClock. The returned
+ * object should be unreffed with g_object_unref() when no longer needed.
+ */
+GVirConfigDomainClock *gvir_config_domain_get_clock(GVirConfigDomain *domain)
+{
+    GVirConfigObject *object;
+
+    g_return_val_if_fail(GVIR_CONFIG_IS_DOMAIN(domain), NULL);
+
+    object = gvir_config_object_get_child_with_type(GVIR_CONFIG_OBJECT(domain),
+                                                    "clock",
+                                                    GVIR_CONFIG_TYPE_DOMAIN_CLOCK);
+
+    return GVIR_CONFIG_DOMAIN_CLOCK(object);
+}
+
+
 /**
  * gvir_config_domain_set_clock:
  * @domain: a #GVirConfigDomain
@@ -519,7 +576,7 @@ void gvir_config_domain_set_clock(GVirConfigDomain *domain,
                                   GVirConfigDomainClock *klock)
 {
     g_return_if_fail(GVIR_CONFIG_IS_DOMAIN(domain));
-    g_return_if_fail(klock != NULL || GVIR_CONFIG_IS_DOMAIN_CLOCK(klock));
+    g_return_if_fail(klock == NULL || GVIR_CONFIG_IS_DOMAIN_CLOCK(klock));
 
     gvir_config_object_attach_replace(GVIR_CONFIG_OBJECT(domain),
                                       "clock",
@@ -800,7 +857,7 @@ void gvir_config_domain_set_cpu(GVirConfigDomain *domain,
                                 GVirConfigDomainCpu *cpu)
 {
     g_return_if_fail(GVIR_CONFIG_IS_DOMAIN(domain));
-    g_return_if_fail(cpu != NULL || GVIR_CONFIG_IS_DOMAIN_CPU(cpu));
+    g_return_if_fail(cpu == NULL || GVIR_CONFIG_IS_DOMAIN_CPU(cpu));
 
     gvir_config_object_attach_replace(GVIR_CONFIG_OBJECT(domain),
                                       "cpu",

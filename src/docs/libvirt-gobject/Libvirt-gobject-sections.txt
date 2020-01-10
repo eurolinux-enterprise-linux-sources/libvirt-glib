@@ -15,9 +15,6 @@ g_simple_async_report_take_gerror_in_idle
 <SECTION>
 <FILE>libvirt-gobject-connection</FILE>
 <TITLE>GVirConnection</TITLE>
-GVirNodeInfo
-GVirConnection
-GVirConnectionClass
 gvir_connection_new
 gvir_connection_open
 gvir_connection_open_read_only
@@ -76,7 +73,10 @@ GVIR_IS_CONNECTION
 GVIR_IS_CONNECTION_CLASS
 GVIR_TYPE_CONNECTION
 GVIR_TYPE_CONNECTION_HANDLE
+GVirConnection
+GVirConnectionClass
 GVirConnectionPrivate
+GVirNodeInfo
 gvir_connection_get_type
 gvir_connection_handle_get_type
 gvir_node_info_get_type
@@ -85,8 +85,6 @@ gvir_node_info_get_type
 <SECTION>
 <FILE>libvirt-gobject-domain</FILE>
 <TITLE>GVirDomain</TITLE>
-GVirDomain
-GVirDomainClass
 GVirDomainState
 GVirDomainStartFlags
 GVirDomainDeleteFlags
@@ -95,7 +93,7 @@ GVirDomainShutdownFlags
 GVirDomainSnapshotCreateFlags
 GVirDomainUpdateDeviceFlags
 GVirDomainRebootFlags
-GVirDomainInfo
+GVirDomainSnapshotListFlags
 gvir_domain_get_name
 gvir_domain_get_uuid
 gvir_domain_get_id
@@ -132,6 +130,13 @@ gvir_domain_get_saved
 gvir_domain_get_devices
 gvir_domain_update_device
 gvir_domain_create_snapshot
+gvir_domain_create_snapshot_async
+gvir_domain_create_snapshot_finish
+gvir_domain_fetch_snapshots
+gvir_domain_get_snapshots
+gvir_domain_fetch_snapshots_async
+gvir_domain_fetch_snapshots_finish
+gvir_domain_get_has_current_snapshot
 <SUBSECTION Standard>
 GVIR_DOMAIN
 GVIR_DOMAIN_CLASS
@@ -141,6 +146,9 @@ GVIR_IS_DOMAIN_CLASS
 GVIR_TYPE_DOMAIN
 GVIR_TYPE_DOMAIN_HANDLE
 GVIR_TYPE_DOMAIN_INFO
+GVirDomain
+GVirDomainClass
+GVirDomainInfo
 GVirDomainPrivate
 gvir_domain_get_type
 gvir_domain_handle_get_type
@@ -150,8 +158,6 @@ gvir_domain_info_get_type
 <SECTION>
 <FILE>libvirt-gobject-domain-device</FILE>
 <TITLE>GVirDomainDevice</TITLE>
-GVirDomainDevice
-GVirDomainDeviceClass
 gvir_domain_device_get_domain
 gvir_domain_device_get_config
 <SUBSECTION Standard>
@@ -161,6 +167,8 @@ GVIR_DOMAIN_DEVICE_GET_CLASS
 GVIR_IS_DOMAIN_DEVICE
 GVIR_IS_DOMAIN_DEVICE_CLASS
 GVIR_TYPE_DOMAIN_DEVICE
+GVirDomainDevice
+GVirDomainDeviceClass
 GVirDomainDevicePrivate
 gvir_domain_device_get_type
 </SECTION>
@@ -173,9 +181,6 @@ gvir_domain_device_get_domain_handle
 <SECTION>
 <FILE>libvirt-gobject-domain-disk</FILE>
 <TITLE>GVirDomainDisk</TITLE>
-GVirDomainDiskStats
-GVirDomainDisk
-GVirDomainDiskClass
 gvir_domain_disk_get_stats
 gvir_domain_disk_resize
 <SUBSECTION Standard>
@@ -186,7 +191,10 @@ GVIR_IS_DOMAIN_DISK
 GVIR_IS_DOMAIN_DISK_CLASS
 GVIR_TYPE_DOMAIN_DISK
 GVIR_TYPE_DOMAIN_DISK_STATS
+GVirDomainDisk
+GVirDomainDiskClass
 GVirDomainDiskPrivate
+GVirDomainDiskStats
 gvir_domain_disk_get_type
 gvir_domain_disk_stats_get_type
 </SECTION>
@@ -194,10 +202,6 @@ gvir_domain_disk_stats_get_type
 <SECTION>
 <FILE>libvirt-gobject-domain-interface</FILE>
 <TITLE>GVirDomainInterface</TITLE>
-<TITLE>GVirDomain</TITLE>
-GVirDomainInterfaceStats
-GVirDomainInterface
-GVirDomainInterfaceClass
 gvir_domain_interface_get_stats
 <SUBSECTION Standard>
 GVIR_DOMAIN_INTERFACE
@@ -207,7 +211,10 @@ GVIR_IS_DOMAIN_INTERFACE
 GVIR_IS_DOMAIN_INTERFACE_CLASS
 GVIR_TYPE_DOMAIN_INTERFACE
 GVIR_TYPE_DOMAIN_INTERFACE_STATS
+GVirDomainInterface
+GVirDomainInterfaceClass
 GVirDomainInterfacePrivate
+GVirDomainInterfaceStats
 gvir_domain_interface_get_type
 gvir_domain_interface_stats_get_type
 </SECTION>
@@ -215,10 +222,18 @@ gvir_domain_interface_stats_get_type
 <SECTION>
 <FILE>libvirt-gobject-domain-snapshot</FILE>
 <TITLE>GVirDomainSnapshot</TITLE>
-GVirDomainSnapshot
-GVirDomainSnapshotClass
+GVirDomainSnapshotDeleteFlags
+GVirDomainSnapshotRevertFlags
 gvir_domain_snapshot_get_name
 gvir_domain_snapshot_get_config
+gvir_domain_snapshot_delete
+gvir_domain_snapshot_delete_async
+gvir_domain_snapshot_delete_finish
+gvir_domain_snapshot_get_is_current
+gvir_domain_snapshot_revert_to
+gvir_domain_snapshot_revert_to_async
+gvir_domain_snapshot_revert_to_finish
+gvir_domain_snapshot_set_config
 <SUBSECTION Standard>
 GVIR_DOMAIN_SNAPSHOT
 GVIR_DOMAIN_SNAPSHOT_CLASS
@@ -227,6 +242,8 @@ GVIR_IS_DOMAIN_SNAPSHOT
 GVIR_IS_DOMAIN_SNAPSHOT_CLASS
 GVIR_TYPE_DOMAIN_SNAPSHOT
 GVIR_TYPE_DOMAIN_SNAPSHOT_HANDLE
+GVirDomainSnapshot
+GVirDomainSnapshotClass
 GVirDomainSnapshotPrivate
 gvir_domain_snapshot_get_type
 gvir_domain_snapshot_handle_get_type
@@ -235,7 +252,6 @@ gvir_domain_snapshot_handle_get_type
 <SECTION>
 <FILE>libvirt-gobject-input-stream</FILE>
 <TITLE>GVirInputStream</TITLE>
-GVirInputStreamClass
 <SUBSECTION Standard>
 GVIR_INPUT_STREAM
 GVIR_INPUT_STREAM_CLASS
@@ -243,15 +259,14 @@ GVIR_INPUT_STREAM_GET_CLASS
 GVIR_IS_INPUT_STREAM
 GVIR_IS_INPUT_STREAM_CLASS
 GVIR_TYPE_INPUT_STREAM
+GVirInputStream
+GVirInputStreamClass
 GVirInputStreamPrivate
 </SECTION>
 
 <SECTION>
 <FILE>libvirt-gobject-interface</FILE>
 <TITLE>GVirInterface</TITLE>
-<TITLE>GVir</TITLE>
-GVirInterface
-GVirInterfaceClass
 gvir_interface_get_name
 gvir_interface_get_config
 <SUBSECTION Standard>
@@ -262,6 +277,8 @@ GVIR_IS_INTERFACE
 GVIR_IS_INTERFACE_CLASS
 GVIR_TYPE_INTERFACE
 GVIR_TYPE_INTERFACE_HANDLE
+GVirInterface
+GVirInterfaceClass
 GVirInterfacePrivate
 gvir_interface_get_type
 gvir_interface_handle_get_type
@@ -276,8 +293,6 @@ gvir_init_object_check
 <SECTION>
 <FILE>libvirt-gobject-manager</FILE>
 <TITLE>GVirManager</TITLE>
-GVirManager
-GVirManagerClass
 gvir_manager_new
 gvir_manager_add_connection
 gvir_manager_remove_connection
@@ -290,6 +305,8 @@ GVIR_MANAGER
 GVIR_MANAGER_CLASS
 GVIR_MANAGER_GET_CLASS
 GVIR_TYPE_MANAGER
+GVirManager
+GVirManagerClass
 GVirManagerPrivate
 gvir_manager_get_type
 </SECTION>
@@ -297,8 +314,6 @@ gvir_manager_get_type
 <SECTION>
 <FILE>libvirt-gobject-network</FILE>
 <TITLE>GVirNetwork</TITLE>
-GVirNetwork
-GVirNetworkClass
 gvir_network_get_name
 gvir_network_get_uuid
 gvir_network_get_config
@@ -310,6 +325,8 @@ GVIR_NETWORK_CLASS
 GVIR_NETWORK_GET_CLASS
 GVIR_TYPE_NETWORK
 GVIR_TYPE_NETWORK_HANDLE
+GVirNetwork
+GVirNetworkClass
 GVirNetworkPrivate
 gvir_network_get_type
 gvir_network_handle_get_type
@@ -318,8 +335,6 @@ gvir_network_handle_get_type
 <SECTION>
 <FILE>libvirt-gobject-network-filter</FILE>
 <TITLE>GVirNetworkFilter</TITLE>
-GVirNetworkFilter
-GVirNetworkFilterClass
 gvir_network_filter_get_name
 gvir_network_filter_get_uuid
 gvir_network_filter_get_config
@@ -331,6 +346,8 @@ GVIR_NETWORK_FILTER_CLASS
 GVIR_NETWORK_FILTER_GET_CLASS
 GVIR_TYPE_NETWORK_FILTER
 GVIR_TYPE_NETWORK_FILTER_HANDLE
+GVirNetworkFilter
+GVirNetworkFilterClass
 GVirNetworkFilterPrivate
 gvir_network_filter_get_type
 gvir_network_filter_handle_get_type
@@ -339,8 +356,6 @@ gvir_network_filter_handle_get_type
 <SECTION>
 <FILE>libvirt-gobject-node-device</FILE>
 <TITLE>GVirNodeDevice</TITLE>
-GVirNodeDevice
-GVirNodeDeviceClass
 gvir_node_device_get_name
 gvir_node_device_get_config
 <SUBSECTION Standard>
@@ -351,6 +366,8 @@ GVIR_NODE_DEVICE_CLASS
 GVIR_NODE_DEVICE_GET_CLASS
 GVIR_TYPE_NODE_DEVICE
 GVIR_TYPE_NODE_DEVICE_HANDLE
+GVirNodeDevice
+GVirNodeDeviceClass
 GVirNodeDevicePrivate
 gvir_node_device_get_type
 gvir_node_device_handle_get_type
@@ -359,7 +376,6 @@ gvir_node_device_handle_get_type
 <SECTION>
 <FILE>libvirt-gobject-output-stream</FILE>
 <TITLE>GVirOutputStream</TITLE>
-GVirOutputStreamClass
 <SUBSECTION Standard>
 GVIR_IS_OUTPUT_STREAM
 GVIR_IS_OUTPUT_STREAM_CLASS
@@ -367,14 +383,14 @@ GVIR_OUTPUT_STREAM
 GVIR_OUTPUT_STREAM_CLASS
 GVIR_OUTPUT_STREAM_GET_CLASS
 GVIR_TYPE_OUTPUT_STREAM
+GVirOutputStream
+GVirOutputStreamClass
 GVirOutputStreamPrivate
 </SECTION>
 
 <SECTION>
 <FILE>libvirt-gobject-secret</FILE>
 <TITLE>GVirSecret</TITLE>
-GVirSecret
-GVirSecretClass
 gvir_secret_get_name
 gvir_secret_get_uuid
 gvir_secret_get_config
@@ -386,6 +402,8 @@ GVIR_SECRET_CLASS
 GVIR_SECRET_GET_CLASS
 GVIR_TYPE_SECRET
 GVIR_TYPE_SECRET_HANDLE
+GVirSecret
+GVirSecretClass
 GVirSecretPrivate
 gvir_secret_get_type
 gvir_secret_handle_get_type
@@ -394,10 +412,7 @@ gvir_secret_handle_get_type
 <SECTION>
 <FILE>libvirt-gobject-storage-pool</FILE>
 <TITLE>GVirStoragePool</TITLE>
-GVirStoragePool
-GVirStoragePoolClass
 GVirStoragePoolState
-GVirStoragePoolInfo
 gvir_storage_pool_get_name
 gvir_storage_pool_get_uuid
 gvir_storage_pool_get_active
@@ -434,6 +449,9 @@ GVIR_STORAGE_POOL_GET_CLASS
 GVIR_TYPE_STORAGE_POOL
 GVIR_TYPE_STORAGE_POOL_HANDLE
 GVIR_TYPE_STORAGE_POOL_INFO
+GVirStoragePool
+GVirStoragePoolClass
+GVirStoragePoolInfo
 GVirStoragePoolPrivate
 gvir_storage_pool_get_type
 gvir_storage_pool_handle_get_type
@@ -443,11 +461,8 @@ gvir_storage_pool_info_get_type
 <SECTION>
 <FILE>libvirt-gobject-storage-vol</FILE>
 <TITLE>GVirStorageVol</TITLE>
-GVirStorageVol
-GVirStorageVolClass
 GVirStorageVolType
 GVirStorageVolResizeFlags
-GVirStorageVolInfo
 gvir_storage_vol_get_name
 gvir_storage_vol_get_path
 gvir_storage_vol_delete
@@ -465,6 +480,9 @@ GVIR_STORAGE_VOL_GET_CLASS
 GVIR_TYPE_STORAGE_VOL
 GVIR_TYPE_STORAGE_VOL_HANDLE
 GVIR_TYPE_STORAGE_VOL_INFO
+GVirStorageVol
+GVirStorageVolClass
+GVirStorageVolInfo
 GVirStorageVolPrivate
 gvir_storage_vol_get_type
 gvir_storage_vol_handle_get_type
@@ -474,8 +492,6 @@ gvir_storage_vol_info_get_type
 <SECTION>
 <FILE>libvirt-gobject-stream</FILE>
 <TITLE>GVirStream</TITLE>
-GVirStream
-GVirStreamClass
 GVirStreamSinkFunc
 GVirStreamSourceFunc
 GVirStreamIOCondition
@@ -494,6 +510,8 @@ GVIR_STREAM_CLASS
 GVIR_STREAM_GET_CLASS
 GVIR_TYPE_STREAM
 GVIR_TYPE_STREAM_HANDLE
+GVirStream
+GVirStreamClass
 GVirStreamPrivate
 gvir_stream_get_type
 gvir_stream_handle_get_type

@@ -29,6 +29,8 @@
 
 G_BEGIN_DECLS
 
+#include <libvirt-gconfig/libvirt-gconfig-domain-disk-driver.h>
+
 #define GVIR_CONFIG_TYPE_DOMAIN_DISK            (gvir_config_domain_disk_get_type ())
 #define GVIR_CONFIG_DOMAIN_DISK(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GVIR_CONFIG_TYPE_DOMAIN_DISK, GVirConfigDomainDisk))
 #define GVIR_CONFIG_DOMAIN_DISK_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GVIR_CONFIG_TYPE_DOMAIN_DISK, GVirConfigDomainDiskClass))
@@ -75,15 +77,6 @@ typedef enum {
 } GVirConfigDomainDiskBus;
 
 typedef enum {
-    GVIR_CONFIG_DOMAIN_DISK_CACHE_DEFAULT,
-    GVIR_CONFIG_DOMAIN_DISK_CACHE_NONE,
-    GVIR_CONFIG_DOMAIN_DISK_CACHE_WRITETHROUGH,
-    GVIR_CONFIG_DOMAIN_DISK_CACHE_WRITEBACK,
-    GVIR_CONFIG_DOMAIN_DISK_CACHE_DIRECTSYNC,
-    GVIR_CONFIG_DOMAIN_DISK_CACHE_UNSAFE
-} GVirConfigDomainDiskCacheType;
-
-typedef enum {
     GVIR_CONFIG_DOMAIN_DISK_GUEST_DEVICE_DISK,
     GVIR_CONFIG_DOMAIN_DISK_GUEST_DEVICE_FLOPPY,
     GVIR_CONFIG_DOMAIN_DISK_GUEST_DEVICE_CDROM
@@ -100,23 +93,6 @@ typedef enum {
     GVIR_CONFIG_DOMAIN_DISK_STARTUP_POLICY_REQUISITE,
     GVIR_CONFIG_DOMAIN_DISK_STARTUP_POLICY_OPTIONAL
 } GVirConfigDomainDiskStartupPolicy;
-
-typedef enum {
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_RAW,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_DIR,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_BOCHS,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_CLOOP,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_COW,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_DMG,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_ISO,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_QCOW,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_QCOW2,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_QED,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_VMDK,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_VPC,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_FAT,
-      GVIR_CONFIG_DOMAIN_DISK_FORMAT_VHD,
-} GVirConfigDomainDiskFormat;
 
 /* backward compatibility */
 #define GVIR_CONFIG_DOMAIN_DISK_FORMAT_AIO GVIR_CONFIG_DOMAIN_DISK_FORMAT_RAW;
@@ -137,29 +113,38 @@ void gvir_config_domain_disk_set_startup_policy(GVirConfigDomainDisk *disk,
                                                 GVirConfigDomainDiskStartupPolicy policy);
 void gvir_config_domain_disk_set_source(GVirConfigDomainDisk *disk,
                                         const char *source);
+G_DEPRECATED_FOR(gvir_config_domain_disk_driver_set_cache)
 void gvir_config_domain_disk_set_driver_cache(GVirConfigDomainDisk *disk,
                                               GVirConfigDomainDiskCacheType cache_type);
+G_DEPRECATED_FOR(gvir_config_domain_disk_driver_set_name)
 void gvir_config_domain_disk_set_driver_name(GVirConfigDomainDisk *disk,
                                              const char *driver_name);
-G_DEPRECATED_FOR(gvir_config_domain_disk_set_driver_format)
+G_DEPRECATED_FOR(gvir_config_domain_disk_driver_set_format)
 void gvir_config_domain_disk_set_driver_type(GVirConfigDomainDisk *disk,
                                              const char *driver_type);
+G_DEPRECATED_FOR(gvir_config_domain_disk_driver_set_format)
 void gvir_config_domain_disk_set_driver_format(GVirConfigDomainDisk *disk,
                                                GVirConfigDomainDiskFormat format);
 void gvir_config_domain_disk_set_target_bus(GVirConfigDomainDisk *disk,
                                             GVirConfigDomainDiskBus bus);
 void gvir_config_domain_disk_set_target_dev(GVirConfigDomainDisk *disk,
                                             const char *dev);
+void gvir_config_domain_disk_set_driver(GVirConfigDomainDisk *disk,
+                                        GVirConfigDomainDiskDriver *driver);
+GVirConfigDomainDiskDriver *gvir_config_domain_disk_get_driver(GVirConfigDomainDisk *disk);
 
 GVirConfigDomainDiskType gvir_config_domain_disk_get_disk_type(GVirConfigDomainDisk *disk);
 GVirConfigDomainDiskGuestDeviceType gvir_config_domain_disk_get_guest_device_type(GVirConfigDomainDisk *disk);
 GVirConfigDomainDiskSnapshotType gvir_config_domain_disk_get_snapshot_type(GVirConfigDomainDisk *disk);
 GVirConfigDomainDiskStartupPolicy gvir_config_domain_disk_get_startup_policy(GVirConfigDomainDisk *disk);
 const char *gvir_config_domain_disk_get_source(GVirConfigDomainDisk *disk);
+G_DEPRECATED_FOR(gvir_config_domain_disk_driver_get_cache)
 GVirConfigDomainDiskCacheType gvir_config_domain_disk_get_driver_cache(GVirConfigDomainDisk *disk);
+G_DEPRECATED_FOR(gvir_config_domain_disk_driver_get_name)
 const char *gvir_config_domain_disk_get_driver_name(GVirConfigDomainDisk *disk);
-G_DEPRECATED_FOR(gvir_config_domain_disk_get_driver_format)
+G_DEPRECATED_FOR(gvir_config_domain_disk_driver_get_format)
 const char *gvir_config_domain_disk_get_driver_type(GVirConfigDomainDisk *disk);
+G_DEPRECATED_FOR(gvir_config_domain_disk_driver_get_format)
 GVirConfigDomainDiskFormat gvir_config_domain_disk_get_driver_format(GVirConfigDomainDisk *disk);
 GVirConfigDomainDiskBus gvir_config_domain_disk_get_target_bus(GVirConfigDomainDisk *disk);
 const char *gvir_config_domain_disk_get_target_dev(GVirConfigDomainDisk *disk);

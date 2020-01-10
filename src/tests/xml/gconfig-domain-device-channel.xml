@@ -1,0 +1,11 @@
+<domain>
+  <devices>
+    <channel type="spicevmc">
+      <target type="virtio"/>
+    </channel>
+    <channel type="spiceport">
+      <target type="virtio" name="org.spice-space.webdav.0"/>
+      <source channel="org.spice-space.webdav.0"/>
+    </channel>
+  </devices>
+</domain>

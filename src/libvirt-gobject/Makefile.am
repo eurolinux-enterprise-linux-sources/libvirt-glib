@@ -68,6 +68,7 @@ libvirt_gobject_1_0_la_CFLAGS = \
 			-DLIBVIRT_GOBJECT_BUILD \
 			$(COVERAGE_CFLAGS) \
 			-I$(top_srcdir) \
+			-I$(top_builddir) \
 			$(GIO2_CFLAGS) \
 			$(GOBJECT2_CFLAGS) \
 			$(GTHREAD2_CFLAGS) \
@@ -92,7 +93,7 @@ libvirt_gobject_1_0_la_LDFLAGS = \
 			-Wl,--version-script=$(srcdir)/libvirt-gobject.sym \
 			-version-info $(LIBVIRT_GLIB_VERSION_INFO)
 
-libvirt-gobject-enums.c: libvirt-gobject-domain.h libvirt-gobject-connection.h
+libvirt-gobject-enums.c: $(libvirt_gobject_1_0_la_HEADERS)
 	$(AM_V_GEN)glib-mkenums \
                         --fhead "#include \"libvirt-gobject/libvirt-gobject.h\"\n\n" \
                         --vhead "static const G@Type@Value _@enum_name@_values[] = {" \
@@ -105,7 +106,7 @@ libvirt-gobject-enums.c: libvirt-gobject-domain.h libvirt-gobject-connection.h
                         --vtail "  return type;\n}\n\n" \
                 $^ | sed -e 's/g_vir/gvir/g' > $@
 
-libvirt-gobject-enums.h: libvirt-gobject-domain.h libvirt-gobject-connection.h
+libvirt-gobject-enums.h: $(libvirt_gobject_1_0_la_HEADERS)
 	$(AM_V_GEN)glib-mkenums    --fhead "#ifndef __LIBVIRT_GOBJECT_ENUMS_H__\n" \
                         --fhead "#define __LIBVIRT_GOBJECT_ENUMS_H__\n\n" \
                         --fhead "G_BEGIN_DECLS\n\n" \
@@ -119,50 +120,54 @@ BUILT_SOURCES = $(GOBJECT_GENERATED_FILES)
 
 CLEANFILES = $(BUILT_SOURCES)
 
-if WITH_GOBJECT_INTROSPECTION
+# .libs/libvirt-gobject.so is built by libtool as a side-effect of the Makefile
+# rule for libosvirt-gobject.la.  However, checking symbols relies on Linux ELF layout
+if WITH_LINUX
+check-symfile: libvirt-gobject.sym libvirt-gobject-1.0.la
+	$(AM_V_GEN)$(PERL) $(top_srcdir)/build-aux/check-symfile.pl $(srcdir)/libvirt-gobject.sym \
+		.libs/libvirt-gobject-1.0.so
+else ! WITH_LINUX
+check-symfile:
+endif ! WITH_LINUX
+check-symsorting:
+	$(AM_V_GEN)$(PERL) $(top_srcdir)/build-aux/check-symsorting.pl \
+		$(srcdir)/libvirt-gobject.sym
+check-local: check-symfile check-symsorting
 
-LibvirtGObject-1.0.gir: libvirt-gobject-1.0.la $(G_IR_SCANNER) Makefile.am
-	$(AM_V_GEN)$(G_IR_SCANNER) \
-                --quiet \
-                --warn-all \
-                --namespace LibvirtGObject \
-                --nsversion 1.0 \
-                --include GObject-2.0 \
-                --include Gio-2.0 \
-                --include-uninstalled $(top_builddir)/libvirt-glib/LibvirtGLib-1.0.gir \
-                --include-uninstalled $(top_builddir)/libvirt-gconfig/LibvirtGConfig-1.0.gir \
-                --identifier-prefix=GVir \
-                --symbol-prefix=gvir \
-                --library=$(top_builddir)/libvirt-glib/libvirt-glib-1.0.la \
-                --library=$(top_builddir)/libvirt-gconfig/libvirt-gconfig-1.0.la \
-                --library=$(builddir)/libvirt-gobject-1.0.la \
-                --output $@ \
-                -I$(top_builddir) \
-                -I$(top_srcdir) \
-                --verbose \
-                --c-include="libvirt-gobject/libvirt-gobject.h" \
-                --pkg=gthread-2.0 \
-                --pkg=libxml-2.0 \
-                --pkg-export=libvirt-gobject-1.0 \
-                $(srcdir)/libvirt-gobject.h \
-                $(GOBJECT_SOURCE_FILES:%=$(srcdir)/%) \
-                $(GOBJECT_HEADER_FILES:%=$(srcdir)/%) \
-                $(GOBJECT_GENERATED_FILES:%=$(builddir)/%)
+-include $(INTROSPECTION_MAKEFILE)
+INTROSPECTION_GIRS =
+
+if HAVE_INTROSPECTION
+LibvirtGObject-1.0.gir: libvirt-gobject-1.0.la
+LibvirtGObject_1_0_gir_INCLUDES = GObject-2.0 Gio-2.0
+LibvirtGObject_1_0_gir_PACKAGES = gobject-2.0
+LibvirtGObject_1_0_gir_EXPORT_PACKAGES = libvirt-gobject-1.0
+LibvirtGObject_1_0_gir_LIBS = \
+	$(top_builddir)/libvirt-glib/libvirt-glib-1.0.la \
+	$(top_builddir)/libvirt-gconfig/libvirt-gconfig-1.0.la \
+	libvirt-gobject-1.0.la
+LibvirtGObject_1_0_gir_FILES = \
+	$(GOBJECT_SOURCE_FILES) \
+	$(GOBJECT_HEADER_FILES) \
+	$(GOBJECT_GENERATED_FILES) \
+	$(NULL)
+LibvirtGObject_1_0_gir_CFLAGS = $(libvirt_gobject_1_0_la_CFLAGS)
+LibvirtGObject_1_0_gir_SCANNERFLAGS = \
+	--identifier-prefix=GVir --symbol-prefix=gvir \
+	--c-include="libvirt-gobject/libvirt-gobject.h" \
+	--include-uninstalled $(top_builddir)/libvirt-glib/LibvirtGLib-1.0.gir \
+	--include-uninstalled $(top_builddir)/libvirt-gconfig/LibvirtGConfig-1.0.gir \
+	$(NULL)
+INTROSPECTION_GIRS += LibvirtGObject-1.0.gir
+INTROSPECTION_COMPILER_ARGS = \
+	--includedir=$(top_builddir)/libvirt-glib \
+	--includedir=$(top_builddir)/libvirt-gconfig
 
 girdir = $(datadir)/gir-1.0
 gir_DATA = LibvirtGObject-1.0.gir
 
-typelibsdir = $(libdir)/girepository-1.0
-typelibs_DATA = LibvirtGObject-1.0.typelib
+typelibdir = $(libdir)/girepository-1.0
+typelib_DATA = LibvirtGObject-1.0.typelib
 
-%.typelib: %.gir
-	$(AM_V_GEN)$(G_IR_COMPILER) \
-                --includedir=$(top_builddir)/libvirt-glib \
-                --includedir=$(top_builddir)/libvirt-gconfig \
-                --includedir=$(builddir) \
-                --includedir=$(girdir) \
-                -o $@ $<
-
-CLEANFILES += $(gir_DATA) $(typelibs_DATA)
-
-endif # WITH_GOBJECT_INTROSPECTION
+CLEANFILES += $(gir_DATA) $(typelib_DATA)
+endif # HAVE_INTROSPECTION

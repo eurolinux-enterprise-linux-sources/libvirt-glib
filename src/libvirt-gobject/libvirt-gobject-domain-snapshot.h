@@ -58,6 +58,31 @@ struct _GVirDomainSnapshotClass
     gpointer padding[20];
 };
 
+/**
+ * GVirDomainSnapshotDeleteFlags:
+ * @GVIR_DOMAIN_SNAPSHOT_DELETE_CHILDREN: Also delete children
+ * @GVIR_DOMAIN_SNAPSHOT_DELETE_METADATA_ONLY: Delete just metadata
+ * @GVIR_DOMAIN_SNAPSHOT_DELETE_CHILDREN_ONLY: Delete just children
+ */
+typedef enum {
+  GVIR_DOMAIN_SNAPSHOT_DELETE_CHILDREN = 1,
+  GVIR_DOMAIN_SNAPSHOT_DELETE_METADATA_ONLY = 2,
+  GVIR_DOMAIN_SNAPSHOT_DELETE_CHILDREN_ONLY = 4
+} GVirDomainSnapshotDeleteFlags;
+
+
+/**
+ * GVirDomainSnapshotRevertFlags:
+ * @GVIR_DOMAIN_SNAPSHOT_REVERT_RUNNING: Run after revert
+ * @GVIR_DOMAIN_SNAPSHOT_REVERT_PAUSED: Pause after revert
+ * @GVIR_DOMAIN_SNAPSHOT_REVERT_FORCE: Allow risky reverts
+ */
+typedef enum {
+  GVIR_DOMAIN_SNAPSHOT_REVERT_RUNNING = 1,
+  GVIR_DOMAIN_SNAPSHOT_REVERT_PAUSED = 2,
+  GVIR_DOMAIN_SNAPSHOT_REVERT_FORCE = 4
+} GVirDomainSnapshotRevertFlags;
+
 
 GType gvir_domain_snapshot_get_type(void);
 GType gvir_domain_snapshot_handle_get_type(void);
@@ -68,6 +93,44 @@ GVirConfigDomainSnapshot *gvir_domain_snapshot_get_config
                                 (GVirDomainSnapshot *snapshot,
                                  guint flags,
                                  GError **err);
+
+gboolean gvir_domain_snapshot_delete (GVirDomainSnapshot *snapshot,
+                                      guint flags,
+                                      GError **error);
+
+void gvir_domain_snapshot_delete_async(GVirDomainSnapshot *snapshot,
+                                       guint flags,
+                                       GCancellable *cancellable,
+                                       GAsyncReadyCallback callback,
+                                       gpointer user_data);
+
+gboolean gvir_domain_snapshot_delete_finish(GVirDomainSnapshot *snapshot,
+                                            GAsyncResult *res,
+                                            GError **error);
+
+gboolean gvir_domain_snapshot_get_is_current(GVirDomainSnapshot *snapshot,
+                                             guint flags,
+                                             gboolean *is_current,
+                                             GError **error);
+
+gboolean gvir_domain_snapshot_revert_to(GVirDomainSnapshot *snapshot,
+                                        guint flags,
+                                        GError **error);
+
+void gvir_domain_snapshot_revert_to_async(GVirDomainSnapshot *snapshot,
+                                          guint flags,
+                                          GCancellable *cancellable,
+                                          GAsyncReadyCallback callback,
+                                          gpointer user_data);
+
+gboolean gvir_domain_snapshot_revert_to_finish(GVirDomainSnapshot *snapshot,
+                                               GAsyncResult *result,
+                                               GError **error);
+
+
+gboolean gvir_domain_snapshot_set_config(GVirDomainSnapshot *snapshot,
+                                         GVirConfigDomainSnapshot *conf,
+                                         GError **error);
 
 G_END_DECLS
 

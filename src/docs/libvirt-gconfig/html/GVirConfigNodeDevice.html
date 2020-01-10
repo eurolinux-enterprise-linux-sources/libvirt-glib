@@ -2,32 +2,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>GVirConfigNodeDevice</title>
+<title>Libvirt-gconfig Reference Manual: GVirConfigNodeDevice</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Libvirt-gconfig Reference Manual">
 <link rel="up" href="ch01.html" title="Libvirt-gconfig">
 <link rel="prev" href="GVirConfigNetwork.html" title="GVirConfigNetwork">
 <link rel="next" href="GVirConfigSecret.html" title="GVirConfigSecret">
-<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
-<tr valign="middle">
-<td><a accesskey="p" href="GVirConfigNetwork.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
-<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Libvirt-gconfig Reference Manual</th>
-<td><a accesskey="n" href="GVirConfigSecret.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
-</tr>
-<tr><td colspan="5" class="shortcuts">
-<a href="#GVirConfigNodeDevice.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#GVirConfigNodeDevice.description" class="shortcut">Description</a>
-                   | 
-                  <a href="#GVirConfigNodeDevice.object-hierarchy" class="shortcut">Object Hierarchy</a>
-</td></tr>
-</table>
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#GVirConfigNodeDevice.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
+                  <a href="#GVirConfigNodeDevice.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="GVirConfigNetwork.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="GVirConfigSecret.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
 <div class="refentry">
 <a name="GVirConfigNodeDevice"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
@@ -35,31 +30,85 @@
 <h2><span class="refentrytitle"><a name="GVirConfigNodeDevice.top_of_page"></a>GVirConfigNodeDevice</span></h2>
 <p>GVirConfigNodeDevice</p>
 </td>
-<td valign="top" align="right"></td>
+<td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv">
-<a name="GVirConfigNodeDevice.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">struct              <a class="link" href="GVirConfigNodeDevice.html#GVirConfigNodeDevice-struct" title="struct GVirConfigNodeDevice">GVirConfigNodeDevice</a>;
-struct              <a class="link" href="GVirConfigNodeDevice.html#GVirConfigNodeDeviceClass" title="struct GVirConfigNodeDeviceClass">GVirConfigNodeDeviceClass</a>;
-<a class="link" href="GVirConfigNodeDevice.html" title="GVirConfigNodeDevice"><span class="returnvalue">GVirConfigNodeDevice</span></a> * <a class="link" href="GVirConfigNodeDevice.html#gvir-config-node-device-new" title="gvir_config_node_device_new ()">gvir_config_node_device_new</a>      (<em class="parameter"><code><span class="type">void</span></code></em>);
-<a class="link" href="GVirConfigNodeDevice.html" title="GVirConfigNodeDevice"><span class="returnvalue">GVirConfigNodeDevice</span></a> * <a class="link" href="GVirConfigNodeDevice.html#gvir-config-node-device-new-from-xml" title="gvir_config_node_device_new_from_xml ()">gvir_config_node_device_new_from_xml</a>
-                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
-</pre>
+<div class="refsect1">
+<a name="GVirConfigNodeDevice.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<a class="link" href="GVirConfigNodeDevice.html" title="GVirConfigNodeDevice"><span class="returnvalue">GVirConfigNodeDevice</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigNodeDevice.html#gvir-config-node-device-new" title="gvir_config_node_device_new ()">gvir_config_node_device_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="GVirConfigNodeDevice.html" title="GVirConfigNodeDevice"><span class="returnvalue">GVirConfigNodeDevice</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigNodeDevice.html#gvir-config-node-device-new-from-xml" title="gvir_config_node_device_new_from_xml ()">gvir_config_node_device_new_from_xml</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GVirConfigNodeDevice.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="name">
+<col class="description">
+</colgroup>
+<tbody>
+<tr>
+<td class="datatype_keyword">struct</td>
+<td class="function_name"><a class="link" href="GVirConfigNodeDevice.html#GVirConfigNodeDevice-struct" title="struct GVirConfigNodeDevice">GVirConfigNodeDevice</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword">struct</td>
+<td class="function_name"><a class="link" href="GVirConfigNodeDevice.html#GVirConfigNodeDeviceClass" title="struct GVirConfigNodeDeviceClass">GVirConfigNodeDeviceClass</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword"> </td>
+<td class="function_name"><a class="link" href="GVirConfigNodeDevice.html#GVirConfigNodeDevicePrivate" title="GVirConfigNodeDevicePrivate">GVirConfigNodeDevicePrivate</a></td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <div class="refsect1">
 <a name="GVirConfigNodeDevice.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="synopsis">
-  GObject
-   +----<a class="link" href="GVirConfigObject.html" title="GVirConfigObject">GVirConfigObject</a>
-         +----GVirConfigNodeDevice
+<pre class="screen">    <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+    <span class="lineart">╰──</span> <a class="link" href="GVirConfigObject.html" title="GVirConfigObject">GVirConfigObject</a>
+        <span class="lineart">╰──</span> GVirConfigNodeDevice
 </pre>
 </div>
 <div class="refsect1">
 <a name="GVirConfigNodeDevice.description"></a><h2>Description</h2>
 </div>
 <div class="refsect1">
-<a name="GVirConfigNodeDevice.details"></a><h2>Details</h2>
+<a name="GVirConfigNodeDevice.functions_details"></a><h2>Functions</h2>
+<div class="refsect2">
+<a name="gvir-config-node-device-new"></a><h3>gvir_config_node_device_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigNodeDevice.html" title="GVirConfigNodeDevice"><span class="returnvalue">GVirConfigNodeDevice</span></a> *
+gvir_config_node_device_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-node-device-new-from-xml"></a><h3>gvir_config_node_device_new_from_xml ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigNodeDevice.html" title="GVirConfigNodeDevice"><span class="returnvalue">GVirConfigNodeDevice</span></a> *
+gvir_config_node_device_new_from_xml (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *xml</code></em>,
+                                      <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirConfigNodeDevice.other_details"></a><h2>Types and Values</h2>
 <div class="refsect2">
 <a name="GVirConfigNodeDevice-struct"></a><h3>struct GVirConfigNodeDevice</h3>
 <pre class="programlisting">struct GVirConfigNodeDevice;</pre>
@@ -76,20 +125,13 @@ struct              <a class="link" href="GVirConfigNodeDevice.html#GVirConfigNo
 </div>
 <hr>
 <div class="refsect2">
-<a name="gvir-config-node-device-new"></a><h3>gvir_config_node_device_new ()</h3>
-<pre class="programlisting"><a class="link" href="GVirConfigNodeDevice.html" title="GVirConfigNodeDevice"><span class="returnvalue">GVirConfigNodeDevice</span></a> * gvir_config_node_device_new      (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-node-device-new-from-xml"></a><h3>gvir_config_node_device_new_from_xml ()</h3>
-<pre class="programlisting"><a class="link" href="GVirConfigNodeDevice.html" title="GVirConfigNodeDevice"><span class="returnvalue">GVirConfigNodeDevice</span></a> * gvir_config_node_device_new_from_xml
-                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
+<a name="GVirConfigNodeDevicePrivate"></a><h3>GVirConfigNodeDevicePrivate</h3>
+<pre class="programlisting">typedef struct _GVirConfigNodeDevicePrivate GVirConfigNodeDevicePrivate;</pre>
 </div>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.19</div>
+          Generated by GTK-Doc V1.21</div>
 </body>
 </html>

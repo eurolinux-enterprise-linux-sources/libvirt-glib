@@ -183,6 +183,39 @@ typedef enum {
     GVIR_DOMAIN_REBOOT_GUEST_AGENT    = VIR_DOMAIN_REBOOT_GUEST_AGENT,
 } GVirDomainRebootFlags;
 
+/**
+ * GVirDomainSnapshotListFlags:
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_ALL: List all snapshots
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_DESCENDANTS: List all descendants, not just
+ *                                         children, when listing a snapshot.
+ *                                         For historical reasons, groups do not use contiguous bits.
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_ROOTS: Filter by snapshots with no parents, when listing a domain
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_METADATA: Filter by snapshots which have metadata
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_LEAVES: Filter by snapshots with no children
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_NO_LEAVES: Filter by snapshots that have children
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_NO_METADATA: Filter by snapshots with no metadata
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_INACTIVE: Filter by snapshots taken while guest was shut off
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_ACTIVE: Filter by snapshots taken while guest was active, and with memory state
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_DISK_ONLY: Filter by snapshots taken while guest was active, but without memory state
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_INTERNAL: Filter by snapshots stored internal to disk images
+ * @GVIR_DOMAIN_SNAPSHOT_LIST_EXTERNAL: Filter by snapshots that use files external to disk images
+ */
+typedef enum {
+    GVIR_DOMAIN_SNAPSHOT_LIST_ALL         = 0,
+    GVIR_DOMAIN_SNAPSHOT_LIST_DESCENDANTS = VIR_DOMAIN_SNAPSHOT_LIST_DESCENDANTS,
+    GVIR_DOMAIN_SNAPSHOT_LIST_ROOTS       = VIR_DOMAIN_SNAPSHOT_LIST_ROOTS,
+    GVIR_DOMAIN_SNAPSHOT_LIST_METADATA    = VIR_DOMAIN_SNAPSHOT_LIST_METADATA,
+    GVIR_DOMAIN_SNAPSHOT_LIST_LEAVES      = VIR_DOMAIN_SNAPSHOT_LIST_LEAVES,
+    GVIR_DOMAIN_SNAPSHOT_LIST_NO_LEAVES   = VIR_DOMAIN_SNAPSHOT_LIST_NO_LEAVES,
+    GVIR_DOMAIN_SNAPSHOT_LIST_NO_METADATA = VIR_DOMAIN_SNAPSHOT_LIST_NO_METADATA,
+    GVIR_DOMAIN_SNAPSHOT_LIST_INACTIVE    = VIR_DOMAIN_SNAPSHOT_LIST_INACTIVE,
+    GVIR_DOMAIN_SNAPSHOT_LIST_ACTIVE      = VIR_DOMAIN_SNAPSHOT_LIST_ACTIVE,
+    GVIR_DOMAIN_SNAPSHOT_LIST_DISK_ONLY   = VIR_DOMAIN_SNAPSHOT_LIST_DISK_ONLY,
+    GVIR_DOMAIN_SNAPSHOT_LIST_INTERNAL    = VIR_DOMAIN_SNAPSHOT_LIST_INTERNAL,
+    GVIR_DOMAIN_SNAPSHOT_LIST_EXTERNAL    = VIR_DOMAIN_SNAPSHOT_LIST_EXTERNAL
+} GVirDomainSnapshotListFlags;
+
+
 typedef struct _GVirDomainInfo GVirDomainInfo;
 struct _GVirDomainInfo
 {
@@ -329,6 +362,40 @@ gvir_domain_create_snapshot(GVirDomain *dom,
                             GVirConfigDomainSnapshot *custom_conf,
                             guint flags,
                             GError **err);
+
+void gvir_domain_create_snapshot_async(GVirDomain *dom,
+                                       GVirConfigDomainSnapshot *custom_conf,
+                                       guint flags,
+                                       GCancellable *cancellable,
+                                       GAsyncReadyCallback callback,
+                                       gpointer user_data);
+
+GVirDomainSnapshot *gvir_domain_create_snapshot_finish(GVirDomain  *domain,
+                                                       GAsyncResult *result,
+                                                       GError **error);
+
+
+gboolean gvir_domain_fetch_snapshots(GVirDomain *dom,
+                                     guint list_flags,
+                                     GCancellable *cancellable,
+                                     GError **error);
+
+GList *gvir_domain_get_snapshots(GVirDomain *dom);
+
+void gvir_domain_fetch_snapshots_async(GVirDomain *dom,
+                                       guint list_flags,
+                                       GCancellable *cancellable,
+                                       GAsyncReadyCallback callback,
+                                       gpointer user_data);
+
+gboolean gvir_domain_fetch_snapshots_finish(GVirDomain *dom,
+                                            GAsyncResult *res,
+                                            GError **error);
+
+gboolean gvir_domain_get_has_current_snapshot(GVirDomain *dom,
+                                              guint flags,
+                                              gboolean *has_current_snapshot,
+                                              GError **error);
 
 G_END_DECLS
 

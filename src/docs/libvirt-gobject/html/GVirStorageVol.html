@@ -2,34 +2,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>GVirStorageVol</title>
+<title>Libvirt-gobject Reference Manual: GVirStorageVol</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Libvirt-gobject Reference Manual">
 <link rel="up" href="ch01.html" title="Libvirt-gobject">
 <link rel="prev" href="GVirStoragePool.html" title="GVirStoragePool">
 <link rel="next" href="GVirStream.html" title="GVirStream">
-<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
-<tr valign="middle">
-<td><a accesskey="p" href="GVirStoragePool.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
-<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Libvirt-gobject Reference Manual</th>
-<td><a accesskey="n" href="GVirStream.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
-</tr>
-<tr><td colspan="5" class="shortcuts">
-<a href="#GVirStorageVol.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#GVirStorageVol.description" class="shortcut">Description</a>
-                   | 
-                  <a href="#GVirStorageVol.object-hierarchy" class="shortcut">Object Hierarchy</a>
-                   | 
-                  <a href="#GVirStorageVol.properties" class="shortcut">Properties</a>
-</td></tr>
-</table>
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#GVirStorageVol.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
+                  <a href="#GVirStorageVol.object-hierarchy" class="shortcut">Object Hierarchy</a></span><span id="nav_properties">  <span class="dim">|</span> 
+                  <a href="#GVirStorageVol.properties" class="shortcut">Properties</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="GVirStoragePool.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="GVirStream.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
 <div class="refentry">
 <a name="GVirStorageVol"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
@@ -37,413 +31,522 @@
 <h2><span class="refentrytitle"><a name="GVirStorageVol.top_of_page"></a>GVirStorageVol</span></h2>
 <p>GVirStorageVol</p>
 </td>
-<td valign="top" align="right"></td>
+<td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv">
-<a name="GVirStorageVol.synopsis"></a><h2>Synopsis</h2>
-<a name="GVirStorageVolInfo"></a><pre class="synopsis">struct              <a class="link" href="GVirStorageVol.html#GVirStorageVol-struct" title="struct GVirStorageVol">GVirStorageVol</a>;
-struct              <a class="link" href="GVirStorageVol.html#GVirStorageVolClass" title="struct GVirStorageVolClass">GVirStorageVolClass</a>;
-enum                <a class="link" href="GVirStorageVol.html#GVirStorageVolType" title="enum GVirStorageVolType">GVirStorageVolType</a>;
-enum                <a class="link" href="GVirStorageVol.html#GVirStorageVolResizeFlags" title="enum GVirStorageVolResizeFlags">GVirStorageVolResizeFlags</a>;
-struct              <a class="link" href="GVirStorageVol.html#GVirStorageVolInfo-struct" title="struct GVirStorageVolInfo">GVirStorageVolInfo</a>;
-const <span class="returnvalue">gchar</span> *       <a class="link" href="GVirStorageVol.html#gvir-storage-vol-get-name" title="gvir_storage_vol_get_name ()">gvir_storage_vol_get_name</a>           (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>);
-const <span class="returnvalue">gchar</span> *       <a class="link" href="GVirStorageVol.html#gvir-storage-vol-get-path" title="gvir_storage_vol_get_path ()">gvir_storage_vol_get_path</a>           (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
-<span class="returnvalue">gboolean</span>            <a class="link" href="GVirStorageVol.html#gvir-storage-vol-delete" title="gvir_storage_vol_delete ()">gvir_storage_vol_delete</a>             (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);
-<a href="/usr/share/gtk-doc/html/Libvirt-gconfig/GVirConfigStorageVol.html"><span class="returnvalue">GVirConfigStorageVol</span></a> * <a class="link" href="GVirStorageVol.html#gvir-storage-vol-get-config" title="gvir_storage_vol_get_config ()">gvir_storage_vol_get_config</a>      (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);
-<a class="link" href="GVirStorageVol.html#GVirStorageVolInfo"><span class="returnvalue">GVirStorageVolInfo</span></a> * <a class="link" href="GVirStorageVol.html#gvir-storage-vol-get-info" title="gvir_storage_vol_get_info ()">gvir_storage_vol_get_info</a>          (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);
-<span class="returnvalue">gboolean</span>            <a class="link" href="GVirStorageVol.html#gvir-storage-vol-resize" title="gvir_storage_vol_resize ()">gvir_storage_vol_resize</a>             (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint64</span> capacity</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);
-<span class="returnvalue">gboolean</span>            <a class="link" href="GVirStorageVol.html#gvir-storage-vol-download" title="gvir_storage_vol_download ()">gvir_storage_vol_download</a>           (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GVirStream.html" title="GVirStream"><span class="type">GVirStream</span></a> *stream</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint64</span> offset</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint64</span> length</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);
-<span class="returnvalue">gboolean</span>            <a class="link" href="GVirStorageVol.html#gvir-storage-vol-upload" title="gvir_storage_vol_upload ()">gvir_storage_vol_upload</a>             (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GVirStream.html" title="GVirStream"><span class="type">GVirStream</span></a> *stream</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint64</span> offset</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint64</span> length</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);
-</pre>
-</div>
 <div class="refsect1">
-<a name="GVirStorageVol.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="synopsis">
-  GObject
-   +----GVirStorageVol
-</pre>
-<pre class="synopsis">
-  GBoxed
-   +----GVirStorageVolInfo
-</pre>
+<a name="GVirStorageVol.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirStorageVol.html#gvir-storage-vol-get-name" title="gvir_storage_vol_get_name ()">gvir_storage_vol_get_name</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirStorageVol.html#gvir-storage-vol-get-path" title="gvir_storage_vol_get_path ()">gvir_storage_vol_get_path</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="GVirStorageVol.html#gvir-storage-vol-delete" title="gvir_storage_vol_delete ()">gvir_storage_vol_delete</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="/usr/share/gtk-doc/html/Libvirt-gconfig/GVirConfigStorageVol.html"><span class="returnvalue">GVirConfigStorageVol</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirStorageVol.html#gvir-storage-vol-get-config" title="gvir_storage_vol_get_config ()">gvir_storage_vol_get_config</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="GVirStorageVol.html#GVirStorageVolInfo"><span class="returnvalue">GVirStorageVolInfo</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirStorageVol.html#gvir-storage-vol-get-info" title="gvir_storage_vol_get_info ()">gvir_storage_vol_get_info</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="GVirStorageVol.html#gvir-storage-vol-resize" title="gvir_storage_vol_resize ()">gvir_storage_vol_resize</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="GVirStorageVol.html#gvir-storage-vol-download" title="gvir_storage_vol_download ()">gvir_storage_vol_download</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="GVirStorageVol.html#gvir-storage-vol-upload" title="gvir_storage_vol_upload ()">gvir_storage_vol_upload</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <div class="refsect1">
 <a name="GVirStorageVol.properties"></a><h2>Properties</h2>
-<pre class="synopsis">
-  "<a class="link" href="GVirStorageVol.html#GVirStorageVol--handle" title='The "handle" property'>handle</a>"                   <span class="type">GVirStorageVolHandle</span>*  : Read / Write / Construct Only
-  "<a class="link" href="GVirStorageVol.html#GVirStorageVol--pool" title='The "pool" property'>pool</a>"                     <a class="link" href="GVirStoragePool.html" title="GVirStoragePool"><span class="type">GVirStoragePool</span></a>*      : Read / Write / Construct Only
+<div class="informaltable"><table border="0">
+<colgroup>
+<col width="150px" class="properties_type">
+<col width="300px" class="properties_name">
+<col width="200px" class="properties_flags">
+</colgroup>
+<tbody>
+<tr>
+<td class="property_type">
+<span class="type">GVirStorageVolHandle</span> *</td>
+<td class="property_name"><a class="link" href="GVirStorageVol.html#GVirStorageVol--handle" title="The “handle” property">handle</a></td>
+<td class="property_flags">Read / Write / Construct Only</td>
+</tr>
+<tr>
+<td class="property_type">
+<a class="link" href="GVirStoragePool.html" title="GVirStoragePool"><span class="type">GVirStoragePool</span></a> *</td>
+<td class="property_name"><a class="link" href="GVirStorageVol.html#GVirStorageVol--pool" title="The “pool” property">pool</a></td>
+<td class="property_flags">Read / Write / Construct Only</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<a name="GVirStorageVolInfo"></a><div class="refsect1">
+<a name="GVirStorageVol.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="name">
+<col class="description">
+</colgroup>
+<tbody>
+<tr>
+<td class="datatype_keyword">enum</td>
+<td class="function_name"><a class="link" href="GVirStorageVol.html#GVirStorageVolType" title="enum GVirStorageVolType">GVirStorageVolType</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword">enum</td>
+<td class="function_name"><a class="link" href="GVirStorageVol.html#GVirStorageVolResizeFlags" title="enum GVirStorageVolResizeFlags">GVirStorageVolResizeFlags</a></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GVirStorageVol.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">    <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Boxed-Types.html">GBoxed</a>
+    <span class="lineart">╰──</span> GVirStorageVolInfo
+    <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+    <span class="lineart">╰──</span> GVirStorageVol
 </pre>
 </div>
 <div class="refsect1">
 <a name="GVirStorageVol.description"></a><h2>Description</h2>
 </div>
 <div class="refsect1">
-<a name="GVirStorageVol.details"></a><h2>Details</h2>
+<a name="GVirStorageVol.functions_details"></a><h2>Functions</h2>
 <div class="refsect2">
-<a name="GVirStorageVol-struct"></a><h3>struct GVirStorageVol</h3>
-<pre class="programlisting">struct GVirStorageVol;</pre>
+<a name="gvir-storage-vol-get-name"></a><h3>gvir_storage_vol_get_name ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+gvir_storage_vol_get_name (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
-<a name="GVirStorageVolClass"></a><h3>struct GVirStorageVolClass</h3>
-<pre class="programlisting">struct GVirStorageVolClass {
-    GObjectClass parent_class;
-
-    gpointer padding[20];
-};
-</pre>
+<a name="gvir-storage-vol-get-path"></a><h3>gvir_storage_vol_get_path ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+gvir_storage_vol_get_path (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
+                           <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
-<a name="GVirStorageVolType"></a><h3>enum GVirStorageVolType</h3>
-<pre class="programlisting">typedef enum {
-    GVIR_STORAGE_VOL_STATE_FILE  = 0, /* Regular file based volume */
-    GVIR_STORAGE_VOL_STATE_BLOCK = 1, /* Block based volume */
-    GVIR_STORAGE_VOL_STATE_DIR   = 2, /* Directory-passthrough based volume */
-} GVirStorageVolType;
-</pre>
-<div class="variablelist"><table border="0" class="variablelist">
+<a name="gvir-storage-vol-delete"></a><h3>gvir_storage_vol_delete ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+gvir_storage_vol_delete (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
+                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> flags</code></em>,
+                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **err</code></em>);</pre>
+<p>Deletes the storage volume <em class="parameter"><code>vol</code></em>
+.</p>
+<div class="refsect3">
+<a name="id-1.2.12.9.4.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
 <colgroup>
-<col align="left" valign="top">
-<col>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
 </colgroup>
 <tbody>
 <tr>
-<td><p><a name="GVIR-STORAGE-VOL-STATE-FILE:CAPS"></a><span class="term"><code class="literal">GVIR_STORAGE_VOL_STATE_FILE</code></span></p></td>
-<td></td>
+<td class="parameter_name"><p>vol</p></td>
+<td class="parameter_description"><p>the storage volume to delete</p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-STORAGE-VOL-STATE-BLOCK:CAPS"></a><span class="term"><code class="literal">GVIR_STORAGE_VOL_STATE_BLOCK</code></span></p></td>
-<td></td>
+<td class="parameter_name"><p>flags</p></td>
+<td class="parameter_description"><p>the flags</p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-STORAGE-VOL-STATE-DIR:CAPS"></a><span class="term"><code class="literal">GVIR_STORAGE_VOL_STATE_DIR</code></span></p></td>
-<td></td>
+<td class="parameter_name"><p>err</p></td>
+<td class="parameter_description"><p>Return location for errors, or NULL</p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 </tbody>
 </table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.12.9.4.6"></a><h4>Returns</h4>
+<p> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
+<p></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-storage-vol-get-config"></a><h3>gvir_storage_vol_get_config ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/Libvirt-gconfig/GVirConfigStorageVol.html"><span class="returnvalue">GVirConfigStorageVol</span></a> *
+gvir_storage_vol_get_config (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
+                             <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> flags</code></em>,
+                             <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **err</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.2.12.9.5.4"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>vol</p></td>
+<td class="parameter_description"><p>the storage_vol</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>flags</p></td>
+<td class="parameter_description"><p>the flags</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>err</p></td>
+<td class="parameter_description"><p>Place-holder for possible errors</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.12.9.5.5"></a><h4>Returns</h4>
+<p> the config. The returned object should be
+unreffed with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> when no longer needed. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-storage-vol-get-info"></a><h3>gvir_storage_vol_get_info ()</h3>
+<pre class="programlisting"><a class="link" href="GVirStorageVol.html#GVirStorageVolInfo"><span class="returnvalue">GVirStorageVolInfo</span></a> *
+gvir_storage_vol_get_info (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
+                           <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **err</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.2.12.9.6.4"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>vol</p></td>
+<td class="parameter_description"><p>the storage_vol</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>err</p></td>
+<td class="parameter_description"><p>Place-holder for possible errors</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.12.9.6.5"></a><h4>Returns</h4>
+<p> the info. The returned object should be
+unreffed with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> when no longer needed. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-storage-vol-resize"></a><h3>gvir_storage_vol_resize ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+gvir_storage_vol_resize (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
+                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> capacity</code></em>,
+                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> flags</code></em>,
+                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **err</code></em>);</pre>
+<p>Changes the capacity of the storage volume <em class="parameter"><code>vol</code></em>
+ to <em class="parameter"><code>capacity</code></em>
+.</p>
+<div class="refsect3">
+<a name="id-1.2.12.9.7.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>vol</p></td>
+<td class="parameter_description"><p>the storage volume to resize</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>capacity</p></td>
+<td class="parameter_description"><p>the new capacity of the volume</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>flags</p></td>
+<td class="parameter_description"><p> the flags. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GVirStorageVolResizeFlags]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>err</p></td>
+<td class="parameter_description"><p>Return location for errors, or NULL</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.12.9.7.6"></a><h4>Returns</h4>
+<p> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><span class="type">TRUE</span></a> success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><span class="type">FALSE</span></a> otherwise</p>
+<p></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-storage-vol-download"></a><h3>gvir_storage_vol_download ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+gvir_storage_vol_download (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
+                           <em class="parameter"><code><a class="link" href="GVirStream.html" title="GVirStream"><span class="type">GVirStream</span></a> *stream</code></em>,
+                           <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> offset</code></em>,
+                           <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> length</code></em>,
+                           <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> flags</code></em>,
+                           <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **err</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.2.12.9.8.4"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>vol</p></td>
+<td class="parameter_description"><p>the storage volume to download from</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>stream</p></td>
+<td class="parameter_description"><p>stream to use as output</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>offset</p></td>
+<td class="parameter_description"><p>position in <em class="parameter"><code>vol</code></em>
+to start reading from</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>length</p></td>
+<td class="parameter_description"><p>limit on amount of data to download, or 0 for downloading all data</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>flags</p></td>
+<td class="parameter_description"><p>extra flags, not used yet, pass 0</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.12.9.8.5"></a><h4>Returns</h4>
+<p> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><span class="type">TRUE</span></a> of success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><span class="type">FALSE</span></a> otherwise</p>
+<p></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-storage-vol-upload"></a><h3>gvir_storage_vol_upload ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+gvir_storage_vol_upload (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
+                         <em class="parameter"><code><a class="link" href="GVirStream.html" title="GVirStream"><span class="type">GVirStream</span></a> *stream</code></em>,
+                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> offset</code></em>,
+                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> length</code></em>,
+                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> flags</code></em>,
+                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **err</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.2.12.9.9.4"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>vol</p></td>
+<td class="parameter_description"><p>the storage volume to upload</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>stream</p></td>
+<td class="parameter_description"><p>stream to use as input</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>offset</p></td>
+<td class="parameter_description"><p>position in <em class="parameter"><code>vol</code></em>
+to start to write to</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>length</p></td>
+<td class="parameter_description"><p>limit on amount of data to upload, or 0 for uploading all data</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>flags</p></td>
+<td class="parameter_description"><p>the flags, not set yet, pass 0</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.12.9.9.5"></a><h4>Returns</h4>
+<p> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><span class="type">TRUE</span></a> of success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><span class="type">FALSE</span></a> otherwise</p>
+<p></p>
+</div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirStorageVol.other_details"></a><h2>Types and Values</h2>
+<div class="refsect2">
+<a name="GVirStorageVolType"></a><h3>enum GVirStorageVolType</h3>
+<div class="refsect3">
+<a name="id-1.2.12.10.2.3"></a><h4>Members</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="300px" class="enum_members_name">
+<col class="enum_members_description">
+<col width="200px" class="enum_members_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="enum_member_name"><p><a name="GVIR-STORAGE-VOL-STATE-FILE:CAPS"></a>GVIR_STORAGE_VOL_STATE_FILE</p></td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GVIR-STORAGE-VOL-STATE-BLOCK:CAPS"></a>GVIR_STORAGE_VOL_STATE_BLOCK</p></td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GVIR-STORAGE-VOL-STATE-DIR:CAPS"></a>GVIR_STORAGE_VOL_STATE_DIR</p></td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="GVirStorageVolResizeFlags"></a><h3>enum GVirStorageVolResizeFlags</h3>
-<pre class="programlisting">typedef enum {
-    GVIR_STORAGE_VOL_RESIZE_NONE     = 0,
-    GVIR_STORAGE_VOL_RESIZE_ALLOCATE = VIR_STORAGE_VOL_RESIZE_ALLOCATE,
-    GVIR_STORAGE_VOL_RESIZE_DELTA    = VIR_STORAGE_VOL_RESIZE_DELTA,
-    GVIR_STORAGE_VOL_RESIZE_SHRINK   = VIR_STORAGE_VOL_RESIZE_SHRINK,
-} GVirStorageVolResizeFlags;
-</pre>
-<div class="variablelist"><table border="0" class="variablelist">
+<div class="refsect3">
+<a name="id-1.2.12.10.3.3"></a><h4>Members</h4>
+<div class="informaltable"><table width="100%" border="0">
 <colgroup>
-<col align="left" valign="top">
-<col>
+<col width="300px" class="enum_members_name">
+<col class="enum_members_description">
+<col width="200px" class="enum_members_annotations">
 </colgroup>
 <tbody>
 <tr>
-<td><p><a name="GVIR-STORAGE-VOL-RESIZE-NONE:CAPS"></a><span class="term"><code class="literal">GVIR_STORAGE_VOL_RESIZE_NONE</code></span></p></td>
-<td>No flags
+<td class="enum_member_name"><p><a name="GVIR-STORAGE-VOL-RESIZE-NONE:CAPS"></a>GVIR_STORAGE_VOL_RESIZE_NONE</p></td>
+<td class="enum_member_description">
+<p>No flags</p>
 </td>
+<td class="enum_member_annotations"> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-STORAGE-VOL-RESIZE-ALLOCATE:CAPS"></a><span class="term"><code class="literal">GVIR_STORAGE_VOL_RESIZE_ALLOCATE</code></span></p></td>
-<td>force allocation of new size
+<td class="enum_member_name"><p><a name="GVIR-STORAGE-VOL-RESIZE-ALLOCATE:CAPS"></a>GVIR_STORAGE_VOL_RESIZE_ALLOCATE</p></td>
+<td class="enum_member_description">
+<p>force allocation of new size</p>
 </td>
+<td class="enum_member_annotations"> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-STORAGE-VOL-RESIZE-DELTA:CAPS"></a><span class="term"><code class="literal">GVIR_STORAGE_VOL_RESIZE_DELTA</code></span></p></td>
-<td>size is relative to current
+<td class="enum_member_name"><p><a name="GVIR-STORAGE-VOL-RESIZE-DELTA:CAPS"></a>GVIR_STORAGE_VOL_RESIZE_DELTA</p></td>
+<td class="enum_member_description">
+<p>size is relative to current</p>
 </td>
+<td class="enum_member_annotations"> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-STORAGE-VOL-RESIZE-SHRINK:CAPS"></a><span class="term"><code class="literal">GVIR_STORAGE_VOL_RESIZE_SHRINK</code></span></p></td>
-<td>allow decrease in capacity. This combined
-with <a class="link" href="GVirStorageVol.html#GVIR-STORAGE-VOL-RESIZE-DELTA:CAPS"><span class="type">GVIR_STORAGE_VOL_RESIZE_DELTA</span></a>, implies a negative delta.
+<td class="enum_member_name"><p><a name="GVIR-STORAGE-VOL-RESIZE-SHRINK:CAPS"></a>GVIR_STORAGE_VOL_RESIZE_SHRINK</p></td>
+<td class="enum_member_description">
+<p>allow decrease in capacity. This combined
+with <a class="link" href="GVirStorageVol.html#GVIR-STORAGE-VOL-RESIZE-DELTA:CAPS"><span class="type">GVIR_STORAGE_VOL_RESIZE_DELTA</span></a>, implies a negative delta.</p>
 </td>
+<td class="enum_member_annotations"> </td>
 </tr>
 </tbody>
 </table></div>
 </div>
-<hr>
-<div class="refsect2">
-<a name="GVirStorageVolInfo-struct"></a><h3>struct GVirStorageVolInfo</h3>
-<pre class="programlisting">struct GVirStorageVolInfo {
-    GVirStorageVolType type; /* Type flags */
-    guint64 capacity;        /* Logical size bytes */
-    guint64 allocation;      /* Current allocation bytes */
-};
-</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-storage-vol-get-name"></a><h3>gvir_storage_vol_get_name ()</h3>
-<pre class="programlisting">const <span class="returnvalue">gchar</span> *       gvir_storage_vol_get_name           (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-storage-vol-get-path"></a><h3>gvir_storage_vol_get_path ()</h3>
-<pre class="programlisting">const <span class="returnvalue">gchar</span> *       gvir_storage_vol_get_path           (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-storage-vol-delete"></a><h3>gvir_storage_vol_delete ()</h3>
-<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_storage_vol_delete             (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);</pre>
-<p>
-Deletes the storage volume <em class="parameter"><code>vol</code></em>.
-</p>
-<div class="variablelist"><table border="0" class="variablelist">
-<colgroup>
-<col align="left" valign="top">
-<col>
-</colgroup>
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>vol</code></em> :</span></p></td>
-<td>the storage volume to delete</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>the flags</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td>Return location for errors, or NULL</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-<code class="literal">TRUE</code> on success, <code class="literal">FALSE</code> otherwise</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-storage-vol-get-config"></a><h3>gvir_storage_vol_get_config ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/Libvirt-gconfig/GVirConfigStorageVol.html"><span class="returnvalue">GVirConfigStorageVol</span></a> * gvir_storage_vol_get_config      (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);</pre>
-<div class="variablelist"><table border="0" class="variablelist">
-<colgroup>
-<col align="left" valign="top">
-<col>
-</colgroup>
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>vol</code></em> :</span></p></td>
-<td>the storage_vol</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>the flags</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td>Place-holder for possible errors</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the config. The returned object should be
-unreffed with <code class="function">g_object_unref()</code> when no longer needed. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-storage-vol-get-info"></a><h3>gvir_storage_vol_get_info ()</h3>
-<pre class="programlisting"><a class="link" href="GVirStorageVol.html#GVirStorageVolInfo"><span class="returnvalue">GVirStorageVolInfo</span></a> * gvir_storage_vol_get_info          (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);</pre>
-<div class="variablelist"><table border="0" class="variablelist">
-<colgroup>
-<col align="left" valign="top">
-<col>
-</colgroup>
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>vol</code></em> :</span></p></td>
-<td>the storage_vol</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td>Place-holder for possible errors</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the info. The returned object should be
-unreffed with <code class="function">g_object_unref()</code> when no longer needed. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-storage-vol-resize"></a><h3>gvir_storage_vol_resize ()</h3>
-<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_storage_vol_resize             (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint64</span> capacity</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);</pre>
-<p>
-Changes the capacity of the storage volume <em class="parameter"><code>vol</code></em> to <em class="parameter"><code>capacity</code></em>.
-</p>
-<div class="variablelist"><table border="0" class="variablelist">
-<colgroup>
-<col align="left" valign="top">
-<col>
-</colgroup>
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>vol</code></em> :</span></p></td>
-<td>the storage volume to resize</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>capacity</code></em> :</span></p></td>
-<td>the new capacity of the volume</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>the flags. <span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GVirStorageVolResizeFlags]</span>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td>Return location for errors, or NULL</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-<span class="type">TRUE</span> success, <span class="type">FALSE</span> otherwise</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-storage-vol-download"></a><h3>gvir_storage_vol_download ()</h3>
-<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_storage_vol_download           (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GVirStream.html" title="GVirStream"><span class="type">GVirStream</span></a> *stream</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint64</span> offset</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint64</span> length</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);</pre>
-<div class="variablelist"><table border="0" class="variablelist">
-<colgroup>
-<col align="left" valign="top">
-<col>
-</colgroup>
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>vol</code></em> :</span></p></td>
-<td>the storage volume to download from</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
-<td>stream to use as output</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>offset</code></em> :</span></p></td>
-<td>position in <em class="parameter"><code>vol</code></em> to start reading from</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td>limit on amount of data to download, or 0 for downloading all data</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>extra flags, not used yet, pass 0</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-<span class="type">TRUE</span> of success, <span class="type">FALSE</span> otherwise</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-storage-vol-upload"></a><h3>gvir_storage_vol_upload ()</h3>
-<pre class="programlisting"><span class="returnvalue">gboolean</span>            gvir_storage_vol_upload             (<em class="parameter"><code><a class="link" href="GVirStorageVol.html" title="GVirStorageVol"><span class="type">GVirStorageVol</span></a> *vol</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GVirStream.html" title="GVirStream"><span class="type">GVirStream</span></a> *stream</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint64</span> offset</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint64</span> length</code></em>,
-                                                         <em class="parameter"><code><span class="type">guint</span> flags</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **err</code></em>);</pre>
-<div class="variablelist"><table border="0" class="variablelist">
-<colgroup>
-<col align="left" valign="top">
-<col>
-</colgroup>
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>vol</code></em> :</span></p></td>
-<td>the storage volume to upload</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
-<td>stream to use as input</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>offset</code></em> :</span></p></td>
-<td>position in <em class="parameter"><code>vol</code></em> to start to write to</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td>limit on amount of data to upload, or 0 for uploading all data</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>the flags, not set yet, pass 0</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-<span class="type">TRUE</span> of success, <span class="type">FALSE</span> otherwise</td>
-</tr>
-</tbody>
-</table></div>
 </div>
 </div>
 <div class="refsect1">
 <a name="GVirStorageVol.property-details"></a><h2>Property Details</h2>
 <div class="refsect2">
-<a name="GVirStorageVol--handle"></a><h3>The <code class="literal">"handle"</code> property</h3>
-<pre class="programlisting">  "handle"                   <span class="type">GVirStorageVolHandle</span>*  : Read / Write / Construct Only</pre>
+<a name="GVirStorageVol--handle"></a><h3>The <code class="literal">“handle”</code> property</h3>
+<pre class="programlisting">  “handle”                   <span class="type">GVirStorageVolHandle</span> *</pre>
 <p>The storage_vol handle.</p>
+<p>Flags: Read / Write / Construct Only</p>
 </div>
 <hr>
 <div class="refsect2">
-<a name="GVirStorageVol--pool"></a><h3>The <code class="literal">"pool"</code> property</h3>
-<pre class="programlisting">  "pool"                     <a class="link" href="GVirStoragePool.html" title="GVirStoragePool"><span class="type">GVirStoragePool</span></a>*      : Read / Write / Construct Only</pre>
+<a name="GVirStorageVol--pool"></a><h3>The <code class="literal">“pool”</code> property</h3>
+<pre class="programlisting">  “pool”                     <a class="link" href="GVirStoragePool.html" title="GVirStoragePool"><span class="type">GVirStoragePool</span></a> *</pre>
 <p>The containing storage pool.</p>
+<p>Flags: Read / Write / Construct Only</p>
 </div>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.19</div>
+          Generated by GTK-Doc V1.21</div>
 </body>
 </html>

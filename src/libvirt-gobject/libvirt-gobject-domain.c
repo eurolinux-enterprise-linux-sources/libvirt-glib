@@ -38,6 +38,8 @@ struct _GVirDomainPrivate
 {
     virDomainPtr handle;
     gchar uuid[VIR_UUID_STRING_BUFLEN];
+    GHashTable *snapshots;
+    GMutex *lock;
 };
 
 G_DEFINE_TYPE(GVirDomain, gvir_domain, G_TYPE_OBJECT);
@@ -58,6 +60,16 @@ enum {
     VIR_PMSUSPENDED,
     LAST_SIGNAL
 };
+
+typedef struct {
+    guint create_flags;
+    GVirConfigDomainSnapshot *snapshot_config;
+} SnapshotCreateData;
+
+static void snapshot_create_data_free (SnapshotCreateData *data) {
+    g_clear_object (&data->snapshot_config);
+    g_slice_free (SnapshotCreateData, data);
+}
 
 static gint signals[LAST_SIGNAL];
 
@@ -120,6 +132,11 @@ static void gvir_domain_finalize(GObject *object)
     GVirDomainPrivate *priv = domain->priv;
 
     g_debug("Finalize GVirDomain=%p", domain);
+
+    if (priv->snapshots) {
+        g_hash_table_unref(priv->snapshots);
+    }
+    g_mutex_free(priv->lock);
 
     virDomainFree(priv->handle);
 
@@ -237,6 +254,7 @@ static void gvir_domain_init(GVirDomain *domain)
     g_debug("Init GVirDomain=%p", domain);
 
     domain->priv = GVIR_DOMAIN_GET_PRIVATE(domain);
+    domain->priv->lock = g_mutex_new();
 }
 
 typedef struct virDomain GVirDomainHandle;
@@ -1513,4 +1531,274 @@ gvir_domain_create_snapshot(GVirDomain *dom,
 
     g_free(custom_xml);
     return dom_snapshot;
+}
+
+
+static void _create_snapshot_async_thread(GTask *task,
+                                          gpointer source_object,
+                                          gpointer task_data,
+                                          GCancellable *cancellable)
+{
+    GError *error = NULL;
+    GVirDomainSnapshot *snapshot;
+    SnapshotCreateData *create_data = task_data;
+
+    snapshot = gvir_domain_create_snapshot(source_object,
+                                           create_data->snapshot_config,
+                                           create_data->create_flags,
+                                           &error);
+    if (snapshot)
+        g_task_return_pointer(task, snapshot, g_object_unref);
+    else
+        g_task_return_error(task, error);
+}
+
+/**
+ * gvir_domain_create_snapshot_async:
+ * @dom: The #GVirDomain
+ * @custom_conf: (allow-none): Configuration of snapshot or %NULL
+ * @flags: Bitwise-OR of #GVirDomainSnapshotCreateFlags
+ * @cancellable: (allow-none) (transfer none): cancellation object
+ * @callback: (scope async): Completion callback
+ * @user_data: (closure): Opaque data for callback
+ */
+void gvir_domain_create_snapshot_async(GVirDomain *dom,
+                                       GVirConfigDomainSnapshot *custom_conf,
+                                       guint flags,
+                                       GCancellable *cancellable,
+                                       GAsyncReadyCallback callback,
+                                       gpointer user_data)
+{
+    SnapshotCreateData *create_data;
+    GTask *task;
+
+    g_return_if_fail(GVIR_IS_DOMAIN(dom));
+    g_return_if_fail(GVIR_CONFIG_IS_DOMAIN_SNAPSHOT(custom_conf));
+
+    create_data = g_slice_new(SnapshotCreateData);
+    create_data->create_flags = flags;
+    create_data->snapshot_config = g_object_ref (custom_conf);
+
+    task = g_task_new(dom, cancellable, callback, user_data);
+    g_task_set_task_data(task, create_data, (GDestroyNotify)snapshot_create_data_free);
+    g_task_run_in_thread(task, _create_snapshot_async_thread);
+    g_object_unref(task);
+}
+
+/**
+ * gvir_domain_create_snapshot_finish:
+ * @domain: A #GVirDomain
+ * @result: (transfer none): Async method result
+ * @error: (allow-none): Error placeholder
+ *
+ * Returns: (transfer full): The created snapshot
+ */
+GVirDomainSnapshot *gvir_domain_create_snapshot_finish(GVirDomain  *domain,
+                                                       GAsyncResult *result,
+                                                       GError **error)
+{
+    g_return_val_if_fail(g_task_is_valid(result, domain), NULL);
+
+    return g_task_propagate_pointer(G_TASK(result), error);
+}
+
+/**
+ * gvir_domain_fetch_snapshots:
+ * @dom: The domain
+ * @list_flags: bitwise-OR of #GVirDomainSnapshotListFlags
+ * @cancellable: (allow-none) (transfer none): cancellation object
+ * @error: (allow-none): Place-holder for error or %NULL
+ *
+ * Returns: %TRUE on success, %FALSE otherwise.
+ */
+gboolean gvir_domain_fetch_snapshots(GVirDomain *dom,
+                                     guint list_flags,
+                                     GCancellable *cancellable,
+                                     GError **error)
+{
+    GVirDomainPrivate *priv;
+    virDomainSnapshotPtr *snapshots = NULL;
+    GVirDomainSnapshot *snap;
+    GHashTable *snap_table;
+    int n_snaps = 0;
+    int i;
+    gboolean ret = FALSE;
+
+    g_return_val_if_fail(GVIR_IS_DOMAIN(dom), FALSE);
+    g_return_val_if_fail((error == NULL) || (*error == NULL), FALSE);
+
+    priv = dom->priv;
+
+    snap_table = g_hash_table_new_full(g_str_hash,
+                                       g_str_equal,
+                                       NULL,
+                                       g_object_unref);
+
+
+    n_snaps = virDomainListAllSnapshots(priv->handle, &snapshots, list_flags);
+
+    if (g_cancellable_set_error_if_cancelled(cancellable, error)) {
+        goto cleanup;
+    }
+
+    if (n_snaps < 0) {
+        gvir_set_error(error, GVIR_DOMAIN_ERROR, 0,
+                       "Unable to fetch snapshots of %s",
+                       gvir_domain_get_name(dom));
+        goto cleanup;
+    }
+
+    for (i = 0; i < n_snaps; i ++) {
+        if (g_cancellable_set_error_if_cancelled(cancellable, error)) {
+            goto cleanup;
+        }
+        snap = GVIR_DOMAIN_SNAPSHOT(g_object_new(GVIR_TYPE_DOMAIN_SNAPSHOT,
+                                                 "handle", snapshots[i],
+                                                 NULL));
+        g_hash_table_insert(snap_table,
+                            (gpointer)gvir_domain_snapshot_get_name(snap),
+                            snap);
+    }
+
+
+    g_mutex_lock(priv->lock);
+    if (priv->snapshots != NULL)
+        g_hash_table_unref(priv->snapshots);
+    priv->snapshots = snap_table;
+    snap_table = NULL;
+    g_mutex_unlock(priv->lock);
+
+    ret = TRUE;
+
+cleanup:
+    free(snapshots);
+    if (snap_table != NULL)
+        g_hash_table_unref(snap_table);
+    return ret;
+}
+
+/**
+ * gvir_domain_get_snapshots:
+ * @dom: The domain
+ * Returns: (element-type LibvirtGObject.DomainSnapshot) (transfer full): A
+ * list of all the snapshots available for the given domain. The returned
+ * list should be freed with g_list_free(), after its elements have been
+ * unreffed with g_object_unref().
+ */
+GList *gvir_domain_get_snapshots(GVirDomain *dom)
+{
+    GVirDomainPrivate *priv;
+    GList *snapshots = NULL;
+    g_return_val_if_fail(GVIR_IS_DOMAIN(dom), NULL);
+
+    priv = dom->priv;
+
+    g_mutex_lock (priv->lock);
+    if (dom->priv->snapshots != NULL) {
+        snapshots = g_hash_table_get_values(priv->snapshots);
+        g_list_foreach(snapshots, (GFunc)g_object_ref, NULL);
+    }
+    g_mutex_unlock (priv->lock);
+
+    return snapshots;
+}
+
+
+
+static void _fetch_snapshots_async_thread(GTask *task,
+                                          gpointer source_object,
+                                          gpointer task_data,
+                                          GCancellable *cancellable)
+{
+    GError *error = NULL;
+    gboolean status;
+
+    status = gvir_domain_fetch_snapshots(source_object,
+                                         GPOINTER_TO_UINT(task_data),
+                                         cancellable,
+                                         &error);
+    if (status)
+        g_task_return_boolean(task, TRUE);
+    else
+        g_task_return_error(task, error);
+}
+
+
+/**
+ * gvir_domain_fetch_snapshots_async:
+ * @dom: The domain
+ * @list_flags: bitwise-OR of #GVirDomainSnapshotListFlags
+ * @cancellable: (allow-none) (transfer none): cancellation object
+ * @callback: (scope async): completion callback
+ * @user_data: (closure): opaque data for callback
+ */
+void gvir_domain_fetch_snapshots_async(GVirDomain *dom,
+                                       guint list_flags,
+                                       GCancellable *cancellable,
+                                       GAsyncReadyCallback callback,
+                                       gpointer user_data)
+{
+    GTask *task;
+
+    g_return_if_fail(GVIR_IS_DOMAIN(dom));
+    g_return_if_fail((cancellable == NULL) || G_IS_CANCELLABLE(cancellable));
+
+    task = g_task_new(dom, cancellable, callback, user_data);
+    g_task_set_task_data(task, GUINT_TO_POINTER(list_flags), NULL);
+    g_task_run_in_thread(task, _fetch_snapshots_async_thread);
+    g_object_unref(task);
+}
+
+
+/**
+ * gvir_domain_fetch_snapshots_finish:
+ * @dom: a #GVirDomain
+ * @res: (transfer none): async method result
+ *
+ * Returns: TRUE on success, FALSE otherwise.
+ */
+gboolean gvir_domain_fetch_snapshots_finish(GVirDomain *dom,
+                                            GAsyncResult *res,
+                                            GError **error)
+{
+    g_return_val_if_fail(GVIR_IS_DOMAIN(dom), FALSE);
+    g_return_val_if_fail(g_task_is_valid(res, dom), FALSE);
+
+    return g_task_propagate_boolean(G_TASK(res), error);
+}
+
+
+/**
+ * gvir_domain_get_has_current_snapshot:
+ * @dom: a #GVirDomain
+ * @flags: Unused, pass 0
+ * @has_current_snapshot: (out): Will be set to %TRUE if the given domain
+ * has a current snapshot and to %FALSE otherwise.
+ * @error: (allow-none): Place-holder for error or %NULL
+ *
+ * Returns: %TRUE on success, %FALSE otherwise.
+ */
+gboolean gvir_domain_get_has_current_snapshot(GVirDomain *dom,
+                                              guint flags,
+                                              gboolean *has_current_snapshot,
+                                              GError **error)
+{
+    int status;
+    g_return_val_if_fail(GVIR_IS_DOMAIN(dom), FALSE);
+    g_return_val_if_fail(has_current_snapshot != NULL, FALSE);
+    g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
+
+    status = virDomainHasCurrentSnapshot(dom->priv->handle,
+                                         flags);
+
+    if (status == -1) {
+        gvir_set_error(error, GVIR_DOMAIN_ERROR, 0,
+                       "Unable to check if domain `%s' has a current snapshot",
+                       gvir_domain_get_name(dom));
+        return FALSE;
+    }
+
+    *has_current_snapshot = status;
+
+    return TRUE;
 }

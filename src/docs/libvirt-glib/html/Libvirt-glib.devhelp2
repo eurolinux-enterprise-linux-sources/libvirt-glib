@@ -12,16 +12,16 @@
     <sub name="Annotation Glossary" link="annotation-glossary.html"/>
   </chapters>
   <functions>
-    <keyword type="function" name="gvir_init ()" link="Libvirt-glib-Library-initialization.html#gvir-init"/>
-    <keyword type="function" name="gvir_init_check ()" link="Libvirt-glib-Library-initialization.html#gvir-init-check"/>
-    <keyword type="function" name="gvir_error_new ()" link="Libvirt-glib-Error-reporting.html#gvir-error-new"/>
-    <keyword type="function" name="gvir_error_new_literal ()" link="Libvirt-glib-Error-reporting.html#gvir-error-new-literal"/>
-    <keyword type="function" name="gvir_error_new_valist ()" link="Libvirt-glib-Error-reporting.html#gvir-error-new-valist"/>
-    <keyword type="function" name="gvir_set_error ()" link="Libvirt-glib-Error-reporting.html#gvir-set-error"/>
-    <keyword type="function" name="gvir_set_error_literal ()" link="Libvirt-glib-Error-reporting.html#gvir-set-error-literal"/>
-    <keyword type="function" name="gvir_set_error_valist ()" link="Libvirt-glib-Error-reporting.html#gvir-set-error-valist"/>
-    <keyword type="function" name="gvir_critical ()" link="Libvirt-glib-Error-reporting.html#gvir-critical"/>
-    <keyword type="function" name="gvir_warning ()" link="Libvirt-glib-Error-reporting.html#gvir-warning"/>
-    <keyword type="function" name="gvir_event_register ()" link="Libvirt-glib-Event-loop.html#gvir-event-register"/>
+    <keyword type="function" name="gvir_init ()" link="Libvirt-glib-Library-initialization.html#gvir-init"/>
+    <keyword type="function" name="gvir_init_check ()" link="Libvirt-glib-Library-initialization.html#gvir-init-check"/>
+    <keyword type="function" name="gvir_error_new ()" link="Libvirt-glib-Error-reporting.html#gvir-error-new"/>
+    <keyword type="function" name="gvir_error_new_literal ()" link="Libvirt-glib-Error-reporting.html#gvir-error-new-literal"/>
+    <keyword type="function" name="gvir_error_new_valist ()" link="Libvirt-glib-Error-reporting.html#gvir-error-new-valist"/>
+    <keyword type="function" name="gvir_set_error ()" link="Libvirt-glib-Error-reporting.html#gvir-set-error"/>
+    <keyword type="function" name="gvir_set_error_literal ()" link="Libvirt-glib-Error-reporting.html#gvir-set-error-literal"/>
+    <keyword type="function" name="gvir_set_error_valist ()" link="Libvirt-glib-Error-reporting.html#gvir-set-error-valist"/>
+    <keyword type="function" name="gvir_critical ()" link="Libvirt-glib-Error-reporting.html#gvir-critical"/>
+    <keyword type="function" name="gvir_warning ()" link="Libvirt-glib-Error-reporting.html#gvir-warning"/>
+    <keyword type="function" name="gvir_event_register ()" link="Libvirt-glib-Event-loop.html#gvir-event-register"/>
   </functions>
 </book>

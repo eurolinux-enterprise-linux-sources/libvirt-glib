@@ -21,7 +21,7 @@
 %define libvirt_version 0.10.2
 
 Name: libvirt-glib
-Version: 0.1.7
+Version: 0.1.9
 Release: 1%{?dist}%{?extra_release}
 Summary: libvirt glib integration for events
 Group: Development/Libraries
@@ -30,7 +30,7 @@ URL: http://libvirt.org/
 Source0: ftp://libvirt.org/libvirt/glib/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires: glib2-devel >= 2.22.0
+BuildRequires: glib2-devel >= 2.36.0
 BuildRequires: libvirt-devel >= %{libvirt_version}
 BuildRequires: python-devel
 %if %{with_introspection}
@@ -138,6 +138,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/libvirt-gconfig-1.0.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/libvirt-gobject-1.0.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/libvirt-gobject-1.0.la
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -153,15 +155,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun -n libvirt-gobject -p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root,-)
 %doc README COPYING AUTHORS ChangeLog NEWS
 %{_libdir}/libvirt-glib-1.0.so.*
 %if %{with_introspection}
 %{_libdir}/girepository-1.0/LibvirtGLib-1.0.typelib
-%endif
-%if %{with_vala}
-%{_datadir}/vala/vapi/libvirt-glib-1.0.vapi
 %endif
 
 %files -n libvirt-gconfig
@@ -169,18 +168,11 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with_introspection}
 %{_libdir}/girepository-1.0/LibvirtGConfig-1.0.typelib
 %endif
-%if %{with_vala}
-%{_datadir}/vala/vapi/libvirt-gconfig-1.0.vapi
-%endif
 
 %files -n libvirt-gobject
 %{_libdir}/libvirt-gobject-1.0.so.*
 %if %{with_introspection}
 %{_libdir}/girepository-1.0/LibvirtGObject-1.0.typelib
-%endif
-%if %{with_vala}
-%{_datadir}/vala/vapi/libvirt-gobject-1.0.deps
-%{_datadir}/vala/vapi/libvirt-gobject-1.0.vapi
 %endif
 
 %files devel
@@ -196,6 +188,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gir-1.0/LibvirtGLib-1.0.gir
 %endif
 %{_datadir}/gtk-doc/html/Libvirt-glib
+%if %{with_vala}
+%{_datadir}/vala/vapi/libvirt-glib-1.0.vapi
+%endif
 
 %files -n libvirt-gconfig-devel
 %defattr(-,root,root,-)
@@ -210,6 +205,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gir-1.0/LibvirtGConfig-1.0.gir
 %endif
 %{_datadir}/gtk-doc/html/Libvirt-gconfig
+%if %{with_vala}
+%{_datadir}/vala/vapi/libvirt-gconfig-1.0.vapi
+%endif
 
 %files -n libvirt-gobject-devel
 %defattr(-,root,root,-)
@@ -224,6 +222,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gir-1.0/LibvirtGObject-1.0.gir
 %endif
 %{_datadir}/gtk-doc/html/Libvirt-gobject
+%if %{with_vala}
+%{_datadir}/vala/vapi/libvirt-gobject-1.0.deps
+%{_datadir}/vala/vapi/libvirt-gobject-1.0.vapi
+%endif
 
 %if %{with_python}
 %files python

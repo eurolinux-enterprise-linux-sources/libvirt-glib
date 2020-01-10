@@ -353,6 +353,7 @@ gvir_config_domain_disk_get_driver_cache(GVirConfigDomainDisk *disk)
                                                   GVIR_CONFIG_DOMAIN_DISK_CACHE_DEFAULT);
 }
 
+
 GVirConfigDomainDiskBus
 gvir_config_domain_disk_get_target_bus(GVirConfigDomainDisk *disk)
 {
@@ -368,6 +369,7 @@ gvir_config_domain_disk_get_target_bus(GVirConfigDomainDisk *disk)
                                                   GVIR_CONFIG_DOMAIN_DISK_BUS_IDE);
 }
 
+
 const char *
 gvir_config_domain_disk_get_target_dev(GVirConfigDomainDisk *disk)
 {
@@ -376,6 +378,7 @@ gvir_config_domain_disk_get_target_dev(GVirConfigDomainDisk *disk)
     return gvir_config_object_get_attribute(GVIR_CONFIG_OBJECT(disk),
                                             "target", "dev");
 }
+
 
 void
 gvir_config_domain_disk_set_readonly(GVirConfigDomainDisk *disk,
@@ -386,4 +389,46 @@ gvir_config_domain_disk_set_readonly(GVirConfigDomainDisk *disk,
         g_object_unref(node);
     } else
         gvir_config_object_delete_child(GVIR_CONFIG_OBJECT(disk), "readonly", NULL);
+}
+
+
+/**
+ * gvir_config_domain_disk_set_driver:
+ * @disk: a #GVirConfigDomainDisk
+ * @driver: (allow-none): a #GVirConfigDomainDiskDriver
+ *
+ * Uses @driver as the driver configuration for @disk.
+ */
+void gvir_config_domain_disk_set_driver(GVirConfigDomainDisk *disk,
+                                        GVirConfigDomainDiskDriver *driver)
+{
+    g_return_if_fail(GVIR_CONFIG_IS_DOMAIN_DISK(disk));
+    g_return_if_fail(driver == NULL || GVIR_CONFIG_IS_DOMAIN_DISK_DRIVER(driver));
+
+    gvir_config_object_attach_replace(GVIR_CONFIG_OBJECT(disk),
+                                      "driver",
+                                      GVIR_CONFIG_OBJECT(driver));
+}
+
+
+/**
+ * gvir_config_domain_disk_get_driver:
+ * @disk: a #GVirConfigDomainDisk
+ *
+ * Gets the driver configuration for @disk.
+ *
+ * Returns: (transfer full): A #GVirConfigDomainDiskDriver. The returned
+ * object should be unreffed with g_object_unref() when no longer needed.
+ */
+GVirConfigDomainDiskDriver *gvir_config_domain_disk_get_driver(GVirConfigDomainDisk *disk)
+{
+    GVirConfigObject *object;
+
+    g_return_val_if_fail(GVIR_CONFIG_IS_DOMAIN_DISK(disk), NULL);
+
+    object = gvir_config_object_get_child_with_type(GVIR_CONFIG_OBJECT(disk),
+                                                    "driver",
+                                                    GVIR_CONFIG_TYPE_DOMAIN_DISK_DRIVER);
+
+    return GVIR_CONFIG_DOMAIN_DISK_DRIVER(object);
 }

@@ -105,6 +105,8 @@ GVirConfigDomainVirtType gvir_config_domain_get_virt_type(GVirConfigDomain *doma
 void gvir_config_domain_set_virt_type(GVirConfigDomain *domain, GVirConfigDomainVirtType type);
 const char *gvir_config_domain_get_name(GVirConfigDomain *domain);
 void gvir_config_domain_set_name(GVirConfigDomain *domain, const char *name);
+const char *gvir_config_domain_get_uuid(GVirConfigDomain *domain);
+void gvir_config_domain_set_uuid(GVirConfigDomain *domain, const char *uuid);
 const char *gvir_config_domain_get_description(GVirConfigDomain *domain);
 void gvir_config_domain_set_description(GVirConfigDomain *domain, const char *description);
 guint64 gvir_config_domain_get_memory(GVirConfigDomain *domain);
@@ -117,6 +119,7 @@ void gvir_config_domain_set_vcpus(GVirConfigDomain *domain,
 GStrv gvir_config_domain_get_features(GVirConfigDomain *domain);
 void gvir_config_domain_set_features(GVirConfigDomain *domain,
                                      const GStrv features);
+GVirConfigDomainClock *gvir_config_domain_get_clock(GVirConfigDomain *domain);
 void gvir_config_domain_set_clock(GVirConfigDomain *domain,
                                   GVirConfigDomainClock *klock);
 GVirConfigDomainOs *gvir_config_domain_get_os(GVirConfigDomain *domain);

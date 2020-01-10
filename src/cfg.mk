@@ -109,7 +109,7 @@ sc_copyright_format:
 prev_version_file = /dev/null
 
 
-exclude_file_name_regexp--sc_bindtextdomain = ^(libvirt-gconfig/tests|examples)/|libvirt-glib/libvirt-glib-event.c|libvirt-glib/libvirt-glib-main.c
+exclude_file_name_regexp--sc_bindtextdomain = ^(libvirt-gconfig/tests|examples)/|libvirt-glib/libvirt-glib-event.c|libvirt-glib/libvirt-glib-main.c|tests/
 
 exclude_file_name_regexp--sc_preprocessor_indentation = ^*/*.[ch]
 
@@ -120,3 +120,5 @@ exclude_file_name_regexp--sc_require_config_h_first = python/libvirt-glib.c
 
 # XXX we shouldn't really ignore this, but the horrible enum rules...
 exclude_file_name_regexp--sc_makefile_at_at_check = libvirt-gobject/Makefile.am
+
+exclude_file_name_regexp--sc_unmarked_diagnostics = tap-driver\.sh

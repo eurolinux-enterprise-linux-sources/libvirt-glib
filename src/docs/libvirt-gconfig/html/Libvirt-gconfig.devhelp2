@@ -6,7 +6,7 @@
       <sub name="GVirConfigObject" link="GVirConfigObject.html"/>
       <sub name="GVirConfigDomain" link="GVirConfigDomain.html"/>
       <sub name="GVirConfigDomainSnapshot" link="GVirConfigDomainSnapshot.html"/>
-      <sub name="GVirConfig" link="Libvirt-gconfig-GVirConfig.html"/>
+      <sub name="GVirConfigInterface" link="GVirConfigInterface.html"/>
       <sub name="GVirConfigNetworkFilter" link="GVirConfigNetworkFilter.html"/>
       <sub name="GVirConfigNetwork" link="GVirConfigNetwork.html"/>
       <sub name="GVirConfigNodeDevice" link="GVirConfigNodeDevice.html"/>
@@ -20,179 +20,150 @@
     <sub name="Annotation Glossary" link="annotation-glossary.html"/>
   </chapters>
   <functions>
+    <keyword type="function" name="gvir_config_object_new ()" link="GVirConfigObject.html#gvir-config-object-new"/>
+    <keyword type="function" name="gvir_config_object_new_from_xml ()" link="GVirConfigObject.html#gvir-config-object-new-from-xml"/>
+    <keyword type="function" name="gvir_config_object_validate ()" link="GVirConfigObject.html#gvir-config-object-validate"/>
+    <keyword type="function" name="gvir_config_object_to_xml ()" link="GVirConfigObject.html#gvir-config-object-to-xml"/>
+    <keyword type="function" name="gvir_config_object_get_schema ()" link="GVirConfigObject.html#gvir-config-object-get-schema"/>
     <keyword type="struct" name="struct GVirConfigObject" link="GVirConfigObject.html#GVirConfigObject-struct"/>
     <keyword type="struct" name="struct GVirConfigObjectClass" link="GVirConfigObject.html#GVirConfigObjectClass"/>
-    <keyword type="function" name="gvir_config_object_new ()" link="GVirConfigObject.html#gvir-config-object-new"/>
-    <keyword type="function" name="gvir_config_object_new_from_xml ()" link="GVirConfigObject.html#gvir-config-object-new-from-xml"/>
-    <keyword type="function" name="gvir_config_object_validate ()" link="GVirConfigObject.html#gvir-config-object-validate"/>
-    <keyword type="function" name="gvir_config_object_to_xml ()" link="GVirConfigObject.html#gvir-config-object-to-xml"/>
-    <keyword type="function" name="gvir_config_object_get_schema ()" link="GVirConfigObject.html#gvir-config-object-get-schema"/>
-    <keyword type="property" name="The &quot;doc&quot; property" link="GVirConfigObject.html#GVirConfigObject--doc"/>
-    <keyword type="property" name="The &quot;node&quot; property" link="GVirConfigObject.html#GVirConfigObject--node"/>
-    <keyword type="property" name="The &quot;schema&quot; property" link="GVirConfigObject.html#GVirConfigObject--schema"/>
+    <keyword type="struct" name="GVirConfigObjectPrivate" link="GVirConfigObject.html#GVirConfigObjectPrivate"/>
+    <keyword type="property" name="The “doc” property" link="GVirConfigObject.html#GVirConfigObject--doc"/>
+    <keyword type="property" name="The “node” property" link="GVirConfigObject.html#GVirConfigObject--node"/>
+    <keyword type="property" name="The “schema” property" link="GVirConfigObject.html#GVirConfigObject--schema"/>
+    <keyword type="function" name="gvir_config_domain_new_from_xml ()" link="GVirConfigDomain.html#gvir-config-domain-new-from-xml"/>
+    <keyword type="function" name="gvir_config_domain_new ()" link="GVirConfigDomain.html#gvir-config-domain-new"/>
+    <keyword type="function" name="gvir_config_domain_get_virt_type ()" link="GVirConfigDomain.html#gvir-config-domain-get-virt-type"/>
+    <keyword type="function" name="gvir_config_domain_set_virt_type ()" link="GVirConfigDomain.html#gvir-config-domain-set-virt-type"/>
+    <keyword type="function" name="gvir_config_domain_get_name ()" link="GVirConfigDomain.html#gvir-config-domain-get-name"/>
+    <keyword type="function" name="gvir_config_domain_set_name ()" link="GVirConfigDomain.html#gvir-config-domain-set-name"/>
+    <keyword type="function" name="gvir_config_domain_get_uuid ()" link="GVirConfigDomain.html#gvir-config-domain-get-uuid"/>
+    <keyword type="function" name="gvir_config_domain_set_uuid ()" link="GVirConfigDomain.html#gvir-config-domain-set-uuid"/>
+    <keyword type="function" name="gvir_config_domain_get_description ()" link="GVirConfigDomain.html#gvir-config-domain-get-description"/>
+    <keyword type="function" name="gvir_config_domain_set_description ()" link="GVirConfigDomain.html#gvir-config-domain-set-description"/>
+    <keyword type="function" name="gvir_config_domain_get_memory ()" link="GVirConfigDomain.html#gvir-config-domain-get-memory"/>
+    <keyword type="function" name="gvir_config_domain_set_memory ()" link="GVirConfigDomain.html#gvir-config-domain-set-memory"/>
+    <keyword type="function" name="gvir_config_domain_get_current_memory ()" link="GVirConfigDomain.html#gvir-config-domain-get-current-memory"/>
+    <keyword type="function" name="gvir_config_domain_set_current_memory ()" link="GVirConfigDomain.html#gvir-config-domain-set-current-memory"/>
+    <keyword type="function" name="gvir_config_domain_get_vcpus ()" link="GVirConfigDomain.html#gvir-config-domain-get-vcpus"/>
+    <keyword type="function" name="gvir_config_domain_set_vcpus ()" link="GVirConfigDomain.html#gvir-config-domain-set-vcpus"/>
+    <keyword type="function" name="gvir_config_domain_get_features ()" link="GVirConfigDomain.html#gvir-config-domain-get-features"/>
+    <keyword type="function" name="gvir_config_domain_set_features ()" link="GVirConfigDomain.html#gvir-config-domain-set-features"/>
+    <keyword type="function" name="gvir_config_domain_get_clock ()" link="GVirConfigDomain.html#gvir-config-domain-get-clock"/>
+    <keyword type="function" name="gvir_config_domain_set_clock ()" link="GVirConfigDomain.html#gvir-config-domain-set-clock"/>
+    <keyword type="function" name="gvir_config_domain_get_os ()" link="GVirConfigDomain.html#gvir-config-domain-get-os"/>
+    <keyword type="function" name="gvir_config_domain_set_os ()" link="GVirConfigDomain.html#gvir-config-domain-set-os"/>
+    <keyword type="function" name="gvir_config_domain_set_seclabel ()" link="GVirConfigDomain.html#gvir-config-domain-set-seclabel"/>
+    <keyword type="function" name="gvir_config_domain_get_title ()" link="GVirConfigDomain.html#gvir-config-domain-get-title"/>
+    <keyword type="function" name="gvir_config_domain_set_title ()" link="GVirConfigDomain.html#gvir-config-domain-set-title"/>
+    <keyword type="function" name="gvir_config_domain_set_devices ()" link="GVirConfigDomain.html#gvir-config-domain-set-devices"/>
+    <keyword type="function" name="gvir_config_domain_add_device ()" link="GVirConfigDomain.html#gvir-config-domain-add-device"/>
+    <keyword type="function" name="gvir_config_domain_get_devices ()" link="GVirConfigDomain.html#gvir-config-domain-get-devices"/>
+    <keyword type="function" name="gvir_config_domain_set_lifecycle ()" link="GVirConfigDomain.html#gvir-config-domain-set-lifecycle"/>
+    <keyword type="function" name="gvir_config_domain_set_custom_xml ()" link="GVirConfigDomain.html#gvir-config-domain-set-custom-xml"/>
+    <keyword type="function" name="gvir_config_domain_get_custom_xml ()" link="GVirConfigDomain.html#gvir-config-domain-get-custom-xml"/>
+    <keyword type="function" name="gvir_config_domain_get_cpu ()" link="GVirConfigDomain.html#gvir-config-domain-get-cpu"/>
+    <keyword type="function" name="gvir_config_domain_set_cpu ()" link="GVirConfigDomain.html#gvir-config-domain-set-cpu"/>
+    <keyword type="function" name="gvir_config_domain_set_power_management ()" link="GVirConfigDomain.html#gvir-config-domain-set-power-management"/>
     <keyword type="struct" name="struct GVirConfigDomain" link="GVirConfigDomain.html#GVirConfigDomain-struct"/>
     <keyword type="struct" name="struct GVirConfigDomainClass" link="GVirConfigDomain.html#GVirConfigDomainClass"/>
     <keyword type="enum" name="enum GVirConfigDomainVirtType" link="GVirConfigDomain.html#GVirConfigDomainVirtType"/>
     <keyword type="enum" name="enum GVirConfigDomainLifecycleEvent" link="GVirConfigDomain.html#GVirConfigDomainLifecycleEvent"/>
     <keyword type="enum" name="enum GVirConfigDomainLifecycleAction" link="GVirConfigDomain.html#GVirConfigDomainLifecycleAction"/>
-    <keyword type="function" name="gvir_config_domain_new_from_xml ()" link="GVirConfigDomain.html#gvir-config-domain-new-from-xml"/>
-    <keyword type="function" name="gvir_config_domain_new ()" link="GVirConfigDomain.html#gvir-config-domain-new"/>
-    <keyword type="function" name="gvir_config_domain_get_virt_type ()" link="GVirConfigDomain.html#gvir-config-domain-get-virt-type"/>
-    <keyword type="function" name="gvir_config_domain_set_virt_type ()" link="GVirConfigDomain.html#gvir-config-domain-set-virt-type"/>
-    <keyword type="function" name="gvir_config_domain_get_name ()" link="GVirConfigDomain.html#gvir-config-domain-get-name"/>
-    <keyword type="function" name="gvir_config_domain_set_name ()" link="GVirConfigDomain.html#gvir-config-domain-set-name"/>
-    <keyword type="function" name="gvir_config_domain_get_description ()" link="GVirConfigDomain.html#gvir-config-domain-get-description"/>
-    <keyword type="function" name="gvir_config_domain_set_description ()" link="GVirConfigDomain.html#gvir-config-domain-set-description"/>
-    <keyword type="function" name="gvir_config_domain_get_memory ()" link="GVirConfigDomain.html#gvir-config-domain-get-memory"/>
-    <keyword type="function" name="gvir_config_domain_set_memory ()" link="GVirConfigDomain.html#gvir-config-domain-set-memory"/>
-    <keyword type="function" name="gvir_config_domain_get_current_memory ()" link="GVirConfigDomain.html#gvir-config-domain-get-current-memory"/>
-    <keyword type="function" name="gvir_config_domain_set_current_memory ()" link="GVirConfigDomain.html#gvir-config-domain-set-current-memory"/>
-    <keyword type="function" name="gvir_config_domain_get_vcpus ()" link="GVirConfigDomain.html#gvir-config-domain-get-vcpus"/>
-    <keyword type="function" name="gvir_config_domain_set_vcpus ()" link="GVirConfigDomain.html#gvir-config-domain-set-vcpus"/>
-    <keyword type="function" name="gvir_config_domain_get_features ()" link="GVirConfigDomain.html#gvir-config-domain-get-features"/>
-    <keyword type="function" name="gvir_config_domain_set_features ()" link="GVirConfigDomain.html#gvir-config-domain-set-features"/>
-    <keyword type="function" name="gvir_config_domain_set_clock ()" link="GVirConfigDomain.html#gvir-config-domain-set-clock"/>
-    <keyword type="function" name="gvir_config_domain_get_os ()" link="GVirConfigDomain.html#gvir-config-domain-get-os"/>
-    <keyword type="function" name="gvir_config_domain_set_os ()" link="GVirConfigDomain.html#gvir-config-domain-set-os"/>
-    <keyword type="function" name="gvir_config_domain_set_seclabel ()" link="GVirConfigDomain.html#gvir-config-domain-set-seclabel"/>
-    <keyword type="function" name="gvir_config_domain_get_title ()" link="GVirConfigDomain.html#gvir-config-domain-get-title"/>
-    <keyword type="function" name="gvir_config_domain_set_title ()" link="GVirConfigDomain.html#gvir-config-domain-set-title"/>
-    <keyword type="function" name="gvir_config_domain_set_devices ()" link="GVirConfigDomain.html#gvir-config-domain-set-devices"/>
-    <keyword type="function" name="gvir_config_domain_add_device ()" link="GVirConfigDomain.html#gvir-config-domain-add-device"/>
-    <keyword type="function" name="gvir_config_domain_get_devices ()" link="GVirConfigDomain.html#gvir-config-domain-get-devices"/>
-    <keyword type="function" name="gvir_config_domain_set_lifecycle ()" link="GVirConfigDomain.html#gvir-config-domain-set-lifecycle"/>
-    <keyword type="function" name="gvir_config_domain_set_custom_xml ()" link="GVirConfigDomain.html#gvir-config-domain-set-custom-xml"/>
-    <keyword type="function" name="gvir_config_domain_get_custom_xml ()" link="GVirConfigDomain.html#gvir-config-domain-get-custom-xml"/>
-    <keyword type="function" name="gvir_config_domain_get_cpu ()" link="GVirConfigDomain.html#gvir-config-domain-get-cpu"/>
-    <keyword type="function" name="gvir_config_domain_set_cpu ()" link="GVirConfigDomain.html#gvir-config-domain-set-cpu"/>
-    <keyword type="function" name="gvir_config_domain_set_power_management ()" link="GVirConfigDomain.html#gvir-config-domain-set-power-management"/>
-    <keyword type="property" name="The &quot;current-memory&quot; property" link="GVirConfigDomain.html#GVirConfigDomain--current-memory"/>
-    <keyword type="property" name="The &quot;description&quot; property" link="GVirConfigDomain.html#GVirConfigDomain--description"/>
-    <keyword type="property" name="The &quot;features&quot; property" link="GVirConfigDomain.html#GVirConfigDomain--features"/>
-    <keyword type="property" name="The &quot;memory&quot; property" link="GVirConfigDomain.html#GVirConfigDomain--memory"/>
-    <keyword type="property" name="The &quot;name&quot; property" link="GVirConfigDomain.html#GVirConfigDomain--name"/>
-    <keyword type="property" name="The &quot;title&quot; property" link="GVirConfigDomain.html#GVirConfigDomain--title"/>
-    <keyword type="property" name="The &quot;vcpu&quot; property" link="GVirConfigDomain.html#GVirConfigDomain--vcpu"/>
+    <keyword type="struct" name="GVirConfigDomainPrivate" link="GVirConfigDomain.html#GVirConfigDomainPrivate"/>
+    <keyword type="property" name="The “current-memory” property" link="GVirConfigDomain.html#GVirConfigDomain--current-memory"/>
+    <keyword type="property" name="The “description” property" link="GVirConfigDomain.html#GVirConfigDomain--description"/>
+    <keyword type="property" name="The “features” property" link="GVirConfigDomain.html#GVirConfigDomain--features"/>
+    <keyword type="property" name="The “memory” property" link="GVirConfigDomain.html#GVirConfigDomain--memory"/>
+    <keyword type="property" name="The “name” property" link="GVirConfigDomain.html#GVirConfigDomain--name"/>
+    <keyword type="property" name="The “title” property" link="GVirConfigDomain.html#GVirConfigDomain--title"/>
+    <keyword type="property" name="The “uuid” property" link="GVirConfigDomain.html#GVirConfigDomain--uuid"/>
+    <keyword type="property" name="The “vcpu” property" link="GVirConfigDomain.html#GVirConfigDomain--vcpu"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_new ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-new"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_new_from_xml ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-new-from-xml"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_get_name ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-name"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_set_name ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-name"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_get_description ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-description"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_set_description ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-description"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_get_memory_state ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-memory-state"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_set_memory_state ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-memory-state"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_get_memory_file ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-memory-file"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_set_memory_file ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-memory-file"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_get_creation_time ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-creation-time"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_get_state ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-state"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_get_parent ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-parent"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_get_domain ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-domain"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_set_disks ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-disks"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_add_disk ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-add-disk"/>
+    <keyword type="function" name="gvir_config_domain_snapshot_get_disks ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-disks"/>
     <keyword type="struct" name="struct GVirConfigDomainSnapshot" link="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshot-struct"/>
     <keyword type="struct" name="struct GVirConfigDomainSnapshotClass" link="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotClass"/>
     <keyword type="enum" name="enum GVirConfigDomainSnapshotDomainState" link="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotDomainState"/>
     <keyword type="enum" name="enum GVirConfigDomainSnapshotMemoryState" link="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotMemoryState"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_new ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-new"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_new_from_xml ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-new-from-xml"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_get_name ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-name"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_set_name ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-name"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_get_description ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-description"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_set_description ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-description"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_get_memory_state ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-memory-state"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_set_memory_state ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-memory-state"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_get_memory_file ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-memory-file"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_set_memory_file ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-memory-file"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_get_creation_time ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-creation-time"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_get_state ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-state"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_get_parent ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-parent"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_get_domain ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-domain"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_set_disks ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-disks"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_add_disk ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-add-disk"/>
-    <keyword type="function" name="gvir_config_domain_snapshot_get_disks ()" link="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-disks"/>
-    <keyword type="struct" name="struct GVirConfigInterface" link="Libvirt-gconfig-GVirConfig.html#GVirConfigInterface-struct"/>
-    <keyword type="struct" name="struct GVirConfigInterfaceClass" link="Libvirt-gconfig-GVirConfig.html#GVirConfigInterfaceClass"/>
-    <keyword type="function" name="gvir_config_interface_new ()" link="Libvirt-gconfig-GVirConfig.html#gvir-config-interface-new"/>
-    <keyword type="function" name="gvir_config_interface_new_from_xml ()" link="Libvirt-gconfig-GVirConfig.html#gvir-config-interface-new-from-xml"/>
+    <keyword type="struct" name="GVirConfigDomainSnapshotPrivate" link="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotPrivate"/>
+    <keyword type="function" name="gvir_config_interface_new ()" link="GVirConfigInterface.html#gvir-config-interface-new"/>
+    <keyword type="function" name="gvir_config_interface_new_from_xml ()" link="GVirConfigInterface.html#gvir-config-interface-new-from-xml"/>
+    <keyword type="struct" name="struct GVirConfigInterface" link="GVirConfigInterface.html#GVirConfigInterface-struct"/>
+    <keyword type="struct" name="struct GVirConfigInterfaceClass" link="GVirConfigInterface.html#GVirConfigInterfaceClass"/>
+    <keyword type="struct" name="GVirConfigInterfacePrivate" link="GVirConfigInterface.html#GVirConfigInterfacePrivate"/>
+    <keyword type="function" name="gvir_config_network_filter_new ()" link="GVirConfigNetworkFilter.html#gvir-config-network-filter-new"/>
+    <keyword type="function" name="gvir_config_network_filter_new_from_xml ()" link="GVirConfigNetworkFilter.html#gvir-config-network-filter-new-from-xml"/>
     <keyword type="struct" name="struct GVirConfigNetworkFilter" link="GVirConfigNetworkFilter.html#GVirConfigNetworkFilter-struct"/>
     <keyword type="struct" name="struct GVirConfigNetworkFilterClass" link="GVirConfigNetworkFilter.html#GVirConfigNetworkFilterClass"/>
-    <keyword type="function" name="gvir_config_network_filter_new ()" link="GVirConfigNetworkFilter.html#gvir-config-network-filter-new"/>
-    <keyword type="function" name="gvir_config_network_filter_new_from_xml ()" link="GVirConfigNetworkFilter.html#gvir-config-network-filter-new-from-xml"/>
+    <keyword type="struct" name="GVirConfigNetworkFilterPrivate" link="GVirConfigNetworkFilter.html#GVirConfigNetworkFilterPrivate"/>
+    <keyword type="function" name="gvir_config_network_new ()" link="GVirConfigNetwork.html#gvir-config-network-new"/>
+    <keyword type="function" name="gvir_config_network_new_from_xml ()" link="GVirConfigNetwork.html#gvir-config-network-new-from-xml"/>
     <keyword type="struct" name="struct GVirConfigNetwork" link="GVirConfigNetwork.html#GVirConfigNetwork-struct"/>
     <keyword type="struct" name="struct GVirConfigNetworkClass" link="GVirConfigNetwork.html#GVirConfigNetworkClass"/>
-    <keyword type="function" name="gvir_config_network_new ()" link="GVirConfigNetwork.html#gvir-config-network-new"/>
-    <keyword type="function" name="gvir_config_network_new_from_xml ()" link="GVirConfigNetwork.html#gvir-config-network-new-from-xml"/>
+    <keyword type="struct" name="GVirConfigNetworkPrivate" link="GVirConfigNetwork.html#GVirConfigNetworkPrivate"/>
+    <keyword type="function" name="gvir_config_node_device_new ()" link="GVirConfigNodeDevice.html#gvir-config-node-device-new"/>
+    <keyword type="function" name="gvir_config_node_device_new_from_xml ()" link="GVirConfigNodeDevice.html#gvir-config-node-device-new-from-xml"/>
     <keyword type="struct" name="struct GVirConfigNodeDevice" link="GVirConfigNodeDevice.html#GVirConfigNodeDevice-struct"/>
     <keyword type="struct" name="struct GVirConfigNodeDeviceClass" link="GVirConfigNodeDevice.html#GVirConfigNodeDeviceClass"/>
-    <keyword type="function" name="gvir_config_node_device_new ()" link="GVirConfigNodeDevice.html#gvir-config-node-device-new"/>
-    <keyword type="function" name="gvir_config_node_device_new_from_xml ()" link="GVirConfigNodeDevice.html#gvir-config-node-device-new-from-xml"/>
+    <keyword type="struct" name="GVirConfigNodeDevicePrivate" link="GVirConfigNodeDevice.html#GVirConfigNodeDevicePrivate"/>
+    <keyword type="function" name="gvir_config_secret_new ()" link="GVirConfigSecret.html#gvir-config-secret-new"/>
+    <keyword type="function" name="gvir_config_secret_new_from_xml ()" link="GVirConfigSecret.html#gvir-config-secret-new-from-xml"/>
     <keyword type="struct" name="struct GVirConfigSecret" link="GVirConfigSecret.html#GVirConfigSecret-struct"/>
     <keyword type="struct" name="struct GVirConfigSecretClass" link="GVirConfigSecret.html#GVirConfigSecretClass"/>
-    <keyword type="function" name="gvir_config_secret_new ()" link="GVirConfigSecret.html#gvir-config-secret-new"/>
-    <keyword type="function" name="gvir_config_secret_new_from_xml ()" link="GVirConfigSecret.html#gvir-config-secret-new-from-xml"/>
+    <keyword type="struct" name="GVirConfigSecretPrivate" link="GVirConfigSecret.html#GVirConfigSecretPrivate"/>
+    <keyword type="function" name="gvir_config_storage_pool_new ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-new"/>
+    <keyword type="function" name="gvir_config_storage_pool_new_from_xml ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-new-from-xml"/>
+    <keyword type="function" name="gvir_config_storage_pool_get_allocation ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-allocation"/>
+    <keyword type="function" name="gvir_config_storage_pool_set_allocation ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-allocation"/>
+    <keyword type="function" name="gvir_config_storage_pool_get_available ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-available"/>
+    <keyword type="function" name="gvir_config_storage_pool_set_available ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-available"/>
+    <keyword type="function" name="gvir_config_storage_pool_get_capacity ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-capacity"/>
+    <keyword type="function" name="gvir_config_storage_pool_set_capacity ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-capacity"/>
+    <keyword type="function" name="gvir_config_storage_pool_get_name ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-name"/>
+    <keyword type="function" name="gvir_config_storage_pool_set_name ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-name"/>
+    <keyword type="function" name="gvir_config_storage_pool_get_pool_type ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-pool-type"/>
+    <keyword type="function" name="gvir_config_storage_pool_set_pool_type ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-pool-type"/>
+    <keyword type="function" name="gvir_config_storage_pool_get_source ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-source"/>
+    <keyword type="function" name="gvir_config_storage_pool_set_source ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-source"/>
+    <keyword type="function" name="gvir_config_storage_pool_get_target ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-target"/>
+    <keyword type="function" name="gvir_config_storage_pool_set_target ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-target"/>
+    <keyword type="function" name="gvir_config_storage_pool_get_uuid ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-uuid"/>
+    <keyword type="function" name="gvir_config_storage_pool_set_uuid ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-uuid"/>
     <keyword type="struct" name="struct GVirConfigStoragePool" link="GVirConfigStoragePool.html#GVirConfigStoragePool-struct"/>
     <keyword type="struct" name="struct GVirConfigStoragePoolClass" link="GVirConfigStoragePool.html#GVirConfigStoragePoolClass"/>
     <keyword type="enum" name="enum GVirConfigStoragePoolType" link="GVirConfigStoragePool.html#GVirConfigStoragePoolType"/>
-    <keyword type="function" name="gvir_config_storage_pool_new ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-new"/>
-    <keyword type="function" name="gvir_config_storage_pool_new_from_xml ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-new-from-xml"/>
-    <keyword type="function" name="gvir_config_storage_pool_get_allocation ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-allocation"/>
-    <keyword type="function" name="gvir_config_storage_pool_set_allocation ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-allocation"/>
-    <keyword type="function" name="gvir_config_storage_pool_get_available ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-available"/>
-    <keyword type="function" name="gvir_config_storage_pool_set_available ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-available"/>
-    <keyword type="function" name="gvir_config_storage_pool_get_capacity ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-capacity"/>
-    <keyword type="function" name="gvir_config_storage_pool_set_capacity ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-capacity"/>
-    <keyword type="function" name="gvir_config_storage_pool_get_name ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-name"/>
-    <keyword type="function" name="gvir_config_storage_pool_set_name ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-name"/>
-    <keyword type="function" name="gvir_config_storage_pool_get_pool_type ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-pool-type"/>
-    <keyword type="function" name="gvir_config_storage_pool_set_pool_type ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-pool-type"/>
-    <keyword type="function" name="gvir_config_storage_pool_get_source ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-source"/>
-    <keyword type="function" name="gvir_config_storage_pool_set_source ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-source"/>
-    <keyword type="function" name="gvir_config_storage_pool_get_target ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-target"/>
-    <keyword type="function" name="gvir_config_storage_pool_set_target ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-target"/>
-    <keyword type="function" name="gvir_config_storage_pool_get_uuid ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-get-uuid"/>
-    <keyword type="function" name="gvir_config_storage_pool_set_uuid ()" link="GVirConfigStoragePool.html#gvir-config-storage-pool-set-uuid"/>
+    <keyword type="struct" name="GVirConfigStoragePoolPrivate" link="GVirConfigStoragePool.html#GVirConfigStoragePoolPrivate"/>
+    <keyword type="function" name="gvir_config_storage_vol_new ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-new"/>
+    <keyword type="function" name="gvir_config_storage_vol_new_from_xml ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-new-from-xml"/>
+    <keyword type="function" name="gvir_config_storage_vol_set_allocation ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-set-allocation"/>
+    <keyword type="function" name="gvir_config_storage_vol_set_backing_store ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-set-backing-store"/>
+    <keyword type="function" name="gvir_config_storage_vol_set_capacity ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-set-capacity"/>
+    <keyword type="function" name="gvir_config_storage_vol_set_name ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-set-name"/>
+    <keyword type="function" name="gvir_config_storage_vol_set_target ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-set-target"/>
     <keyword type="struct" name="struct GVirConfigStorageVol" link="GVirConfigStorageVol.html#GVirConfigStorageVol-struct"/>
     <keyword type="struct" name="struct GVirConfigStorageVolClass" link="GVirConfigStorageVol.html#GVirConfigStorageVolClass"/>
-    <keyword type="function" name="gvir_config_storage_vol_new ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-new"/>
-    <keyword type="function" name="gvir_config_storage_vol_new_from_xml ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-new-from-xml"/>
-    <keyword type="function" name="gvir_config_storage_vol_set_allocation ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-set-allocation"/>
-    <keyword type="function" name="gvir_config_storage_vol_set_backing_store ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-set-backing-store"/>
-    <keyword type="function" name="gvir_config_storage_vol_set_capacity ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-set-capacity"/>
-    <keyword type="function" name="gvir_config_storage_vol_set_name ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-set-name"/>
-    <keyword type="function" name="gvir_config_storage_vol_set_target ()" link="GVirConfigStorageVol.html#gvir-config-storage-vol-set-target"/>
+    <keyword type="struct" name="GVirConfigStorageVolPrivate" link="GVirConfigStorageVol.html#GVirConfigStorageVolPrivate"/>
+    <keyword type="function" name="gvir_config_capabilities_new ()" link="GVirConfigCapabilities.html#gvir-config-capabilities-new"/>
+    <keyword type="function" name="gvir_config_capabilities_new_from_xml ()" link="GVirConfigCapabilities.html#gvir-config-capabilities-new-from-xml"/>
+    <keyword type="function" name="gvir_config_capabilities_get_host ()" link="GVirConfigCapabilities.html#gvir-config-capabilities-get-host"/>
+    <keyword type="function" name="gvir_config_capabilities_get_guests ()" link="GVirConfigCapabilities.html#gvir-config-capabilities-get-guests"/>
     <keyword type="struct" name="struct GVirConfigCapabilities" link="GVirConfigCapabilities.html#GVirConfigCapabilities-struct"/>
     <keyword type="struct" name="struct GVirConfigCapabilitiesClass" link="GVirConfigCapabilities.html#GVirConfigCapabilitiesClass"/>
-    <keyword type="function" name="gvir_config_capabilities_new ()" link="GVirConfigCapabilities.html#gvir-config-capabilities-new"/>
-    <keyword type="function" name="gvir_config_capabilities_new_from_xml ()" link="GVirConfigCapabilities.html#gvir-config-capabilities-new-from-xml"/>
-    <keyword type="function" name="gvir_config_capabilities_get_host ()" link="GVirConfigCapabilities.html#gvir-config-capabilities-get-host"/>
-    <keyword type="function" name="gvir_config_capabilities_get_guests ()" link="GVirConfigCapabilities.html#gvir-config-capabilities-get-guests"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_QEMU" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-QEMU:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_KQEMU" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-KQEMU:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_KVM" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-KVM:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_XEN" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-XEN:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_LXC" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-LXC:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_UML" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-UML:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_OPENVZ" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-OPENVZ:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_VSERVER" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-VSERVER:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_LDOM" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-LDOM:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_TEST" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-TEST:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_VMWARE" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-VMWARE:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_HYPERV" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-HYPERV:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_VBOX" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-VBOX:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_ONE" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-ONE:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_VIRT_PHYP" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-VIRT-PHYP:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_ON_POWEROFF" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-ON-POWEROFF:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_ON_REBOOT" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-ON-REBOOT:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_ON_CRASH" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-ON-CRASH:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_DESTROY" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-DESTROY:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_RESTART" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-RESTART:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_PRESERVE" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-PRESERVE:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_RENAME_RESTART" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-RENAME-RESTART:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_COREDUMP_DESTROY" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-COREDUMP-DESTROY:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_LIFECYCLE_COREDUMP_RESTART" link="GVirConfigDomain.html#GVIR-CONFIG-DOMAIN-LIFECYCLE-COREDUMP-RESTART:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_NOSTATE" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-NOSTATE:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_RUNNING" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-RUNNING:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_BLOCKED" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-BLOCKED:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_PAUSED" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-PAUSED:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_SHUTDOWN" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-SHUTDOWN:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_SHUTOFF" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-SHUTOFF:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_CRASHED" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-CRASHED:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_PMSUSPENDED" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-PMSUSPENDED:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_DISK_SNAPSHOT" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-DISK-SNAPSHOT:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_NONE" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-NONE:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_INTERNAL" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-INTERNAL:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_EXTERNAL" link="GVirConfigDomainSnapshot.html#GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-EXTERNAL:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_DIR" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-DIR:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_FS" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-FS:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_NETFS" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-NETFS:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_LOGICAL" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-LOGICAL:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_DISK" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-DISK:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_ISCSI" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-ISCSI:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_SCSI" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-SCSI:CAPS"/>
-    <keyword type="constant" name="GVIR_CONFIG_STORAGE_POOL_TYPE_MPATH" link="GVirConfigStoragePool.html#GVIR-CONFIG-STORAGE-POOL-TYPE-MPATH:CAPS"/>
+    <keyword type="struct" name="GVirConfigCapabilitiesPrivate" link="GVirConfigCapabilities.html#GVirConfigCapabilitiesPrivate"/>
   </functions>
 </book>

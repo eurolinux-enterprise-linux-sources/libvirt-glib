@@ -1,4 +1,4 @@
-AC_INIT(libvirt-glib, 0.1.7)
+AC_INIT(libvirt-glib, 0.1.9)
 AC_CONFIG_SRCDIR(libvirt-glib/libvirt-glib-main.c)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
@@ -11,7 +11,9 @@ AM_SILENT_RULES([yes])
 
 LIBVIRT_REQUIRED=0.10.2
 AC_SUBST([LIBVIRT_REQUIRED]) dnl used in the .spec file
-GLIB2_REQUIRED=2.22.0
+GLIB2_REQUIRED=2.36.0
+AC_SUBST([GLIB2_REQUIRED]) dnl used in the .spec file
+GLIB2_TEST_REQUIRED=2.38.0
 GOBJECT2_REQUIRED=2.10.0
 GIO_REQUIRED=2.10.0
 GOBJECT_INTROSPECTION_REQUIRED=0.10.8
@@ -91,11 +93,16 @@ m4_if(m4_version_compare([2.61a.100],
 LIBVIRT_GLIB_COMPILE_WARNINGS
 
 PKG_CHECK_MODULES(LIBVIRT, libvirt >= $LIBVIRT_REQUIRED)
-PKG_CHECK_MODULES(GLIB2, glib-2.0 >= $GLIB2_REQUIRED)
+enable_tests=no
+PKG_CHECK_MODULES(GLIB2, glib-2.0 >= $GLIB2_TEST_REQUIRED,
+                  [enable_tests=yes],
+                  [PKG_CHECK_MODULES(GLIB2, glib-2.0 >= $GLIB2_REQUIRED)])
 PKG_CHECK_MODULES(GTHREAD2, gthread-2.0 >= $GLIB2_REQUIRED)
 PKG_CHECK_MODULES(GOBJECT2, gobject-2.0 >= $GLIB2_REQUIRED)
 PKG_CHECK_MODULES(GIO2, gio-2.0 >= $GLIB2_REQUIRED)
 PKG_CHECK_MODULES(LIBXML2, libxml-2.0 >= $LIBXML2_REQUIRED)
+
+AM_CONDITIONAL([ENABLE_TESTS], [test "$enable_tests" = "yes"])
 
 LIBVIRT_GLIB_GETTEXT
 dnl Should be in m4/virt-gettext.m4 but intltoolize is too
@@ -108,6 +115,8 @@ GTK_DOC_CHECK([1.10],[--flavour no-tmpl])
 # Setup GLIB_MKENUMS to use glib-mkenums even if GLib is uninstalled.
 GLIB_MKENUMS=`$PKG_CONFIG --variable=glib_mkenums glib-2.0`
 AC_SUBST(GLIB_MKENUMS)
+
+GLIB_TESTS
 
 dnl Extra link-time flags for Cygwin.
 dnl Copied from libxml2 configure.in, but I removed mingw changes
@@ -232,30 +241,13 @@ AC_SUBST([PYTHON_VERSION])
 AC_SUBST([PYTHON_INCLUDES])
 AC_SUBST([PYTHON_SITE_PACKAGES])
 
-AC_ARG_ENABLE([introspection],
-        AS_HELP_STRING([--enable-introspection], [enable GObject introspection]),
-        [], [enable_introspection=check])
+GOBJECT_INTROSPECTION_CHECK([$GOBJECT_INTROSPECTION_REQUIRED])
 
-if test "x$enable_introspection" != "xno" ; then
-        PKG_CHECK_MODULES([GOBJECT_INTROSPECTION],
-                          [gobject-introspection-1.0 >= $GOBJECT_INTROSPECTION_REQUIRED],
-                          [enable_introspection=yes],
-                          [
-                             if test "x$enable_introspection" = "xcheck"; then
-                               enable_introspection=no
-                             else
-                               AC_MSG_ERROR([gobject-introspection is not available])
-                             fi
-                          ])
-        if test "x$enable_introspection" = "xyes" ; then
-          AC_DEFINE([WITH_GOBJECT_INTROSPECTION], [1], [enable GObject introspection support])
-          AC_SUBST(GOBJECT_INTROSPECTION_CFLAGS)
-          AC_SUBST(GOBJECT_INTROSPECTION_LIBS)
-          AC_SUBST([G_IR_SCANNER], [$($PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0)])
-          AC_SUBST([G_IR_COMPILER], [$($PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0)])
-        fi
-fi
-AM_CONDITIONAL([WITH_GOBJECT_INTROSPECTION], [test "x$enable_introspection" = "xyes"])
+with_linux=no
+case $host in
+  *-*-linux*) with_linux=yes ;;
+esac
+AM_CONDITIONAL([WITH_LINUX], [test "$with_linux" = "yes"])
 
 AC_ARG_ENABLE([vala],
               AS_HELP_STRING([--enable-vala], [enable Vala binding generation]),
@@ -306,6 +298,7 @@ AC_OUTPUT(Makefile
           docs/libvirt-gobject/Makefile
           docs/libvirt-gconfig/Makefile
           po/Makefile.in
+          tests/Makefile
           libvirt-glib-1.0.pc
           libvirt-gconfig-1.0.pc
           libvirt-gobject-1.0.pc

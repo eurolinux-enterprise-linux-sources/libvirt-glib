@@ -2,55 +2,55 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Object Hierarchy</title>
+<title>Libvirt-gobject Reference Manual: Object Hierarchy</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Libvirt-gobject Reference Manual">
 <link rel="up" href="index.html" title="Libvirt-gobject Reference Manual">
 <link rel="prev" href="GVirStream.html" title="GVirStream">
 <link rel="next" href="api-index-full.html" title="API Index">
-<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
-<td><a accesskey="p" href="GVirStream.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td> </td>
-<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Libvirt-gobject Reference Manual</th>
-<td><a accesskey="n" href="api-index-full.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts"></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><img src="up-insensitive.png" width="16" height="16" border="0"></td>
+<td><a accesskey="p" href="GVirStream.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="api-index-full.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="chapter">
 <div class="titlepage"><div><div><h1 class="title">
 <a name="object-tree"></a>Object Hierarchy</h1></div></div></div>
 <pre class="screen">
-    GObject
-        <a class="link" href="GVirConnection.html" title="GVirConnection">GVirConnection</a>
-        GVirDomainDevice
-            GVirDomainDisk
-            GVirDomainInterface
-        <a class="link" href="GVirDomain.html" title="GVirDomain">GVirDomain</a>
-        <a class="link" href="GVirDomainSnapshot.html" title="GVirDomainSnapshot">GVirDomainSnapshot</a>
-        <a class="link" href="Libvirt-gobject-GVir.html#GVirInterface">GVirInterface</a>
-        <a class="link" href="GVirManager.html" title="GVirManager">GVirManager</a>
-        <a class="link" href="GVirNetworkFilter.html" title="GVirNetworkFilter">GVirNetworkFilter</a>
-        <a class="link" href="GVirNetwork.html" title="GVirNetwork">GVirNetwork</a>
-        <a class="link" href="GVirNodeDevice.html" title="GVirNodeDevice">GVirNodeDevice</a>
-        <a class="link" href="GVirSecret.html" title="GVirSecret">GVirSecret</a>
-        <a class="link" href="GVirStoragePool.html" title="GVirStoragePool">GVirStoragePool</a>
-        <a class="link" href="GVirStorageVol.html" title="GVirStorageVol">GVirStorageVol</a>
-        GIOStream
-            <a class="link" href="GVirStream.html" title="GVirStream">GVirStream</a>
-    GBoxed
-        GVirDomainDiskStats
-        <a class="link" href="GVirDomain.html#GVirDomainInfo">GVirDomainInfo</a>
-        GVirDomainInterfaceStats
-        <a class="link" href="GVirConnection.html#GVirNodeInfo">GVirNodeInfo</a>
-        <a class="link" href="GVirStoragePool.html#GVirStoragePoolInfo">GVirStoragePoolInfo</a>
-        <a class="link" href="GVirStorageVol.html#GVirStorageVolInfo">GVirStorageVolInfo</a>
+    <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirConnection.html" title="GVirConnection">GVirConnection</a>
+    <span class="lineart">├──</span> GVirDomainDevice
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirDomainDisk
+    <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirDomainInterface
+    <span class="lineart">├──</span> <a class="link" href="GVirDomain.html" title="GVirDomain">GVirDomain</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirDomainSnapshot.html" title="GVirDomainSnapshot">GVirDomainSnapshot</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirInterface.html" title="GVirInterface">GVirInterface</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirManager.html" title="GVirManager">GVirManager</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirNetworkFilter.html" title="GVirNetworkFilter">GVirNetworkFilter</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirNetwork.html" title="GVirNetwork">GVirNetwork</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirNodeDevice.html" title="GVirNodeDevice">GVirNodeDevice</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirSecret.html" title="GVirSecret">GVirSecret</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirStoragePool.html" title="GVirStoragePool">GVirStoragePool</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirStorageVol.html" title="GVirStorageVol">GVirStorageVol</a>
+    <span class="lineart">╰──</span> <a href="http://library.gnome.org/devel/gio/unstable/GIOStream.html">GIOStream</a>
+        <span class="lineart">╰──</span> <a class="link" href="GVirStream.html" title="GVirStream">GVirStream</a>
+    <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Boxed-Types.html">GBoxed</a>
+    <span class="lineart">├──</span> GVirDomainDiskStats
+    <span class="lineart">├──</span> <a class="link" href="GVirDomain.html#GVirDomainInfo">GVirDomainInfo</a>
+    <span class="lineart">├──</span> GVirDomainInterfaceStats
+    <span class="lineart">├──</span> <a class="link" href="GVirConnection.html#GVirNodeInfo">GVirNodeInfo</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirStoragePool.html#GVirStoragePoolInfo">GVirStoragePoolInfo</a>
+    <span class="lineart">╰──</span> <a class="link" href="GVirStorageVol.html#GVirStorageVolInfo">GVirStorageVolInfo</a>
 </pre>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.19</div>
+          Generated by GTK-Doc V1.21</div>
 </body>
 </html>

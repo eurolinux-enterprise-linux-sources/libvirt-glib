@@ -6,7 +6,7 @@
       <sub name="GVirConnection" link="GVirConnection.html"/>
       <sub name="GVirDomain" link="GVirDomain.html"/>
       <sub name="GVirDomainSnapshot" link="GVirDomainSnapshot.html"/>
-      <sub name="GVir" link="Libvirt-gobject-GVir.html"/>
+      <sub name="GVirInterface" link="GVirInterface.html"/>
       <sub name="GVirManager" link="GVirManager.html"/>
       <sub name="GVirNetworkFilter" link="GVirNetworkFilter.html"/>
       <sub name="GVirNetwork" link="GVirNetwork.html"/>
@@ -21,67 +21,105 @@
     <sub name="Annotation Glossary" link="annotation-glossary.html"/>
   </chapters>
   <functions>
-    <keyword type="struct" name="struct GVirNodeInfo" link="GVirConnection.html#GVirNodeInfo-struct"/>
-    <keyword type="struct" name="struct GVirConnection" link="GVirConnection.html#GVirConnection-struct"/>
-    <keyword type="struct" name="struct GVirConnectionClass" link="GVirConnection.html#GVirConnectionClass"/>
-    <keyword type="function" name="gvir_connection_new ()" link="GVirConnection.html#gvir-connection-new"/>
-    <keyword type="function" name="gvir_connection_open ()" link="GVirConnection.html#gvir-connection-open"/>
-    <keyword type="function" name="gvir_connection_open_read_only ()" link="GVirConnection.html#gvir-connection-open-read-only"/>
-    <keyword type="function" name="gvir_connection_open_async ()" link="GVirConnection.html#gvir-connection-open-async"/>
-    <keyword type="function" name="gvir_connection_open_finish ()" link="GVirConnection.html#gvir-connection-open-finish"/>
-    <keyword type="function" name="gvir_connection_open_read_only_async ()" link="GVirConnection.html#gvir-connection-open-read-only-async"/>
-    <keyword type="function" name="gvir_connection_open_read_only_finish ()" link="GVirConnection.html#gvir-connection-open-read-only-finish"/>
-    <keyword type="function" name="gvir_connection_is_open ()" link="GVirConnection.html#gvir-connection-is-open"/>
-    <keyword type="function" name="gvir_connection_is_read_only ()" link="GVirConnection.html#gvir-connection-is-read-only"/>
-    <keyword type="function" name="gvir_connection_close ()" link="GVirConnection.html#gvir-connection-close"/>
-    <keyword type="function" name="gvir_connection_fetch_domains ()" link="GVirConnection.html#gvir-connection-fetch-domains"/>
-    <keyword type="function" name="gvir_connection_fetch_domains_async ()" link="GVirConnection.html#gvir-connection-fetch-domains-async"/>
-    <keyword type="function" name="gvir_connection_fetch_domains_finish ()" link="GVirConnection.html#gvir-connection-fetch-domains-finish"/>
-    <keyword type="function" name="gvir_connection_get_uri ()" link="GVirConnection.html#gvir-connection-get-uri"/>
-    <keyword type="function" name="gvir_connection_get_hypervisor_name ()" link="GVirConnection.html#gvir-connection-get-hypervisor-name"/>
-    <keyword type="function" name="gvir_connection_get_version ()" link="GVirConnection.html#gvir-connection-get-version"/>
-    <keyword type="function" name="gvir_connection_get_domains ()" link="GVirConnection.html#gvir-connection-get-domains"/>
-    <keyword type="function" name="gvir_connection_get_domain ()" link="GVirConnection.html#gvir-connection-get-domain"/>
-    <keyword type="function" name="gvir_connection_find_domain_by_id ()" link="GVirConnection.html#gvir-connection-find-domain-by-id"/>
-    <keyword type="function" name="gvir_connection_find_domain_by_name ()" link="GVirConnection.html#gvir-connection-find-domain-by-name"/>
-    <keyword type="function" name="gvir_connection_create_domain ()" link="GVirConnection.html#gvir-connection-create-domain"/>
-    <keyword type="function" name="gvir_connection_start_domain ()" link="GVirConnection.html#gvir-connection-start-domain"/>
-    <keyword type="function" name="gvir_connection_get_interfaces ()" link="GVirConnection.html#gvir-connection-get-interfaces"/>
-    <keyword type="function" name="gvir_connection_get_interface ()" link="GVirConnection.html#gvir-connection-get-interface"/>
-    <keyword type="function" name="gvir_connection_find_interface_by_mac ()" link="GVirConnection.html#gvir-connection-find-interface-by-mac"/>
-    <keyword type="function" name="gvir_connection_get_networks ()" link="GVirConnection.html#gvir-connection-get-networks"/>
-    <keyword type="function" name="gvir_connection_get_network ()" link="GVirConnection.html#gvir-connection-get-network"/>
-    <keyword type="function" name="gvir_connection_find_network_by_name ()" link="GVirConnection.html#gvir-connection-find-network-by-name"/>
-    <keyword type="function" name="gvir_connection_get_network_filters ()" link="GVirConnection.html#gvir-connection-get-network-filters"/>
-    <keyword type="function" name="gvir_connection_get_network_filter ()" link="GVirConnection.html#gvir-connection-get-network-filter"/>
-    <keyword type="function" name="gvir_connection_find_network_filter_by_name ()" link="GVirConnection.html#gvir-connection-find-network-filter-by-name"/>
-    <keyword type="function" name="gvir_connection_get_node_devices ()" link="GVirConnection.html#gvir-connection-get-node-devices"/>
-    <keyword type="function" name="gvir_connection_get_node_device ()" link="GVirConnection.html#gvir-connection-get-node-device"/>
-    <keyword type="function" name="gvir_connection_get_secrets ()" link="GVirConnection.html#gvir-connection-get-secrets"/>
-    <keyword type="function" name="gvir_connection_get_secret ()" link="GVirConnection.html#gvir-connection-get-secret"/>
-    <keyword type="function" name="gvir_connection_fetch_storage_pools ()" link="GVirConnection.html#gvir-connection-fetch-storage-pools"/>
-    <keyword type="function" name="gvir_connection_fetch_storage_pools_async ()" link="GVirConnection.html#gvir-connection-fetch-storage-pools-async"/>
-    <keyword type="function" name="gvir_connection_fetch_storage_pools_finish ()" link="GVirConnection.html#gvir-connection-fetch-storage-pools-finish"/>
-    <keyword type="function" name="gvir_connection_get_storage_pools ()" link="GVirConnection.html#gvir-connection-get-storage-pools"/>
-    <keyword type="function" name="gvir_connection_get_storage_pool ()" link="GVirConnection.html#gvir-connection-get-storage-pool"/>
-    <keyword type="function" name="gvir_connection_find_storage_pool_by_name ()" link="GVirConnection.html#gvir-connection-find-storage-pool-by-name"/>
-    <keyword type="function" name="gvir_connection_create_storage_pool ()" link="GVirConnection.html#gvir-connection-create-storage-pool"/>
-    <keyword type="function" name="gvir_connection_get_stream ()" link="GVirConnection.html#gvir-connection-get-stream"/>
-    <keyword type="function" name="gvir_connection_get_node_info ()" link="GVirConnection.html#gvir-connection-get-node-info"/>
-    <keyword type="function" name="gvir_connection_get_capabilities ()" link="GVirConnection.html#gvir-connection-get-capabilities"/>
-    <keyword type="function" name="gvir_connection_get_capabilities_async ()" link="GVirConnection.html#gvir-connection-get-capabilities-async"/>
-    <keyword type="function" name="gvir_connection_get_capabilities_finish ()" link="GVirConnection.html#gvir-connection-get-capabilities-finish"/>
-    <keyword type="function" name="gvir_connection_restore_domain_from_file ()" link="GVirConnection.html#gvir-connection-restore-domain-from-file"/>
-    <keyword type="function" name="gvir_connection_restore_domain_from_file_async ()" link="GVirConnection.html#gvir-connection-restore-domain-from-file-async"/>
-    <keyword type="function" name="gvir_connection_restore_domain_from_file_finish ()" link="GVirConnection.html#gvir-connection-restore-domain-from-file-finish"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="GVirConnection.html#GVirConnection--handle"/>
-    <keyword type="property" name="The &quot;uri&quot; property" link="GVirConnection.html#GVirConnection--uri"/>
-    <keyword type="signal" name="The &quot;connection-closed&quot; signal" link="GVirConnection.html#GVirConnection-connection-closed"/>
-    <keyword type="signal" name="The &quot;connection-opened&quot; signal" link="GVirConnection.html#GVirConnection-connection-opened"/>
-    <keyword type="signal" name="The &quot;domain-added&quot; signal" link="GVirConnection.html#GVirConnection-domain-added"/>
-    <keyword type="signal" name="The &quot;domain-removed&quot; signal" link="GVirConnection.html#GVirConnection-domain-removed"/>
-    <keyword type="struct" name="struct GVirDomain" link="GVirDomain.html#GVirDomain-struct"/>
-    <keyword type="struct" name="struct GVirDomainClass" link="GVirDomain.html#GVirDomainClass"/>
+    <keyword type="function" name="gvir_connection_new ()" link="GVirConnection.html#gvir-connection-new"/>
+    <keyword type="function" name="gvir_connection_open ()" link="GVirConnection.html#gvir-connection-open"/>
+    <keyword type="function" name="gvir_connection_open_read_only ()" link="GVirConnection.html#gvir-connection-open-read-only"/>
+    <keyword type="function" name="gvir_connection_open_async ()" link="GVirConnection.html#gvir-connection-open-async"/>
+    <keyword type="function" name="gvir_connection_open_finish ()" link="GVirConnection.html#gvir-connection-open-finish"/>
+    <keyword type="function" name="gvir_connection_open_read_only_async ()" link="GVirConnection.html#gvir-connection-open-read-only-async"/>
+    <keyword type="function" name="gvir_connection_open_read_only_finish ()" link="GVirConnection.html#gvir-connection-open-read-only-finish"/>
+    <keyword type="function" name="gvir_connection_is_open ()" link="GVirConnection.html#gvir-connection-is-open"/>
+    <keyword type="function" name="gvir_connection_is_read_only ()" link="GVirConnection.html#gvir-connection-is-read-only"/>
+    <keyword type="function" name="gvir_connection_close ()" link="GVirConnection.html#gvir-connection-close"/>
+    <keyword type="function" name="gvir_connection_fetch_domains ()" link="GVirConnection.html#gvir-connection-fetch-domains"/>
+    <keyword type="function" name="gvir_connection_fetch_domains_async ()" link="GVirConnection.html#gvir-connection-fetch-domains-async"/>
+    <keyword type="function" name="gvir_connection_fetch_domains_finish ()" link="GVirConnection.html#gvir-connection-fetch-domains-finish"/>
+    <keyword type="function" name="gvir_connection_get_uri ()" link="GVirConnection.html#gvir-connection-get-uri"/>
+    <keyword type="function" name="gvir_connection_get_hypervisor_name ()" link="GVirConnection.html#gvir-connection-get-hypervisor-name"/>
+    <keyword type="function" name="gvir_connection_get_version ()" link="GVirConnection.html#gvir-connection-get-version"/>
+    <keyword type="function" name="gvir_connection_get_domains ()" link="GVirConnection.html#gvir-connection-get-domains"/>
+    <keyword type="function" name="gvir_connection_get_domain ()" link="GVirConnection.html#gvir-connection-get-domain"/>
+    <keyword type="function" name="gvir_connection_find_domain_by_id ()" link="GVirConnection.html#gvir-connection-find-domain-by-id"/>
+    <keyword type="function" name="gvir_connection_find_domain_by_name ()" link="GVirConnection.html#gvir-connection-find-domain-by-name"/>
+    <keyword type="function" name="gvir_connection_create_domain ()" link="GVirConnection.html#gvir-connection-create-domain"/>
+    <keyword type="function" name="gvir_connection_start_domain ()" link="GVirConnection.html#gvir-connection-start-domain"/>
+    <keyword type="function" name="gvir_connection_get_interfaces ()" link="GVirConnection.html#gvir-connection-get-interfaces"/>
+    <keyword type="function" name="gvir_connection_get_interface ()" link="GVirConnection.html#gvir-connection-get-interface"/>
+    <keyword type="function" name="gvir_connection_find_interface_by_mac ()" link="GVirConnection.html#gvir-connection-find-interface-by-mac"/>
+    <keyword type="function" name="gvir_connection_get_networks ()" link="GVirConnection.html#gvir-connection-get-networks"/>
+    <keyword type="function" name="gvir_connection_get_network ()" link="GVirConnection.html#gvir-connection-get-network"/>
+    <keyword type="function" name="gvir_connection_find_network_by_name ()" link="GVirConnection.html#gvir-connection-find-network-by-name"/>
+    <keyword type="function" name="gvir_connection_get_network_filters ()" link="GVirConnection.html#gvir-connection-get-network-filters"/>
+    <keyword type="function" name="gvir_connection_get_network_filter ()" link="GVirConnection.html#gvir-connection-get-network-filter"/>
+    <keyword type="function" name="gvir_connection_find_network_filter_by_name ()" link="GVirConnection.html#gvir-connection-find-network-filter-by-name"/>
+    <keyword type="function" name="gvir_connection_get_node_devices ()" link="GVirConnection.html#gvir-connection-get-node-devices"/>
+    <keyword type="function" name="gvir_connection_get_node_device ()" link="GVirConnection.html#gvir-connection-get-node-device"/>
+    <keyword type="function" name="gvir_connection_get_secrets ()" link="GVirConnection.html#gvir-connection-get-secrets"/>
+    <keyword type="function" name="gvir_connection_get_secret ()" link="GVirConnection.html#gvir-connection-get-secret"/>
+    <keyword type="function" name="gvir_connection_fetch_storage_pools ()" link="GVirConnection.html#gvir-connection-fetch-storage-pools"/>
+    <keyword type="function" name="gvir_connection_fetch_storage_pools_async ()" link="GVirConnection.html#gvir-connection-fetch-storage-pools-async"/>
+    <keyword type="function" name="gvir_connection_fetch_storage_pools_finish ()" link="GVirConnection.html#gvir-connection-fetch-storage-pools-finish"/>
+    <keyword type="function" name="gvir_connection_get_storage_pools ()" link="GVirConnection.html#gvir-connection-get-storage-pools"/>
+    <keyword type="function" name="gvir_connection_get_storage_pool ()" link="GVirConnection.html#gvir-connection-get-storage-pool"/>
+    <keyword type="function" name="gvir_connection_find_storage_pool_by_name ()" link="GVirConnection.html#gvir-connection-find-storage-pool-by-name"/>
+    <keyword type="function" name="gvir_connection_create_storage_pool ()" link="GVirConnection.html#gvir-connection-create-storage-pool"/>
+    <keyword type="function" name="gvir_connection_get_stream ()" link="GVirConnection.html#gvir-connection-get-stream"/>
+    <keyword type="function" name="gvir_connection_get_node_info ()" link="GVirConnection.html#gvir-connection-get-node-info"/>
+    <keyword type="function" name="gvir_connection_get_capabilities ()" link="GVirConnection.html#gvir-connection-get-capabilities"/>
+    <keyword type="function" name="gvir_connection_get_capabilities_async ()" link="GVirConnection.html#gvir-connection-get-capabilities-async"/>
+    <keyword type="function" name="gvir_connection_get_capabilities_finish ()" link="GVirConnection.html#gvir-connection-get-capabilities-finish"/>
+    <keyword type="function" name="gvir_connection_restore_domain_from_file ()" link="GVirConnection.html#gvir-connection-restore-domain-from-file"/>
+    <keyword type="function" name="gvir_connection_restore_domain_from_file_async ()" link="GVirConnection.html#gvir-connection-restore-domain-from-file-async"/>
+    <keyword type="function" name="gvir_connection_restore_domain_from_file_finish ()" link="GVirConnection.html#gvir-connection-restore-domain-from-file-finish"/>
+    <keyword type="property" name="The “handle” property" link="GVirConnection.html#GVirConnection--handle"/>
+    <keyword type="property" name="The “uri” property" link="GVirConnection.html#GVirConnection--uri"/>
+    <keyword type="signal" name="The “connection-closed” signal" link="GVirConnection.html#GVirConnection-connection-closed"/>
+    <keyword type="signal" name="The “connection-opened” signal" link="GVirConnection.html#GVirConnection-connection-opened"/>
+    <keyword type="signal" name="The “domain-added” signal" link="GVirConnection.html#GVirConnection-domain-added"/>
+    <keyword type="signal" name="The “domain-removed” signal" link="GVirConnection.html#GVirConnection-domain-removed"/>
+    <keyword type="function" name="gvir_domain_get_name ()" link="GVirDomain.html#gvir-domain-get-name"/>
+    <keyword type="function" name="gvir_domain_get_uuid ()" link="GVirDomain.html#gvir-domain-get-uuid"/>
+    <keyword type="function" name="gvir_domain_get_id ()" link="GVirDomain.html#gvir-domain-get-id"/>
+    <keyword type="function" name="gvir_domain_start ()" link="GVirDomain.html#gvir-domain-start"/>
+    <keyword type="function" name="gvir_domain_start_async ()" link="GVirDomain.html#gvir-domain-start-async"/>
+    <keyword type="function" name="gvir_domain_start_finish ()" link="GVirDomain.html#gvir-domain-start-finish"/>
+    <keyword type="function" name="gvir_domain_resume ()" link="GVirDomain.html#gvir-domain-resume"/>
+    <keyword type="function" name="gvir_domain_resume_async ()" link="GVirDomain.html#gvir-domain-resume-async"/>
+    <keyword type="function" name="gvir_domain_resume_finish ()" link="GVirDomain.html#gvir-domain-resume-finish"/>
+    <keyword type="function" name="gvir_domain_wakeup ()" link="GVirDomain.html#gvir-domain-wakeup"/>
+    <keyword type="function" name="gvir_domain_wakeup_async ()" link="GVirDomain.html#gvir-domain-wakeup-async"/>
+    <keyword type="function" name="gvir_domain_wakeup_finish ()" link="GVirDomain.html#gvir-domain-wakeup-finish"/>
+    <keyword type="function" name="gvir_domain_stop ()" link="GVirDomain.html#gvir-domain-stop"/>
+    <keyword type="function" name="gvir_domain_delete ()" link="GVirDomain.html#gvir-domain-delete"/>
+    <keyword type="function" name="gvir_domain_shutdown ()" link="GVirDomain.html#gvir-domain-shutdown"/>
+    <keyword type="function" name="gvir_domain_reboot ()" link="GVirDomain.html#gvir-domain-reboot"/>
+    <keyword type="function" name="gvir_domain_save_to_file ()" link="GVirDomain.html#gvir-domain-save-to-file"/>
+    <keyword type="function" name="gvir_domain_save_to_file_async ()" link="GVirDomain.html#gvir-domain-save-to-file-async"/>
+    <keyword type="function" name="gvir_domain_save_to_file_finish ()" link="GVirDomain.html#gvir-domain-save-to-file-finish"/>
+    <keyword type="function" name="gvir_domain_get_info ()" link="GVirDomain.html#gvir-domain-get-info"/>
+    <keyword type="function" name="gvir_domain_get_info_async ()" link="GVirDomain.html#gvir-domain-get-info-async"/>
+    <keyword type="function" name="gvir_domain_get_info_finish ()" link="GVirDomain.html#gvir-domain-get-info-finish"/>
+    <keyword type="function" name="gvir_domain_get_config ()" link="GVirDomain.html#gvir-domain-get-config"/>
+    <keyword type="function" name="gvir_domain_set_config ()" link="GVirDomain.html#gvir-domain-set-config"/>
+    <keyword type="function" name="gvir_domain_screenshot ()" link="GVirDomain.html#gvir-domain-screenshot"/>
+    <keyword type="function" name="gvir_domain_open_console ()" link="GVirDomain.html#gvir-domain-open-console"/>
+    <keyword type="function" name="gvir_domain_open_graphics ()" link="GVirDomain.html#gvir-domain-open-graphics"/>
+    <keyword type="function" name="gvir_domain_suspend ()" link="GVirDomain.html#gvir-domain-suspend"/>
+    <keyword type="function" name="gvir_domain_save ()" link="GVirDomain.html#gvir-domain-save"/>
+    <keyword type="function" name="gvir_domain_save_async ()" link="GVirDomain.html#gvir-domain-save-async"/>
+    <keyword type="function" name="gvir_domain_save_finish ()" link="GVirDomain.html#gvir-domain-save-finish"/>
+    <keyword type="function" name="gvir_domain_get_persistent ()" link="GVirDomain.html#gvir-domain-get-persistent"/>
+    <keyword type="function" name="gvir_domain_get_saved ()" link="GVirDomain.html#gvir-domain-get-saved"/>
+    <keyword type="function" name="gvir_domain_get_devices ()" link="GVirDomain.html#gvir-domain-get-devices"/>
+    <keyword type="function" name="gvir_domain_update_device ()" link="GVirDomain.html#gvir-domain-update-device"/>
+    <keyword type="function" name="gvir_domain_create_snapshot ()" link="GVirDomain.html#gvir-domain-create-snapshot"/>
+    <keyword type="function" name="gvir_domain_create_snapshot_async ()" link="GVirDomain.html#gvir-domain-create-snapshot-async"/>
+    <keyword type="function" name="gvir_domain_create_snapshot_finish ()" link="GVirDomain.html#gvir-domain-create-snapshot-finish"/>
+    <keyword type="function" name="gvir_domain_fetch_snapshots ()" link="GVirDomain.html#gvir-domain-fetch-snapshots"/>
+    <keyword type="function" name="gvir_domain_get_snapshots ()" link="GVirDomain.html#gvir-domain-get-snapshots"/>
+    <keyword type="function" name="gvir_domain_fetch_snapshots_async ()" link="GVirDomain.html#gvir-domain-fetch-snapshots-async"/>
+    <keyword type="function" name="gvir_domain_fetch_snapshots_finish ()" link="GVirDomain.html#gvir-domain-fetch-snapshots-finish"/>
+    <keyword type="function" name="gvir_domain_get_has_current_snapshot ()" link="GVirDomain.html#gvir-domain-get-has-current-snapshot"/>
     <keyword type="enum" name="enum GVirDomainState" link="GVirDomain.html#GVirDomainState"/>
     <keyword type="enum" name="enum GVirDomainStartFlags" link="GVirDomain.html#GVirDomainStartFlags"/>
     <keyword type="enum" name="enum GVirDomainDeleteFlags" link="GVirDomain.html#GVirDomainDeleteFlags"/>
@@ -90,206 +128,104 @@
     <keyword type="enum" name="enum GVirDomainSnapshotCreateFlags" link="GVirDomain.html#GVirDomainSnapshotCreateFlags"/>
     <keyword type="enum" name="enum GVirDomainUpdateDeviceFlags" link="GVirDomain.html#GVirDomainUpdateDeviceFlags"/>
     <keyword type="enum" name="enum GVirDomainRebootFlags" link="GVirDomain.html#GVirDomainRebootFlags"/>
-    <keyword type="struct" name="struct GVirDomainInfo" link="GVirDomain.html#GVirDomainInfo-struct"/>
-    <keyword type="function" name="gvir_domain_get_name ()" link="GVirDomain.html#gvir-domain-get-name"/>
-    <keyword type="function" name="gvir_domain_get_uuid ()" link="GVirDomain.html#gvir-domain-get-uuid"/>
-    <keyword type="function" name="gvir_domain_get_id ()" link="GVirDomain.html#gvir-domain-get-id"/>
-    <keyword type="function" name="gvir_domain_start ()" link="GVirDomain.html#gvir-domain-start"/>
-    <keyword type="function" name="gvir_domain_start_async ()" link="GVirDomain.html#gvir-domain-start-async"/>
-    <keyword type="function" name="gvir_domain_start_finish ()" link="GVirDomain.html#gvir-domain-start-finish"/>
-    <keyword type="function" name="gvir_domain_resume ()" link="GVirDomain.html#gvir-domain-resume"/>
-    <keyword type="function" name="gvir_domain_resume_async ()" link="GVirDomain.html#gvir-domain-resume-async"/>
-    <keyword type="function" name="gvir_domain_resume_finish ()" link="GVirDomain.html#gvir-domain-resume-finish"/>
-    <keyword type="function" name="gvir_domain_wakeup ()" link="GVirDomain.html#gvir-domain-wakeup"/>
-    <keyword type="function" name="gvir_domain_wakeup_async ()" link="GVirDomain.html#gvir-domain-wakeup-async"/>
-    <keyword type="function" name="gvir_domain_wakeup_finish ()" link="GVirDomain.html#gvir-domain-wakeup-finish"/>
-    <keyword type="function" name="gvir_domain_stop ()" link="GVirDomain.html#gvir-domain-stop"/>
-    <keyword type="function" name="gvir_domain_delete ()" link="GVirDomain.html#gvir-domain-delete"/>
-    <keyword type="function" name="gvir_domain_shutdown ()" link="GVirDomain.html#gvir-domain-shutdown"/>
-    <keyword type="function" name="gvir_domain_reboot ()" link="GVirDomain.html#gvir-domain-reboot"/>
-    <keyword type="function" name="gvir_domain_save_to_file ()" link="GVirDomain.html#gvir-domain-save-to-file"/>
-    <keyword type="function" name="gvir_domain_save_to_file_async ()" link="GVirDomain.html#gvir-domain-save-to-file-async"/>
-    <keyword type="function" name="gvir_domain_save_to_file_finish ()" link="GVirDomain.html#gvir-domain-save-to-file-finish"/>
-    <keyword type="function" name="gvir_domain_get_info ()" link="GVirDomain.html#gvir-domain-get-info"/>
-    <keyword type="function" name="gvir_domain_get_info_async ()" link="GVirDomain.html#gvir-domain-get-info-async"/>
-    <keyword type="function" name="gvir_domain_get_info_finish ()" link="GVirDomain.html#gvir-domain-get-info-finish"/>
-    <keyword type="function" name="gvir_domain_get_config ()" link="GVirDomain.html#gvir-domain-get-config"/>
-    <keyword type="function" name="gvir_domain_set_config ()" link="GVirDomain.html#gvir-domain-set-config"/>
-    <keyword type="function" name="gvir_domain_screenshot ()" link="GVirDomain.html#gvir-domain-screenshot"/>
-    <keyword type="function" name="gvir_domain_open_console ()" link="GVirDomain.html#gvir-domain-open-console"/>
-    <keyword type="function" name="gvir_domain_open_graphics ()" link="GVirDomain.html#gvir-domain-open-graphics"/>
-    <keyword type="function" name="gvir_domain_suspend ()" link="GVirDomain.html#gvir-domain-suspend"/>
-    <keyword type="function" name="gvir_domain_save ()" link="GVirDomain.html#gvir-domain-save"/>
-    <keyword type="function" name="gvir_domain_save_async ()" link="GVirDomain.html#gvir-domain-save-async"/>
-    <keyword type="function" name="gvir_domain_save_finish ()" link="GVirDomain.html#gvir-domain-save-finish"/>
-    <keyword type="function" name="gvir_domain_get_persistent ()" link="GVirDomain.html#gvir-domain-get-persistent"/>
-    <keyword type="function" name="gvir_domain_get_saved ()" link="GVirDomain.html#gvir-domain-get-saved"/>
-    <keyword type="function" name="gvir_domain_get_devices ()" link="GVirDomain.html#gvir-domain-get-devices"/>
-    <keyword type="function" name="gvir_domain_update_device ()" link="GVirDomain.html#gvir-domain-update-device"/>
-    <keyword type="function" name="gvir_domain_create_snapshot ()" link="GVirDomain.html#gvir-domain-create-snapshot"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="GVirDomain.html#GVirDomain--handle"/>
-    <keyword type="property" name="The &quot;persistent&quot; property" link="GVirDomain.html#GVirDomain--persistent"/>
-    <keyword type="signal" name="The &quot;pmsuspended&quot; signal" link="GVirDomain.html#GVirDomain-pmsuspended"/>
-    <keyword type="signal" name="The &quot;resumed&quot; signal" link="GVirDomain.html#GVirDomain-resumed"/>
-    <keyword type="signal" name="The &quot;started&quot; signal" link="GVirDomain.html#GVirDomain-started"/>
-    <keyword type="signal" name="The &quot;stopped&quot; signal" link="GVirDomain.html#GVirDomain-stopped"/>
-    <keyword type="signal" name="The &quot;suspended&quot; signal" link="GVirDomain.html#GVirDomain-suspended"/>
-    <keyword type="signal" name="The &quot;updated&quot; signal" link="GVirDomain.html#GVirDomain-updated"/>
-    <keyword type="struct" name="struct GVirDomainSnapshot" link="GVirDomainSnapshot.html#GVirDomainSnapshot-struct"/>
-    <keyword type="struct" name="struct GVirDomainSnapshotClass" link="GVirDomainSnapshot.html#GVirDomainSnapshotClass"/>
-    <keyword type="function" name="gvir_domain_snapshot_get_name ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-get-name"/>
-    <keyword type="function" name="gvir_domain_snapshot_get_config ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-get-config"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="GVirDomainSnapshot.html#GVirDomainSnapshot--handle"/>
-    <keyword type="struct" name="struct GVirInterface" link="Libvirt-gobject-GVir.html#GVirInterface-struct"/>
-    <keyword type="struct" name="struct GVirInterfaceClass" link="Libvirt-gobject-GVir.html#GVirInterfaceClass"/>
-    <keyword type="function" name="gvir_interface_get_name ()" link="Libvirt-gobject-GVir.html#gvir-interface-get-name"/>
-    <keyword type="function" name="gvir_interface_get_config ()" link="Libvirt-gobject-GVir.html#gvir-interface-get-config"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="Libvirt-gobject-GVir.html#GVirInterface--handle"/>
-    <keyword type="struct" name="struct GVirManager" link="GVirManager.html#GVirManager-struct"/>
-    <keyword type="struct" name="struct GVirManagerClass" link="GVirManager.html#GVirManagerClass"/>
-    <keyword type="function" name="gvir_manager_new ()" link="GVirManager.html#gvir-manager-new"/>
-    <keyword type="function" name="gvir_manager_add_connection ()" link="GVirManager.html#gvir-manager-add-connection"/>
-    <keyword type="function" name="gvir_manager_remove_connection ()" link="GVirManager.html#gvir-manager-remove-connection"/>
-    <keyword type="function" name="gvir_manager_get_connections ()" link="GVirManager.html#gvir-manager-get-connections"/>
-    <keyword type="function" name="gvir_manager_find_connection_by_uri ()" link="GVirManager.html#gvir-manager-find-connection-by-uri"/>
-    <keyword type="signal" name="The &quot;connection-added&quot; signal" link="GVirManager.html#GVirManager-connection-added"/>
-    <keyword type="signal" name="The &quot;connection-removed&quot; signal" link="GVirManager.html#GVirManager-connection-removed"/>
-    <keyword type="struct" name="struct GVirNetworkFilter" link="GVirNetworkFilter.html#GVirNetworkFilter-struct"/>
-    <keyword type="struct" name="struct GVirNetworkFilterClass" link="GVirNetworkFilter.html#GVirNetworkFilterClass"/>
-    <keyword type="function" name="gvir_network_filter_get_name ()" link="GVirNetworkFilter.html#gvir-network-filter-get-name"/>
-    <keyword type="function" name="gvir_network_filter_get_uuid ()" link="GVirNetworkFilter.html#gvir-network-filter-get-uuid"/>
-    <keyword type="function" name="gvir_network_filter_get_config ()" link="GVirNetworkFilter.html#gvir-network-filter-get-config"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="GVirNetworkFilter.html#GVirNetworkFilter--handle"/>
-    <keyword type="struct" name="struct GVirNetwork" link="GVirNetwork.html#GVirNetwork-struct"/>
-    <keyword type="struct" name="struct GVirNetworkClass" link="GVirNetwork.html#GVirNetworkClass"/>
-    <keyword type="function" name="gvir_network_get_name ()" link="GVirNetwork.html#gvir-network-get-name"/>
-    <keyword type="function" name="gvir_network_get_uuid ()" link="GVirNetwork.html#gvir-network-get-uuid"/>
-    <keyword type="function" name="gvir_network_get_config ()" link="GVirNetwork.html#gvir-network-get-config"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="GVirNetwork.html#GVirNetwork--handle"/>
-    <keyword type="struct" name="struct GVirNodeDevice" link="GVirNodeDevice.html#GVirNodeDevice-struct"/>
-    <keyword type="struct" name="struct GVirNodeDeviceClass" link="GVirNodeDevice.html#GVirNodeDeviceClass"/>
-    <keyword type="function" name="gvir_node_device_get_name ()" link="GVirNodeDevice.html#gvir-node-device-get-name"/>
-    <keyword type="function" name="gvir_node_device_get_config ()" link="GVirNodeDevice.html#gvir-node-device-get-config"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="GVirNodeDevice.html#GVirNodeDevice--handle"/>
-    <keyword type="struct" name="struct GVirSecret" link="GVirSecret.html#GVirSecret-struct"/>
-    <keyword type="struct" name="struct GVirSecretClass" link="GVirSecret.html#GVirSecretClass"/>
-    <keyword type="function" name="gvir_secret_get_name ()" link="GVirSecret.html#gvir-secret-get-name"/>
-    <keyword type="function" name="gvir_secret_get_uuid ()" link="GVirSecret.html#gvir-secret-get-uuid"/>
-    <keyword type="function" name="gvir_secret_get_config ()" link="GVirSecret.html#gvir-secret-get-config"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="GVirSecret.html#GVirSecret--handle"/>
-    <keyword type="struct" name="struct GVirStoragePool" link="GVirStoragePool.html#GVirStoragePool-struct"/>
-    <keyword type="struct" name="struct GVirStoragePoolClass" link="GVirStoragePool.html#GVirStoragePoolClass"/>
+    <keyword type="enum" name="enum GVirDomainSnapshotListFlags" link="GVirDomain.html#GVirDomainSnapshotListFlags"/>
+    <keyword type="property" name="The “handle” property" link="GVirDomain.html#GVirDomain--handle"/>
+    <keyword type="property" name="The “persistent” property" link="GVirDomain.html#GVirDomain--persistent"/>
+    <keyword type="signal" name="The “pmsuspended” signal" link="GVirDomain.html#GVirDomain-pmsuspended"/>
+    <keyword type="signal" name="The “resumed” signal" link="GVirDomain.html#GVirDomain-resumed"/>
+    <keyword type="signal" name="The “started” signal" link="GVirDomain.html#GVirDomain-started"/>
+    <keyword type="signal" name="The “stopped” signal" link="GVirDomain.html#GVirDomain-stopped"/>
+    <keyword type="signal" name="The “suspended” signal" link="GVirDomain.html#GVirDomain-suspended"/>
+    <keyword type="signal" name="The “updated” signal" link="GVirDomain.html#GVirDomain-updated"/>
+    <keyword type="function" name="gvir_domain_snapshot_get_name ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-get-name"/>
+    <keyword type="function" name="gvir_domain_snapshot_get_config ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-get-config"/>
+    <keyword type="function" name="gvir_domain_snapshot_delete ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-delete"/>
+    <keyword type="function" name="gvir_domain_snapshot_delete_async ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-delete-async"/>
+    <keyword type="function" name="gvir_domain_snapshot_delete_finish ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-delete-finish"/>
+    <keyword type="function" name="gvir_domain_snapshot_get_is_current ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-get-is-current"/>
+    <keyword type="function" name="gvir_domain_snapshot_revert_to ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-revert-to"/>
+    <keyword type="function" name="gvir_domain_snapshot_revert_to_async ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-revert-to-async"/>
+    <keyword type="function" name="gvir_domain_snapshot_revert_to_finish ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-revert-to-finish"/>
+    <keyword type="function" name="gvir_domain_snapshot_set_config ()" link="GVirDomainSnapshot.html#gvir-domain-snapshot-set-config"/>
+    <keyword type="enum" name="enum GVirDomainSnapshotDeleteFlags" link="GVirDomainSnapshot.html#GVirDomainSnapshotDeleteFlags"/>
+    <keyword type="enum" name="enum GVirDomainSnapshotRevertFlags" link="GVirDomainSnapshot.html#GVirDomainSnapshotRevertFlags"/>
+    <keyword type="property" name="The “handle” property" link="GVirDomainSnapshot.html#GVirDomainSnapshot--handle"/>
+    <keyword type="function" name="gvir_interface_get_name ()" link="GVirInterface.html#gvir-interface-get-name"/>
+    <keyword type="function" name="gvir_interface_get_config ()" link="GVirInterface.html#gvir-interface-get-config"/>
+    <keyword type="property" name="The “handle” property" link="GVirInterface.html#GVirInterface--handle"/>
+    <keyword type="function" name="gvir_manager_new ()" link="GVirManager.html#gvir-manager-new"/>
+    <keyword type="function" name="gvir_manager_add_connection ()" link="GVirManager.html#gvir-manager-add-connection"/>
+    <keyword type="function" name="gvir_manager_remove_connection ()" link="GVirManager.html#gvir-manager-remove-connection"/>
+    <keyword type="function" name="gvir_manager_get_connections ()" link="GVirManager.html#gvir-manager-get-connections"/>
+    <keyword type="function" name="gvir_manager_find_connection_by_uri ()" link="GVirManager.html#gvir-manager-find-connection-by-uri"/>
+    <keyword type="signal" name="The “connection-added” signal" link="GVirManager.html#GVirManager-connection-added"/>
+    <keyword type="signal" name="The “connection-removed” signal" link="GVirManager.html#GVirManager-connection-removed"/>
+    <keyword type="function" name="gvir_network_filter_get_name ()" link="GVirNetworkFilter.html#gvir-network-filter-get-name"/>
+    <keyword type="function" name="gvir_network_filter_get_uuid ()" link="GVirNetworkFilter.html#gvir-network-filter-get-uuid"/>
+    <keyword type="function" name="gvir_network_filter_get_config ()" link="GVirNetworkFilter.html#gvir-network-filter-get-config"/>
+    <keyword type="property" name="The “handle” property" link="GVirNetworkFilter.html#GVirNetworkFilter--handle"/>
+    <keyword type="function" name="gvir_network_get_name ()" link="GVirNetwork.html#gvir-network-get-name"/>
+    <keyword type="function" name="gvir_network_get_uuid ()" link="GVirNetwork.html#gvir-network-get-uuid"/>
+    <keyword type="function" name="gvir_network_get_config ()" link="GVirNetwork.html#gvir-network-get-config"/>
+    <keyword type="property" name="The “handle” property" link="GVirNetwork.html#GVirNetwork--handle"/>
+    <keyword type="function" name="gvir_node_device_get_name ()" link="GVirNodeDevice.html#gvir-node-device-get-name"/>
+    <keyword type="function" name="gvir_node_device_get_config ()" link="GVirNodeDevice.html#gvir-node-device-get-config"/>
+    <keyword type="property" name="The “handle” property" link="GVirNodeDevice.html#GVirNodeDevice--handle"/>
+    <keyword type="function" name="gvir_secret_get_name ()" link="GVirSecret.html#gvir-secret-get-name"/>
+    <keyword type="function" name="gvir_secret_get_uuid ()" link="GVirSecret.html#gvir-secret-get-uuid"/>
+    <keyword type="function" name="gvir_secret_get_config ()" link="GVirSecret.html#gvir-secret-get-config"/>
+    <keyword type="property" name="The “handle” property" link="GVirSecret.html#GVirSecret--handle"/>
+    <keyword type="function" name="gvir_storage_pool_get_name ()" link="GVirStoragePool.html#gvir-storage-pool-get-name"/>
+    <keyword type="function" name="gvir_storage_pool_get_uuid ()" link="GVirStoragePool.html#gvir-storage-pool-get-uuid"/>
+    <keyword type="function" name="gvir_storage_pool_get_active ()" link="GVirStoragePool.html#gvir-storage-pool-get-active"/>
+    <keyword type="function" name="gvir_storage_pool_get_persistent ()" link="GVirStoragePool.html#gvir-storage-pool-get-persistent"/>
+    <keyword type="function" name="gvir_storage_pool_get_config ()" link="GVirStoragePool.html#gvir-storage-pool-get-config"/>
+    <keyword type="function" name="gvir_storage_pool_get_info ()" link="GVirStoragePool.html#gvir-storage-pool-get-info"/>
+    <keyword type="function" name="gvir_storage_pool_refresh ()" link="GVirStoragePool.html#gvir-storage-pool-refresh"/>
+    <keyword type="function" name="gvir_storage_pool_refresh_async ()" link="GVirStoragePool.html#gvir-storage-pool-refresh-async"/>
+    <keyword type="function" name="gvir_storage_pool_refresh_finish ()" link="GVirStoragePool.html#gvir-storage-pool-refresh-finish"/>
+    <keyword type="function" name="gvir_storage_pool_get_volumes ()" link="GVirStoragePool.html#gvir-storage-pool-get-volumes"/>
+    <keyword type="function" name="gvir_storage_pool_get_volume ()" link="GVirStoragePool.html#gvir-storage-pool-get-volume"/>
+    <keyword type="function" name="gvir_storage_pool_create_volume ()" link="GVirStoragePool.html#gvir-storage-pool-create-volume"/>
+    <keyword type="function" name="gvir_storage_pool_build ()" link="GVirStoragePool.html#gvir-storage-pool-build"/>
+    <keyword type="function" name="gvir_storage_pool_build_async ()" link="GVirStoragePool.html#gvir-storage-pool-build-async"/>
+    <keyword type="function" name="gvir_storage_pool_build_finish ()" link="GVirStoragePool.html#gvir-storage-pool-build-finish"/>
+    <keyword type="function" name="gvir_storage_pool_undefine ()" link="GVirStoragePool.html#gvir-storage-pool-undefine"/>
+    <keyword type="function" name="gvir_storage_pool_undefine_async ()" link="GVirStoragePool.html#gvir-storage-pool-undefine-async"/>
+    <keyword type="function" name="gvir_storage_pool_undefine_finish ()" link="GVirStoragePool.html#gvir-storage-pool-undefine-finish"/>
+    <keyword type="function" name="gvir_storage_pool_start ()" link="GVirStoragePool.html#gvir-storage-pool-start"/>
+    <keyword type="function" name="gvir_storage_pool_start_async ()" link="GVirStoragePool.html#gvir-storage-pool-start-async"/>
+    <keyword type="function" name="gvir_storage_pool_start_finish ()" link="GVirStoragePool.html#gvir-storage-pool-start-finish"/>
+    <keyword type="function" name="gvir_storage_pool_stop ()" link="GVirStoragePool.html#gvir-storage-pool-stop"/>
+    <keyword type="function" name="gvir_storage_pool_stop_async ()" link="GVirStoragePool.html#gvir-storage-pool-stop-async"/>
+    <keyword type="function" name="gvir_storage_pool_stop_finish ()" link="GVirStoragePool.html#gvir-storage-pool-stop-finish"/>
+    <keyword type="function" name="gvir_storage_pool_delete ()" link="GVirStoragePool.html#gvir-storage-pool-delete"/>
+    <keyword type="function" name="gvir_storage_pool_delete_async ()" link="GVirStoragePool.html#gvir-storage-pool-delete-async"/>
+    <keyword type="function" name="gvir_storage_pool_delete_finish ()" link="GVirStoragePool.html#gvir-storage-pool-delete-finish"/>
     <keyword type="enum" name="enum GVirStoragePoolState" link="GVirStoragePool.html#GVirStoragePoolState"/>
-    <keyword type="struct" name="struct GVirStoragePoolInfo" link="GVirStoragePool.html#GVirStoragePoolInfo-struct"/>
-    <keyword type="function" name="gvir_storage_pool_get_name ()" link="GVirStoragePool.html#gvir-storage-pool-get-name"/>
-    <keyword type="function" name="gvir_storage_pool_get_uuid ()" link="GVirStoragePool.html#gvir-storage-pool-get-uuid"/>
-    <keyword type="function" name="gvir_storage_pool_get_active ()" link="GVirStoragePool.html#gvir-storage-pool-get-active"/>
-    <keyword type="function" name="gvir_storage_pool_get_persistent ()" link="GVirStoragePool.html#gvir-storage-pool-get-persistent"/>
-    <keyword type="function" name="gvir_storage_pool_get_config ()" link="GVirStoragePool.html#gvir-storage-pool-get-config"/>
-    <keyword type="function" name="gvir_storage_pool_get_info ()" link="GVirStoragePool.html#gvir-storage-pool-get-info"/>
-    <keyword type="function" name="gvir_storage_pool_refresh ()" link="GVirStoragePool.html#gvir-storage-pool-refresh"/>
-    <keyword type="function" name="gvir_storage_pool_refresh_async ()" link="GVirStoragePool.html#gvir-storage-pool-refresh-async"/>
-    <keyword type="function" name="gvir_storage_pool_refresh_finish ()" link="GVirStoragePool.html#gvir-storage-pool-refresh-finish"/>
-    <keyword type="function" name="gvir_storage_pool_get_volumes ()" link="GVirStoragePool.html#gvir-storage-pool-get-volumes"/>
-    <keyword type="function" name="gvir_storage_pool_get_volume ()" link="GVirStoragePool.html#gvir-storage-pool-get-volume"/>
-    <keyword type="function" name="gvir_storage_pool_create_volume ()" link="GVirStoragePool.html#gvir-storage-pool-create-volume"/>
-    <keyword type="function" name="gvir_storage_pool_build ()" link="GVirStoragePool.html#gvir-storage-pool-build"/>
-    <keyword type="function" name="gvir_storage_pool_build_async ()" link="GVirStoragePool.html#gvir-storage-pool-build-async"/>
-    <keyword type="function" name="gvir_storage_pool_build_finish ()" link="GVirStoragePool.html#gvir-storage-pool-build-finish"/>
-    <keyword type="function" name="gvir_storage_pool_undefine ()" link="GVirStoragePool.html#gvir-storage-pool-undefine"/>
-    <keyword type="function" name="gvir_storage_pool_undefine_async ()" link="GVirStoragePool.html#gvir-storage-pool-undefine-async"/>
-    <keyword type="function" name="gvir_storage_pool_undefine_finish ()" link="GVirStoragePool.html#gvir-storage-pool-undefine-finish"/>
-    <keyword type="function" name="gvir_storage_pool_start ()" link="GVirStoragePool.html#gvir-storage-pool-start"/>
-    <keyword type="function" name="gvir_storage_pool_start_async ()" link="GVirStoragePool.html#gvir-storage-pool-start-async"/>
-    <keyword type="function" name="gvir_storage_pool_start_finish ()" link="GVirStoragePool.html#gvir-storage-pool-start-finish"/>
-    <keyword type="function" name="gvir_storage_pool_stop ()" link="GVirStoragePool.html#gvir-storage-pool-stop"/>
-    <keyword type="function" name="gvir_storage_pool_stop_async ()" link="GVirStoragePool.html#gvir-storage-pool-stop-async"/>
-    <keyword type="function" name="gvir_storage_pool_stop_finish ()" link="GVirStoragePool.html#gvir-storage-pool-stop-finish"/>
-    <keyword type="function" name="gvir_storage_pool_delete ()" link="GVirStoragePool.html#gvir-storage-pool-delete"/>
-    <keyword type="function" name="gvir_storage_pool_delete_async ()" link="GVirStoragePool.html#gvir-storage-pool-delete-async"/>
-    <keyword type="function" name="gvir_storage_pool_delete_finish ()" link="GVirStoragePool.html#gvir-storage-pool-delete-finish"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="GVirStoragePool.html#GVirStoragePool--handle"/>
-    <keyword type="struct" name="struct GVirStorageVol" link="GVirStorageVol.html#GVirStorageVol-struct"/>
-    <keyword type="struct" name="struct GVirStorageVolClass" link="GVirStorageVol.html#GVirStorageVolClass"/>
+    <keyword type="property" name="The “handle” property" link="GVirStoragePool.html#GVirStoragePool--handle"/>
+    <keyword type="function" name="gvir_storage_vol_get_name ()" link="GVirStorageVol.html#gvir-storage-vol-get-name"/>
+    <keyword type="function" name="gvir_storage_vol_get_path ()" link="GVirStorageVol.html#gvir-storage-vol-get-path"/>
+    <keyword type="function" name="gvir_storage_vol_delete ()" link="GVirStorageVol.html#gvir-storage-vol-delete"/>
+    <keyword type="function" name="gvir_storage_vol_get_config ()" link="GVirStorageVol.html#gvir-storage-vol-get-config"/>
+    <keyword type="function" name="gvir_storage_vol_get_info ()" link="GVirStorageVol.html#gvir-storage-vol-get-info"/>
+    <keyword type="function" name="gvir_storage_vol_resize ()" link="GVirStorageVol.html#gvir-storage-vol-resize"/>
+    <keyword type="function" name="gvir_storage_vol_download ()" link="GVirStorageVol.html#gvir-storage-vol-download"/>
+    <keyword type="function" name="gvir_storage_vol_upload ()" link="GVirStorageVol.html#gvir-storage-vol-upload"/>
     <keyword type="enum" name="enum GVirStorageVolType" link="GVirStorageVol.html#GVirStorageVolType"/>
     <keyword type="enum" name="enum GVirStorageVolResizeFlags" link="GVirStorageVol.html#GVirStorageVolResizeFlags"/>
-    <keyword type="struct" name="struct GVirStorageVolInfo" link="GVirStorageVol.html#GVirStorageVolInfo-struct"/>
-    <keyword type="function" name="gvir_storage_vol_get_name ()" link="GVirStorageVol.html#gvir-storage-vol-get-name"/>
-    <keyword type="function" name="gvir_storage_vol_get_path ()" link="GVirStorageVol.html#gvir-storage-vol-get-path"/>
-    <keyword type="function" name="gvir_storage_vol_delete ()" link="GVirStorageVol.html#gvir-storage-vol-delete"/>
-    <keyword type="function" name="gvir_storage_vol_get_config ()" link="GVirStorageVol.html#gvir-storage-vol-get-config"/>
-    <keyword type="function" name="gvir_storage_vol_get_info ()" link="GVirStorageVol.html#gvir-storage-vol-get-info"/>
-    <keyword type="function" name="gvir_storage_vol_resize ()" link="GVirStorageVol.html#gvir-storage-vol-resize"/>
-    <keyword type="function" name="gvir_storage_vol_download ()" link="GVirStorageVol.html#gvir-storage-vol-download"/>
-    <keyword type="function" name="gvir_storage_vol_upload ()" link="GVirStorageVol.html#gvir-storage-vol-upload"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="GVirStorageVol.html#GVirStorageVol--handle"/>
-    <keyword type="property" name="The &quot;pool&quot; property" link="GVirStorageVol.html#GVirStorageVol--pool"/>
-    <keyword type="struct" name="struct GVirStream" link="GVirStream.html#GVirStream-struct"/>
-    <keyword type="struct" name="struct GVirStreamClass" link="GVirStream.html#GVirStreamClass"/>
-    <keyword type="function" name="GVirStreamSinkFunc ()" link="GVirStream.html#GVirStreamSinkFunc"/>
-    <keyword type="function" name="GVirStreamSourceFunc ()" link="GVirStream.html#GVirStreamSourceFunc"/>
+    <keyword type="property" name="The “handle” property" link="GVirStorageVol.html#GVirStorageVol--handle"/>
+    <keyword type="property" name="The “pool” property" link="GVirStorageVol.html#GVirStorageVol--pool"/>
+    <keyword type="function" name="GVirStreamSinkFunc ()" link="GVirStream.html#GVirStreamSinkFunc"/>
+    <keyword type="function" name="GVirStreamSourceFunc ()" link="GVirStream.html#GVirStreamSourceFunc"/>
+    <keyword type="function" name="GVirStreamIOFunc ()" link="GVirStream.html#GVirStreamIOFunc"/>
+    <keyword type="function" name="gvir_stream_add_watch ()" link="GVirStream.html#gvir-stream-add-watch"/>
+    <keyword type="function" name="gvir_stream_add_watch_full ()" link="GVirStream.html#gvir-stream-add-watch-full"/>
+    <keyword type="function" name="gvir_stream_receive_all ()" link="GVirStream.html#gvir-stream-receive-all"/>
+    <keyword type="function" name="gvir_stream_receive ()" link="GVirStream.html#gvir-stream-receive"/>
+    <keyword type="function" name="gvir_stream_send_all ()" link="GVirStream.html#gvir-stream-send-all"/>
+    <keyword type="function" name="gvir_stream_send ()" link="GVirStream.html#gvir-stream-send"/>
     <keyword type="enum" name="enum GVirStreamIOCondition" link="GVirStream.html#GVirStreamIOCondition"/>
-    <keyword type="function" name="GVirStreamIOFunc ()" link="GVirStream.html#GVirStreamIOFunc"/>
-    <keyword type="function" name="gvir_stream_add_watch ()" link="GVirStream.html#gvir-stream-add-watch"/>
-    <keyword type="function" name="gvir_stream_add_watch_full ()" link="GVirStream.html#gvir-stream-add-watch-full"/>
-    <keyword type="function" name="gvir_stream_receive_all ()" link="GVirStream.html#gvir-stream-receive-all"/>
-    <keyword type="function" name="gvir_stream_receive ()" link="GVirStream.html#gvir-stream-receive"/>
-    <keyword type="function" name="gvir_stream_send_all ()" link="GVirStream.html#gvir-stream-send-all"/>
-    <keyword type="function" name="gvir_stream_send ()" link="GVirStream.html#gvir-stream-send"/>
-    <keyword type="property" name="The &quot;handle&quot; property" link="GVirStream.html#GVirStream--handle"/>
-    <keyword type="constant" name="GVIR_DOMAIN_STATE_NONE" link="GVirDomain.html#GVIR-DOMAIN-STATE-NONE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_STATE_RUNNING" link="GVirDomain.html#GVIR-DOMAIN-STATE-RUNNING:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_STATE_BLOCKED" link="GVirDomain.html#GVIR-DOMAIN-STATE-BLOCKED:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_STATE_PAUSED" link="GVirDomain.html#GVIR-DOMAIN-STATE-PAUSED:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_STATE_SHUTDOWN" link="GVirDomain.html#GVIR-DOMAIN-STATE-SHUTDOWN:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_STATE_SHUTOFF" link="GVirDomain.html#GVIR-DOMAIN-STATE-SHUTOFF:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_STATE_CRASHED" link="GVirDomain.html#GVIR-DOMAIN-STATE-CRASHED:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_STATE_PMSUSPENDED" link="GVirDomain.html#GVIR-DOMAIN-STATE-PMSUSPENDED:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_START_NONE" link="GVirDomain.html#GVIR-DOMAIN-START-NONE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_START_PAUSED" link="GVirDomain.html#GVIR-DOMAIN-START-PAUSED:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_START_AUTODESTROY" link="GVirDomain.html#GVIR-DOMAIN-START-AUTODESTROY:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_START_BYPASS_CACHE" link="GVirDomain.html#GVIR-DOMAIN-START-BYPASS-CACHE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_START_FORCE_BOOT" link="GVirDomain.html#GVIR-DOMAIN-START-FORCE-BOOT:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_DELETE_NONE" link="GVirDomain.html#GVIR-DOMAIN-DELETE-NONE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_DELETE_SAVED_STATE" link="GVirDomain.html#GVIR-DOMAIN-DELETE-SAVED-STATE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_DELETE_SNAPSHOTS_METADATA" link="GVirDomain.html#GVIR-DOMAIN-DELETE-SNAPSHOTS-METADATA:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_XML_NONE" link="GVirDomain.html#GVIR-DOMAIN-XML-NONE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_XML_SECURE" link="GVirDomain.html#GVIR-DOMAIN-XML-SECURE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_XML_INACTIVE" link="GVirDomain.html#GVIR-DOMAIN-XML-INACTIVE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_XML_UPDATE_CPU" link="GVirDomain.html#GVIR-DOMAIN-XML-UPDATE-CPU:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SHUTDOWN_NONE" link="GVirDomain.html#GVIR-DOMAIN-SHUTDOWN-NONE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SHUTDOWN_ACPI_POWER_BTN" link="GVirDomain.html#GVIR-DOMAIN-SHUTDOWN-ACPI-POWER-BTN:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SHUTDOWN_GUEST_AGENT" link="GVirDomain.html#GVIR-DOMAIN-SHUTDOWN-GUEST-AGENT:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SNAPSHOT_NONE" link="GVirDomain.html#GVIR-DOMAIN-SNAPSHOT-NONE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SNAPSHOT_REDEFINE" link="GVirDomain.html#GVIR-DOMAIN-SNAPSHOT-REDEFINE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SNAPSHOT_CURRENT" link="GVirDomain.html#GVIR-DOMAIN-SNAPSHOT-CURRENT:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SNAPSHOT_NO_METADATA" link="GVirDomain.html#GVIR-DOMAIN-SNAPSHOT-NO-METADATA:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SNAPSHOT_HALT" link="GVirDomain.html#GVIR-DOMAIN-SNAPSHOT-HALT:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SNAPSHOT_DISK_ONLY" link="GVirDomain.html#GVIR-DOMAIN-SNAPSHOT-DISK-ONLY:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SNAPSHOT_REUSE_EXT" link="GVirDomain.html#GVIR-DOMAIN-SNAPSHOT-REUSE-EXT:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SNAPSHOT_QUIESCE" link="GVirDomain.html#GVIR-DOMAIN-SNAPSHOT-QUIESCE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_SNAPSHOT_ATOMIC" link="GVirDomain.html#GVIR-DOMAIN-SNAPSHOT-ATOMIC:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_UPDATE_DEVICE_CURRENT" link="GVirDomain.html#GVIR-DOMAIN-UPDATE-DEVICE-CURRENT:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_UPDATE_DEVICE_LIVE" link="GVirDomain.html#GVIR-DOMAIN-UPDATE-DEVICE-LIVE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_UPDATE_DEVICE_CONFIG" link="GVirDomain.html#GVIR-DOMAIN-UPDATE-DEVICE-CONFIG:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_REBOOT_NONE" link="GVirDomain.html#GVIR-DOMAIN-REBOOT-NONE:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_REBOOT_ACPI_POWER_BTN" link="GVirDomain.html#GVIR-DOMAIN-REBOOT-ACPI-POWER-BTN:CAPS"/>
-    <keyword type="constant" name="GVIR_DOMAIN_REBOOT_GUEST_AGENT" link="GVirDomain.html#GVIR-DOMAIN-REBOOT-GUEST-AGENT:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_POOL_STATE_INACTIVE" link="GVirStoragePool.html#GVIR-STORAGE-POOL-STATE-INACTIVE:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_POOL_STATE_BUILDING" link="GVirStoragePool.html#GVIR-STORAGE-POOL-STATE-BUILDING:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_POOL_STATE_RUNNING" link="GVirStoragePool.html#GVIR-STORAGE-POOL-STATE-RUNNING:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_POOL_STATE_DEGRADED" link="GVirStoragePool.html#GVIR-STORAGE-POOL-STATE-DEGRADED:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_POOL_STATE_INACCESSIBLE" link="GVirStoragePool.html#GVIR-STORAGE-POOL-STATE-INACCESSIBLE:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_VOL_STATE_FILE" link="GVirStorageVol.html#GVIR-STORAGE-VOL-STATE-FILE:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_VOL_STATE_BLOCK" link="GVirStorageVol.html#GVIR-STORAGE-VOL-STATE-BLOCK:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_VOL_STATE_DIR" link="GVirStorageVol.html#GVIR-STORAGE-VOL-STATE-DIR:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_VOL_RESIZE_NONE" link="GVirStorageVol.html#GVIR-STORAGE-VOL-RESIZE-NONE:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_VOL_RESIZE_ALLOCATE" link="GVirStorageVol.html#GVIR-STORAGE-VOL-RESIZE-ALLOCATE:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_VOL_RESIZE_DELTA" link="GVirStorageVol.html#GVIR-STORAGE-VOL-RESIZE-DELTA:CAPS"/>
-    <keyword type="constant" name="GVIR_STORAGE_VOL_RESIZE_SHRINK" link="GVirStorageVol.html#GVIR-STORAGE-VOL-RESIZE-SHRINK:CAPS"/>
-    <keyword type="constant" name="GVIR_STREAM_IO_CONDITION_READABLE" link="GVirStream.html#GVIR-STREAM-IO-CONDITION-READABLE:CAPS"/>
-    <keyword type="constant" name="GVIR_STREAM_IO_CONDITION_WRITABLE" link="GVirStream.html#GVIR-STREAM-IO-CONDITION-WRITABLE:CAPS"/>
-    <keyword type="constant" name="GVIR_STREAM_IO_CONDITION_HANGUP" link="GVirStream.html#GVIR-STREAM-IO-CONDITION-HANGUP:CAPS"/>
-    <keyword type="constant" name="GVIR_STREAM_IO_CONDITION_ERROR" link="GVirStream.html#GVIR-STREAM-IO-CONDITION-ERROR:CAPS"/>
+    <keyword type="property" name="The “handle” property" link="GVirStream.html#GVirStream--handle"/>
   </functions>
 </book>

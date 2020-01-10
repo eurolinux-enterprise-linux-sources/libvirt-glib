@@ -1,4 +1,4 @@
-# generated automatically by aclocal 1.13.2 -*- Autoconf -*-
+# generated automatically by aclocal 1.13.4 -*- Autoconf -*-
 
 # Copyright (C) 1996-2013 Free Software Foundation, Inc.
 
@@ -22,7 +22,7 @@ To do so, use the procedure documented by the package, typically 'autoreconf'.])
 
 dnl -*- mode: autoconf -*-
 
-# serial 1
+# serial 2
 
 dnl Usage:
 dnl   GTK_DOC_CHECK([minimum-gtk-doc-version])
@@ -32,8 +32,24 @@ AC_DEFUN([GTK_DOC_CHECK],
   AC_BEFORE([AC_PROG_LIBTOOL],[$0])dnl setup libtool first
   AC_BEFORE([AM_PROG_LIBTOOL],[$0])dnl setup libtool first
 
+  ifelse([$1],[],[gtk_doc_requires="gtk-doc"],[gtk_doc_requires="gtk-doc >= $1"])
+  AC_MSG_CHECKING([for gtk-doc])
+  PKG_CHECK_EXISTS([$gtk_doc_requires],[have_gtk_doc=yes],[have_gtk_doc=no])
+  AC_MSG_RESULT($have_gtk_doc)
+
+  if test "$have_gtk_doc" = "no"; then
+      AC_MSG_WARN([
+  You will not be able to create source packages with 'make dist'
+  because $gtk_doc_requires is not found.])
+  fi
+
   dnl check for tools we added during development
-  AC_PATH_PROG([GTKDOC_CHECK],[gtkdoc-check])
+  dnl Use AC_CHECK_PROG to avoid the check target using an absolute path that
+  dnl may not be writable by the user. Currently, automake requires that the
+  dnl test name must end in '.test'.
+  dnl https://bugzilla.gnome.org/show_bug.cgi?id=701638
+  AC_CHECK_PROG([GTKDOC_CHECK],[gtkdoc-check],[gtkdoc-check.test])
+  AC_PATH_PROG([GTKDOC_CHECK_PATH],[gtkdoc-check])
   AC_PATH_PROGS([GTKDOC_REBASE],[gtkdoc-rebase],[true])
   AC_PATH_PROG([GTKDOC_MKPDF],[gtkdoc-mkpdf])
 
@@ -50,21 +66,21 @@ AC_DEFUN([GTK_DOC_CHECK],
                    [use gtk-doc to build documentation [[default=no]]]),,
     [enable_gtk_doc=no])
 
-  if test x$enable_gtk_doc = xyes; then
-    ifelse([$1],[],
-      [PKG_CHECK_EXISTS([gtk-doc],,
-                        AC_MSG_ERROR([gtk-doc not installed and --enable-gtk-doc requested]))],
-      [PKG_CHECK_EXISTS([gtk-doc >= $1],,
-                        AC_MSG_ERROR([You need to have gtk-doc >= $1 installed to build $PACKAGE_NAME]))])
-    dnl don't check for glib if we build glib
-    if test "x$PACKAGE_NAME" != "xglib"; then
-      dnl don't fail if someone does not have glib
-      PKG_CHECK_MODULES(GTKDOC_DEPS, glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0,,[:])
-    fi
-  fi
-
   AC_MSG_CHECKING([whether to build gtk-doc documentation])
   AC_MSG_RESULT($enable_gtk_doc)
+
+  if test "x$enable_gtk_doc" = "xyes" && test "$have_gtk_doc" = "no"; then
+    AC_MSG_ERROR([
+  You must have $gtk_doc_requires installed to build documentation for
+  $PACKAGE_NAME. Please install gtk-doc or disable building the
+  documentation by adding '--disable-gtk-doc' to '[$]0'.])
+  fi
+
+  dnl don't check for glib if we build glib
+  if test "x$PACKAGE_NAME" != "xglib"; then
+    dnl don't fail if someone does not have glib
+    PKG_CHECK_MODULES(GTKDOC_DEPS, glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0,,[:])
+  fi
 
   dnl enable/disable output formats
   AC_ARG_ENABLE([gtk-doc-html],
@@ -85,11 +101,109 @@ AC_DEFUN([GTK_DOC_CHECK],
   fi
   AC_SUBST([AM_DEFAULT_VERBOSITY])
 
+  AM_CONDITIONAL([HAVE_GTK_DOC], [test x$have_gtk_doc = xyes])
   AM_CONDITIONAL([ENABLE_GTK_DOC], [test x$enable_gtk_doc = xyes])
   AM_CONDITIONAL([GTK_DOC_BUILD_HTML], [test x$enable_gtk_doc_html = xyes])
   AM_CONDITIONAL([GTK_DOC_BUILD_PDF], [test x$enable_gtk_doc_pdf = xyes])
   AM_CONDITIONAL([GTK_DOC_USE_LIBTOOL], [test -n "$LIBTOOL"])
   AM_CONDITIONAL([GTK_DOC_USE_REBASE], [test -n "$GTKDOC_REBASE"])
+])
+
+dnl -*- mode: autoconf -*-
+dnl Copyright 2009 Johan Dahlin
+dnl
+dnl This file is free software; the author(s) gives unlimited
+dnl permission to copy and/or distribute it, with or without
+dnl modifications, as long as this notice is preserved.
+dnl
+
+# serial 1
+
+m4_define([_GOBJECT_INTROSPECTION_CHECK_INTERNAL],
+[
+    AC_BEFORE([AC_PROG_LIBTOOL],[$0])dnl setup libtool first
+    AC_BEFORE([AM_PROG_LIBTOOL],[$0])dnl setup libtool first
+    AC_BEFORE([LT_INIT],[$0])dnl setup libtool first
+
+    dnl enable/disable introspection
+    m4_if([$2], [require],
+    [dnl
+        enable_introspection=yes
+    ],[dnl
+        AC_ARG_ENABLE(introspection,
+                  AS_HELP_STRING([--enable-introspection[=@<:@no/auto/yes@:>@]],
+                                 [Enable introspection for this build]),, 
+                                 [enable_introspection=auto])
+    ])dnl
+
+    AC_MSG_CHECKING([for gobject-introspection])
+
+    dnl presence/version checking
+    AS_CASE([$enable_introspection],
+    [no], [dnl
+        found_introspection="no (disabled, use --enable-introspection to enable)"
+    ],dnl
+    [yes],[dnl
+        PKG_CHECK_EXISTS([gobject-introspection-1.0],,
+                         AC_MSG_ERROR([gobject-introspection-1.0 is not installed]))
+        PKG_CHECK_EXISTS([gobject-introspection-1.0 >= $1],
+                         found_introspection=yes,
+                         AC_MSG_ERROR([You need to have gobject-introspection >= $1 installed to build AC_PACKAGE_NAME]))
+    ],dnl
+    [auto],[dnl
+        PKG_CHECK_EXISTS([gobject-introspection-1.0 >= $1], found_introspection=yes, found_introspection=no)
+	dnl Canonicalize enable_introspection
+	enable_introspection=$found_introspection
+    ],dnl
+    [dnl	
+        AC_MSG_ERROR([invalid argument passed to --enable-introspection, should be one of @<:@no/auto/yes@:>@])
+    ])dnl
+
+    AC_MSG_RESULT([$found_introspection])
+
+    INTROSPECTION_SCANNER=
+    INTROSPECTION_COMPILER=
+    INTROSPECTION_GENERATE=
+    INTROSPECTION_GIRDIR=
+    INTROSPECTION_TYPELIBDIR=
+    if test "x$found_introspection" = "xyes"; then
+       INTROSPECTION_SCANNER=`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
+       INTROSPECTION_COMPILER=`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
+       INTROSPECTION_GENERATE=`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
+       INTROSPECTION_GIRDIR=`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
+       INTROSPECTION_TYPELIBDIR="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
+       INTROSPECTION_CFLAGS=`$PKG_CONFIG --cflags gobject-introspection-1.0`
+       INTROSPECTION_LIBS=`$PKG_CONFIG --libs gobject-introspection-1.0`
+       INTROSPECTION_MAKEFILE=`$PKG_CONFIG --variable=datadir gobject-introspection-1.0`/gobject-introspection-1.0/Makefile.introspection
+    fi
+    AC_SUBST(INTROSPECTION_SCANNER)
+    AC_SUBST(INTROSPECTION_COMPILER)
+    AC_SUBST(INTROSPECTION_GENERATE)
+    AC_SUBST(INTROSPECTION_GIRDIR)
+    AC_SUBST(INTROSPECTION_TYPELIBDIR)
+    AC_SUBST(INTROSPECTION_CFLAGS)
+    AC_SUBST(INTROSPECTION_LIBS)
+    AC_SUBST(INTROSPECTION_MAKEFILE)
+
+    AM_CONDITIONAL(HAVE_INTROSPECTION, test "x$found_introspection" = "xyes")
+])
+
+
+dnl Usage:
+dnl   GOBJECT_INTROSPECTION_CHECK([minimum-g-i-version])
+
+AC_DEFUN([GOBJECT_INTROSPECTION_CHECK],
+[
+  _GOBJECT_INTROSPECTION_CHECK_INTERNAL([$1])
+])
+
+dnl Usage:
+dnl   GOBJECT_INTROSPECTION_REQUIRE([minimum-g-i-version])
+
+
+AC_DEFUN([GOBJECT_INTROSPECTION_REQUIRE],
+[
+  _GOBJECT_INTROSPECTION_CHECK_INTERNAL([$1], [require])
 ])
 
 # nls.m4 serial 5 (gettext-0.18)
@@ -325,6 +439,21 @@ m4_popdef([pkg_default])
 m4_popdef([pkg_description])
 ]) dnl PKG_NOARCH_INSTALLDIR
 
+
+# PKG_CHECK_VAR(VARIABLE, MODULE, CONFIG-VARIABLE,
+# [ACTION-IF-FOUND], [ACTION-IF-NOT-FOUND])
+# -------------------------------------------
+# Retrieves the value of the pkg-config variable for the given module.
+AC_DEFUN([PKG_CHECK_VAR],
+[AC_REQUIRE([PKG_PROG_PKG_CONFIG])dnl
+AC_ARG_VAR([$1], [value of $3 for $2, overriding pkg-config])dnl
+
+_PKG_CONFIG([$1], [variable="][$3]["], [$2])
+AS_VAR_COPY([$1], [pkg_cv_][$1])
+
+AS_VAR_IF([$1], [""], [$5], [$4])dnl
+])# PKG_CHECK_VAR
+
 # Copyright (C) 2002-2013 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
@@ -340,7 +469,7 @@ AC_DEFUN([AM_AUTOMAKE_VERSION],
 [am__api_version='1.13'
 dnl Some users find AM_AUTOMAKE_VERSION and mistake it for a way to
 dnl require some minimum version.  Point them to the right macro.
-m4_if([$1], [1.13.2], [],
+m4_if([$1], [1.13.4], [],
       [AC_FATAL([Do not call $0, use AM_INIT_AUTOMAKE([$1]).])])dnl
 ])
 
@@ -356,7 +485,7 @@ m4_define([_AM_AUTOCONF_VERSION], [])
 # Call AM_AUTOMAKE_VERSION and AM_AUTOMAKE_VERSION so they can be traced.
 # This function is AC_REQUIREd by AM_INIT_AUTOMAKE.
 AC_DEFUN([AM_SET_CURRENT_AUTOMAKE_VERSION],
-[AM_AUTOMAKE_VERSION([1.13.2])dnl
+[AM_AUTOMAKE_VERSION([1.13.4])dnl
 m4_ifndef([AC_AUTOCONF_VERSION],
   [m4_copy([m4_PACKAGE_VERSION], [AC_AUTOCONF_VERSION])])dnl
 _AM_AUTOCONF_VERSION(m4_defn([AC_AUTOCONF_VERSION]))])
@@ -1374,6 +1503,7 @@ AC_SUBST([am__tar])
 AC_SUBST([am__untar])
 ]) # _AM_PROG_TAR
 
+m4_include([m4/glibtests.m4])
 m4_include([m4/intltool.m4])
 m4_include([m4/libtool.m4])
 m4_include([m4/ltoptions.m4])

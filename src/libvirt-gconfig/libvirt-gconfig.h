@@ -1,7 +1,7 @@
 /*
  * libvirt-gconfig.h: libvirt gconfig integration
  *
- * Copyright (C) 2010-2012 Red Hat, Inc.
+ * Copyright (C) 2010-2014 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -31,12 +31,14 @@
 #include <libvirt-gconfig/libvirt-gconfig-capabilities.h>
 #include <libvirt-gconfig/libvirt-gconfig-capabilities-cpu.h>
 #include <libvirt-gconfig/libvirt-gconfig-capabilities-cpu-feature.h>
+#include <libvirt-gconfig/libvirt-gconfig-capabilities-cpu-model.h>
 #include <libvirt-gconfig/libvirt-gconfig-capabilities-cpu-topology.h>
 #include <libvirt-gconfig/libvirt-gconfig-capabilities-guest.h>
 #include <libvirt-gconfig/libvirt-gconfig-capabilities-guest-arch.h>
 #include <libvirt-gconfig/libvirt-gconfig-capabilities-guest-domain.h>
 #include <libvirt-gconfig/libvirt-gconfig-capabilities-guest-feature.h>
 #include <libvirt-gconfig/libvirt-gconfig-capabilities-host.h>
+#include <libvirt-gconfig/libvirt-gconfig-capabilities-host-secmodel.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-address.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-address-pci.h>
@@ -44,6 +46,7 @@
 #include <libvirt-gconfig/libvirt-gconfig-domain-chardev.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-chardev-source.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-chardev-source-pty.h>
+#include <libvirt-gconfig/libvirt-gconfig-domain-chardev-source-spiceport.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-chardev-source-spicevmc.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-channel.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-clock.h>
@@ -52,8 +55,10 @@
 #include <libvirt-gconfig/libvirt-gconfig-domain-controller-usb.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-cpu.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-cpu-feature.h>
+#include <libvirt-gconfig/libvirt-gconfig-domain-cpu-model.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-device.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-disk.h>
+#include <libvirt-gconfig/libvirt-gconfig-domain-disk-driver.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-filesys.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-graphics.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-graphics-desktop.h>
@@ -64,6 +69,8 @@
 #include <libvirt-gconfig/libvirt-gconfig-domain-input.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-interface.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-interface-bridge.h>
+#include <libvirt-gconfig/libvirt-gconfig-domain-interface-filterref-parameter.h>
+#include <libvirt-gconfig/libvirt-gconfig-domain-interface-filterref.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-interface-network.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-interface-user.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-memballoon.h>
@@ -81,6 +88,7 @@
 #include <libvirt-gconfig/libvirt-gconfig-domain-snapshot-disk.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-sound.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-timer.h>
+#include <libvirt-gconfig/libvirt-gconfig-domain-timer-hpet.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-timer-pit.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-timer-rtc.h>
 #include <libvirt-gconfig/libvirt-gconfig-domain-video.h>

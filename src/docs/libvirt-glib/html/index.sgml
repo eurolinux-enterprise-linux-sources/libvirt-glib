@@ -1,15 +1,18 @@
 <ANCHOR id="Libvirt-glib-Library-initialization" href="Libvirt-glib/Libvirt-glib-Library-initialization.html">
 <ANCHOR id="Libvirt-glib-Library-initialization.stability-level" href="Libvirt-glib/Libvirt-glib-Library-initialization.html#Libvirt-glib-Library-initialization.stability-level">
-<ANCHOR id="Libvirt-glib-Library-initialization.synopsis" href="Libvirt-glib/Libvirt-glib-Library-initialization.html#Libvirt-glib-Library-initialization.synopsis">
+<ANCHOR id="Libvirt-glib-Library-initialization.functions" href="Libvirt-glib/Libvirt-glib-Library-initialization.html#Libvirt-glib-Library-initialization.functions">
+<ANCHOR id="Libvirt-glib-Library-initialization.includes" href="Libvirt-glib/Libvirt-glib-Library-initialization.html#Libvirt-glib-Library-initialization.includes">
 <ANCHOR id="Libvirt-glib-Library-initialization.description" href="Libvirt-glib/Libvirt-glib-Library-initialization.html#Libvirt-glib-Library-initialization.description">
-<ANCHOR id="Libvirt-glib-Library-initialization.details" href="Libvirt-glib/Libvirt-glib-Library-initialization.html#Libvirt-glib-Library-initialization.details">
+<ANCHOR id="Libvirt-glib-Library-initialization.functions_details" href="Libvirt-glib/Libvirt-glib-Library-initialization.html#Libvirt-glib-Library-initialization.functions_details">
 <ANCHOR id="gvir-init" href="Libvirt-glib/Libvirt-glib-Library-initialization.html#gvir-init">
 <ANCHOR id="gvir-init-check" href="Libvirt-glib/Libvirt-glib-Library-initialization.html#gvir-init-check">
+<ANCHOR id="Libvirt-glib-Library-initialization.other_details" href="Libvirt-glib/Libvirt-glib-Library-initialization.html#Libvirt-glib-Library-initialization.other_details">
 <ANCHOR id="Libvirt-glib-Error-reporting" href="Libvirt-glib/Libvirt-glib-Error-reporting.html">
 <ANCHOR id="Libvirt-glib-Error-reporting.stability-level" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#Libvirt-glib-Error-reporting.stability-level">
-<ANCHOR id="Libvirt-glib-Error-reporting.synopsis" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#Libvirt-glib-Error-reporting.synopsis">
+<ANCHOR id="Libvirt-glib-Error-reporting.functions" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#Libvirt-glib-Error-reporting.functions">
+<ANCHOR id="Libvirt-glib-Error-reporting.includes" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#Libvirt-glib-Error-reporting.includes">
 <ANCHOR id="Libvirt-glib-Error-reporting.description" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#Libvirt-glib-Error-reporting.description">
-<ANCHOR id="Libvirt-glib-Error-reporting.details" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#Libvirt-glib-Error-reporting.details">
+<ANCHOR id="Libvirt-glib-Error-reporting.functions_details" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#Libvirt-glib-Error-reporting.functions_details">
 <ANCHOR id="gvir-error-new" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#gvir-error-new">
 <ANCHOR id="gvir-error-new-literal" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#gvir-error-new-literal">
 <ANCHOR id="gvir-error-new-valist" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#gvir-error-new-valist">
@@ -18,14 +21,18 @@
 <ANCHOR id="gvir-set-error-valist" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#gvir-set-error-valist">
 <ANCHOR id="gvir-critical" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#gvir-critical">
 <ANCHOR id="gvir-warning" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#gvir-warning">
+<ANCHOR id="Libvirt-glib-Error-reporting.other_details" href="Libvirt-glib/Libvirt-glib-Error-reporting.html#Libvirt-glib-Error-reporting.other_details">
 <ANCHOR id="Libvirt-glib-Event-loop" href="Libvirt-glib/Libvirt-glib-Event-loop.html">
 <ANCHOR id="Libvirt-glib-Event-loop.stability-level" href="Libvirt-glib/Libvirt-glib-Event-loop.html#Libvirt-glib-Event-loop.stability-level">
-<ANCHOR id="Libvirt-glib-Event-loop.synopsis" href="Libvirt-glib/Libvirt-glib-Event-loop.html#Libvirt-glib-Event-loop.synopsis">
+<ANCHOR id="Libvirt-glib-Event-loop.functions" href="Libvirt-glib/Libvirt-glib-Event-loop.html#Libvirt-glib-Event-loop.functions">
+<ANCHOR id="Libvirt-glib-Event-loop.includes" href="Libvirt-glib/Libvirt-glib-Event-loop.html#Libvirt-glib-Event-loop.includes">
 <ANCHOR id="Libvirt-glib-Event-loop.description" href="Libvirt-glib/Libvirt-glib-Event-loop.html#Libvirt-glib-Event-loop.description">
-<ANCHOR id="Libvirt-glib-Event-loop.details" href="Libvirt-glib/Libvirt-glib-Event-loop.html#Libvirt-glib-Event-loop.details">
+<ANCHOR id="Libvirt-glib-Event-loop.functions_details" href="Libvirt-glib/Libvirt-glib-Event-loop.html#Libvirt-glib-Event-loop.functions_details">
 <ANCHOR id="gvir-event-register" href="Libvirt-glib/Libvirt-glib-Event-loop.html#gvir-event-register">
-<ANCHOR id="annotation-glossterm-array" href="Libvirt-glib/annotation-glossary.html#annotation-glossterm-array">
+<ANCHOR id="Libvirt-glib-Event-loop.other_details" href="Libvirt-glib/Libvirt-glib-Event-loop.html#Libvirt-glib-Event-loop.other_details">
 <ANCHOR id="annotation-glossterm-allow-none" href="Libvirt-glib/annotation-glossary.html#annotation-glossterm-allow-none">
+<ANCHOR id="annotation-glossterm-array" href="Libvirt-glib/annotation-glossary.html#annotation-glossterm-array">
 <ANCHOR id="annotation-glossterm-inout" href="Libvirt-glib/annotation-glossary.html#annotation-glossterm-inout">
+<ANCHOR id="annotation-glossterm-Stable" href="Libvirt-glib/annotation-glossary.html#annotation-glossterm-Stable">
 <ANCHOR id="annotation-glossterm-transfer full" href="Libvirt-glib/annotation-glossary.html#annotation-glossterm-transfer full">
 <ANCHOR id="annotation-glossterm-transfer none" href="Libvirt-glib/annotation-glossary.html#annotation-glossterm-transfer none">

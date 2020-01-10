@@ -144,9 +144,7 @@ typedef struct virDomainSnapshot GVirDomainSnapshotHandle;
 static GVirDomainSnapshotHandle*
 gvir_domain_snapshot_handle_copy(GVirDomainSnapshotHandle *src)
 {
-#if 0
     virDomainSnapshotRef((virDomainSnapshotPtr)src);
-#endif
     return src;
 }
 
@@ -162,7 +160,7 @@ G_DEFINE_BOXED_TYPE(GVirDomainSnapshotHandle, gvir_domain_snapshot_handle,
 const gchar *gvir_domain_snapshot_get_name(GVirDomainSnapshot *snapshot)
 {
     g_return_val_if_fail(GVIR_IS_DOMAIN_SNAPSHOT(snapshot), NULL);
-#if 0
+
     GVirDomainSnapshotPrivate *priv = snapshot->priv;
     const char *name;
 
@@ -172,12 +170,6 @@ const gchar *gvir_domain_snapshot_get_name(GVirDomainSnapshot *snapshot)
     }
 
     return name;
-#else
-    if (snapshot)
-        return NULL;
-#endif
-
-    g_return_val_if_reached(NULL);
 }
 
 
@@ -213,4 +205,293 @@ GVirConfigDomainSnapshot *gvir_domain_snapshot_get_config
 
     free(xml);
     return conf;
+}
+
+/**
+ * gvir_domain_snapshot_delete:
+ * @snapshot: The domain snapshot
+ * @flags: Bitwise or of #GVirDomainSnapshotDeleteFlags
+ * @error: (allow-none): Place-holder for error or NULL
+ *
+ * Returns: TRUE on success, FALSE otherwise
+ */
+gboolean gvir_domain_snapshot_delete (GVirDomainSnapshot *snapshot,
+                                      guint flags,
+                                      GError **error)
+{
+    GVirDomainSnapshotPrivate *priv;
+    int status;
+
+    g_return_val_if_fail(GVIR_IS_DOMAIN_SNAPSHOT (snapshot), FALSE);
+    g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
+
+    priv = snapshot->priv;
+    status = virDomainSnapshotDelete(priv->handle, flags);
+    if (status < 0) {
+        gvir_set_error(error, GVIR_DOMAIN_SNAPSHOT_ERROR, 0,
+                       "Unable to delete snapshot `%s'",
+                       gvir_domain_snapshot_get_name(snapshot));
+        return FALSE;
+    }
+    return TRUE;
+}
+
+
+
+static void _delete_async_thread(GTask *task,
+                                 gpointer source_object,
+                                 gpointer task_data,
+                                 GCancellable *cancellable)
+{
+    GError *error = NULL;
+    gboolean status;
+
+    status = gvir_domain_snapshot_delete(source_object,
+                                         GPOINTER_TO_UINT(task_data),
+                                         &error);
+
+    if (status)
+        g_task_return_boolean(task, TRUE);
+    else
+        g_task_return_error(task, error);
+}
+
+
+/**
+ * gvir_domain_snapshot_delete_async:
+ * @snapshot: A #GVirDomainSnapshot
+ * @flags: Bitwise-OR of #GVirDomainSnapshotDeleteFlags
+ * @cancellable: (allow-none) (transfer none): cancellation object
+ * @callback: (scope async): completion callback
+ * @user_data: (closure): opaque data for callback
+ */
+void gvir_domain_snapshot_delete_async(GVirDomainSnapshot *snapshot,
+                                       guint flags,
+                                       GCancellable *cancellable,
+                                       GAsyncReadyCallback callback,
+                                       gpointer user_data)
+{
+    GTask *task;
+
+    g_return_if_fail(GVIR_IS_DOMAIN_SNAPSHOT(snapshot));
+
+    task = g_task_new(snapshot, cancellable, callback, user_data);
+    g_task_set_task_data(task, GUINT_TO_POINTER(flags), NULL);
+    g_task_run_in_thread(task, _delete_async_thread);
+    g_object_unref(task);
+}
+
+/**
+ * gvir_domain_snapshot_delete_finish:
+ * @snapshot: A #GVirDomainSnapshot
+ * @res: (transfer none): async method result
+ *
+ * Returns: %TRUE on success, %FALSE otherwise.
+ */
+gboolean gvir_domain_snapshot_delete_finish(GVirDomainSnapshot *snapshot,
+                                            GAsyncResult *res,
+                                            GError **error)
+{
+    g_return_val_if_fail(GVIR_IS_DOMAIN_SNAPSHOT(snapshot), FALSE);
+    g_return_val_if_fail(g_task_is_valid(res, snapshot), FALSE);
+
+    return g_task_propagate_boolean(G_TASK(res), error);
+}
+
+/**
+ * gvir_domain_snapshot_get_is_current:
+ * @snapshot: The domain snapshot
+ * @flags: Currently unused, pass 0
+ * @is_current: (out): %TRUE if the given snapshot is the current snapshot
+ * of its domain, %FALSE otherwise.
+ * @error: (allow-none): Place-holder for error or %NULL
+ *
+ * Returns: %TRUE on success, %FALSE otherwise.
+ */
+gboolean gvir_domain_snapshot_get_is_current(GVirDomainSnapshot *snapshot,
+                                             guint flags,
+                                             gboolean *is_current,
+                                             GError **error)
+{
+    gint status;
+
+    g_return_val_if_fail(GVIR_IS_DOMAIN_SNAPSHOT(snapshot), FALSE);
+    g_return_val_if_fail(is_current != NULL, FALSE);
+    g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
+
+    status = virDomainSnapshotIsCurrent(snapshot->priv->handle, flags);
+    if (status == -1) {
+        gvir_set_error(error, GVIR_DOMAIN_SNAPSHOT_ERROR, 0,
+                       "Could not determine if `%s' is the current snapshot",
+                       gvir_domain_snapshot_get_name(snapshot));
+        return FALSE;
+    }
+
+    *is_current = status;
+
+    return TRUE;
+}
+
+
+
+/**
+ * gvir_domain_snapshot_revert_to:
+ * @snapshot: The domain snapshot
+ * @flags: Bitwise OR of GVirDomainSnapshotRevertFlags
+ * @error: (allow-none): Place-holder for error or NULL
+ *
+ * Returns: TRUE if the snapshot's domain has successfully been
+ * reverted to the given snapshot, FALSE otherwise, in which case
+ * @error will be set.
+ */
+gboolean gvir_domain_snapshot_revert_to(GVirDomainSnapshot *snapshot,
+                                        guint flags,
+                                        GError **error)
+{
+    int status;
+
+    g_return_val_if_fail(GVIR_IS_DOMAIN_SNAPSHOT(snapshot), FALSE);
+    g_return_val_if_fail((error == NULL) || (*error == NULL), FALSE);
+
+
+    status = virDomainRevertToSnapshot(snapshot->priv->handle,
+                                       flags);
+    if (status != 0) {
+        gvir_set_error(error, GVIR_DOMAIN_SNAPSHOT_ERROR,
+                       0, "Failed to revert to snapshot `%s'",
+                       gvir_domain_snapshot_get_name(snapshot));
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static void _revert_to_async_thread(GTask *task,
+                                    gpointer source_object,
+                                    gpointer task_data,
+                                    GCancellable *cancellable)
+{
+    GError *error = NULL;
+    gboolean status;
+
+    status = gvir_domain_snapshot_revert_to(source_object,
+                                            GPOINTER_TO_UINT(task_data),
+                                            &error);
+
+    if (status)
+        g_task_return_boolean(task, TRUE);
+    else
+        g_task_return_error(task, error);
+}
+
+
+/**
+ * gvir_domain_snapshot_revert_to_async:
+ * @snapshot: A #GVirDomainSnapshot
+ * @flags: Bitwise OR of #GVirDomainSnapshotRevertFlags
+ * @cancellable: (allow-none) (transfer none): cancellation object
+ * @callback: (scope async): The callback
+ * @user_data: (closure): Opaque data for callback
+ */
+void gvir_domain_snapshot_revert_to_async(GVirDomainSnapshot *snapshot,
+                                          guint flags,
+                                          GCancellable *cancellable,
+                                          GAsyncReadyCallback callback,
+                                          gpointer user_data)
+{
+    GTask *task;
+
+    g_return_if_fail(GVIR_IS_DOMAIN_SNAPSHOT(snapshot));
+
+    task = g_task_new(snapshot, cancellable, callback, user_data);
+    g_task_set_task_data(task, GUINT_TO_POINTER(flags), NULL);
+    g_task_run_in_thread(task, _revert_to_async_thread);
+    g_object_unref(task);
+}
+
+
+
+/**
+ * gvir_domain_snapshot_revert_to_finish:
+ * @snapshot: The domain snapshot
+ * @result: (transfer none): The result
+ *
+ * Returns: %TRUE on success, %FALSE otherwise.
+ */
+gboolean gvir_domain_snapshot_revert_to_finish(GVirDomainSnapshot *snapshot,
+                                               GAsyncResult *result,
+                                               GError **error)
+{
+    g_return_val_if_fail(GVIR_IS_DOMAIN_SNAPSHOT(snapshot), FALSE);
+    g_return_val_if_fail(g_task_is_valid(result, snapshot), FALSE);
+
+    return g_task_propagate_boolean(G_TASK(result), error);
+}
+
+
+
+/**
+ * gvir_domain_snapshot_set_config:
+ * @snapshot: The domain snapshot
+ * @conf: The new config object
+ * @error: (allow-none): Place-holder for error or %NULL
+ *
+ * Updates the given snapshot's configuration according to the
+ * given GVirConfigDomainSnapshot.
+ *
+ * Returns: %TRUE if no error was reported, %FALSE otherwise.
+ */
+gboolean gvir_domain_snapshot_set_config(GVirDomainSnapshot *snapshot,
+                                         GVirConfigDomainSnapshot *conf,
+                                         GError **error)
+{
+    gchar *xml;
+    virConnectPtr conn;
+    virDomainSnapshotPtr handle;
+    virDomainPtr domain;
+    GVirDomainSnapshotPrivate *priv;
+
+    g_return_val_if_fail(GVIR_IS_DOMAIN_SNAPSHOT(snapshot), FALSE);
+    g_return_val_if_fail(GVIR_CONFIG_IS_DOMAIN_SNAPSHOT(conf), FALSE);
+    g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
+
+    priv = snapshot->priv;
+    handle = priv->handle;
+    domain = virDomainSnapshotGetDomain(handle);
+
+
+    if ((conn = virDomainSnapshotGetConnect(priv->handle)) == NULL) {
+        gvir_set_error_literal(error, GVIR_DOMAIN_SNAPSHOT_ERROR,
+                               0,
+                               "Failed to get domain connection");
+        return FALSE;
+    }
+
+
+    /* XXX Changing the name will create a new snapshot */
+    if (g_strcmp0 (gvir_domain_snapshot_get_name(snapshot),
+                   gvir_config_domain_snapshot_get_name(conf)) != 0) {
+        gvir_set_error_literal(error, GVIR_DOMAIN_SNAPSHOT_ERROR,
+                               0,
+                               "Cannot set config: snapshot names don't match");
+        return FALSE;
+    }
+
+
+    xml = gvir_config_object_to_xml(GVIR_CONFIG_OBJECT(conf));
+
+    handle = virDomainSnapshotCreateXML(domain,
+                                        xml,
+                                        VIR_DOMAIN_SNAPSHOT_CREATE_REDEFINE);
+    g_free(xml);
+
+    if (handle == NULL) {
+        gvir_set_error(error, GVIR_DOMAIN_SNAPSHOT_ERROR,
+                       0,
+                       "Failed to create snapshot `%s' from XML definition",
+                       gvir_domain_snapshot_get_name(snapshot));
+        return FALSE;
+    }
+    virDomainSnapshotFree(handle);
+    return TRUE;
 }

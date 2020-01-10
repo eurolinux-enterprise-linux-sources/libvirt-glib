@@ -2,32 +2,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>GVirConfigDomainSnapshot</title>
+<title>Libvirt-gconfig Reference Manual: GVirConfigDomainSnapshot</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Libvirt-gconfig Reference Manual">
 <link rel="up" href="ch01.html" title="Libvirt-gconfig">
 <link rel="prev" href="GVirConfigDomain.html" title="GVirConfigDomain">
-<link rel="next" href="Libvirt-gconfig-GVirConfig.html" title="GVirConfig">
-<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<link rel="next" href="GVirConfigInterface.html" title="GVirConfigInterface">
+<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
-<tr valign="middle">
-<td><a accesskey="p" href="GVirConfigDomain.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
-<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Libvirt-gconfig Reference Manual</th>
-<td><a accesskey="n" href="Libvirt-gconfig-GVirConfig.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
-</tr>
-<tr><td colspan="5" class="shortcuts">
-<a href="#GVirConfigDomainSnapshot.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#GVirConfigDomainSnapshot.description" class="shortcut">Description</a>
-                   | 
-                  <a href="#GVirConfigDomainSnapshot.object-hierarchy" class="shortcut">Object Hierarchy</a>
-</td></tr>
-</table>
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#GVirConfigDomainSnapshot.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
+                  <a href="#GVirConfigDomainSnapshot.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="GVirConfigDomain.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="GVirConfigInterface.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
 <div class="refentry">
 <a name="GVirConfigDomainSnapshot"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
@@ -35,70 +30,384 @@
 <h2><span class="refentrytitle"><a name="GVirConfigDomainSnapshot.top_of_page"></a>GVirConfigDomainSnapshot</span></h2>
 <p>GVirConfigDomainSnapshot</p>
 </td>
-<td valign="top" align="right"></td>
+<td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv">
-<a name="GVirConfigDomainSnapshot.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">struct              <a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshot-struct" title="struct GVirConfigDomainSnapshot">GVirConfigDomainSnapshot</a>;
-struct              <a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotClass" title="struct GVirConfigDomainSnapshotClass">GVirConfigDomainSnapshotClass</a>;
-enum                <a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotDomainState" title="enum GVirConfigDomainSnapshotDomainState">GVirConfigDomainSnapshotDomainState</a>;
-enum                <a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotMemoryState" title="enum GVirConfigDomainSnapshotMemoryState">GVirConfigDomainSnapshotMemoryState</a>;
-<a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> * <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-new" title="gvir_config_domain_snapshot_new ()">gvir_config_domain_snapshot_new</a>
-                                                        (<em class="parameter"><code><span class="type">void</span></code></em>);
-<a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> * <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-new-from-xml" title="gvir_config_domain_snapshot_new_from_xml ()">gvir_config_domain_snapshot_new_from_xml</a>
-                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);
-const <span class="returnvalue">char</span> *        <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-name" title="gvir_config_domain_snapshot_get_name ()">gvir_config_domain_snapshot_get_name</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-name" title="gvir_config_domain_snapshot_set_name ()">gvir_config_domain_snapshot_set_name</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *name</code></em>);
-const <span class="returnvalue">char</span> *        <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-description" title="gvir_config_domain_snapshot_get_description ()">gvir_config_domain_snapshot_get_description</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-description" title="gvir_config_domain_snapshot_set_description ()">gvir_config_domain_snapshot_set_description</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *description</code></em>);
-<a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotMemoryState" title="enum GVirConfigDomainSnapshotMemoryState"><span class="returnvalue">GVirConfigDomainSnapshotMemoryState</span></a> <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-memory-state" title="gvir_config_domain_snapshot_get_memory_state ()">gvir_config_domain_snapshot_get_memory_state</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-memory-state" title="gvir_config_domain_snapshot_set_memory_state ()">gvir_config_domain_snapshot_set_memory_state</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotMemoryState" title="enum GVirConfigDomainSnapshotMemoryState"><span class="type">GVirConfigDomainSnapshotMemoryState</span></a> state</code></em>);
-const <span class="returnvalue">char</span> *        <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-memory-file" title="gvir_config_domain_snapshot_get_memory_file ()">gvir_config_domain_snapshot_get_memory_file</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-memory-file" title="gvir_config_domain_snapshot_set_memory_file ()">gvir_config_domain_snapshot_set_memory_file</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *filename</code></em>);
-<span class="returnvalue">time_t</span>              <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-creation-time" title="gvir_config_domain_snapshot_get_creation_time ()">gvir_config_domain_snapshot_get_creation_time</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);
-<a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotDomainState" title="enum GVirConfigDomainSnapshotDomainState"><span class="returnvalue">GVirConfigDomainSnapshotDomainState</span></a> <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-state" title="gvir_config_domain_snapshot_get_state ()">gvir_config_domain_snapshot_get_state</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);
-const <span class="returnvalue">char</span> *        <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-parent" title="gvir_config_domain_snapshot_get_parent ()">gvir_config_domain_snapshot_get_parent</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);
-<a class="link" href="GVirConfigDomain.html" title="GVirConfigDomain"><span class="returnvalue">GVirConfigDomain</span></a> *  <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-domain" title="gvir_config_domain_snapshot_get_domain ()">gvir_config_domain_snapshot_get_domain</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-disks" title="gvir_config_domain_snapshot_set_disks ()">gvir_config_domain_snapshot_set_disks</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code><span class="type">GList</span> *disks</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-add-disk" title="gvir_config_domain_snapshot_add_disk ()">gvir_config_domain_snapshot_add_disk</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code><span class="type">GVirConfigDomainSnapshotDisk</span> *disk</code></em>);
-<span class="returnvalue">GList</span> *             <a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-disks" title="gvir_config_domain_snapshot_get_disks ()">gvir_config_domain_snapshot_get_disks</a>
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);
-</pre>
+<div class="refsect1">
+<a name="GVirConfigDomainSnapshot.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-new" title="gvir_config_domain_snapshot_new ()">gvir_config_domain_snapshot_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-new-from-xml" title="gvir_config_domain_snapshot_new_from_xml ()">gvir_config_domain_snapshot_new_from_xml</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <span class="returnvalue">char</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-name" title="gvir_config_domain_snapshot_get_name ()">gvir_config_domain_snapshot_get_name</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-name" title="gvir_config_domain_snapshot_set_name ()">gvir_config_domain_snapshot_set_name</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <span class="returnvalue">char</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-description" title="gvir_config_domain_snapshot_get_description ()">gvir_config_domain_snapshot_get_description</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-description" title="gvir_config_domain_snapshot_set_description ()">gvir_config_domain_snapshot_set_description</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotMemoryState" title="enum GVirConfigDomainSnapshotMemoryState"><span class="returnvalue">GVirConfigDomainSnapshotMemoryState</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-memory-state" title="gvir_config_domain_snapshot_get_memory_state ()">gvir_config_domain_snapshot_get_memory_state</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-memory-state" title="gvir_config_domain_snapshot_set_memory_state ()">gvir_config_domain_snapshot_set_memory_state</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <span class="returnvalue">char</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-memory-file" title="gvir_config_domain_snapshot_get_memory_file ()">gvir_config_domain_snapshot_get_memory_file</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-memory-file" title="gvir_config_domain_snapshot_set_memory_file ()">gvir_config_domain_snapshot_set_memory_file</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">time_t</span>
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-creation-time" title="gvir_config_domain_snapshot_get_creation_time ()">gvir_config_domain_snapshot_get_creation_time</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotDomainState" title="enum GVirConfigDomainSnapshotDomainState"><span class="returnvalue">GVirConfigDomainSnapshotDomainState</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-state" title="gvir_config_domain_snapshot_get_state ()">gvir_config_domain_snapshot_get_state</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <span class="returnvalue">char</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-parent" title="gvir_config_domain_snapshot_get_parent ()">gvir_config_domain_snapshot_get_parent</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="GVirConfigDomain.html" title="GVirConfigDomain"><span class="returnvalue">GVirConfigDomain</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-domain" title="gvir_config_domain_snapshot_get_domain ()">gvir_config_domain_snapshot_get_domain</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-set-disks" title="gvir_config_domain_snapshot_set_disks ()">gvir_config_domain_snapshot_set_disks</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-add-disk" title="gvir_config_domain_snapshot_add_disk ()">gvir_config_domain_snapshot_add_disk</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="GVirConfigDomainSnapshot.html#gvir-config-domain-snapshot-get-disks" title="gvir_config_domain_snapshot_get_disks ()">gvir_config_domain_snapshot_get_disks</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GVirConfigDomainSnapshot.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="name">
+<col class="description">
+</colgroup>
+<tbody>
+<tr>
+<td class="datatype_keyword">struct</td>
+<td class="function_name"><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshot-struct" title="struct GVirConfigDomainSnapshot">GVirConfigDomainSnapshot</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword">struct</td>
+<td class="function_name"><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotClass" title="struct GVirConfigDomainSnapshotClass">GVirConfigDomainSnapshotClass</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword">enum</td>
+<td class="function_name"><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotDomainState" title="enum GVirConfigDomainSnapshotDomainState">GVirConfigDomainSnapshotDomainState</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword">enum</td>
+<td class="function_name"><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotMemoryState" title="enum GVirConfigDomainSnapshotMemoryState">GVirConfigDomainSnapshotMemoryState</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword"> </td>
+<td class="function_name"><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotPrivate" title="GVirConfigDomainSnapshotPrivate">GVirConfigDomainSnapshotPrivate</a></td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <div class="refsect1">
 <a name="GVirConfigDomainSnapshot.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="synopsis">
-  GObject
-   +----<a class="link" href="GVirConfigObject.html" title="GVirConfigObject">GVirConfigObject</a>
-         +----GVirConfigDomainSnapshot
+<pre class="screen">    <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+    <span class="lineart">╰──</span> <a class="link" href="GVirConfigObject.html" title="GVirConfigObject">GVirConfigObject</a>
+        <span class="lineart">╰──</span> GVirConfigDomainSnapshot
 </pre>
 </div>
 <div class="refsect1">
 <a name="GVirConfigDomainSnapshot.description"></a><h2>Description</h2>
 </div>
 <div class="refsect1">
-<a name="GVirConfigDomainSnapshot.details"></a><h2>Details</h2>
+<a name="GVirConfigDomainSnapshot.functions_details"></a><h2>Functions</h2>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-new"></a><h3>gvir_config_domain_snapshot_new ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> *
+gvir_config_domain_snapshot_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-new-from-xml"></a><h3>gvir_config_domain_snapshot_new_from_xml ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> *
+gvir_config_domain_snapshot_new_from_xml
+                               (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *xml</code></em>,
+                                <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-get-name"></a><h3>gvir_config_domain_snapshot_get_name ()</h3>
+<pre class="programlisting">const <span class="returnvalue">char</span> *
+gvir_config_domain_snapshot_get_name (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-set-name"></a><h3>gvir_config_domain_snapshot_set_name ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gvir_config_domain_snapshot_set_name (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
+                                      <em class="parameter"><code>const <span class="type">char</span> *name</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-get-description"></a><h3>gvir_config_domain_snapshot_get_description ()</h3>
+<pre class="programlisting">const <span class="returnvalue">char</span> *
+gvir_config_domain_snapshot_get_description
+                               (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-set-description"></a><h3>gvir_config_domain_snapshot_set_description ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gvir_config_domain_snapshot_set_description
+                               (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
+                                <em class="parameter"><code>const <span class="type">char</span> *description</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-get-memory-state"></a><h3>gvir_config_domain_snapshot_get_memory_state ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotMemoryState" title="enum GVirConfigDomainSnapshotMemoryState"><span class="returnvalue">GVirConfigDomainSnapshotMemoryState</span></a>
+gvir_config_domain_snapshot_get_memory_state
+                               (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-set-memory-state"></a><h3>gvir_config_domain_snapshot_set_memory_state ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gvir_config_domain_snapshot_set_memory_state
+                               (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
+                                <em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotMemoryState" title="enum GVirConfigDomainSnapshotMemoryState"><span class="type">GVirConfigDomainSnapshotMemoryState</span></a> state</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-get-memory-file"></a><h3>gvir_config_domain_snapshot_get_memory_file ()</h3>
+<pre class="programlisting">const <span class="returnvalue">char</span> *
+gvir_config_domain_snapshot_get_memory_file
+                               (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-set-memory-file"></a><h3>gvir_config_domain_snapshot_set_memory_file ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gvir_config_domain_snapshot_set_memory_file
+                               (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
+                                <em class="parameter"><code>const <span class="type">char</span> *filename</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-get-creation-time"></a><h3>gvir_config_domain_snapshot_get_creation_time ()</h3>
+<pre class="programlisting"><span class="returnvalue">time_t</span>
+gvir_config_domain_snapshot_get_creation_time
+                               (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-get-state"></a><h3>gvir_config_domain_snapshot_get_state ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotDomainState" title="enum GVirConfigDomainSnapshotDomainState"><span class="returnvalue">GVirConfigDomainSnapshotDomainState</span></a>
+gvir_config_domain_snapshot_get_state (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-get-parent"></a><h3>gvir_config_domain_snapshot_get_parent ()</h3>
+<pre class="programlisting">const <span class="returnvalue">char</span> *
+gvir_config_domain_snapshot_get_parent
+                               (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-get-domain"></a><h3>gvir_config_domain_snapshot_get_domain ()</h3>
+<pre class="programlisting"><a class="link" href="GVirConfigDomain.html" title="GVirConfigDomain"><span class="returnvalue">GVirConfigDomain</span></a> *
+gvir_config_domain_snapshot_get_domain
+                               (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
+<p>Gets the configuration of the domain <em class="parameter"><code>snapshot</code></em>
+ is a snapshot of.</p>
+<div class="refsect3">
+<a name="id-1.2.4.7.15.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>snapshot</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.4.7.15.6"></a><h4>Returns</h4>
+<p> A <a class="link" href="GVirConfigDomain.html" title="GVirConfigDomain"><span class="type">GVirConfigDomain</span></a>. The returned object
+should be unreffed with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> when no longer needed. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-set-disks"></a><h3>gvir_config_domain_snapshot_set_disks ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gvir_config_domain_snapshot_set_disks (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
+                                       <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *disks</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.2.4.7.16.4"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>snapshot</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>disks</p></td>
+<td class="parameter_description"><p>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input. Default is transfer none."><span class="acronym">in</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> LibvirtGConfig.DomainSnapshotDisk]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-add-disk"></a><h3>gvir_config_domain_snapshot_add_disk ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gvir_config_domain_snapshot_add_disk (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
+                                      <em class="parameter"><code><span class="type">GVirConfigDomainSnapshotDisk</span> *disk</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gvir-config-domain-snapshot-get-disks"></a><h3>gvir_config_domain_snapshot_get_disks ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *
+gvir_config_domain_snapshot_get_disks (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
+<p>Gets the list of disks attached to <em class="parameter"><code>snapshot</code></em>
+.  The returned list should
+be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>, after its elements have been unreffed with
+<a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</p>
+<div class="refsect3">
+<a name="id-1.2.4.7.18.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>snapshot</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.4.7.18.6"></a><h4>Returns</h4>
+<p>a newly allocated <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <span class="type">GVirConfigDomainSnapshotDisk</span>. </p>
+<p><span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> LibvirtGConfig.DomainSnapshotDisk][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GVirConfigDomainSnapshot.other_details"></a><h2>Types and Values</h2>
 <div class="refsect2">
 <a name="GVirConfigDomainSnapshot-struct"></a><h3>struct GVirConfigDomainSnapshot</h3>
 <pre class="programlisting">struct GVirConfigDomainSnapshot;</pre>
@@ -116,270 +425,104 @@ const <span class="returnvalue">char</span> *        <a class="link" href="GVirC
 <hr>
 <div class="refsect2">
 <a name="GVirConfigDomainSnapshotDomainState"></a><h3>enum GVirConfigDomainSnapshotDomainState</h3>
-<pre class="programlisting">typedef enum {
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_NOSTATE = 0,     /* no state */
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_RUNNING = 1,     /* the domain is running */
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_BLOCKED = 2,     /* the domain is blocked on resource */
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_PAUSED  = 3,     /* the domain is paused by user */
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_SHUTDOWN= 4,     /* the domain is being shut down */
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_SHUTOFF = 5,     /* the domain is shut off */
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_CRASHED = 6,     /* the domain is crashed */
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_PMSUSPENDED = 7, /* the domain is suspended by guest
-                                                                 power management */
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_DISK_SNAPSHOT = 100
-} GVirConfigDomainSnapshotDomainState;
-</pre>
-<div class="variablelist"><table border="0" class="variablelist">
+<div class="refsect3">
+<a name="id-1.2.4.8.4.3"></a><h4>Members</h4>
+<div class="informaltable"><table width="100%" border="0">
 <colgroup>
-<col align="left" valign="top">
-<col>
+<col width="300px" class="enum_members_name">
+<col class="enum_members_description">
+<col width="200px" class="enum_members_annotations">
 </colgroup>
 <tbody>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-NOSTATE:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_NOSTATE</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-NOSTATE:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_NOSTATE</p></td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-RUNNING:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_RUNNING</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-RUNNING:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_RUNNING</p></td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-BLOCKED:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_BLOCKED</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-BLOCKED:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_BLOCKED</p></td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-PAUSED:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_PAUSED</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-PAUSED:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_PAUSED</p></td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-SHUTDOWN:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_SHUTDOWN</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-SHUTDOWN:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_SHUTDOWN</p></td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-SHUTOFF:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_SHUTOFF</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-SHUTOFF:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_SHUTOFF</p></td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-CRASHED:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_CRASHED</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-CRASHED:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_CRASHED</p></td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-PMSUSPENDED:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_PMSUSPENDED</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-PMSUSPENDED:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_PMSUSPENDED</p></td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-DISK-SNAPSHOT:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_DISK_SNAPSHOT</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-DOMAIN-STATE-DISK-SNAPSHOT:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_DOMAIN_STATE_DISK_SNAPSHOT</p></td>
+<td> </td>
+<td> </td>
 </tr>
 </tbody>
 </table></div>
+</div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="GVirConfigDomainSnapshotMemoryState"></a><h3>enum GVirConfigDomainSnapshotMemoryState</h3>
-<pre class="programlisting">typedef enum {
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_NONE,
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_INTERNAL,
-    GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_EXTERNAL,
-} GVirConfigDomainSnapshotMemoryState;
-</pre>
-<div class="variablelist"><table border="0" class="variablelist">
+<div class="refsect3">
+<a name="id-1.2.4.8.5.3"></a><h4>Members</h4>
+<div class="informaltable"><table width="100%" border="0">
 <colgroup>
-<col align="left" valign="top">
-<col>
+<col width="300px" class="enum_members_name">
+<col class="enum_members_description">
+<col width="200px" class="enum_members_annotations">
 </colgroup>
 <tbody>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-NONE:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_NONE</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-NONE:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_NONE</p></td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-INTERNAL:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_INTERNAL</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-INTERNAL:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_INTERNAL</p></td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-EXTERNAL:CAPS"></a><span class="term"><code class="literal">GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_EXTERNAL</code></span></p></td>
-<td></td>
+<td class="enum_member_name"><p><a name="GVIR-CONFIG-DOMAIN-SNAPSHOT-MEMORY-STATE-EXTERNAL:CAPS"></a>GVIR_CONFIG_DOMAIN_SNAPSHOT_MEMORY_STATE_EXTERNAL</p></td>
+<td> </td>
+<td> </td>
 </tr>
 </tbody>
 </table></div>
 </div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-new"></a><h3>gvir_config_domain_snapshot_new ()</h3>
-<pre class="programlisting"><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> * gvir_config_domain_snapshot_new
-                                                        (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
-<a name="gvir-config-domain-snapshot-new-from-xml"></a><h3>gvir_config_domain_snapshot_new_from_xml ()</h3>
-<pre class="programlisting"><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="returnvalue">GVirConfigDomainSnapshot</span></a> * gvir_config_domain_snapshot_new_from_xml
-                                                        (<em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
-                                                         <em class="parameter"><code><span class="type">GError</span> **error</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-get-name"></a><h3>gvir_config_domain_snapshot_get_name ()</h3>
-<pre class="programlisting">const <span class="returnvalue">char</span> *        gvir_config_domain_snapshot_get_name
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-set-name"></a><h3>gvir_config_domain_snapshot_set_name ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_domain_snapshot_set_name
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *name</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-get-description"></a><h3>gvir_config_domain_snapshot_get_description ()</h3>
-<pre class="programlisting">const <span class="returnvalue">char</span> *        gvir_config_domain_snapshot_get_description
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-set-description"></a><h3>gvir_config_domain_snapshot_set_description ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_domain_snapshot_set_description
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *description</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-get-memory-state"></a><h3>gvir_config_domain_snapshot_get_memory_state ()</h3>
-<pre class="programlisting"><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotMemoryState" title="enum GVirConfigDomainSnapshotMemoryState"><span class="returnvalue">GVirConfigDomainSnapshotMemoryState</span></a> gvir_config_domain_snapshot_get_memory_state
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-set-memory-state"></a><h3>gvir_config_domain_snapshot_set_memory_state ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_domain_snapshot_set_memory_state
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotMemoryState" title="enum GVirConfigDomainSnapshotMemoryState"><span class="type">GVirConfigDomainSnapshotMemoryState</span></a> state</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-get-memory-file"></a><h3>gvir_config_domain_snapshot_get_memory_file ()</h3>
-<pre class="programlisting">const <span class="returnvalue">char</span> *        gvir_config_domain_snapshot_get_memory_file
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-set-memory-file"></a><h3>gvir_config_domain_snapshot_set_memory_file ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_domain_snapshot_set_memory_file
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *filename</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-get-creation-time"></a><h3>gvir_config_domain_snapshot_get_creation_time ()</h3>
-<pre class="programlisting"><span class="returnvalue">time_t</span>              gvir_config_domain_snapshot_get_creation_time
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-get-state"></a><h3>gvir_config_domain_snapshot_get_state ()</h3>
-<pre class="programlisting"><a class="link" href="GVirConfigDomainSnapshot.html#GVirConfigDomainSnapshotDomainState" title="enum GVirConfigDomainSnapshotDomainState"><span class="returnvalue">GVirConfigDomainSnapshotDomainState</span></a> gvir_config_domain_snapshot_get_state
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-get-parent"></a><h3>gvir_config_domain_snapshot_get_parent ()</h3>
-<pre class="programlisting">const <span class="returnvalue">char</span> *        gvir_config_domain_snapshot_get_parent
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-get-domain"></a><h3>gvir_config_domain_snapshot_get_domain ()</h3>
-<pre class="programlisting"><a class="link" href="GVirConfigDomain.html" title="GVirConfigDomain"><span class="returnvalue">GVirConfigDomain</span></a> *  gvir_config_domain_snapshot_get_domain
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
-<p>
-Gets the configuration of the domain <em class="parameter"><code>snapshot</code></em> is a snapshot of.
-</p>
-<div class="variablelist"><table border="0" class="variablelist">
-<colgroup>
-<col align="left" valign="top">
-<col>
-</colgroup>
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>snapshot</code></em> :</span></p></td>
-<td>a <a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>A <a class="link" href="GVirConfigDomain.html" title="GVirConfigDomain"><span class="type">GVirConfigDomain</span></a>. The returned object
-should be unreffed with <code class="function">g_object_unref()</code> when no longer needed. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-set-disks"></a><h3>gvir_config_domain_snapshot_set_disks ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_domain_snapshot_set_disks
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code><span class="type">GList</span> *disks</code></em>);</pre>
-<div class="variablelist"><table border="0" class="variablelist">
-<colgroup>
-<col align="left" valign="top">
-<col>
-</colgroup>
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>snapshot</code></em> :</span></p></td>
-<td>a <a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>disks</code></em> :</span></p></td>
-<td>. <span class="annotation">[<acronym title="Parameter for input. Default is transfer none."><span class="acronym">in</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> LibvirtGConfig.DomainSnapshotDisk]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-add-disk"></a><h3>gvir_config_domain_snapshot_add_disk ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                gvir_config_domain_snapshot_add_disk
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>,
-                                                         <em class="parameter"><code><span class="type">GVirConfigDomainSnapshotDisk</span> *disk</code></em>);</pre>
-</div>
-<hr>
-<div class="refsect2">
-<a name="gvir-config-domain-snapshot-get-disks"></a><h3>gvir_config_domain_snapshot_get_disks ()</h3>
-<pre class="programlisting"><span class="returnvalue">GList</span> *             gvir_config_domain_snapshot_get_disks
-                                                        (<em class="parameter"><code><a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a> *snapshot</code></em>);</pre>
-<p>
-Gets the list of disks attached to <em class="parameter"><code>snapshot</code></em>.  The returned list should
-be freed with <code class="function">g_list_free()</code>, after its elements have been unreffed with
-<code class="function">g_object_unref()</code>.
-</p>
-<div class="variablelist"><table border="0" class="variablelist">
-<colgroup>
-<col align="left" valign="top">
-<col>
-</colgroup>
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>snapshot</code></em> :</span></p></td>
-<td>a <a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot"><span class="type">GVirConfigDomainSnapshot</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly allocated <span class="type">GList</span> of <span class="type">GVirConfigDomainSnapshotDisk</span>. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> LibvirtGConfig.DomainSnapshotDisk][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
+<a name="GVirConfigDomainSnapshotPrivate"></a><h3>GVirConfigDomainSnapshotPrivate</h3>
+<pre class="programlisting">typedef struct _GVirConfigDomainSnapshotPrivate GVirConfigDomainSnapshotPrivate;</pre>
 </div>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.19</div>
+          Generated by GTK-Doc V1.21</div>
 </body>
 </html>

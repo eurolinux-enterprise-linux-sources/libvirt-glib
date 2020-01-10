@@ -138,15 +138,20 @@ int main(int argc, char **argv)
     GVirConfigDomainClock *klock;
     GVirConfigDomainTimerPit *pit;
     GVirConfigDomainTimerRtc *rtc;
+    GVirConfigDomainTimerHpet *hpet;
 
     klock = gvir_config_domain_clock_new();
-    gvir_config_domain_clock_set_offset(klock, GVIR_CONFIG_DOMAIN_CLOCK_UTC);
+    gvir_config_domain_clock_set_offset(klock, GVIR_CONFIG_DOMAIN_CLOCK_TIMEZONE);
+    gvir_config_domain_clock_set_timezone(klock, "CEST");
+    g_assert(gvir_config_domain_clock_get_offset(klock) == GVIR_CONFIG_DOMAIN_CLOCK_TIMEZONE);
+    g_str_const_check(gvir_config_domain_clock_get_timezone(klock), "CEST");
 
     pit = gvir_config_domain_timer_pit_new();
     gvir_config_domain_timer_set_tick_policy(GVIR_CONFIG_DOMAIN_TIMER(pit),
                                              GVIR_CONFIG_DOMAIN_TIMER_TICK_POLICY_DELAY);
     gvir_config_domain_clock_add_timer(klock, GVIR_CONFIG_DOMAIN_TIMER(pit));
     g_assert(gvir_config_domain_timer_get_tick_policy(GVIR_CONFIG_DOMAIN_TIMER(pit)) == GVIR_CONFIG_DOMAIN_TIMER_TICK_POLICY_DELAY);
+    g_assert(gvir_config_domain_timer_get_present(GVIR_CONFIG_DOMAIN_TIMER(pit)) != FALSE);
     g_object_unref(G_OBJECT(pit));
 
     rtc = gvir_config_domain_timer_rtc_new();
@@ -154,9 +159,22 @@ int main(int argc, char **argv)
                                              GVIR_CONFIG_DOMAIN_TIMER_TICK_POLICY_CATCHUP);
     gvir_config_domain_clock_add_timer(klock, GVIR_CONFIG_DOMAIN_TIMER(rtc));
     g_assert(gvir_config_domain_timer_get_tick_policy(GVIR_CONFIG_DOMAIN_TIMER(rtc)) == GVIR_CONFIG_DOMAIN_TIMER_TICK_POLICY_CATCHUP);
+    g_assert(gvir_config_domain_timer_get_present(GVIR_CONFIG_DOMAIN_TIMER(rtc)) != FALSE);
     g_object_unref(G_OBJECT(rtc));
 
+    hpet = gvir_config_domain_timer_hpet_new();
+    gvir_config_domain_timer_set_present(GVIR_CONFIG_DOMAIN_TIMER(hpet), FALSE);
+    gvir_config_domain_clock_add_timer(klock, GVIR_CONFIG_DOMAIN_TIMER(hpet));
+    g_assert(gvir_config_domain_timer_get_present(GVIR_CONFIG_DOMAIN_TIMER(hpet)) == FALSE);
+    g_object_unref(G_OBJECT(hpet));
+
     gvir_config_domain_set_clock(domain, klock);
+    g_object_unref(G_OBJECT(klock));
+
+    klock = gvir_config_domain_get_clock(domain);
+    g_assert(klock != NULL);
+    g_assert(gvir_config_domain_clock_get_offset(klock) == GVIR_CONFIG_DOMAIN_CLOCK_TIMEZONE);
+    g_str_const_check(gvir_config_domain_clock_get_timezone(klock), "CEST");
     g_object_unref(G_OBJECT(klock));
 
     /* os node */
@@ -233,28 +251,37 @@ int main(int argc, char **argv)
 
     /* disk node */
     GVirConfigDomainDisk *disk;
+    GVirConfigDomainDiskDriver *driver;
+
+    driver = gvir_config_domain_disk_driver_new();
+    gvir_config_domain_disk_driver_set_name(driver, "foo");
+    gvir_config_domain_disk_driver_set_format(driver, GVIR_CONFIG_DOMAIN_DISK_FORMAT_BOCHS);
+    gvir_config_domain_disk_driver_set_name(driver, "qemu");
+    gvir_config_domain_disk_driver_set_cache(driver, GVIR_CONFIG_DOMAIN_DISK_CACHE_NONE);
+    gvir_config_domain_disk_driver_set_format(driver, GVIR_CONFIG_DOMAIN_DISK_FORMAT_QCOW2);
+    gvir_config_domain_disk_driver_set_copy_on_read(driver, TRUE);
 
     disk = gvir_config_domain_disk_new();
     gvir_config_domain_disk_set_type(disk, GVIR_CONFIG_DOMAIN_DISK_FILE);
     gvir_config_domain_disk_set_guest_device_type(disk, GVIR_CONFIG_DOMAIN_DISK_GUEST_DEVICE_DISK);
     gvir_config_domain_disk_set_source(disk, "/tmp/foo/bar");
     gvir_config_domain_disk_set_startup_policy (disk, GVIR_CONFIG_DOMAIN_DISK_STARTUP_POLICY_REQUISITE);
-    gvir_config_domain_disk_set_driver_name(disk, "foo");
-    gvir_config_domain_disk_set_driver_format(disk, GVIR_CONFIG_DOMAIN_DISK_FORMAT_BOCHS);
-    gvir_config_domain_disk_set_driver_name(disk, "qemu");
-    gvir_config_domain_disk_set_driver_cache(disk, GVIR_CONFIG_DOMAIN_DISK_CACHE_NONE);
-    gvir_config_domain_disk_set_driver_format(disk, GVIR_CONFIG_DOMAIN_DISK_FORMAT_QCOW2);
     gvir_config_domain_disk_set_target_bus(disk, GVIR_CONFIG_DOMAIN_DISK_BUS_IDE);
     gvir_config_domain_disk_set_target_dev(disk, "hda");
+    gvir_config_domain_disk_set_driver(disk, driver);
+    g_object_unref(G_OBJECT(driver));
     devices = g_list_append(devices, GVIR_CONFIG_DOMAIN_DEVICE(disk));
 
     g_assert(gvir_config_domain_disk_get_disk_type(disk) == GVIR_CONFIG_DOMAIN_DISK_FILE);
     g_assert(gvir_config_domain_disk_get_guest_device_type(disk) == GVIR_CONFIG_DOMAIN_DISK_GUEST_DEVICE_DISK);
     g_assert(gvir_config_domain_disk_get_startup_policy (disk) == GVIR_CONFIG_DOMAIN_DISK_STARTUP_POLICY_REQUISITE);
     g_str_const_check(gvir_config_domain_disk_get_source(disk), "/tmp/foo/bar");
-    g_assert(gvir_config_domain_disk_get_driver_cache(disk) == GVIR_CONFIG_DOMAIN_DISK_CACHE_NONE);
-    g_str_const_check(gvir_config_domain_disk_get_driver_name(disk), "qemu");
-    g_assert(gvir_config_domain_disk_get_driver_format(disk) == GVIR_CONFIG_DOMAIN_DISK_FORMAT_QCOW2);
+    driver = gvir_config_domain_disk_get_driver(disk);
+    g_assert(driver != NULL);
+    g_assert(gvir_config_domain_disk_driver_get_cache(driver) == GVIR_CONFIG_DOMAIN_DISK_CACHE_NONE);
+    g_str_const_check(gvir_config_domain_disk_driver_get_name(driver), "qemu");
+    g_assert(gvir_config_domain_disk_driver_get_format(driver) == GVIR_CONFIG_DOMAIN_DISK_FORMAT_QCOW2);
+    g_assert(gvir_config_domain_disk_driver_get_copy_on_read(driver));
     g_assert(gvir_config_domain_disk_get_target_bus(disk) == GVIR_CONFIG_DOMAIN_DISK_BUS_IDE);
     g_str_const_check(gvir_config_domain_disk_get_target_dev(disk), "hda");
 

@@ -31,6 +31,10 @@
 
 #include "libvirt-glib/libvirt-glib.h"
 
+#ifdef G_OS_WIN32
+#include <io.h>
+#endif
+
 /**
  * SECTION:libvirt-glib-event
  * @short_description: Integrate libvirt with the GMain event framework
@@ -164,15 +168,21 @@ gvir_event_handle_add(int fd,
     data->events = events;
     data->cb = cb;
     data->opaque = opaque;
+#ifdef G_OS_WIN32
+    data->channel = g_io_channel_win32_new_socket(_get_osfhandle(fd));
+#else
     data->channel = g_io_channel_unix_new(fd);
+#endif
     data->ff = ff;
 
     g_debug("Add handle %p %d %d %d %p\n", data, data->watch, data->fd, events, data->opaque);
 
-    data->source = g_io_add_watch(data->channel,
-                                  cond,
-                                  gvir_event_handle_dispatch,
-                                  data);
+    if (events != 0) {
+        data->source = g_io_add_watch(data->channel,
+                                      cond,
+                                      gvir_event_handle_dispatch,
+                                      data);
+    }
 
     g_ptr_array_add(handles, data);
 
@@ -282,12 +292,16 @@ gvir_event_handle_remove(int watch)
 
     g_debug("Remove handle %p %d %d\n", data, watch, data->fd);
 
-    if (!data->source)
-        goto cleanup;
+    if (data->source != 0) {
+        g_source_remove(data->source);
+        data->source = 0;
+        data->events = 0;
+    }
 
-    g_source_remove(data->source);
-    data->source = 0;
-    data->events = 0;
+    g_warn_if_fail(data->channel != NULL);
+    g_io_channel_unref(data->channel);
+    data->channel = NULL;
+
     /* since the actual watch deletion is done asynchronously, a handle_update call may
      * reschedule the watch before it's fully deleted, that's why we need to mark it as
      * 'removed' to prevent reuse
@@ -438,11 +452,11 @@ gvir_event_timeout_remove(int timer)
 
     g_debug("Remove timeout %p %d\n", data, timer);
 
-    if (!data->source)
-        goto cleanup;
+    if (data->source != 0) {
+        g_source_remove(data->source);
+        data->source = 0;
+    }
 
-    g_source_remove(data->source);
-    data->source = 0;
     /* since the actual timeout deletion is done asynchronously, a timeout_update call may
      * reschedule the timeout before it's fully deleted, that's why we need to mark it as
      * 'removed' to prevent reuse

@@ -2,102 +2,110 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Object Hierarchy</title>
+<title>Libvirt-gconfig Reference Manual: Object Hierarchy</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Libvirt-gconfig Reference Manual">
 <link rel="up" href="index.html" title="Libvirt-gconfig Reference Manual">
 <link rel="prev" href="GVirConfigCapabilities.html" title="GVirConfigCapabilities">
 <link rel="next" href="api-index-full.html" title="API Index">
-<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
-<td><a accesskey="p" href="GVirConfigCapabilities.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td> </td>
-<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Libvirt-gconfig Reference Manual</th>
-<td><a accesskey="n" href="api-index-full.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts"></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><img src="up-insensitive.png" width="16" height="16" border="0"></td>
+<td><a accesskey="p" href="GVirConfigCapabilities.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="api-index-full.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="chapter">
 <div class="titlepage"><div><div><h1 class="title">
 <a name="object-tree"></a>Object Hierarchy</h1></div></div></div>
 <pre class="screen">
-    GObject
-        <a class="link" href="GVirConfigObject.html" title="GVirConfigObject">GVirConfigObject</a>
-            GVirConfigCapabilitiesCpuFeature
-                GVirConfigDomainCpuFeature
-            GVirConfigCapabilitiesCpu
-                GVirConfigDomainCpu
-            GVirConfigCapabilitiesCpuTopology
-            <a class="link" href="GVirConfigCapabilities.html" title="GVirConfigCapabilities">GVirConfigCapabilities</a>
-            GVirConfigCapabilitiesGuestArch
-            GVirConfigCapabilitiesGuestDomain
-            GVirConfigCapabilitiesGuestFeature
-            GVirConfigCapabilitiesGuest
-            GVirConfigCapabilitiesHost
-            GVirConfigDomainAddress
-                GVirConfigDomainAddressPci
-                GVirConfigDomainAddressUsb
-            GVirConfigDomainDevice
-                GVirConfigDomainChardev
-                    GVirConfigDomainChannel
-                    GVirConfigDomainConsole
-                    GVirConfigDomainParallel
-                    GVirConfigDomainRedirdev
-                    GVirConfigDomainSerial
-                GVirConfigDomainController
-                    GVirConfigDomainControllerUsb
-                GVirConfigDomainDisk
-                GVirConfigDomainFilesys
-                GVirConfigDomainGraphics
-                    GVirConfigDomainGraphicsDesktop
-                    GVirConfigDomainGraphicsRdp
-                    GVirConfigDomainGraphicsSdl
-                    GVirConfigDomainGraphicsSpice
-                    GVirConfigDomainGraphicsVnc
-                GVirConfigDomainInput
-                GVirConfigDomainInterface
-                    GVirConfigDomainInterfaceBridge
-                    GVirConfigDomainInterfaceNetwork
-                    GVirConfigDomainInterfaceUser
-                GVirConfigDomainMemballoon
-                GVirConfigDomainSmartcard
-                    GVirConfigDomainSmartcardHostCertificates
-                    GVirConfigDomainSmartcardHost
-                    GVirConfigDomainSmartcardPassthrough
-                GVirConfigDomainSound
-                GVirConfigDomainVideo
-            GVirConfigDomainChardevSource
-                GVirConfigDomainChardevSourcePty
-                GVirConfigDomainChardevSourceSpiceVmc
-            GVirConfigDomainClock
-            <a class="link" href="GVirConfigDomain.html" title="GVirConfigDomain">GVirConfigDomain</a>
-            GVirConfigDomainOs
-            GVirConfigDomainPowerManagement
-            GVirConfigDomainSeclabel
-            GVirConfigDomainSnapshotDisk
-            <a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot">GVirConfigDomainSnapshot</a>
-            GVirConfigDomainTimer
-                GVirConfigDomainTimerPit
-                GVirConfigDomainTimerRtc
-            <a class="link" href="Libvirt-gconfig-GVirConfig.html#GVirConfigInterface">GVirConfigInterface</a>
-            <a class="link" href="GVirConfigNetworkFilter.html" title="GVirConfigNetworkFilter">GVirConfigNetworkFilter</a>
-            <a class="link" href="GVirConfigNetwork.html" title="GVirConfigNetwork">GVirConfigNetwork</a>
-            <a class="link" href="GVirConfigNodeDevice.html" title="GVirConfigNodeDevice">GVirConfigNodeDevice</a>
-            <a class="link" href="GVirConfigSecret.html" title="GVirConfigSecret">GVirConfigSecret</a>
-            GVirConfigStoragePermissions
-            <a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool">GVirConfigStoragePool</a>
-            GVirConfigStoragePoolSource
-            GVirConfigStoragePoolTarget
-            GVirConfigStorageVolBackingStore
-            <a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol">GVirConfigStorageVol</a>
-            GVirConfigStorageVolTarget
-        GVirConfigXmlDoc
+    <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+    <span class="lineart">├──</span> <a class="link" href="GVirConfigObject.html" title="GVirConfigObject">GVirConfigObject</a>
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigCapabilitiesCpuFeature
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainCpuFeature
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigCapabilitiesCpu
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainCpu
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigCapabilitiesCpuModel
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainCpuModel
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigCapabilitiesCpuTopology
+    <span class="lineart">│</span>   <span class="lineart">├──</span> <a class="link" href="GVirConfigCapabilities.html" title="GVirConfigCapabilities">GVirConfigCapabilities</a>
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigCapabilitiesGuestArch
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigCapabilitiesGuestDomain
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigCapabilitiesGuestFeature
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigCapabilitiesGuest
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigCapabilitiesHost
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigCapabilitiesHostSecModel
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainAddress
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainAddressPci
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainAddressUsb
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainDevice
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainChardev
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainChannel
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainConsole
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainParallel
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainRedirdev
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainSerial
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainController
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainControllerUsb
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainDisk
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainFilesys
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainGraphics
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainGraphicsDesktop
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainGraphicsRdp
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainGraphicsSdl
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainGraphicsSpice
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainGraphicsVnc
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainInput
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainInterface
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainInterfaceBridge
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainInterfaceNetwork
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainInterfaceUser
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainMemballoon
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainSmartcard
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainSmartcardHostCertificates
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainSmartcardHost
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainSmartcardPassthrough
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainSound
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainVideo
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainChardevSource
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainChardevSourcePty
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainChardevSourceSpicePort
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainChardevSourceSpiceVmc
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainClock
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainDiskDriver
+    <span class="lineart">│</span>   <span class="lineart">├──</span> <a class="link" href="GVirConfigDomain.html" title="GVirConfigDomain">GVirConfigDomain</a>
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainInterfaceFilterref
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainInterfaceFilterrefParameter
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainOs
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainPowerManagement
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainSeclabel
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainSnapshotDisk
+    <span class="lineart">│</span>   <span class="lineart">├──</span> <a class="link" href="GVirConfigDomainSnapshot.html" title="GVirConfigDomainSnapshot">GVirConfigDomainSnapshot</a>
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainTimer
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainTimerHpet
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigDomainTimerPit
+    <span class="lineart">│</span>   <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigDomainTimerRtc
+    <span class="lineart">│</span>   <span class="lineart">├──</span> <a class="link" href="GVirConfigInterface.html" title="GVirConfigInterface">GVirConfigInterface</a>
+    <span class="lineart">│</span>   <span class="lineart">├──</span> <a class="link" href="GVirConfigNetworkFilter.html" title="GVirConfigNetworkFilter">GVirConfigNetworkFilter</a>
+    <span class="lineart">│</span>   <span class="lineart">├──</span> <a class="link" href="GVirConfigNetwork.html" title="GVirConfigNetwork">GVirConfigNetwork</a>
+    <span class="lineart">│</span>   <span class="lineart">├──</span> <a class="link" href="GVirConfigNodeDevice.html" title="GVirConfigNodeDevice">GVirConfigNodeDevice</a>
+    <span class="lineart">│</span>   <span class="lineart">├──</span> <a class="link" href="GVirConfigSecret.html" title="GVirConfigSecret">GVirConfigSecret</a>
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigStoragePermissions
+    <span class="lineart">│</span>   <span class="lineart">├──</span> <a class="link" href="GVirConfigStoragePool.html" title="GVirConfigStoragePool">GVirConfigStoragePool</a>
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigStoragePoolSource
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigStoragePoolTarget
+    <span class="lineart">│</span>   <span class="lineart">├──</span> GVirConfigStorageVolBackingStore
+    <span class="lineart">│</span>   <span class="lineart">├──</span> <a class="link" href="GVirConfigStorageVol.html" title="GVirConfigStorageVol">GVirConfigStorageVol</a>
+    <span class="lineart">│</span>   <span class="lineart">╰──</span> GVirConfigStorageVolTarget
+    <span class="lineart">╰──</span> GVirConfigXmlDoc
 </pre>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.19</div>
+          Generated by GTK-Doc V1.21</div>
 </body>
 </html>
